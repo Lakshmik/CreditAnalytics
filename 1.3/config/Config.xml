@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<holidays>
+	<NYB>
+		<FixedHoliday><Date>1</Date><Month>1</Month></FixedHoliday>
+		<FloatingHoliday><WeekInMonth>3</WeekInMonth><WeekDay>0</WeekDay><Month>1</Month><FromFront>true</FromFront></FloatingHoliday>
+		<FloatingHoliday><WeekInMonth>3</WeekInMonth><WeekDay>0</WeekDay><Month>2</Month><FromFront>true</FromFront></FloatingHoliday>
+		<FloatingHoliday><WeekInMonth>1</WeekInMonth><WeekDay>0</WeekDay><Month>5</Month><FromFront>false</FromFront></FloatingHoliday>
+		<FixedHoliday><Date>4</Date><Month>7</Month></FixedHoliday>
+		<FloatingHoliday><WeekInMonth>1</WeekInMonth><WeekDay>0</WeekDay><Month>9</Month><FromFront>true</FromFront></FloatingHoliday>
+		<FloatingHoliday><WeekInMonth>2</WeekInMonth><WeekDay>0</WeekDay><Month>10</Month><FromFront>true</FromFront></FloatingHoliday>
+		<FixedHoliday><Date>11</Date><Month>11</Month></FixedHoliday>
+		<FloatingHoliday><WeekInMonth>4</WeekInMonth><WeekDay>4</WeekDay><Month>11</Month><FromFront>true</FromFront></FloatingHoliday>
+		<FixedHoliday><Date>25</Date><Month>12</Month></FixedHoliday>
+		<Weekend><DaysInWeek>5,6</DaysInWeek></Weekend>
+	</NYB>
+	<logger>
+		<Location>c:\\lakshmi\\java\bondanal\\log.dat</Location>
+	</logger>
+	<dbconn>
+		<drivertype>thin</drivertype><host>localhost</host><port>1521</port><dbname>XE</dbname><user>hr</user><pwd>hr</pwd>
+	</dbconn>
+	<analserver>
+		<host>localhost</host><port>2004</port><maxconn>10</maxconn>
+	</analserver>
+</holidays>
