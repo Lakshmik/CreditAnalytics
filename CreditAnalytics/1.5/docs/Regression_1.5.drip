@@ -1,0 +1,371 @@
+Regression series suite started at Wed May 23 20:36:15 EDT 2012
+org.drip.analytics.curve.DiscountCurve.CreateFromFlatRate: succeeded
+	org.drip.analytics.curve.DiscountCurve.CreateFromFlatRate Succeeded: true
+	Regression completed at: Wed May 23 20:36:15 EDT 2012
+	Time (mu-s): 17
+
+org.drip.analytics.curve.DiscountCurve.BuildFromDF: succeeded
+	org.drip.analytics.curve.DiscountCurve.BuildFromDF Succeeded: true
+		[05/12/2011 | 0.997 | 0.997]
+		[05/12/2012 | 0.986 | 0.986]
+		[05/12/2013 | 0.961 | 0.961]
+		[05/12/2014 | 0.936 | 0.936]
+		[05/12/2015 | 0.901 | 0.901]
+	Regression completed at: Wed May 23 20:36:15 EDT 2012
+	Time (mu-s): 12
+
+org.drip.analytics.curve.DiscountCurve.CreateDC: succeeded
+	org.drip.analytics.curve.DiscountCurve.CreateDC Succeeded: true
+		[05/12/2011 | 0.003 | 0.003]
+		[05/12/2012 | 0.007 | 0.007]
+		[05/12/2013 | 0.013 | 0.013]
+		[05/12/2014 | 0.017 | 0.017]
+		[05/12/2015 | 0.021 | 0.021]
+	Regression completed at: Wed May 23 20:36:15 EDT 2012
+	Time (mu-s): 8
+
+org.drip.analytics.curve.DiscountCurve.CompAndQuotes: succeeded
+	org.drip.analytics.curve.DiscountCurve.CompAndQuotes Succeeded: true
+		[CD.05/15/2010.CHF{05/15/2010}=0.0013 | 0.0013]
+		[CD.05/16/2010.CHF{05/16/2010}=0.0017 | 0.0017]
+		[CD.05/21/2010.CHF{05/21/2010}=0.0017 | 0.0017]
+		[CD.05/28/2010.CHF{05/28/2010}=0.0018 | 0.0018]
+		[CD.06/13/2010.CHF{06/13/2010}=0.0020 | 0.0020]
+		[CD.07/13/2010.CHF{07/13/2010}=0.0023 | 0.0023]
+		[CD.08/12/2010.CHF{08/12/2010}=0.0026 | 0.0026]
+		[EDH1.CHF{03/20/2011}=0.0041 | 0.0041]
+		[EDH2.CHF{03/20/2012}=0.0134 | 0.0134]
+		[EDM1.CHF{06/20/2011}=0.0054 | 0.0054]
+		[EDM2.CHF{06/20/2012}=0.0160 | 0.0160]
+		[EDU0.CHF{09/20/2010}=0.0027 | 0.0027]
+		[EDU1.CHF{09/20/2011}=0.0077 | 0.0077]
+		[EDZ0.CHF{12/20/2010}=0.0032 | 0.0032]
+		[EDZ1.CHF{12/20/2011}=0.0104 | 0.0104]
+		[IRS.05/13/2016.CHF{05/13/2016}=0.0241 | 0.0241]
+		[IRS.05/13/2017.CHF{05/13/2017}=0.0269 | 0.0269]
+		[IRS.05/13/2020.CHF{05/13/2020}=0.0326 | 0.0326]
+		[IRS.05/13/2021.CHF{05/13/2021}=0.0340 | 0.0340]
+		[IRS.05/13/2025.CHF{05/13/2025}=0.0375 | 0.0375]
+		[IRS.05/13/2040.CHF{05/13/2040}=0.0407 | 0.0407]
+		[IRS.05/13/2060.CHF{05/13/2060}=0.0409 | 0.0409]
+		[IRS.05/14/2014.CHF{05/14/2014}=0.0166 | 0.0166]
+		[IRS.05/14/2015.CHF{05/14/2015}=0.0206 | 0.0206]
+		[IRS.05/14/2018.CHF{05/14/2018}=0.0292 | 0.0292]
+		[IRS.05/14/2019.CHF{05/14/2019}=0.0311 | 0.0311]
+		[IRS.05/14/2022.CHF{05/14/2022}=0.0351 | 0.0351]
+		[IRS.05/14/2030.CHF{05/14/2030}=0.0393 | 0.0393]
+		[IRS.05/14/2035.CHF{05/14/2035}=0.0402 | 0.0402]
+		[IRS.05/14/2050.CHF{05/14/2050}=0.0409 | 0.0409]
+	Regression completed at: Wed May 23 20:36:15 EDT 2012
+	Time (mu-s): 9
+
+org.drip.analytics.curve.DiscountCurve.ParallelShiftedCurve: succeeded
+	org.drip.analytics.curve.DiscountCurve.ParallelShiftedCurve Succeeded: true
+		[CD.05/15/2010.CHF=0.0013 | 0.0017]
+		[CD.05/16/2010.CHF=0.0017 | 0.0021]
+		[CD.05/21/2010.CHF=0.0017 | 0.0021]
+		[CD.05/28/2010.CHF=0.0018 | 0.0022]
+		[CD.06/13/2010.CHF=0.0020 | 0.0024]
+		[CD.07/13/2010.CHF=0.0023 | 0.0027]
+		[CD.08/12/2010.CHF=0.0026 | 0.0030]
+		[EDH1.CHF=0.0041 | 0.0045]
+		[EDH2.CHF=0.0134 | 0.0138]
+		[EDM1.CHF=0.0054 | 0.0058]
+		[EDM2.CHF=0.0160 | 0.0164]
+		[EDU0.CHF=0.0027 | 0.0031]
+		[EDU1.CHF=0.0077 | 0.0081]
+		[EDZ0.CHF=0.0032 | 0.0036]
+		[EDZ1.CHF=0.0104 | 0.0108]
+		[IRS.05/13/2016.CHF=0.0241 | 0.0245]
+		[IRS.05/13/2017.CHF=0.0269 | 0.0273]
+		[IRS.05/13/2020.CHF=0.0326 | 0.0330]
+		[IRS.05/13/2021.CHF=0.0340 | 0.0344]
+		[IRS.05/13/2025.CHF=0.0375 | 0.0379]
+		[IRS.05/13/2040.CHF=0.0407 | 0.0411]
+		[IRS.05/13/2060.CHF=0.0409 | 0.0413]
+		[IRS.05/14/2014.CHF=0.0166 | 0.0170]
+		[IRS.05/14/2015.CHF=0.0206 | 0.0210]
+		[IRS.05/14/2018.CHF=0.0292 | 0.0296]
+		[IRS.05/14/2019.CHF=0.0311 | 0.0315]
+		[IRS.05/14/2022.CHF=0.0351 | 0.0355]
+		[IRS.05/14/2030.CHF=0.0393 | 0.0397]
+		[IRS.05/14/2035.CHF=0.0402 | 0.0406]
+		[IRS.05/14/2050.CHF=0.0409 | 0.0413]
+	Regression completed at: Wed May 23 20:36:15 EDT 2012
+	Time (mu-s): 6091
+
+org.drip.analytics.curve.DiscountCurve.RateShiftedCurve: succeeded
+	org.drip.analytics.curve.DiscountCurve.RateShiftedCurve Succeeded: true
+		[05/12/2011 | 0.0400 | 0.0404]
+		[05/12/2012 | 0.0400 | 0.0404]
+		[05/12/2013 | 0.0400 | 0.0404]
+		[05/12/2014 | 0.0400 | 0.0404]
+		[05/12/2015 | 0.0400 | 0.0404]
+	Regression completed at: Wed May 23 20:36:15 EDT 2012
+	Time (mu-s): 11
+
+org.drip.analytics.curve.DiscountCurve.BasisRateShiftedCurve: succeeded
+	org.drip.analytics.curve.DiscountCurve.BasisRateShiftedCurve Succeeded: true
+		[05/12/2011 | 0.0400 | 0.0401]
+		[05/12/2012 | 0.0400 | 0.0402]
+		[05/12/2013 | 0.0400 | 0.0402]
+		[05/12/2014 | 0.0400 | 0.0402]
+		[05/12/2015 | 0.0400 | 0.0403]
+	Regression completed at: Wed May 23 20:36:15 EDT 2012
+	Time (mu-s): 17
+
+org.drip.analytics.curve.DiscountCurve.CreateTweakedCurve: succeeded
+	org.drip.analytics.curve.DiscountCurve.CreateTweakedCurve Succeeded: true
+		[05/12/2011 | 0.0400 | 0.0405]
+		[05/12/2012 | 0.0400 | 0.0405]
+		[05/12/2013 | 0.0400 | 0.0405]
+		[05/12/2014 | 0.0400 | 0.0405]
+		[05/12/2015 | 0.0400 | 0.0405]
+	Regression completed at: Wed May 23 20:36:15 EDT 2012
+	Time (mu-s): 29
+
+org.drip.analytics.curve.DiscountCurve.EffectiveDF: succeeded
+	org.drip.analytics.curve.DiscountCurve.EffectiveDF Succeeded: true
+		[05/12/2011 | 0.9921]
+		[05/12/2012 | 0.9713]
+		[05/12/2013 | 0.9457]
+		[05/12/2014 | 0.9150]
+		[05/12/2015 | 0.8820]
+	Regression completed at: Wed May 23 20:36:15 EDT 2012
+	Time (mu-s): 545
+
+org.drip.analytics.curve.DiscountCurve.CalcImpliedRate: succeeded
+	org.drip.analytics.curve.DiscountCurve.CalcImpliedRate Succeeded: true
+		[05/12/2011 | 0.0107]
+		[05/12/2012 | 0.0255]
+		[05/12/2013 | 0.0266]
+		[05/12/2014 | 0.0377]
+		[05/12/2015 | 0.0434]
+	Regression completed at: Wed May 23 20:36:15 EDT 2012
+	Time (mu-s): 509
+
+org.drip.analytics.curve.DiscountCurve Status: 10 / 10 succeeded.
+org.drip.analytics.curve.CreditCurve.FromFlatHazard: succeeded
+	org.drip.analytics.curve.CreditCurve.FromFlatHazard Succeeded: true
+		[05/12/2011 = 0.0200]
+		[05/12/2012 = 0.0200]
+		[05/12/2013 = 0.0200]
+		[05/12/2014 = 0.0200]
+		[05/12/2015 = 0.0200]
+	Regression completed at: Wed May 23 20:36:15 EDT 2012
+	Time (mu-s): 20
+
+org.drip.analytics.curve.CreditCurve.FromSurvival: succeeded
+	org.drip.analytics.curve.CreditCurve.FromSurvival Succeeded: true
+		[05/12/2011 = 0.9000 | 0.9000]
+		[05/12/2012 = 0.8000 | 0.8000]
+		[05/12/2013 = 0.7000 | 0.7000]
+		[05/12/2014 = 0.6000 | 0.6000]
+		[05/12/2015 = 0.5000 | 0.5000]
+	Regression completed at: Wed May 23 20:36:15 EDT 2012
+	Time (mu-s): 14
+
+org.drip.analytics.curve.CreditCurve.FromHazard: succeeded
+	org.drip.analytics.curve.CreditCurve.FromHazard Succeeded: true
+		[05/12/2010=>05/12/2011: 0.0090 | 0.0090]
+		[05/12/2011=>05/12/2012: 0.0080 | 0.0080]
+		[05/12/2012=>05/12/2013: 0.0070 | 0.0070]
+		[05/12/2013=>05/12/2014: 0.0060 | 0.0060]
+		[05/12/2014=>05/12/2015: 0.0050 | 0.0050]
+	Regression completed at: Wed May 23 20:36:15 EDT 2012
+	Time (mu-s): 9
+
+org.drip.analytics.curve.CreditCurve.CompAndQuotes: succeeded
+	org.drip.analytics.curve.CreditCurve.CompAndQuotes Succeeded: true
+		[06/20/2011[CDS.1Y.CORP]=50. | 50.]
+		[06/20/2012[CDS.2Y.CORP]=100. | 100.]
+		[06/20/2013[CDS.3Y.CORP]=150. | 150.]
+		[06/20/2014[CDS.4Y.CORP]=200. | 200.]
+		[06/20/2015[CDS.5Y.CORP]=250. | 250.]
+	Regression completed at: Wed May 23 20:36:15 EDT 2012
+	Time (mu-s): 8
+
+org.drip.analytics.curve.CreditCurve.ParallelHazardShiftedCurve: succeeded
+	org.drip.analytics.curve.CreditCurve.ParallelHazardShiftedCurve Succeeded: true
+		[06/20/2011: 0.00828 | 0.00878]
+		[06/20/2012: 0.01640 | 0.01690]
+		[06/20/2013: 0.02509 | 0.02559]
+		[06/20/2014: 0.03423 | 0.03473]
+		[06/20/2015: 0.04375 | 0.04425]
+	Regression completed at: Wed May 23 20:36:15 EDT 2012
+	Time (mu-s): 589
+
+org.drip.analytics.curve.CreditCurve.ParallelQuoteShiftedCurve: succeeded
+	org.drip.analytics.curve.CreditCurve.ParallelQuoteShiftedCurve Succeeded: true
+		[06/20/2011: 50.00000 | 55.00000]
+		[06/20/2012: 100.00000 | 105.00000]
+		[06/20/2013: 150.00000 | 155.00000]
+		[06/20/2014: 200.00000 | 205.00000]
+		[06/20/2015: 250.00000 | 255.00000]
+	Regression completed at: Wed May 23 20:36:15 EDT 2012
+	Time (mu-s): 30695
+
+org.drip.analytics.curve.CreditCurve.NodeTweakedCurve: succeeded
+	org.drip.analytics.curve.CreditCurve.NodeTweakedCurve Succeeded: true
+		[06/20/2011: 0.00828 | 0.00878]
+		[06/20/2012: 0.01640 | 0.01666]
+		[06/20/2013: 0.02509 | 0.02526]
+		[06/20/2014: 0.03423 | 0.03436]
+		[06/20/2015: 0.04375 | 0.04385]
+	Regression completed at: Wed May 23 20:36:15 EDT 2012
+	Time (mu-s): 20
+
+org.drip.analytics.curve.CreditCurve.FlatCurve: succeeded
+	org.drip.analytics.curve.CreditCurve.FlatCurve Succeeded: true
+		[05/12/2011 = 0.0149]
+		[05/12/2012 = 0.0149]
+		[05/12/2013 = 0.0149]
+		[05/12/2014 = 0.0149]
+		[05/12/2015 = 0.0149]
+	Regression completed at: Wed May 23 20:36:15 EDT 2012
+	Time (mu-s): 24475
+
+org.drip.analytics.curve.CreditCurve.SpecificDefault: succeeded
+	org.drip.analytics.curve.CreditCurve.SpecificDefault Succeeded: true
+		[Specific Default Set SP: 0.0]
+		[Specific Default Unset SP: 0.9293065306552686]
+	Regression completed at: Wed May 23 20:36:15 EDT 2012
+	Time (mu-s): 66
+
+org.drip.analytics.curve.CreditCurve.EffectiveSurvival: succeeded
+	org.drip.analytics.curve.CreditCurve.EffectiveSurvival Succeeded: true
+		[05/12/2011 | 0.9809]
+		[05/12/2012 | 0.9454]
+		[05/12/2013 | 0.8968]
+		[05/12/2014 | 0.8343]
+		[05/12/2015 | 0.7744]
+	Regression completed at: Wed May 23 20:36:15 EDT 2012
+	Time (mu-s): 381
+
+org.drip.analytics.curve.CreditCurve.EffectiveRecovery: succeeded
+	org.drip.analytics.curve.CreditCurve.EffectiveRecovery Succeeded: true
+		[{1Y->2Y} | 0.4000 | 0.4000 | 0.4000]
+		[{2Y->3Y} | 0.4000 | 0.4000 | 0.4000]
+		[{3Y->4Y} | 0.4000 | 0.4000 | 0.4000]
+		[{4Y->5Y} | 0.4000 | 0.4000 | 0.4000]
+		[{5Y->6Y} | 0.4000 | 0.4000 | 0.4000]
+	Regression completed at: Wed May 23 20:36:15 EDT 2012
+	Time (mu-s): 745
+
+org.drip.analytics.curve.CreditCurve Status: 11 / 11 succeeded.
+org.drip.analytics.curve.FXCurve.FXFwdTest: succeeded
+	org.drip.analytics.curve.FXCurve.FXFwdTest Succeeded: true
+		[FXFwd: 1.3791]
+		[FXFwdPIP: -208.9]
+	Regression completed at: Wed May 23 20:36:16 EDT 2012
+	Time (mu-s): 23
+
+org.drip.analytics.curve.FXCurve.FXBasisTest: succeeded
+	org.drip.analytics.curve.FXCurve.FXBasisTest Succeeded: true
+		[BootstrapEURBasis{1Y}=52.]
+		[BootstrapEURBasis{2Y}=-24.]
+		[BootstrapEURBasis{3Y}=20.]
+		[BootstrapEURBasis{4Y}=-2.]
+		[BootstrapEURBasis{5Y}=29.]
+		[BootstrapUSDBasis{1Y}=-52.]
+		[BootstrapUSDBasis{2Y}=24.]
+		[BootstrapUSDBasis{3Y}=-20.]
+		[BootstrapUSDBasis{4Y}=2.]
+		[BootstrapUSDBasis{5Y}=-29.]
+		[EUR Basis: 100.00]
+		[FXFwd from EUR Basis{1Y}=1.2540]
+		[FXFwd from EUR Basis{2Y}=1.2421]
+		[FXFwd from EUR Basis{3Y}=1.2498]
+		[FXFwd from EUR Basis{4Y}=1.2354]
+		[FXFwd from EUR Basis{5Y}=1.2482]
+		[FXFwd from USD Basis{1Y}=1.2540]
+		[FXFwd from USD Basis{2Y}=1.2421]
+		[FXFwd from USD Basis{3Y}=1.2498]
+		[FXFwd from USD Basis{4Y}=1.2354]
+		[FXFwd from USD Basis{5Y}=1.2482]
+		[FullEURBasis{1Y}=52.4924]
+		[FullEURBasis{2Y}=28.2607]
+		[FullEURBasis{3Y}=72.7859]
+		[FullEURBasis{4Y}=50.7869]
+		[FullEURBasis{5Y}=81.1016]
+		[FullUSDBasis{1Y}=-52.4924]
+		[FullUSDBasis{2Y}=-28.2607]
+		[FullUSDBasis{3Y}=-72.7856]
+		[FullUSDBasis{4Y}=-50.7867]
+		[FullUSDBasis{5Y}=-81.1016]
+		[USD Basis: -100.00]
+	Regression completed at: Wed May 23 20:36:16 EDT 2012
+	Time (mu-s): 3391
+
+org.drip.analytics.curve.FXCurve Status: 2 / 2 succeeded.
+org.drip.analytics.curve.ZeroCurve.getZeroDF: succeeded
+	org.drip.analytics.curve.ZeroCurve.getZeroDF Succeeded: true
+		[ZeroDF(03/25/2009): 1.0]
+		[ZeroDF(03/25/2010): 1.0]
+		[ZeroDF(03/25/2011): 0.9453756299305216]
+		[ZeroDF(03/25/2012): 0.886810405305226]
+		[ZeroDF(03/25/2013): 0.8321044637037827]
+		[ZeroDF(03/25/2014): 0.7814478873145143]
+		[ZeroDF(03/25/2015): 0.7339711472564256]
+		[ZeroDF(03/25/2016): 0.6898767707964396]
+		[ZeroDF(03/25/2017): 0.6486081220157848]
+		[ZeroDF(03/25/2018): 0.6103350913679424]
+		[ZeroDF(03/25/2019): 0.5743955873669344]
+		[ZeroDF(03/25/2020): 0.5404972666835242]
+		[ZeroDF(03/25/2021): 0.5086701532978871]
+		[ZeroDF(03/25/2022): 0.4787171752272007]
+		[ZeroDF(03/25/2023): 0.45052797433170994]
+		[ZeroDF(09/25/2009): 1.0]
+		[ZeroDF(09/25/2010): 0.9762233574931849]
+		[ZeroDF(09/25/2011): 0.9154303269973285]
+		[ZeroDF(09/25/2012): 0.8588324998980551]
+		[ZeroDF(09/25/2013): 0.806151130967129]
+		[ZeroDF(09/25/2014): 0.7571735496752269]
+		[ZeroDF(09/25/2015): 0.7114351622590261]
+		[ZeroDF(09/25/2016): 0.6687821251740196]
+		[ZeroDF(09/25/2017): 0.629008396554976]
+		[ZeroDF(09/25/2018): 0.5919693177937481]
+		[ZeroDF(09/25/2019): 0.5571112798068827]
+		[ZeroDF(09/25/2020): 0.5242330033869764]
+		[ZeroDF(09/25/2021): 0.49336360899540216]
+		[ZeroDF(09/25/2022): 0.4643119547943264]
+		[ZeroDF(09/25/2023): 0.4369710034509606]
+	Regression completed at: Wed May 23 20:36:16 EDT 2012
+	Time (mu-s): 99
+
+org.drip.analytics.curve.ZeroCurve.getZeroRate: succeeded
+	org.drip.analytics.curve.ZeroCurve.getZeroRate Succeeded: true
+		[ZeroRate(03/25/2009): 1.0]
+		[ZeroRate(03/25/2010): 1.0]
+		[ZeroRate(03/25/2011): 0.06566272440557984]
+		[ZeroRate(03/25/2012): 0.06529992955030582]
+		[ZeroRate(03/25/2013): 0.06509000957626719]
+		[ZeroRate(03/25/2014): 0.0647581492827307]
+		[ZeroRate(03/25/2015): 0.06453489308945558]
+		[ZeroRate(03/25/2016): 0.06426075522455775]
+		[ZeroRate(03/25/2017): 0.06402552070190935]
+		[ZeroRate(03/25/2018): 0.0637368344674145]
+		[ZeroRate(03/25/2019): 0.06349805971937193]
+		[ZeroRate(03/25/2020): 0.0633222164171736]
+		[ZeroRate(03/25/2021): 0.06316555213173579]
+		[ZeroRate(03/25/2022): 0.06303529486179403]
+		[ZeroRate(03/25/2023): 0.06292528690289888]
+		[ZeroRate(09/25/2009): 1.0]
+		[ZeroRate(09/25/2010): 0.06620754411030448]
+		[ZeroRate(09/25/2011): 0.0655753576018283]
+		[ZeroRate(09/25/2012): 0.06526899658273487]
+		[ZeroRate(09/25/2013): 0.06498585961132596]
+		[ZeroRate(09/25/2014): 0.06468491978956491]
+		[ZeroRate(09/25/2015): 0.06442486197381724]
+		[ZeroRate(09/25/2016): 0.0641683370942132]
+		[ZeroRate(09/25/2017): 0.0639097223876146]
+		[ZeroRate(09/25/2018): 0.06363600728880602]
+		[ZeroRate(09/25/2019): 0.06342074499646942]
+		[ZeroRate(09/25/2020): 0.0632608418458178]
+		[ZeroRate(09/25/2021): 0.0631164692289372]
+		[ZeroRate(09/25/2022): 0.06299544786196008]
+		[ZeroRate(09/25/2023): 0.06289253628062873]
+	Regression completed at: Wed May 23 20:36:16 EDT 2012
+	Time (mu-s): 75
+
+org.drip.analytics.curve.ZeroCurve Status: 2 / 2 succeeded.
