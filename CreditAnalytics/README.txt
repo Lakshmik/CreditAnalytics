@@ -1,67 +1,25 @@
-
 CreditAnalytics
 
-
 Lakshmi Krishnamurthy
-v1.5, 22 May 2012
+v1.6, 19 July 2012
 
 
-If you are looking to ...
+CreditAnalytics provides the functionality behind creation, calibration, and implementation of the curve, the parameter, and the product interfaces defined in CreditProduct. It also implements a curve/parameter/product/analytics management environment, and has packaged samples and testers.
 
-- Create IR discount curve from rates, or by calibration from quotes of cash/money market LIBOR/swap/future
-- Create credit curve from hazard rate or survival probabilites, or from quotes of bonds/CDS/other credit sensitive instruments
-- Create basis and correlation curves using single name and credit basket products
-- Build FX Spot, forward, and FX basis curves from a variety of inputs
-- Day counts of all kinds, holiday calendars for 150+ jurisdictions, and weirdest date adjustment rules
-- Pull up a complete description of a bond using its ISIN/CUSIP/other standard identifier, and calc price, yield, G/I/Z Spread, bond credit basis or any other relative value metric, or
-- Build your own bond or semi-funded note using any of the numerous bells
-- Pull in all the ref data for a given bond (incl. non-valuation details such as issue dates, notional, domicile, option schedule), or for all the bonds for the given issuer/sector/rating etc
-- Build a standard CDS/CDX/CDO instrument by code, or a bespoke one using the numerous built-in custom features
-- Pull historical and live IR/CDS/CDX/CDO/bond quotes, analytics
-_ Generate 1000+ measures for each of the product for a given scenario, or
-- Generate valuations for fully customizable scenario adjustment
-- All these in a set of very simple, elegant group of APIs
+CreditAnalytics library achieves its design goal by implementing its functionality over several packages:
+·	Curve calibration and creation: Functional implementation and creation factories for rates curves, credit curves, and FX curves of al types
+·	Market Parameter implementation and creation: Implementation and creation of quotes, component/basket market parameters, as well as scenario parameters.
+·	Product implementation and creation: Implementation and creation factories for rates products (cash/EDF/IRS), credit products (bonds/CDS), as well as basket products.
+·	Reference data/marks loaders: Loaders for bond/CDX, as well a sub-universe of closing marks
+·	Calculation Environment Manager: Implementation of the market parameter container, manager for live/closing curves, stub/client functionality for serverization/distribution, input/output serialization.
+·	Samples: Samples for curve, parameters, product, and analytics creation and usage
+·	Unit functional testers: Detailed unit scenario test of various analytics, curve, parameter, and product functionality.
 
-... CreditAnalytics does all this (and more)!
+Download CreditAnalytics binary along with the complete CreditSuite source from the link here.
 
+To install CreditAnalytics, drop it into the class-path. Use Config.xml to configure custom holidays.
 
-To learn more ...
+CreditAnalytics depends on the CreditProduct jar to provide the definitions behind the curves, the parameters, and the products. The Oracle ODBC driver is optional – it is used for the ref data connection.
 
-Check out the detailed documentation of at the user documentation site. javadoc gives elaborate API usage information.
+CreditAnalytics is part of CreditSuite – open suite analytics and trading/valuation system for credit products. Detailed documentation and downloads may be found here.
 
-
-All you need is to install is a single jar file. Really.
-
-It is called drip.jar (with version info appended). This contains the complete suite of the entire CreditAnalytics analytics. Drop this in the classpath.
-
-You may optionally need Ojdbc14.jar - the Oracle JDBC drivers needed for access to the reference data. Again in your classpath it goes.
-
-
-Configuring is simple too, 
-
-Built-in configuration covers a humoungous variety of day count conventions, calendars, and date adjustment rules. Unhappy with any factory default? Examine it first by using one of the API calls, then muck with appropriate Config.xml entry in the config directory, and use this file as the start up.
-
-
-After installation, start by
-
- ... altering the entries provided in the Config.xml file (you can rename it, as long you identify the full path in the initializer - see below). Of course, you don't even need a configuration file - in which case the settings default to the values provided in the previous section.
-
-Any of the samples in the examples folder would be the place to start. They contain a comprehensive set of illustrated usage of all the CreditAnalytics API calls. They all start as:
-
-		java.lang.String strConfig;
-
-		boolean bFIInit = org.drip.service.api.FI.Init (strConfig);
-
-FI.Init initializes the CreditAnalytics library - it takes the optional configuration file as an input. If the initialization is not successful, certain CreditAnalytics functionality will not be available, as the sample demonstrates.
-
-Examples folder contains samples for bond/CDS/CDX creation and usage, show historical/live data extractions, and their eventual analytics.
-
-
-Licence
-
-CreditAnalytics is distributed under the Apache 2.0 licence - please see the attached Licence for details.
-
-
-Contributors
-
-Lakshmi Krishnamurthy (lakshmi7977@gmail.com)
