@@ -74,101 +74,13 @@ public class FormatUtil {
 		for (int i = 0; i < iNumLeft; ++i)
 			strFormat += "0";
 
-		strFormat += ".";
+		if (0 != iNumRight) {
+			strFormat += ".";
 
-		for (int i = 0; i < iNumRight; ++i)
-			strFormat += "0";
+			for (int i = 0; i < iNumRight; ++i)
+				strFormat += "0";
+		}
 
 		return new java.text.DecimalFormat (strFormat).format (dblMultiplier * dblValue);
-	}
-
-	/**
-	 * Format the double input by the multiplier, then justifies the left and the right by 1 and 3 zeros
-	 * 
-	 * @param dblValue Double input
-	 * @param dblMultiplier Double representing the multiplier
-	 * 
-	 * @return String representing the formatted input
-	 */
-
-	public static final java.lang.String FormatDouble (
-		final double dblValue,
-		final double dblMultiplier)
-	{
-		return FormatDouble (dblValue, 1, 3, dblMultiplier);
-	}
-
-	/**
-	 * Format the double input by multiplying by 100, then justifies the left and the right by 1 and 3 zeros
-	 * 
-	 * @param dblValue Double input
-	 * 
-	 * @return String representing the formatted input
-	 */
-
-	public static final java.lang.String FormatDouble (
-		final double dblValue)
-	{
-		return FormatDouble (dblValue, 100.);
-	}
-
-	/**
-	 * Format the double input by multiplying by 10000, no justification
-	 * 
-	 * @param dblSpread Double input
-	 * 
-	 * @return String representing the formatted input
-	 */
-
-	public static final java.lang.String FormatSpread (
-		final double dblSpread)
-	{
-		return new java.text.DecimalFormat ("#0").format (10000. * dblSpread);
-	}
-
-	/**
-	 * Format the double input by multiplying, and then adding left and right adjustments
-	 * 
-	 * @param dblPrice Double representing the input
-	 * @param iNumLeft Integer representing the number of left justifying zeros
-	 * @param iNumRight Integer representing the number of right justifying zeros
-	 * @param dblMultiplier Double representing the multiplier
-	 * 
-	 * @return String representing the formatted input
-	 */
-
-	public static final java.lang.String FormatPrice (
-		final double dblPrice,
-		final int iNumLeft,
-		final int iNumRight,
-		final double dblMultiplier)
-	{
-		java.lang.String strFormat = "#";
-
-		for (int i = 0; i < iNumLeft; ++i)
-			strFormat += "0";
-
-		strFormat += ".";
-
-		for (int i = 0; i < iNumRight; ++i)
-			strFormat += "0";
-
-		java.text.DecimalFormat df2p = new java.text.DecimalFormat (strFormat);
-
-		return df2p.format (dblMultiplier * dblPrice);
-	}
-
-	/**
-	 * Format the double input by multiplying by 100, then justifies the left and the right by 2 and 3 zeros
-	 * 
-	 * @param dblPrice Double input
-	 * 
-	 * @return String representing the formatted input
-	 */
-
-	public static final java.lang.String FormatPrice (
-		final double dblPrice)
-	{
-		return FormatPrice (dblPrice, 2, 3, 100.);
 	}
 }

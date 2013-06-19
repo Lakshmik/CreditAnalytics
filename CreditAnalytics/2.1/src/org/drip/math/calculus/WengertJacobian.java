@@ -1,5 +1,5 @@
 
-package org.drip.math.algodiff;
+package org.drip.math.calculus;
 
 /*
  * -*- mode: java; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
@@ -179,7 +179,7 @@ public class WengertJacobian {
 	 */
 
 	public boolean cumulativeMerge (
-		final org.drip.math.algodiff.WengertJacobian wjOther)
+		final org.drip.math.calculus.WengertJacobian wjOther)
 	{
 		if (null == wjOther) return false;
 

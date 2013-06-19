@@ -231,7 +231,7 @@ public class CDSComponent extends org.drip.product.definition.CreditDefaultSwap 
 		return mapResult;
 	}
 
-	private org.drip.math.algodiff.WengertJacobian calcPeriodOnDefaultPVDFMicroJack (
+	private org.drip.math.calculus.WengertJacobian calcPeriodOnDefaultPVDFMicroJack (
 		final double dblFairPremium,
 		final org.drip.analytics.period.Period period,
 		final org.drip.param.valuation.ValuationParams valParams,
@@ -245,16 +245,16 @@ public class CDSComponent extends org.drip.product.definition.CreditDefaultSwap 
 		if (null == sLPSub || 0 == sLPSub.size()) return null;
 
 		int iNumParameters = 0;
-		org.drip.math.algodiff.WengertJacobian wjPeriodOnDefaultPVDF = null;
+		org.drip.math.calculus.WengertJacobian wjPeriodOnDefaultPVDF = null;
 
 		for (org.drip.analytics.period.LossPeriodCurveFactors lpcf : sLPSub) {
-			org.drip.math.algodiff.WengertJacobian wjPeriodPayDFDF =
+			org.drip.math.calculus.WengertJacobian wjPeriodPayDFDF =
 				mktParams.getDiscountCurve().getDFJacobian (0.5 * (lpcf.getStartDate() + lpcf.getEndDate()) +
 					_crValParams._iDefPayLag);
 
 			try {
 				if (null == wjPeriodOnDefaultPVDF)
-					wjPeriodOnDefaultPVDF = new org.drip.math.algodiff.WengertJacobian (1, iNumParameters =
+					wjPeriodOnDefaultPVDF = new org.drip.math.calculus.WengertJacobian (1, iNumParameters =
 						wjPeriodPayDFDF.numParameters());
 
 				double dblPeriodIncrementalCashFlow = getNotional (lpcf.getStartDate(), lpcf.getEndDate()) *
@@ -298,7 +298,7 @@ public class CDSComponent extends org.drip.product.definition.CreditDefaultSwap 
 
 			double dblPeriodEffectiveDate = 0.5 * (lpcf.getStartDate() + lpcf.getEndDate());
 
-			org.drip.math.algodiff.WengertJacobian wjPeriodPayDFDF =
+			org.drip.math.calculus.WengertJacobian wjPeriodPayDFDF =
 				mktParams.getDiscountCurve().getDFJacobian (dblPeriodEffectiveDate +
 					_crValParams._iDefPayLag);
 
@@ -419,8 +419,9 @@ public class CDSComponent extends org.drip.product.definition.CreditDefaultSwap 
 			_bApplyCpnEOMAdj,
 			strAccrualDC, // Accrual Day Count
 			_bApplyAccEOMAdj,
-			bConvCDS,
-			strCalendar); // Full First Coupon Period?
+			bConvCDS, // Full First Coupon Period?
+			false, // Merge the first 2 Periods - create a long stub?
+			strCalendar);
 	}
 
 	/**
@@ -924,7 +925,7 @@ public class CDSComponent extends org.drip.product.definition.CreditDefaultSwap 
 		return mapMeasures;
 	}
 
-	@Override public org.drip.math.algodiff.WengertJacobian calcPVDFMicroJack (
+	@Override public org.drip.math.calculus.WengertJacobian calcPVDFMicroJack (
 		final org.drip.param.valuation.ValuationParams valParams,
 		final org.drip.param.pricer.PricerParams pricerParams,
 		final org.drip.param.definition.ComponentMarketParams mktParams,
@@ -944,7 +945,7 @@ public class CDSComponent extends org.drip.product.definition.CreditDefaultSwap 
 		double dblFairPremium = mapMeasures.get ("FairPremium");
 
 		try {
-			org.drip.math.algodiff.WengertJacobian wjPVDFMicroJack = null;
+			org.drip.math.calculus.WengertJacobian wjPVDFMicroJack = null;
 
 			org.drip.analytics.definition.CreditCurve cc = mktParams.getCreditCurve();
 
@@ -955,15 +956,15 @@ public class CDSComponent extends org.drip.product.definition.CreditDefaultSwap 
 
 				if (dblPeriodPayDate < valParams._dblValue) continue;
 
-				org.drip.math.algodiff.WengertJacobian wjPeriodPayDFDF = dc.getDFJacobian (dblPeriodPayDate);
+				org.drip.math.calculus.WengertJacobian wjPeriodPayDFDF = dc.getDFJacobian (dblPeriodPayDate);
 
-				org.drip.math.algodiff.WengertJacobian wjPeriodOnDefaultPVMicroJack =
+				org.drip.math.calculus.WengertJacobian wjPeriodOnDefaultPVMicroJack =
 					calcPeriodOnDefaultPVDFMicroJack (dblFairPremium, p, valParams, pricerParams, mktParams);
 
 				if (null == wjPeriodPayDFDF | null == wjPeriodOnDefaultPVMicroJack) continue;
 
 				if (null == wjPVDFMicroJack)
-					wjPVDFMicroJack = new org.drip.math.algodiff.WengertJacobian (1,
+					wjPVDFMicroJack = new org.drip.math.calculus.WengertJacobian (1,
 						wjPeriodPayDFDF.numParameters());
 
 				double dblPeriodCashFlow = dblFairPremium * getNotional (p.getStartDate(), p.getEndDate()) *
@@ -986,7 +987,7 @@ public class CDSComponent extends org.drip.product.definition.CreditDefaultSwap 
 		return null;
 	}
 
-	@Override public org.drip.math.algodiff.WengertJacobian calcQuoteDFMicroJack (
+	@Override public org.drip.math.calculus.WengertJacobian calcQuoteDFMicroJack (
 		final java.lang.String strQuote,
 		final org.drip.param.valuation.ValuationParams valParams,
 		final org.drip.param.pricer.PricerParams pricerParams,
@@ -1008,7 +1009,7 @@ public class CDSComponent extends org.drip.product.definition.CreditDefaultSwap 
 
 			try {
 				double dblDV01 = 0.;
-				org.drip.math.algodiff.WengertJacobian wjFairPremiumDFMicroJack = null;
+				org.drip.math.calculus.WengertJacobian wjFairPremiumDFMicroJack = null;
 
 				org.drip.analytics.definition.CreditCurve cc = mktParams.getCreditCurve();
 
@@ -1019,14 +1020,14 @@ public class CDSComponent extends org.drip.product.definition.CreditDefaultSwap 
 
 					if (dblPeriodPayDate < valParams._dblValue) continue;
 
-					org.drip.math.algodiff.WengertJacobian wjPeriodPayDFDF = dc.getDFJacobian (p.getEndDate());
+					org.drip.math.calculus.WengertJacobian wjPeriodPayDFDF = dc.getDFJacobian (p.getEndDate());
 
 					PeriodLossMicroJack plmj = calcPeriodLossMicroJack (p, valParams, pricerParams, mktParams);
 
 					if (null == wjPeriodPayDFDF | null == plmj) continue;
 
 					if (null == wjFairPremiumDFMicroJack)
-						wjFairPremiumDFMicroJack = new org.drip.math.algodiff.WengertJacobian (1,
+						wjFairPremiumDFMicroJack = new org.drip.math.calculus.WengertJacobian (1,
 							wjPeriodPayDFDF.numParameters());
 
 					double dblPeriodCoupon01 = getNotional (p.getStartDate(), p.getEndDate()) * p.getCouponDCF()
@@ -1173,8 +1174,8 @@ public class CDSComponent extends org.drip.product.definition.CreditDefaultSwap 
 
 			final org.drip.analytics.definition.CreditCurve ccOld = mktParams.getCreditCurve();
 
-			org.drip.math.algodiff.ObjectiveFunction ofCDSPriceFromFlatSpread = new
-				org.drip.math.algodiff.ObjectiveFunction (null) {
+			org.drip.math.function.AbstractUnivariate ofCDSPriceFromFlatSpread = new
+				org.drip.math.function.AbstractUnivariate (null) {
 				public double evaluate (
 					final double dblFlatSpread)
 					throws java.lang.Exception
@@ -1302,16 +1303,16 @@ public class CDSComponent extends org.drip.product.definition.CreditDefaultSwap 
 
 	class PeriodLossMicroJack {
 		public double _dblAccrOnDef01 = 0.;
-		public org.drip.math.algodiff.WengertJacobian _wjLossPVMicroJack = null;
-		public org.drip.math.algodiff.WengertJacobian _wjAccrOnDef01MicroJack = null;
+		public org.drip.math.calculus.WengertJacobian _wjLossPVMicroJack = null;
+		public org.drip.math.calculus.WengertJacobian _wjAccrOnDef01MicroJack = null;
 
 		public PeriodLossMicroJack (
 			final int iNumParameters)
 			throws java.lang.Exception
 		{
-			_wjLossPVMicroJack = new org.drip.math.algodiff.WengertJacobian (1, iNumParameters);
+			_wjLossPVMicroJack = new org.drip.math.calculus.WengertJacobian (1, iNumParameters);
 
-			_wjAccrOnDef01MicroJack = new org.drip.math.algodiff.WengertJacobian (1, iNumParameters);
+			_wjAccrOnDef01MicroJack = new org.drip.math.calculus.WengertJacobian (1, iNumParameters);
 		}
 	}
 }

@@ -36,14 +36,14 @@ package org.drip.regression.fixedpointfinder;
  */
 
 public class CompoundBracketingRegressorSet implements org.drip.regression.core.RegressorSet {
-	private org.drip.math.algodiff.ObjectiveFunction _of = null;
+	private org.drip.math.function.AbstractUnivariate _of = null;
 	private java.lang.String _strRegressionScenario = "org.drip.math.solver1D.FixedPointFinderNewton";
 
 	private java.util.List<org.drip.regression.core.UnitRegressor> _setRegressors = new
 		java.util.ArrayList<org.drip.regression.core.UnitRegressor>();
 
 	public CompoundBracketingRegressorSet() {
-		_of = new org.drip.math.algodiff.ObjectiveFunction (null) {
+		_of = new org.drip.math.function.AbstractUnivariate (null) {
 			public double evaluate (
 				final double dblVariate)
 				throws java.lang.Exception

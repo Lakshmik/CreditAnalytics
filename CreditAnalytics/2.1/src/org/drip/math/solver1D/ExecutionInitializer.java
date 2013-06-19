@@ -64,7 +64,7 @@ public class ExecutionInitializer {
 		}
 	}
 
-	private org.drip.math.algodiff.ObjectiveFunction _of = null;
+	private org.drip.math.function.AbstractUnivariate _of = null;
 	private org.drip.math.solver1D.ConvergenceControlParams _ccp = null;
 
 	private java.util.SortedMap<java.lang.Double, java.lang.Double> _mapOFMap = new
@@ -209,7 +209,7 @@ public class ExecutionInitializer {
 			throw new java.lang.Exception
 				("ExecutionInitializer::isInConvergenceZone => Cannot increment OF deriv count in the output");
 
-		org.drip.math.algodiff.Differential diff1D = _of.calcDerivative (dblConvergenceZoneVariate, 1);
+		org.drip.math.calculus.Differential diff1D = _of.calcDifferential (dblConvergenceZoneVariate, 1);
 
 		if (null == diff1D)
 			throw new java.lang.Exception
@@ -220,7 +220,7 @@ public class ExecutionInitializer {
 			throw new java.lang.Exception
 				("ExecutionInitializer::isInConvergenceZone => Cannot increment OF deriv in the output");
 
-		org.drip.math.algodiff.Differential diff2D = _of.calcDerivative (dblConvergenceZoneVariate, 2);
+		org.drip.math.calculus.Differential diff2D = _of.calcDifferential (dblConvergenceZoneVariate, 2);
 
 		if (null == diff2D)
 			throw new java.lang.Exception
@@ -293,7 +293,7 @@ public class ExecutionInitializer {
 	 */
 
 	public ExecutionInitializer (
-		final org.drip.math.algodiff.ObjectiveFunction of,
+		final org.drip.math.function.AbstractUnivariate of,
 		final org.drip.math.solver1D.ConvergenceControlParams ccp)
 		throws java.lang.Exception
 	{

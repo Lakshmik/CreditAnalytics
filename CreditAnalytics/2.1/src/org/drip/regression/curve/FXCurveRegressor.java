@@ -2,32 +2,6 @@
 package org.drip.regression.curve;
 
 /*
- * Other imports
- */
-
-import java.util.*;
-
-/*
- * Regression Suite Imports
- */
-
-import org.drip.regression.core.*;
-
-/*
- * Credit Analytics Imports
- */
-
-import org.drip.analytics.creator.*;
-import org.drip.analytics.definition.*;
-import org.drip.analytics.date.JulianDate;
-import org.drip.analytics.daycount.Convention;
-import org.drip.analytics.support.GenericUtil;
-import org.drip.param.valuation.*;
-import org.drip.product.creator.*;
-import org.drip.product.definition.*;
-import org.drip.product.params.*;
-
-/*
  * -*- mode: java; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
  */
 
@@ -61,53 +35,58 @@ import org.drip.product.params.*;
  * @author Lakshmi Krishnamurthy
  */
 
-public class FXCurveRegressor implements RegressorSet {
-	private FXForwardCurve _fxForwardCurve = null;
-	private FXForward _fxfwd = null;
-	private String _strRegressionScenario = "org.drip.analytics.curve.FXCurve";
+public class FXCurveRegressor implements org.drip.regression.core.RegressorSet {
+	private org.drip.product.definition.FXForward _fxfwd = null;
+	private org.drip.analytics.definition.FXForwardCurve _fxForwardCurve = null;
+	private java.lang.String _strRegressionScenario = "org.drip.analytics.curve.FXCurve";
 
-	private List<UnitRegressor> _setRegressors = new ArrayList<UnitRegressor>();
+	private java.util.List<org.drip.regression.core.UnitRegressor> _setRegressors = new
+		java.util.ArrayList<org.drip.regression.core.UnitRegressor>();
 
 	/**
 	 * Do nothing FXCurveRegressor constructor
 	 */
 
-	public FXCurveRegressor() {
+	public FXCurveRegressor()
+	{
 	}
 
 	/*
 	 * FX Curve Regressor set setup
 	 */
 
-	@Override public boolean setupRegressors() {
+	@Override public boolean setupRegressors()
+	{
 		/*
 		 * FXBasis and FXCurve Creation unit regressor - implements the pre-regression, the post-regression,
 		 * 	and the actual regression functionality of the UnitRegressorExecutor class.
 		 */
 
 		try {
-			_setRegressors.add (new UnitRegressionExecutor ("FXBasisAndFXCurveCreation",
-				_strRegressionScenario) {
+			_setRegressors.add (new org.drip.regression.core.UnitRegressionExecutor
+				("FXBasisAndFXCurveCreation", _strRegressionScenario)
+			{
 				private static final int NUM_FX_NODES = 5;
 
-				private CurrencyPair _cp = null;
 				private double _dblFXSpot = 1.25;
 				double[] _adblFXFwd = new double[NUM_FX_NODES];
 				double[] _adblNodes = new double[NUM_FX_NODES];
 				boolean[] _abIsPIP = new boolean[NUM_FX_NODES];
+				private org.drip.product.params.CurrencyPair _cp = null;
 
-				@Override public boolean preRegression() {
+				@Override public boolean preRegression()
+				{
 					try {
-						_cp = new CurrencyPair ("EUR", "USD", "USD", 10000.);
-					} catch (Exception e) {
+						_cp = new org.drip.product.params.CurrencyPair ("EUR", "USD", "USD", 10000.);
+					} catch (java.lang.Exception e) {
 						e.printStackTrace();
 
 						return false;
 					}
 
-					Random rand = new Random();
+					java.util.Random rand = new java.util.Random();
 
-					JulianDate dtToday = JulianDate.Today();
+					org.drip.analytics.date.JulianDate dtToday = org.drip.analytics.date.JulianDate.Today();
 
 					for (int i = 0; i < NUM_FX_NODES; ++i) {
 						_abIsPIP[i] = false;
@@ -120,16 +99,20 @@ public class FXCurveRegressor implements RegressorSet {
 					return true;
 				}
 
-				@Override public boolean execRegression() {
-					JulianDate dtToday = JulianDate.Today();
+				@Override public boolean execRegression()
+				{
+					org.drip.analytics.date.JulianDate dtToday = org.drip.analytics.date.JulianDate.Today();
 
-					if (null == (_fxfwd = FXForwardBuilder.CreateFXForward (_cp, dtToday, "18M"))) return false;
+					if (null == (_fxfwd = org.drip.product.creator.FXForwardBuilder.CreateFXForward (_cp,
+						dtToday, "18M")))
+						return false;
 
 					try {
-						if (null == (_fxForwardCurve = FXForwardCurveBuilder.CreateFXForwardCurve (_cp,
-							dtToday, _dblFXSpot, _adblNodes, _adblFXFwd, _abIsPIP)))
+						if (null == (_fxForwardCurve =
+							org.drip.analytics.creator.FXForwardCurveBuilder.CreateFXForwardCurve (_cp,
+								dtToday, _dblFXSpot, _adblNodes, _adblFXFwd, _abIsPIP)))
 							return false;
-					} catch (Exception e) {
+					} catch (java.lang.Exception e) {
 						e.printStackTrace();
 
 						return false;
@@ -144,35 +127,41 @@ public class FXCurveRegressor implements RegressorSet {
 			 * 	actual regression functionality of the UnitRegressorExecutor class.
 			 */
 
-			_setRegressors.add (new UnitRegressionExecutor ("FXFwdTest", _strRegressionScenario) {
-				private DiscountCurve _dcEUR = null;
-				private DiscountCurve _dcUSD = null;
-				private double _dblFXFwd = Double.NaN;
-				private double _dblFXFwdPIP = Double.NaN;
-				private ValuationParams _valParams = null;
+			_setRegressors.add (new org.drip.regression.core.UnitRegressionExecutor ("FXFwdTest",
+				_strRegressionScenario)
+			{
+				private double _dblFXFwd = java.lang.Double.NaN;
+				private double _dblFXFwdPIP = java.lang.Double.NaN;
+				private org.drip.analytics.definition.DiscountCurve _dcEUR = null;
+				private org.drip.analytics.definition.DiscountCurve _dcUSD = null;
+				private org.drip.param.valuation.ValuationParams _valParams = null;
 
-				@Override public boolean preRegression() {
-					JulianDate dtToday = JulianDate.Today();
+				@Override public boolean preRegression()
+				{
+					org.drip.analytics.date.JulianDate dtToday = org.drip.analytics.date.JulianDate.Today();
 
-					if (null == (_dcUSD = DiscountCurveBuilder.CreateFromFlatRate (dtToday, "USD", 0.05)))
+					if (null == (_dcUSD = org.drip.analytics.creator.DiscountCurveBuilder.CreateFromFlatRate
+						(dtToday, "USD", 0.05)))
 						return false;
 
-					if (null == (_dcEUR = DiscountCurveBuilder.CreateFromFlatRate (dtToday, "EUR", 0.04)))
+					if (null == (_dcEUR = org.drip.analytics.creator.DiscountCurveBuilder.CreateFromFlatRate
+						(dtToday, "EUR", 0.04)))
 						return false;
 
-					if (null == (_valParams = ValuationParams.CreateValParams (dtToday, 0, "USD",
-						Convention.DR_ACTUAL)))
+					if (null == (_valParams = org.drip.param.valuation.ValuationParams.CreateValParams
+						(dtToday, 0, "USD", org.drip.analytics.daycount.Convention.DR_ACTUAL)))
 						return false;
 
 					return true;
 				}
 
-				@Override public boolean execRegression() {
+				@Override public boolean execRegression()
+				{
 					try {
 						_dblFXFwd = _fxfwd.implyFXForward (_valParams, _dcEUR, _dcUSD, 1.4, false);
 
 						_dblFXFwdPIP = _fxfwd.implyFXForward (_valParams, _dcEUR, _dcUSD, 1.4, true);
-					} catch (Exception e) {
+					} catch (java.lang.Exception e) {
 						e.printStackTrace();
 
 						return false;
@@ -181,10 +170,13 @@ public class FXCurveRegressor implements RegressorSet {
 					return true;
 				}
 
-				@Override public boolean postRegression (final RegressionRunDetail rnvd) {
-					rnvd.set ("FXFwd", GenericUtil.FormatDouble (_dblFXFwd, 1, 4, 1));
+				@Override public boolean postRegression (
+					final org.drip.regression.core.RegressionRunDetail rnvd)
+				{
+					rnvd.set ("FXFwd", org.drip.math.common.FormatUtil.FormatDouble (_dblFXFwd, 1, 4, 1));
 
-					rnvd.set ("FXFwdPIP", GenericUtil.FormatDouble (_dblFXFwdPIP, 1, 1, 1));
+					rnvd.set ("FXFwdPIP", org.drip.math.common.FormatUtil.FormatDouble (_dblFXFwdPIP, 1, 1,
+						1));
 
 					return true;
 				}
@@ -195,37 +187,42 @@ public class FXCurveRegressor implements RegressorSet {
 			 * 	actual regression functionality of the UnitRegressorExecutor class.
 			 */
 
-			_setRegressors.add (new UnitRegressionExecutor ("FXBasisTest", _strRegressionScenario) {
+			_setRegressors.add (new org.drip.regression.core.UnitRegressionExecutor ("FXBasisTest",
+				_strRegressionScenario)
+			{
 				private static final int NUM_FX_NODES = 5;
 
 				private double _dblFXSpot = 1.26;
-				private DiscountCurve _dcEUR = null;
-				private DiscountCurve _dcUSD = null;
 				private double _dblFXFwdMarket = 1.26;
-				private FXBasisCurve _fxEURBasisCurve = null;
-				private FXBasisCurve _fxUSDBasisCurve = null;
 				private double[] _adblFullEURBasis = null;
 				private double[] _adblFullUSDBasis = null;
-				private ValuationParams _valParams = null;
-				private double _dblDCEURBasis = Double.NaN;
-				private double _dblDCUSDBasis = Double.NaN;
 				private double[] _adblFXFwdFromEURBasis = null;
 				private double[] _adblFXFwdFromUSDBasis = null;
 				private double[] _adblBootstrappedEURBasis = null;
 				private double[] _adblBootstrappedUSDBasis = null;
+				private double _dblDCEURBasis = java.lang.Double.NaN;
+				private double _dblDCUSDBasis = java.lang.Double.NaN;
 				private double[] _adblNodes = new double[NUM_FX_NODES];
+				private org.drip.analytics.definition.DiscountCurve _dcEUR = null;
+				private org.drip.analytics.definition.DiscountCurve _dcUSD = null;
+				private org.drip.param.valuation.ValuationParams _valParams = null;
+				private org.drip.analytics.definition.FXBasisCurve _fxEURBasisCurve = null;
+				private org.drip.analytics.definition.FXBasisCurve _fxUSDBasisCurve = null;
 
-				@Override public boolean preRegression() {
-					JulianDate dtToday = JulianDate.Today();
+				@Override public boolean preRegression()
+				{
+					org.drip.analytics.date.JulianDate dtToday = org.drip.analytics.date.JulianDate.Today();
 
-					if (null == (_dcUSD = DiscountCurveBuilder.CreateFromFlatRate (dtToday, "USD", 0.05)))
+					if (null == (_dcUSD = org.drip.analytics.creator.DiscountCurveBuilder.CreateFromFlatRate
+						(dtToday, "USD", 0.05)))
 						return false;
 
-					if (null == (_dcEUR = DiscountCurveBuilder.CreateFromFlatRate (dtToday, "EUR", 0.04)))
+					if (null == (_dcEUR = org.drip.analytics.creator.DiscountCurveBuilder.CreateFromFlatRate
+						(dtToday, "EUR", 0.04)))
 						return false;
 
-					if (null == (_valParams = ValuationParams.CreateValParams (dtToday, 0, "USD",
-						Convention.DR_ACTUAL)))
+					if (null == (_valParams = org.drip.param.valuation.ValuationParams.CreateValParams
+						(dtToday, 0, "USD", org.drip.analytics.daycount.Convention.DR_ACTUAL)))
 						return false;
 
 						for (int i = 0; i < NUM_FX_NODES; ++i)
@@ -234,46 +231,49 @@ public class FXCurveRegressor implements RegressorSet {
 					return true;
 				}
 
-				@Override public boolean execRegression() {
+				@Override public boolean execRegression()
+				{
 					try {
 						_dblDCEURBasis = _fxfwd.calcDCBasis (_valParams, _dcEUR, _dcUSD, _dblFXSpot,
 							_dblFXFwdMarket, false);
 
 						_dblDCUSDBasis = _fxfwd.calcDCBasis (_valParams, _dcEUR, _dcUSD, _dblFXSpot,
 							_dblFXFwdMarket, true);
-					} catch (Exception e) {
+					} catch (java.lang.Exception e) {
 						e.printStackTrace();
 
 						return false;
 					}
 
-					if (null == (_adblFullUSDBasis = _fxForwardCurve.getFullBasis (_valParams, _dcEUR, _dcUSD,
-						true)) || 0 == _adblFullUSDBasis.length)
+					if (null == (_adblFullUSDBasis = _fxForwardCurve.getFullBasis (_valParams, _dcEUR,
+						_dcUSD, true)) || 0 == _adblFullUSDBasis.length)
 						return false;
 
-					if (null == (_adblFullEURBasis = _fxForwardCurve.getFullBasis (_valParams, _dcEUR, _dcUSD,
-						false)) || 0 == _adblFullEURBasis.length)
+					if (null == (_adblFullEURBasis = _fxForwardCurve.getFullBasis (_valParams, _dcEUR,
+						_dcUSD, false)) || 0 == _adblFullEURBasis.length)
 						return false;
 
-					if (null == (_adblBootstrappedUSDBasis = _fxForwardCurve.bootstrapBasis (_valParams, _dcEUR,
-						_dcUSD, true)) || 0 == _adblBootstrappedUSDBasis.length)
+					if (null == (_adblBootstrappedUSDBasis = _fxForwardCurve.bootstrapBasis (_valParams,
+						_dcEUR, _dcUSD, true)) || 0 == _adblBootstrappedUSDBasis.length)
 						return false;
 
-					if (null == (_adblBootstrappedEURBasis = _fxForwardCurve.bootstrapBasis (_valParams, _dcEUR,
-						_dcUSD, false)) || 0 == _adblBootstrappedEURBasis.length)
+					if (null == (_adblBootstrappedEURBasis = _fxForwardCurve.bootstrapBasis (_valParams,
+						_dcEUR, _dcUSD, false)) || 0 == _adblBootstrappedEURBasis.length)
 						return false;
 
 					try {
-						JulianDate dtToday = JulianDate.Today();
+						org.drip.analytics.date.JulianDate dtToday =
+							org.drip.analytics.date.JulianDate.Today();
 
-						CurrencyPair cp = new CurrencyPair ("EUR", "USD", "USD", 10000.);
+						org.drip.product.params.CurrencyPair cp = new org.drip.product.params.CurrencyPair
+							("EUR", "USD", "USD", 10000.);
 
-						_fxUSDBasisCurve = FXBasisCurveBuilder.CreateFXBasisCurve (cp, dtToday, _dblFXSpot, _adblNodes,
-							_adblFullUSDBasis, false);
+						_fxUSDBasisCurve = org.drip.analytics.creator.FXBasisCurveBuilder.CreateFXBasisCurve
+							(cp, dtToday, _dblFXSpot, _adblNodes, _adblFullUSDBasis, false);
 
-						_fxEURBasisCurve = FXBasisCurveBuilder.CreateFXBasisCurve (cp, dtToday, _dblFXSpot, _adblNodes,
-							_adblFullEURBasis, false);
-					} catch (Exception e) {
+						_fxEURBasisCurve = org.drip.analytics.creator.FXBasisCurveBuilder.CreateFXBasisCurve
+							(cp, dtToday, _dblFXSpot, _adblNodes, _adblFullEURBasis, false);
+					} catch (java.lang.Exception e) {
 						e.printStackTrace();
 
 						return false;
@@ -290,29 +290,39 @@ public class FXCurveRegressor implements RegressorSet {
 					return true;
 				}
 
-				@Override public boolean postRegression (final RegressionRunDetail rnvd) {
-					rnvd.set ("EURBasis", GenericUtil.FormatDouble (_dblDCEURBasis, 1, 2, 10000.));
+				@Override public boolean postRegression (
+					final org.drip.regression.core.RegressionRunDetail rnvd)
+				{
+					rnvd.set ("EURBasis", org.drip.math.common.FormatUtil.FormatDouble (_dblDCEURBasis, 1, 2,
+						10000.));
 
-					rnvd.set ("USDBasis", GenericUtil.FormatDouble (_dblDCUSDBasis, 1, 2, 10000.));
+					rnvd.set ("USDBasis", org.drip.math.common.FormatUtil.FormatDouble (_dblDCUSDBasis, 1, 2,
+						10000.));
 
 					for (int i = 0; i < _adblFullUSDBasis.length; ++i) {
-						rnvd.set ("FullUSDBasis{" + (i + 1) + "Y}", GenericUtil.FormatDouble
-							(_adblFullUSDBasis[i], 1, 4, 10000.));
+						rnvd.set ("FullUSDBasis{" + (i + 1) + "Y}",
+							org.drip.math.common.FormatUtil.FormatDouble (_adblFullUSDBasis[i], 1, 4,
+								10000.));
 
-						rnvd.set ("FullEURBasis{" + (i + 1) + "Y}", GenericUtil.FormatDouble
-								(_adblFullEURBasis[i], 1, 4, 10000.));
+						rnvd.set ("FullEURBasis{" + (i + 1) + "Y}",
+							org.drip.math.common.FormatUtil.FormatDouble (_adblFullEURBasis[i], 1, 4,
+								10000.));
 
-						rnvd.set ("BootstrapUSDBasis{" + (i + 1) + "Y}", GenericUtil.FormatDouble
-							(_adblBootstrappedUSDBasis[i], 1, 0, 10000.));
+						rnvd.set ("BootstrapUSDBasis{" + (i + 1) + "Y}",
+							org.drip.math.common.FormatUtil.FormatDouble (_adblBootstrappedUSDBasis[i], 1, 0,
+								10000.));
 
-						rnvd.set ("BootstrapEURBasis{" + (i + 1) + "Y}", GenericUtil.FormatDouble
-							(_adblBootstrappedEURBasis[i], 1, 0, 10000.));
+						rnvd.set ("BootstrapEURBasis{" + (i + 1) + "Y}",
+							org.drip.math.common.FormatUtil.FormatDouble (_adblBootstrappedEURBasis[i], 1, 0,
+								10000.));
 
-						rnvd.set ("FXFwd from USD Basis{" + (i + 1) + "Y}", GenericUtil.FormatDouble
-							(_adblFXFwdFromUSDBasis[i], 1, 4, 1.));
+						rnvd.set ("FXFwd from USD Basis{" + (i + 1) + "Y}",
+							org.drip.math.common.FormatUtil.FormatDouble (_adblFXFwdFromUSDBasis[i], 1, 4,
+								1.));
 
-						rnvd.set ("FXFwd from EUR Basis{" + (i + 1) + "Y}", GenericUtil.FormatDouble
-							(_adblFXFwdFromEURBasis[i], 1, 4, 1.));
+						rnvd.set ("FXFwd from EUR Basis{" + (i + 1) + "Y}",
+							org.drip.math.common.FormatUtil.FormatDouble (_adblFXFwdFromEURBasis[i], 1, 4,
+								1.));
 
 						if (!org.drip.math.common.NumberUtil.WithinTolerance (_adblFullUSDBasis[i],
 							-_adblFullEURBasis[i]))
@@ -330,7 +340,7 @@ public class FXCurveRegressor implements RegressorSet {
 					return true;
 				}
 			});
-		} catch (Exception e) {
+		} catch (java.lang.Exception e) {
 			e.printStackTrace();
 
 			return false;
@@ -339,11 +349,13 @@ public class FXCurveRegressor implements RegressorSet {
 		return true;
 	}
 
-	@Override public List<UnitRegressor> getRegressorSet() {
+	@Override public java.util.List<org.drip.regression.core.UnitRegressor> getRegressorSet()
+	{
 		return _setRegressors;
 	}
 
-	@Override public String getSetName() {
+	@Override public java.lang.String getSetName()
+	{
 		return _strRegressionScenario;
 	}
 }

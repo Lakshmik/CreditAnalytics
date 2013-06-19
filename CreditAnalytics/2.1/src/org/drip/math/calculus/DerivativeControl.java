@@ -1,5 +1,5 @@
 
-package org.drip.math.algodiff;
+package org.drip.math.calculus;
 
 /*
  * -*- mode: java; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-

@@ -44,16 +44,10 @@ public class DiscountCurveBuilder {
 	public static final java.lang.String BOOTSTRAP_MODE_CONSTANT_FORWARD = "ConstantForward";
 
 	/**
-	 * Linear Forward Bootstrap mode
-	 */
-
-	public static final java.lang.String BOOTSTRAP_MODE_LINEAR_FORWARD = "LinearForward";
-
-	/**
 	 * Cubic Forward Bootstrap mode
 	 */
 
-	public static final java.lang.String BOOTSTRAP_MODE_CUBIC_FORWARD = "CubicForward";
+	public static final java.lang.String BOOTSTRAP_MODE_POLYNOMIAL_FORWARD = "PolynomialForward";
 
 	/**
 	 * Hyperbolic Tension Spline Forward Bootstrap mode
@@ -112,12 +106,8 @@ public class DiscountCurveBuilder {
 				return new org.drip.analytics.curve.ConstantForwardRate (dtStart, strCurrency,
 					adblDate, adblRate);
 
-			if (BOOTSTRAP_MODE_LINEAR_FORWARD.equalsIgnoreCase (strBootstrapMode))
-				return new org.drip.analytics.curve.LinearForwardRate (dtStart, strCurrency, adblDate,
-					adblRate);
-
-			if (BOOTSTRAP_MODE_CUBIC_FORWARD.equalsIgnoreCase (strBootstrapMode))
-				return new org.drip.analytics.curve.CubicForwardRate (dtStart, strCurrency, adblDate,
+			if (BOOTSTRAP_MODE_POLYNOMIAL_FORWARD.equalsIgnoreCase (strBootstrapMode))
+				return new org.drip.analytics.curve.PolynomialForwardRate (dtStart, strCurrency, adblDate,
 					adblRate);
 
 			if (BOOTSTRAP_MODE_HYPERBOLIC_TENSION_FORWARD.equalsIgnoreCase (strBootstrapMode))
@@ -189,12 +179,8 @@ public class DiscountCurveBuilder {
 				return new org.drip.analytics.curve.ConstantForwardRate (dtStart, strCurrency, adblDate,
 					adblRate);
 
-			if (BOOTSTRAP_MODE_LINEAR_FORWARD.equalsIgnoreCase (strBootstrapMode))
-				return new org.drip.analytics.curve.LinearForwardRate (dtStart, strCurrency, adblDate,
-					adblRate);
-
-			if (BOOTSTRAP_MODE_CUBIC_FORWARD.equalsIgnoreCase (strBootstrapMode))
-				return new org.drip.analytics.curve.CubicForwardRate (dtStart, strCurrency, adblDate,
+			if (BOOTSTRAP_MODE_POLYNOMIAL_FORWARD.equalsIgnoreCase (strBootstrapMode))
+				return new org.drip.analytics.curve.PolynomialForwardRate (dtStart, strCurrency, adblDate,
 					adblRate);
 
 			if (BOOTSTRAP_MODE_HYPERBOLIC_TENSION_FORWARD.equalsIgnoreCase (strBootstrapMode))
@@ -233,11 +219,8 @@ public class DiscountCurveBuilder {
 		try {
 			if (null == strBootstrapMode) return new org.drip.analytics.curve.ConstantForwardRate (ab);
 
-			if (BOOTSTRAP_MODE_LINEAR_FORWARD.equalsIgnoreCase (strBootstrapMode))
-				return new org.drip.analytics.curve.LinearForwardRate (ab);
-
-			if (BOOTSTRAP_MODE_CUBIC_FORWARD.equalsIgnoreCase (strBootstrapMode))
-				return new org.drip.analytics.curve.CubicForwardRate (ab);
+			if (BOOTSTRAP_MODE_POLYNOMIAL_FORWARD.equalsIgnoreCase (strBootstrapMode))
+				return new org.drip.analytics.curve.PolynomialForwardRate (ab);
 
 			if (BOOTSTRAP_MODE_HYPERBOLIC_TENSION_FORWARD.equalsIgnoreCase (strBootstrapMode))
 				return new org.drip.analytics.curve.HyperbolicTensionForwardRate (ab);

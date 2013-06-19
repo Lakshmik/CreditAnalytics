@@ -50,8 +50,8 @@ public class IRSJacobianRegressorSet implements org.drip.regression.core.Regress
 			_setRegressors.add (new org.drip.regression.core.UnitRegressionExecutor ("IRSJacobian",
 				_strRegressionScenario) {
 				org.drip.analytics.date.JulianDate dtStart = null;
-				org.drip.math.algodiff.WengertJacobian wjPVDF = null;
-				org.drip.math.algodiff.WengertJacobian aWJComp[] = null;
+				org.drip.math.calculus.WengertJacobian wjPVDF = null;
+				org.drip.math.calculus.WengertJacobian aWJComp[] = null;
 				org.drip.analytics.definition.DiscountCurve dcIRS = null;
 				org.drip.product.definition.CalibratableComponent aCompCalib[] = null;
 				java.util.Map<org.drip.analytics.date.JulianDate, java.util.Map<java.lang.String,
@@ -62,7 +62,7 @@ public class IRSJacobianRegressorSet implements org.drip.regression.core.Regress
 					double adblDate[] = new double[NUM_DC_INSTR];
 					double adblRate[] = new double[NUM_DC_INSTR];
 					double adblCompCalibValue[] = new double[NUM_DC_INSTR];
-					aWJComp = new org.drip.math.algodiff.WengertJacobian[NUM_DC_INSTR];
+					aWJComp = new org.drip.math.calculus.WengertJacobian[NUM_DC_INSTR];
 					java.lang.String astrCalibMeasure[] = new java.lang.String[NUM_DC_INSTR];
 					aCompCalib = new org.drip.product.definition.CalibratableComponent[NUM_DC_INSTR];
 

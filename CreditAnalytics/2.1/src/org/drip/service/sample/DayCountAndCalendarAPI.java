@@ -133,7 +133,8 @@ public class DayCountAndCalendarAPI {
 		 * List all the holidays between the specified days according to the calendar set
 		 */
 
-		List<Double> lsHols = Convention.HolidaySet (dtToday.getJulian(), dtToday.addYears (1).getJulian(), "USD,GBP");
+		List<Double> lsHols = Convention.HolidaySet
+			(dtToday.getJulian(), dtToday.addYears (1).getJulian(), "USD,GBP");
 
 		for (double dblDate : lsHols)
 			System.out.println (new JulianDate (dblDate).toOracleDate());
@@ -152,30 +153,33 @@ public class DayCountAndCalendarAPI {
 		 * List available day count
 		 */
 
-		String strDCList = CreditAnalytics.GetAvailableDC();
+		/* String strDCList = CreditAnalytics.GetAvailableDC();
 
-		System.out.println (strDCList);
+		System.out.println (strDCList); */
 
 		/*
 		 * Calculate year fraction between 2 dates according to semi-annual, Act/360, and USD calendar
 		 */
 
-		double dblYF = CreditAnalytics.YearFraction (JulianDate.CreateFromYMD (2011, 1, 14),
-			JulianDate.CreateFromYMD (2011, 2, 14), "Act/360", false, "USD");
+		double dblYF = CreditAnalytics.YearFraction (JulianDate.CreateFromYMD (2013, 5, 31),
+			JulianDate.CreateFromYMD (2013, 6, 13), "30/360", false, "USD");
 
 		/*
 		 * Adjust the date FORWARD according to the USD calendar
 		 */
 
-		JulianDate dtAdjusted = CreditAnalytics.Adjust (JulianDate.CreateFromYMD (2011, 1, 16), "USD", 0);
+		// JulianDate dtAdjusted = CreditAnalytics.Adjust (JulianDate.CreateFromYMD (2011, 1, 16), "USD", 0);
 
 		/*
 		 * Roll to the PREVIOUS date according to the USD calendar
 		 */
 
-		JulianDate dtRoll = CreditAnalytics.RollDate (JulianDate.CreateFromYMD (2011, 1, 16), "USD", Convention.DR_PREV);
+		/* JulianDate dtRoll = CreditAnalytics.RollDate
+			(JulianDate.CreateFromYMD (2011, 1, 16), "USD", Convention.DR_PREV);
 
-		System.out.println ("YearFract: " + dblYF + "; Adjusted: " + dtAdjusted + "; Rolled: " + dtRoll);
+		System.out.println ("YearFract: " + dblYF + "; Adjusted: " + dtAdjusted + "; Rolled: " + dtRoll); */
+
+		System.out.println ("YearFract: " + dblYF);
 	}
 
 	public static final void main (
@@ -188,7 +192,7 @@ public class DayCountAndCalendarAPI {
 
 		CreditAnalytics.Init (strConfig);
 
-		CalenderAPISample();
+		// CalenderAPISample();
 
 		DayCountAPISample();
 	}

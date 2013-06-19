@@ -41,7 +41,7 @@ public class RootFinderSample {
 	 */
 
 	private static final void InvokeNewton (
-		final org.drip.math.algodiff.ObjectiveFunction of)
+		final org.drip.math.function.AbstractUnivariate of)
 	{
 		try {
 			org.drip.math.solver1D.FixedPointFinderOutput fpop = new
@@ -68,7 +68,7 @@ public class RootFinderSample {
 	 */
 
 	private static final void InvokeBisection (
-		final org.drip.math.algodiff.ObjectiveFunction of)
+		final org.drip.math.function.AbstractUnivariate of)
 	{
 		try {
 			org.drip.math.solver1D.FixedPointFinderOutput fpop = new
@@ -96,7 +96,7 @@ public class RootFinderSample {
 	 */
 
 	private static final void InvokeFalsePosition (
-		final org.drip.math.algodiff.ObjectiveFunction of)
+		final org.drip.math.function.AbstractUnivariate of)
 	{
 		try {
 			org.drip.math.solver1D.FixedPointFinderOutput fpop = new
@@ -124,7 +124,7 @@ public class RootFinderSample {
 	 */
 
 	private static final void InvokeQuadraticInterpolation (
-		final org.drip.math.algodiff.ObjectiveFunction of)
+		final org.drip.math.function.AbstractUnivariate of)
 	{
 		try {
 			org.drip.math.solver1D.FixedPointFinderOutput fpop = new
@@ -152,7 +152,7 @@ public class RootFinderSample {
 	 */
 
 	private static final void InvokeInverseQuadraticInterpolation (
-		final org.drip.math.algodiff.ObjectiveFunction of)
+		final org.drip.math.function.AbstractUnivariate of)
 	{
 		try {
 			org.drip.math.solver1D.FixedPointFinderOutput fpop = new
@@ -180,7 +180,7 @@ public class RootFinderSample {
 	 */
 
 	private static final void InvokeRidder (
-		final org.drip.math.algodiff.ObjectiveFunction of)
+		final org.drip.math.function.AbstractUnivariate of)
 	{
 		try {
 			org.drip.math.solver1D.FixedPointFinderOutput fpop = new
@@ -208,7 +208,7 @@ public class RootFinderSample {
 	 */
 
 	private static final void InvokeBrent (
-		final org.drip.math.algodiff.ObjectiveFunction of)
+		final org.drip.math.function.AbstractUnivariate of)
 	{
 		try {
 			org.drip.math.solver1D.FixedPointFinderOutput fpop = new
@@ -235,7 +235,7 @@ public class RootFinderSample {
 	 */
 
 	private static final void InvokeZheng (
-		final org.drip.math.algodiff.ObjectiveFunction of)
+		final org.drip.math.function.AbstractUnivariate of)
 	{
 		try {
 			org.drip.math.solver1D.FixedPointFinderOutput fpop = new
@@ -264,7 +264,7 @@ public class RootFinderSample {
 		 * Define and implement the objective function
 		 */
 
-		org.drip.math.algodiff.ObjectiveFunction of = new org.drip.math.algodiff.ObjectiveFunction (null) {
+		org.drip.math.function.AbstractUnivariate of = new org.drip.math.function.AbstractUnivariate (null) {
 			@Override public double evaluate (
 				final double dblVariate)
 				throws java.lang.Exception
@@ -286,7 +286,7 @@ public class RootFinderSample {
 				return 1. + 3. * dblVariate - 2. * java.lang.Math.sin (dblVariate); */
 			}
 
-			@Override public org.drip.math.algodiff.Differential calcDerivative (
+			@Override public org.drip.math.calculus.Differential calcDifferential (
 				final double dblVariate,
 				final double dblOFBase,
 				final int iOrder)
@@ -306,7 +306,7 @@ public class RootFinderSample {
 
 				if (1 != iOrder) {
 					try {
-						return new org.drip.math.algodiff.Differential (dblVariateInfinitesimal, (-1. *
+						return new org.drip.math.calculus.Differential (dblVariateInfinitesimal, (-1. *
 						 	java.lang.Math.cos (dblVariate) - 6. * dblVariate) * dblVariateInfinitesimal);
 
 						/* return new org.drip.math.autodiff.Differential (dblVariateInfinitesimal, (6. *
@@ -329,7 +329,7 @@ public class RootFinderSample {
 				}
 
 				try {
-					return new org.drip.math.algodiff.Differential (dblVariateInfinitesimal, (-1. *
+					return new org.drip.math.calculus.Differential (dblVariateInfinitesimal, (-1. *
 					 	java.lang.Math.sin (dblVariate) - 3. * dblVariate * dblVariate) *
 					 		dblVariateInfinitesimal);
 

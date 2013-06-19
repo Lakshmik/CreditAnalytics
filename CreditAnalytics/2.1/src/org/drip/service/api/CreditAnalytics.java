@@ -1536,7 +1536,7 @@ public class CreditAnalytics {
 		if (null == GetBond (strBondId))
 			throw new java.lang.Exception ("Cannot locate bond for ID " + strBondId);
 
-		return GetBond (strBondId).calcExerciseZSpreadFromPrice (valParams,
+		return GetBond (strBondId).calcZSpreadFromPriceToOptimalExercise (valParams,
 			org.drip.param.creator.ComponentMarketParamsBuilder.CreateComponentMarketParams (dc, null, null,
 				null, null, null, null), quotingParams, dblPrice);
 	}
@@ -1625,7 +1625,7 @@ public class CreditAnalytics {
 		if (null == GetBond (strBondId))
 			throw new java.lang.Exception ("Cannot locate bond for ID " + strBondId);
 
-		return GetBond (strBondId).calcExerciseOASFromPrice (valParams,
+		return GetBond (strBondId).calcOASFromZSpreadToOptimalExercise (valParams,
 			org.drip.param.creator.ComponentMarketParamsBuilder.CreateComponentMarketParams (dc, null, null,
 				null, null, null, null), quotingParams, dblPrice);
 	}
@@ -1715,7 +1715,7 @@ public class CreditAnalytics {
 		if (null == GetBond (strBondId))
 			throw new java.lang.Exception ("Cannot locate bond for ID " + strBondId);
 
-		return GetBond (strBondId).calcExerciseISpreadFromPrice (valParams,
+		return GetBond (strBondId).calcISpreadFromPriceToOptimalExercise (valParams,
 			org.drip.param.creator.ComponentMarketParamsBuilder.CreateComponentMarketParams (dc, null, null,
 				null, null, null, null), quotingParams, dblPrice);
 	}
@@ -1805,7 +1805,7 @@ public class CreditAnalytics {
 		if (null == GetBond (strBondId))
 			throw new java.lang.Exception ("Cannot locate bond for ID " + strBondId);
 
-		return GetBond (strBondId).calcExerciseDiscountMarginFromPrice (valParams,
+		return GetBond (strBondId).calcDiscountMarginFromPriceToOptimalExercise (valParams,
 			org.drip.param.creator.ComponentMarketParamsBuilder.CreateComponentMarketParams (dc, null, null,
 				null, null, null, null), quotingParams, dblPrice);
 	}
@@ -1898,7 +1898,7 @@ public class CreditAnalytics {
 		if (null == GetBond (strBondId))
 			throw new java.lang.Exception ("Cannot locate bond for ID " + strBondId);
 
-		return GetBond (strBondId).calcExerciseTSYSpreadFromPrice (valParams,
+		return GetBond (strBondId).calcTSYSpreadFromPriceToOptimalExercise (valParams,
 			org.drip.param.creator.ComponentMarketParamsBuilder.CreateComponentMarketParams (dc, dcTSY,
 				dcTSY, null, null, null, null), quotingParams, dblPrice);
 	}
@@ -1994,7 +1994,7 @@ public class CreditAnalytics {
 		if (null == GetBond (strBondId))
 			throw new java.lang.Exception ("Cannot locate bond for ID " + strBondId);
 
-		return GetBond (strBondId).calcExerciseGSpreadFromPrice (valParams,
+		return GetBond (strBondId).calcGSpreadFromPriceToOptimalExercise (valParams,
 			org.drip.param.creator.ComponentMarketParamsBuilder.CreateComponentMarketParams (dc, dcTSY,
 				dcTSY, null, null, null, null), quotingParams, dblPrice);
 	}
@@ -2060,96 +2060,6 @@ public class CreditAnalytics {
 	}
 
 	/**
-	 * Calculates the bond par asset swap Spread from price
-	 * 
-	 * @param strBondId Bond ID
-	 * @param valParams Valuation Parameters
-	 * @param dc Discount Curve
-	 * @param dblPrice Price
-	 * @param quotingParams Bond Quoting parameters
-	 * 
-	 * @return Double par asset swap Spread
-	 * 
-	 * @throws java.lang.Exception Thrown if input is invalid
-	 */
-
-	public static final double BondParASWFromPrice (
-		final java.lang.String strBondId,
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.analytics.definition.DiscountCurve dc,
-		final double dblPrice,
-		final org.drip.param.valuation.QuotingParams quotingParams)
-		throws java.lang.Exception
-	{
-		if (null == valParams || null == dc || null == strBondId || strBondId.isEmpty())
-			throw new java.lang.Exception ("Bad inputs into CreditAnalytics.BondASWFromPrice");
-
-		if (null == GetBond (strBondId))
-			throw new java.lang.Exception ("Cannot locate bond for ID " + strBondId);
-
-		return GetBond (strBondId).calcExerciseParASWFromPrice (valParams,
-			org.drip.param.creator.ComponentMarketParamsBuilder.CreateComponentMarketParams (dc, null, null,
-				null, null, null, null), quotingParams, dblPrice);
-	}
-
-	/**
-	 * Calculates the bond par asset swap Spread to maturity from price
-	 * 
-	 * @param strBondId Bond ID
-	 * @param valParams Valuation Parameters
-	 * @param dc Discount Curve
-	 * @param dblPrice Price
-	 * @param quotingParams Bond Quoting parameters
-	 * 
-	 * @return Double par asset swap Spread to maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if input is invalid
-	 */
-
-	public static final double BondParASWTMFromPrice (
-		final java.lang.String strBondId,
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.analytics.definition.DiscountCurve dc,
-		final double dblPrice,
-		final org.drip.param.valuation.QuotingParams quotingParams)
-		throws java.lang.Exception
-	{
-		if (null == valParams || null == dc || null == strBondId || strBondId.isEmpty())
-			throw new java.lang.Exception ("Bad inputs into CreditAnalytics.BondASWTMFromPrice");
-
-		if (null == GetBond (strBondId))
-			throw new java.lang.Exception ("Cannot locate bond for ID " + strBondId);
-
-		return GetBond (strBondId).calcParASWFromPrice (valParams,
-			org.drip.param.creator.ComponentMarketParamsBuilder.CreateComponentMarketParams (dc, null, null,
-				null, null, null, null), quotingParams, dblPrice);
-	}
-
-	/**
-	 * Calculates the bond Par ASW Spread from price (simplified version)
-	 * 
-	 * @param strBondId Bond ID
-	 * @param dt Valuation Date
-	 * @param dc Discount Curve
-	 * @param dblPrice Price
-	 * 
-	 * @return Double Par ASW Spread
-	 * 
-	 * @throws java.lang.Exception Thrown if input is invalid
-	 */
-
-	public static final double BondParASWFromPrice (
-		final java.lang.String strBondId,
-		final org.drip.analytics.date.JulianDate dt,
-		final org.drip.analytics.definition.DiscountCurve dc,
-		final double dblPrice)
-		throws java.lang.Exception
-	{
-		return BondParASWFromPrice (strBondId, org.drip.param.valuation.ValuationParams.CreateValParams (dt,
-			0, "", org.drip.analytics.daycount.Convention.DR_ACTUAL), dc, dblPrice, null);
-	}
-
-	/**
 	 * Calculates the bond credit basis from price
 	 * 
 	 * @param strBondId Bond ID
@@ -2179,7 +2089,7 @@ public class CreditAnalytics {
 		if (null == GetBond (strBondId))
 			throw new java.lang.Exception ("Cannot locate bond for ID " + strBondId);
 
-		return GetBond (strBondId).calcExerciseCreditBasisFromPrice (valParams,
+		return GetBond (strBondId).calcCreditBasisFromPriceToOptimalExercise (valParams,
 			org.drip.param.creator.ComponentMarketParamsBuilder.CreateComponentMarketParams (dc, null, null,
 				cc, null, null, null), quotingParams, dblPrice);
 	}
@@ -2275,7 +2185,7 @@ public class CreditAnalytics {
 		if (null == GetBond (strBondId))
 			throw new java.lang.Exception ("Cannot locate bond for ID " + strBondId);
 
-		return GetBond (strBondId).calcExercisePECSFromPrice (valParams,
+		return GetBond (strBondId).calcPECSFromPriceToOptimalExercise (valParams,
 			org.drip.param.creator.ComponentMarketParamsBuilder.CreateComponentMarketParams (dc, null, null,
 				cc, null, null, null), quotingParams, dblPrice);
 	}
@@ -2432,7 +2342,7 @@ public class CreditAnalytics {
 
 		return GetBond (strBondId).calcYieldFromTSYSpread (valParams,
 			org.drip.param.creator.ComponentMarketParamsBuilder.CreateComponentMarketParams (dc, dcTSY,
-				dcTSY, null, null, null, null), dblTSYSpread);
+				dcTSY, null, null, null, null), null, dblTSYSpread);
 	}
 
 	/**
@@ -2609,9 +2519,9 @@ public class CreditAnalytics {
 		if (null == GetBond (strBondId))
 			throw new java.lang.Exception ("Cannot locate bond for ID " + strBondId);
 
-		return GetBond (strBondId).calcISpreadFromTSYSpread (valParams,
+		return GetBond (strBondId).calcISpreadFromTSYSpreadToOptimalExercise (valParams,
 			org.drip.param.creator.ComponentMarketParamsBuilder.CreateComponentMarketParams (dc, dcTSY,
-				dcTSY, null, null, null, null), dblTSYSpread);
+				dcTSY, null, null, null, null), null, dblTSYSpread);
 	}
 
 	/**
@@ -2669,9 +2579,9 @@ public class CreditAnalytics {
 		if (null == GetBond (strBondId))
 			throw new java.lang.Exception ("Cannot locate bond for ID " + strBondId);
 
-		return GetBond (strBondId).calcDiscountMarginFromTSYSpread (valParams,
+		return GetBond (strBondId).calcDiscountMarginFromTSYSpreadToOptimalExercise (valParams,
 			org.drip.param.creator.ComponentMarketParamsBuilder.CreateComponentMarketParams (dc, dcTSY,
-				dcTSY, null, null, null, null), dblTSYSpread);
+				dcTSY, null, null, null, null), null, dblTSYSpread);
 	}
 
 	/**
@@ -2728,9 +2638,9 @@ public class CreditAnalytics {
 		if (null == GetBond (strBondId))
 			throw new java.lang.Exception ("Cannot locate bond for ID " + strBondId);
 
-		return GetBond (strBondId).calcGSpreadFromTSYSpread (valParams,
+		return GetBond (strBondId).calcGSpreadFromTSYSpreadToOptimalExercise (valParams,
 			org.drip.param.creator.ComponentMarketParamsBuilder.CreateComponentMarketParams (dc, dcTSY,
-				dcTSY, null, null, null, null), dblTSYSpread);
+				dcTSY, null, null, null, null), null, dblTSYSpread);
 	}
 
 	/**
@@ -2757,67 +2667,6 @@ public class CreditAnalytics {
 	{
 		return BondGSpreadFromTSYSpread (strBondId, org.drip.param.valuation.ValuationParams.CreateValParams
 			(dt, 0, "", org.drip.analytics.daycount.Convention.DR_ACTUAL), dc, dcTSY, dblTSYSpread);
-	}
-
-	/**
-	 * Calculates the bond par asset swap spread from spread to a treasury benchmark
-	 * 
-	 * @param strBondId Bond ID
-	 * @param valParams Valuation Parameters
-	 * @param dc Discount Curve
-	 * @param dcTSY Treasury discount curve
-	 * @param dblTSYSpread Spread to treasury
-	 * @param quotingParams Bond Quoting parameters
-	 * 
-	 * @return Double par asset swap spread
-	 * 
-	 * @throws java.lang.Exception Thrown if input is invalid
-	 */
-
-	public static final double BondParASWFromTSYSpread (
-		final java.lang.String strBondId,
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.analytics.definition.DiscountCurve dc,
-		final org.drip.analytics.definition.DiscountCurve dcTSY,
-		final double dblTSYSpread,
-		final org.drip.param.valuation.QuotingParams quotingParams)
-		throws java.lang.Exception
-	{
-		if (null == valParams || null == dc || null == dcTSY || null == strBondId || strBondId.isEmpty())
-			throw new java.lang.Exception ("Bad inputs into CreditAnalytics.BondParASWFromTSYSpread");
-
-		if (null == GetBond (strBondId))
-			throw new java.lang.Exception ("Cannot locate bond for ID " + strBondId);
-
-		return GetBond (strBondId).calcParASWFromTSYSpread (valParams,
-			org.drip.param.creator.ComponentMarketParamsBuilder.CreateComponentMarketParams (dc, dcTSY,
-				dcTSY, null, null, null, null), quotingParams, dblTSYSpread);
-	}
-
-	/**
-	 * Calculates the bond par asset swap spread from spread to a treasury benchmark (simplified version)
-	 * 
-	 * @param strBondId Bond ID
-	 * @param dt Valuation Date
-	 * @param dc Discount Curve
-	 * @param dcTSY Treasury discount curve
-	 * @param dblTSYSpread Spread to treasury
-	 * 
-	 * @return Double par asset swap spread
-	 * 
-	 * @throws java.lang.Exception Thrown if input is invalid
-	 */
-
-	public static final double BondParASWFromTSYSpread (
-		final java.lang.String strBondId,
-		final org.drip.analytics.date.JulianDate dt,
-		final org.drip.analytics.definition.DiscountCurve dc,
-		final org.drip.analytics.definition.DiscountCurve dcTSY,
-		final double dblTSYSpread)
-		throws java.lang.Exception
-	{
-		return BondParASWFromTSYSpread (strBondId, org.drip.param.valuation.ValuationParams.CreateValParams
-			(dt, 0, "", org.drip.analytics.daycount.Convention.DR_ACTUAL), dc, dcTSY, dblTSYSpread, null);
 	}
 
 	/**
@@ -3090,9 +2939,9 @@ public class CreditAnalytics {
 		if (null == GetBond (strBondId))
 			throw new java.lang.Exception ("Cannot locate bond for ID " + strBondId);
 
-		return GetBond (strBondId).calcISpreadFromYTM (valParams,
+		return GetBond (strBondId).calcISpreadFromYield (valParams,
 			org.drip.param.creator.ComponentMarketParamsBuilder.CreateComponentMarketParams (dc, null, null,
-				null, null, null, null), dblYield);
+				null, null, null, null), null, dblYield);
 	}
 
 	/**
@@ -3147,9 +2996,9 @@ public class CreditAnalytics {
 		if (null == GetBond (strBondId))
 			throw new java.lang.Exception ("Cannot locate bond for ID " + strBondId);
 
-		return GetBond (strBondId).calcISpreadFromYTM (valParams,
+		return GetBond (strBondId).calcISpreadFromYield (valParams,
 			org.drip.param.creator.ComponentMarketParamsBuilder.CreateComponentMarketParams (dc, null, null,
-				null, null, null, null), dblYield);
+				null, null, null, null), null, dblYield);
 	}
 
 	/**
@@ -3207,9 +3056,9 @@ public class CreditAnalytics {
 		if (null == GetBond (strBondId))
 			throw new java.lang.Exception ("Cannot locate bond for ID " + strBondId);
 
-		return GetBond (strBondId).calcGSpreadFromYTM (valParams,
+		return GetBond (strBondId).calcGSpreadFromYield (valParams,
 			org.drip.param.creator.ComponentMarketParamsBuilder.CreateComponentMarketParams (dc, dcTSY,
-				dcTSY, null, null, null, null), dblYield);
+				dcTSY, null, null, null, null), null, dblYield);
 	}
 
 	/**
@@ -3236,63 +3085,6 @@ public class CreditAnalytics {
 	{
 		return BondGSpreadFromYield (strBondId, org.drip.param.valuation.ValuationParams.CreateValParams (dt,
 			0, "", org.drip.analytics.daycount.Convention.DR_ACTUAL), dc, dcTSY, dblYield, null);
-	}
-
-	/**
-	 * Calculates the bond par ASW from yield
-	 * 
-	 * @param strBondId Bond ID
-	 * @param valParams Valuation Parameters
-	 * @param dc Discount Curve
-	 * @param dblYield YTM
-	 * @param quotingParams Bond Quoting parameters
-	 * 
-	 * @return Double Par ASW
-	 * 
-	 * @throws java.lang.Exception Thrown if input is invalid
-	 */
-
-	public static final double BondParASWFromYield (
-		final java.lang.String strBondId,
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.analytics.definition.DiscountCurve dc,
-		final double dblYield,
-		final org.drip.param.valuation.QuotingParams quotingParams)
-		throws java.lang.Exception
-	{
-		if (null == valParams || null == dc || null == strBondId || strBondId.isEmpty())
-			throw new java.lang.Exception ("Bad inputs into CreditAnalytics.BondParASWFromYield");
-
-		if (null == GetBond (strBondId))
-			throw new java.lang.Exception ("Cannot locate bond for ID " + strBondId);
-
-		return GetBond (strBondId).calcParASWFromYield (valParams,
-			org.drip.param.creator.ComponentMarketParamsBuilder.CreateComponentMarketParams (dc, null, null,
-				null, null, null, null), quotingParams, dblYield);
-	}
-
-	/**
-	 * Calculates the bond Par ASW from yield (simplified version)
-	 * 
-	 * @param strBondId Bond ID
-	 * @param dt Valuation Date
-	 * @param dc Discount Curve
-	 * @param dblYield YTM
-	 * 
-	 * @return Double Par ASW
-	 * 
-	 * @throws java.lang.Exception Thrown if input is invalid
-	 */
-
-	public static final double BondParASWFromYield (
-		final java.lang.String strBondId,
-		final org.drip.analytics.date.JulianDate dt,
-		final org.drip.analytics.definition.DiscountCurve dc,
-		final double dblYield)
-		throws java.lang.Exception
-	{
-		return BondParASWFromYield (strBondId, org.drip.param.valuation.ValuationParams.CreateValParams (dt,
-			0, "", org.drip.analytics.daycount.Convention.DR_ACTUAL), dc, dblYield, null);
 	}
 
 	/**
@@ -3955,42 +3747,6 @@ public class CreditAnalytics {
 	}
 
 	/**
-	 * Calculates the EOD bond par ASW from price
-	 * 
-	 * @param strBondId Bond ID
-	 * @param dtEOD EOD
-	 * @param dblPrice Price
-	 * 
-	 * @return Double EOD Par ASW
-	 * 
-	 * @throws java.lang.Exception Thrown if input is invalid
-	 */
-
-	public static final double BondEODParASWFromPrice (
-		final java.lang.String strBondId,
-		final org.drip.analytics.date.JulianDate dtEOD,
-		final double dblPrice)
-		throws java.lang.Exception
-	{
-		if (null == strBondId || strBondId.isEmpty() || null == dtEOD || java.lang.Double.isNaN (dblPrice))
-			throw new java.lang.Exception ("CreditAnalytics.BondEODParASWFromPrice: Bad inputs");
-
-		org.drip.product.definition.Bond bond = GetBond (strBondId);
-
-		if (null == bond) throw new java.lang.Exception ("Cannot locate bond for ID " + strBondId);
-
-		org.drip.analytics.definition.DiscountCurve dcEOD = null;
-
-		java.lang.String strIR = bond.getIRCurveName();
-
-		if (null != strIR && !strIR.isEmpty()) dcEOD = LoadEODFullIRCurve (strIR, dtEOD);
-
-		return bond.calcParASWFromPrice (org.drip.param.valuation.ValuationParams.CreateStdValParams (dtEOD,
-			strIR), org.drip.param.creator.ComponentMarketParamsBuilder.CreateComponentMarketParams (dcEOD,
-				null, null, null, null, null, null), null, dblPrice);
-	}
-
-	/**
 	 * Calculates the EOD bond TSY Spread from price
 	 * 
 	 * @param strBondId Bond ID
@@ -4246,22 +4002,6 @@ public class CreditAnalytics {
 	}
 
 	/**
-	 * Calculates the Live bond par ASW from price
-	 * 
-	 * @param strBondId Bond ID
-	 * @param dblPrice Price
-	 * 
-	 * @return Double Live Par ASW
-	 * 
-	 * @throws java.lang.Exception Thrown if input is invalid
-	 */
-
-	public static final double BondLiveParASWFromPrice (final java.lang.String strBondId, final double
-		dblPrice) throws java.lang.Exception {
-		return BondEODParASWFromPrice (strBondId, org.drip.analytics.date.JulianDate.Today(), dblPrice);
-	}
-
-	/**
 	 * Calculates the Live bond TSY Spread from price
 	 * 
 	 * @param strBondId Bond ID
@@ -4512,7 +4252,7 @@ public class CreditAnalytics {
 
 		return bond.calcGSpreadFromYield (org.drip.param.valuation.ValuationParams.CreateStdValParams (dtEOD,
 			strIR), org.drip.param.creator.ComponentMarketParamsBuilder.CreateComponentMarketParams (dcEOD,
-				dcTSY, null, null, null, null, null), dblYield);
+				dcTSY, null, null, null, null, null), null, dblYield);
 	}
 
 	/**
@@ -4549,7 +4289,7 @@ public class CreditAnalytics {
 
 		return bond.calcISpreadFromYield (org.drip.param.valuation.ValuationParams.CreateStdValParams (dtEOD,
 			strIR), org.drip.param.creator.ComponentMarketParamsBuilder.CreateComponentMarketParams (dcEOD,
-				null, null, null, null, null, null), dblYield);
+				null, null, null, null, null, null), null, dblYield);
 	}
 
 	/**
@@ -4586,7 +4326,7 @@ public class CreditAnalytics {
 
 		return bond.calcDiscountMarginFromYield (org.drip.param.valuation.ValuationParams.CreateStdValParams
 			(dtEOD, strIR), org.drip.param.creator.ComponentMarketParamsBuilder.CreateComponentMarketParams
-				(dcEOD, null, null, null, null, null, null), dblYield);
+				(dcEOD, null, null, null, null, null, null), null, dblYield);
 	}
 
 	/**
@@ -4622,42 +4362,6 @@ public class CreditAnalytics {
 		org.drip.analytics.definition.DiscountCurve dcEOD = LoadEODFullIRCurve (strIR, dtEOD);
 
 		return bond.calcOASFromYield (org.drip.param.valuation.ValuationParams.CreateStdValParams (dtEOD,
-			strIR), org.drip.param.creator.ComponentMarketParamsBuilder.CreateComponentMarketParams (dcEOD,
-				null, null, null, null, null, null), null, dblYield);
-	}
-
-	/**
-	 * Calculates the EOD bond par ASW from Yield
-	 * 
-	 * @param strBondId Bond ID
-	 * @param dtEOD EOD
-	 * @param dblYield Yield
-	 * 
-	 * @return Double EOD Par ASW
-	 * 
-	 * @throws java.lang.Exception Thrown if input is invalid
-	 */
-
-	public static final double BondEODParASWFromYield (
-		final java.lang.String strBondId,
-		final org.drip.analytics.date.JulianDate dtEOD,
-		final double dblYield)
-		throws java.lang.Exception
-	{
-		if (null == strBondId || strBondId.isEmpty() || null == dtEOD || java.lang.Double.isNaN (dblYield))
-			throw new java.lang.Exception ("CreditAnalytics.BondEODParASWFromYield: Bad inputs");
-
-		org.drip.product.definition.Bond bond = GetBond (strBondId);
-
-		if (null == bond) throw new java.lang.Exception ("Cannot locate bond for ID " + strBondId);
-
-		org.drip.analytics.definition.DiscountCurve dcEOD = null;
-
-		java.lang.String strIR = bond.getIRCurveName();
-
-		if (null != strIR && !strIR.isEmpty()) dcEOD = LoadEODFullIRCurve (strIR, dtEOD);
-
-		return bond.calcParASWFromYield (org.drip.param.valuation.ValuationParams.CreateStdValParams (dtEOD,
 			strIR), org.drip.param.creator.ComponentMarketParamsBuilder.CreateComponentMarketParams (dcEOD,
 				null, null, null, null, null, null), null, dblYield);
 	}
@@ -5214,10 +4918,11 @@ public class CreditAnalytics {
 
 		if (null == strEDSF || strEDSF.isEmpty()) dcEDSF = LoadEODEDFCurve (strEDSF, dtEOD);
 
-		return bond.calcGSpreadFromTSYSpread (org.drip.param.valuation.ValuationParams.CreateStdValParams
-			(dtEOD, strIR), org.drip.param.creator.ComponentMarketParamsBuilder.CreateComponentMarketParams
-				(dcEOD, dcTSY, dcEDSF, null, null, org.drip.service.env.EODCurves.GetTSYQuotes (s_stmt,
-					dtEOD, strIR), null), dblTSYSpread);
+		return bond.calcGSpreadFromTSYSpreadToOptimalExercise
+			(org.drip.param.valuation.ValuationParams.CreateStdValParams (dtEOD, strIR),
+				org.drip.param.creator.ComponentMarketParamsBuilder.CreateComponentMarketParams (dcEOD,
+					dcTSY, dcEDSF, null, null, org.drip.service.env.EODCurves.GetTSYQuotes (s_stmt, dtEOD,
+						strIR), null), null, dblTSYSpread);
 	}
 
 	/**
@@ -5259,10 +4964,11 @@ public class CreditAnalytics {
 
 		if (null == strEDSF || strEDSF.isEmpty()) dcEDSF = LoadEODEDFCurve (strEDSF, dtEOD);
 
-		return bond.calcISpreadFromTSYSpread (org.drip.param.valuation.ValuationParams.CreateStdValParams
-			(dtEOD, strIR), org.drip.param.creator.ComponentMarketParamsBuilder.CreateComponentMarketParams
-				(dcEOD, null, dcEDSF, null, null, org.drip.service.env.EODCurves.GetTSYQuotes (s_stmt, dtEOD,
-					strIR), null), dblTSYSpread);
+		return bond.calcISpreadFromTSYSpreadToOptimalExercise
+			(org.drip.param.valuation.ValuationParams.CreateStdValParams (dtEOD, strIR),
+				org.drip.param.creator.ComponentMarketParamsBuilder.CreateComponentMarketParams (dcEOD, null,
+					dcEDSF, null, null, org.drip.service.env.EODCurves.GetTSYQuotes (s_stmt, dtEOD, strIR),
+						null), null, dblTSYSpread);
 	}
 
 	/**
@@ -5304,11 +5010,11 @@ public class CreditAnalytics {
 
 		if (null == strEDSF || strEDSF.isEmpty()) dcEDSF = LoadEODEDFCurve (strEDSF, dtEOD);
 
-		return bond.calcDiscountMarginFromTSYSpread
+		return bond.calcDiscountMarginFromTSYSpreadToOptimalExercise
 			(org.drip.param.valuation.ValuationParams.CreateStdValParams (dtEOD, strIR),
 				org.drip.param.creator.ComponentMarketParamsBuilder.CreateComponentMarketParams (dcEOD, null,
 					dcEDSF, null, null, org.drip.service.env.EODCurves.GetTSYQuotes (s_stmt, dtEOD, strIR),
-						null), dblTSYSpread);
+						null), null, dblTSYSpread);
 	}
 
 	/**
@@ -5354,49 +5060,6 @@ public class CreditAnalytics {
 			strIR), org.drip.param.creator.ComponentMarketParamsBuilder.CreateComponentMarketParams (dcEOD,
 				null, dcEDSF, null, null, org.drip.service.env.EODCurves.GetTSYQuotes (s_stmt, dtEOD, strIR),
 					null), null, dblTSYSpread);
-	}
-
-	/**
-	 * Calculates the EOD bond par ASW from TSY Spread
-	 * 
-	 * @param strBondId Bond ID
-	 * @param dtEOD EOD
-	 * @param dblTSYSpread TSY Spread
-	 * 
-	 * @return Double EOD Par ASW
-	 * 
-	 * @throws java.lang.Exception Thrown if input is invalid
-	 */
-
-	public static final double BondEODParASWFromTSYSpread (
-		final java.lang.String strBondId,
-		final org.drip.analytics.date.JulianDate dtEOD,
-		final double dblTSYSpread)
-		throws java.lang.Exception
-	{
-		if (null == strBondId || strBondId.isEmpty() || null == dtEOD || java.lang.Double.isNaN
-			(dblTSYSpread))
-			throw new java.lang.Exception ("CreditAnalytics.BondEODParASWFromTSYSpread: Bad inputs");
-
-		org.drip.product.definition.Bond bond = GetBond (strBondId);
-
-		if (null == bond) throw new java.lang.Exception ("Cannot locate bond for ID " + strBondId);
-
-		org.drip.analytics.definition.DiscountCurve dcEOD = null;
-		org.drip.analytics.definition.DiscountCurve dcEDSF = null;
-
-		java.lang.String strIR = bond.getIRCurveName();
-
-		if (null != strIR && !strIR.isEmpty()) dcEOD = LoadEODFullIRCurve (strIR, dtEOD);
-
-		java.lang.String strEDSF = bond.getEDSFCurveName();
-
-		if (null == strEDSF || strEDSF.isEmpty()) dcEDSF = LoadEODEDFCurve (strEDSF, dtEOD);
-
-		return bond.calcParASWFromTSYSpread (org.drip.param.valuation.ValuationParams.CreateStdValParams
-			(dtEOD, strIR), org.drip.param.creator.ComponentMarketParamsBuilder.CreateComponentMarketParams
-				(dcEOD, null, dcEDSF, null, null, org.drip.service.env.EODCurves.GetTSYQuotes (s_stmt, dtEOD,
-					strIR), null), null, dblTSYSpread);
 	}
 
 	/**
@@ -5482,7 +5145,7 @@ public class CreditAnalytics {
 		return bond.calcYieldFromTSYSpread (org.drip.param.valuation.ValuationParams.CreateStdValParams
 			(dtEOD, strIR), org.drip.param.creator.ComponentMarketParamsBuilder.CreateComponentMarketParams
 				(dcEOD, null, dcEDSF, null, null, org.drip.service.env.EODCurves.GetTSYQuotes (s_stmt, dtEOD,
-					strIR), null), dblTSYSpread);
+					strIR), null), null, dblTSYSpread);
 	}
 
 	/**
@@ -5667,26 +5330,6 @@ public class CreditAnalytics {
 		throws java.lang.Exception
 	{
 		return BondEODOASFromTSYSpread (strBondId, org.drip.analytics.date.JulianDate.Today(), dblTSYSpread);
-	}
-
-	/**
-	 * Calculates the Live bond par ASW from TSY Spread
-	 * 
-	 * @param strBondId Bond ID
-	 * @param dblTSYSpread TSY Spread
-	 * 
-	 * @return Double Live Par ASW
-	 * 
-	 * @throws java.lang.Exception Thrown if input is invalid
-	 */
-
-	public static final double BondLiveParASWFromTSYSpread (
-		final java.lang.String strBondId,
-		final double dblTSYSpread)
-		throws java.lang.Exception
-	{
-		return BondEODParASWFromTSYSpread (strBondId, org.drip.analytics.date.JulianDate.Today(),
-			dblTSYSpread);
 	}
 
 	/**

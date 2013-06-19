@@ -186,7 +186,7 @@ public class FixedPointFinderBracketing extends org.drip.math.solver1D.FixedPoin
 
 	public FixedPointFinderBracketing (
 		final double dblOFGoal,
-		final org.drip.math.algodiff.ObjectiveFunction of,
+		final org.drip.math.function.AbstractUnivariate of,
 		final org.drip.math.solver1D.ExecutionControl ec,
 		final int iIteratorPrimitive)
 		throws java.lang.Exception

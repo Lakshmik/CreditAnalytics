@@ -405,8 +405,7 @@ public class PeriodSet extends org.drip.service.stream.Serializer implements
 			dblStart += 180.;
 		}
 
-		PeriodSet bfpgp = new PeriodSet (1., "Act/360", 2,
-			lPeriods);
+		PeriodSet bfpgp = new PeriodSet (1., "Act/360", 2, lPeriods);
 
 		bfpgp.validate();
 

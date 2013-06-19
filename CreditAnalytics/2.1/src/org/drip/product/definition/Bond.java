@@ -37,6 +37,24 @@ package org.drip.product.definition;
  */
 
 public abstract class Bond extends CreditComponent {
+
+	/**
+	 * Retrieves the work-out information from price
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Bond Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblPrice Price
+	 * 
+	 * @return The Optimal Work-out Information
+	 */
+
+	public abstract org.drip.param.valuation.WorkoutInfo calcExerciseYieldFromPrice (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblPrice);
+
 	/**
 	 * Retrieves the array of double for the bond's secondary treasury spreads from the Valuation
 	 * 	Parameters and the component market parameters
@@ -561,4153 +579,21 @@ public abstract class Bond extends CreditComponent {
 		throws java.lang.Exception;
 
 	/**
-	 * Calculate the bond price from yield to work-out
+	 * Calculate ASW from Bond Basis to Work-out
 	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblWorkoutDate JulianDate work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblYield Yield to work-out input
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblBondBasis Bond Basis to Work-out
 	 * 
-	 * @return Calculated price from yield to work-out
+	 * @return ASW from Bond Basis to Work-out
 	 * 
-	 * @throws java.lang.Exception Thrown if the price cannot be calculated
+	 * @throws java.lang.Exception Thrown if ASW cannot be calculated
 	 */
 
-	public abstract double calcPriceFromYield (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblYield)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond price from yield to maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblYield Yield to maturity input
-	 * 
-	 * @return Calculated price from yield to maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the price cannot be calculated
-	 */
-
-	public abstract double calcPriceFromYield (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblYield)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond price from yield to maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblYield Yield to maturity input
-	 * 
-	 * @return Calculated price from yield to maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the price cannot be calculated
-	 */
-
-	public abstract double calcPriceFromYTM (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblYield)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond price from exercise yield
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblYield Exercise Yield input
-	 * 
-	 * @return Calculated price from exercise yield
-	 * 
-	 * @throws java.lang.Exception Thrown if the price cannot be calculated
-	 */
-
-	public abstract double calcExercisePriceFromYield (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblYield)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond Z Spread from Yield to work-out
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblWorkoutDate JulianDate work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblYield Yield to work-out input
-	 * 
-	 * @return Calculated Z Spread from yield to work-out
-	 * 
-	 * @throws java.lang.Exception Thrown if the Z Spread cannot be calculated
-	 */
-
-	public abstract double calcZSpreadFromYield (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblYield)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond Z Spread from yield to maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblYield Yield to maturity input
-	 * 
-	 * @return Calculated Z Spread from yield to maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the Z Spread cannot be calculated
-	 */
-
-	public abstract double calcZSpreadFromYield (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblYield)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond Z Spread from yield to maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblYield Yield to maturity input
-	 * 
-	 * @return Calculated Z Spread from yield to maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the Z Spread cannot be calculated
-	 */
-
-	public abstract double calcZSpreadFromYTM (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblYield)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond Z Spread from yield to exercise
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblYield Yield to exercise input
-	 * 
-	 * @return Calculated Z Spread from yield to exercise
-	 * 
-	 * @throws java.lang.Exception Thrown if the Z Spread cannot be calculated
-	 */
-
-	public abstract double calcExerciseZSpreadFromYield (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblYield)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond Option Adjusted Spread from Yield to work-out
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblWorkoutDate JulianDate work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblYield Yield to work-out input
-	 * 
-	 * @return Calculated Option Adjusted Spread from yield to work-out
-	 * 
-	 * @throws java.lang.Exception Thrown if the Option Adjusted Spread cannot be calculated
-	 */
-
-	public abstract double calcOASFromYield (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblYield)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond Option Adjusted Spread from yield to maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblYield Yield to maturity input
-	 * 
-	 * @return Calculated Option Adjusted Spread from yield to maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the Option Adjusted Spread cannot be calculated
-	 */
-
-	public abstract double calcOASFromYield (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblYield)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond Option Adjusted Spread from yield to maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblYield Yield to maturity input
-	 * 
-	 * @return Calculated Option Adjusted Spread from yield to maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the Option Adjusted Spread cannot be calculated
-	 */
-
-	public abstract double calcOASFromYTM (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblYield)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond Option Adjusted Spread from yield to exercise
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblYield Yield to exercise input
-	 * 
-	 * @return Calculated Option Adjusted Spread from yield to exercise
-	 * 
-	 * @throws java.lang.Exception Thrown if the Option Adjusted Spread cannot be calculated
-	 */
-
-	public abstract double calcExerciseOASFromYield (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblYield)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the Bond Basis from Yield to work-out
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblWorkoutDate JulianDate work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblYield Yield to work-out input
-	 * 
-	 * @return Calculated Bond Basis from yield to work-out
-	 * 
-	 * @throws java.lang.Exception Thrown if the Bond Basis cannot be calculated
-	 */
-
-	public abstract double calcBondBasisFromYield (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblYield)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond Basis from yield to maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblYield Yield to maturity input
-	 * 
-	 * @return Calculated Bond Basis from yield to maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the Bond Basis cannot be calculated
-	 */
-
-	public abstract double calcBondBasisFromYield (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblYield)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond Basis from yield to maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblYield Yield to maturity input
-	 * 
-	 * @return Calculated Bond Basis from yield to maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the Bond Basis cannot be calculated
-	 */
-
-	public abstract double calcBondBasisFromYTM (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblYield)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond Basis from yield to exercise
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblYield Yield to exercise input
-	 * 
-	 * @return Calculated Bond Basis from yield to exercise
-	 * 
-	 * @throws java.lang.Exception Thrown if the Bond Basis cannot be calculated
-	 */
-
-	public abstract double calcExerciseBondBasisFromYield (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblYield)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the Yield Spread from Yield to work-out
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblWorkoutDate JulianDate work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblYield Yield to work-out input
-	 * 
-	 * @return Calculated Yield Spread from yield to work-out
-	 * 
-	 * @throws java.lang.Exception Thrown if the Yield Spread cannot be calculated
-	 */
-
-	public abstract double calcYieldSpreadFromYield (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblYield)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the Yield Spread from yield to maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblYield Yield to maturity input
-	 * 
-	 * @return Calculated Yield Spread from yield to maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the Yield Spread cannot be calculated
-	 */
-
-	public abstract double calcYieldSpreadFromYield (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblYield)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the Yield Spread from yield to maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblYield Yield to maturity input
-	 * 
-	 * @return Calculated Yield Spread from yield to maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the Yield Spread cannot be calculated
-	 */
-
-	public abstract double calcYieldSpreadFromYTM (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblYield)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the Yield Spread from yield to exercise
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblYield Yield to exercise input
-	 * 
-	 * @return Calculated Yield Spread from yield to exercise
-	 * 
-	 * @throws java.lang.Exception Thrown if the Yield Spread cannot be calculated
-	 */
-
-	public abstract double calcExerciseYieldSpreadFromYield (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblYield)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond credit basis from Yield to work-out
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblWorkoutDate JulianDate work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblYield Yield to work-out input
-	 * 
-	 * @return Calculated Credit Basis from yield to work-out
-	 * 
-	 * @throws java.lang.Exception Thrown if the Credit Basis cannot be calculated
-	 */
-
-	public abstract double calcCreditBasisFromYield (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblYield)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond credit basis from Yield to maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblYield Yield to maturity input
-	 * 
-	 * @return Calculated Credit Basis from yield to maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the Credit Basis cannot be calculated
-	 */
-
-	public abstract double calcCreditBasisFromYield (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblYield)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond credit basis from Yield to maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblYield Yield to maturity input
-	 * 
-	 * @return Calculated Credit Basis from yield to maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the Credit Basis cannot be calculated
-	 */
-
-	public abstract double calcCreditBasisFromYTM (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblYield)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond credit basis from Yield to exercise
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblYield Yield to maturity input
-	 * 
-	 * @return Calculated Credit Basis from yield to exercise
-	 * 
-	 * @throws java.lang.Exception Thrown if the Credit Basis cannot be calculated
-	 */
-
-	public abstract double calcExerciseCreditBasisFromYield (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblYield)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the Bond PECS from Yield to work-out
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblWorkoutDate JulianDate work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblYield Yield to work-out input
-	 * 
-	 * @return Calculated PECS from yield to work-out
-	 * 
-	 * @throws java.lang.Exception Thrown if the PECS cannot be calculated
-	 */
-
-	public abstract double calcPECSFromYield (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblYield)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the Bond PECS from Yield to maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblYield Yield to maturity input
-	 * 
-	 * @return Calculated PECS from yield to maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the PECS cannot be calculated
-	 */
-
-	public abstract double calcPECSFromYield (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblYield)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the Bond PECS from Yield to maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblYield Yield to maturity input
-	 * 
-	 * @return Calculated PECS from yield to maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the PECS cannot be calculated
-	 */
-
-	public abstract double calcPECSFromYTM (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblYield)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the Bond PECS from Yield to exercise
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblYield Yield to maturity input
-	 * 
-	 * @return Calculated PECS from yield to exercise
-	 * 
-	 * @throws java.lang.Exception Thrown if the PECS cannot be calculated
-	 */
-
-	public abstract double calcExercisePECSFromYield (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblYield)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond spread to treasury from Work-out Yield
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblWorkoutDate JulianDate Work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblYield Work-out Yield input
-	 * 
-	 * @return Calculated bond spread to treasury from Work-out yield
-	 * 
-	 * @throws java.lang.Exception Thrown if the spread to treasury cannot be calculated
-	 */
-
-	public abstract double calcTSYSpreadFromYield (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblYield)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond spread to treasury from Yield to maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblYield Yield to maturity input
-	 * 
-	 * @return Calculated bond spread to treasury from yield to maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the spread to treasury cannot be calculated
-	 */
-
-	public abstract double calcTSYSpreadFromYield (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblYield)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond spread to treasury from Yield to maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblYield Yield to maturity input
-	 * 
-	 * @return Calculated bond spread to treasury from yield to maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the spread to treasury cannot be calculated
-	 */
-
-	public abstract double calcTSYSpreadFromYTM (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblYield)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond spread to treasury from exercise Yield
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblYield Yield to maturity input
-	 * 
-	 * @return Calculated bond spread to treasury from exercise yield
-	 * 
-	 * @throws java.lang.Exception Thrown if the spread to treasury cannot be calculated
-	 */
-
-	public abstract double calcExerciseTSYSpreadFromYield (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblYield)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond G spread from Work-out Yield
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param dblWorkoutDate JulianDate Work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblYield Work-out Yield input
-	 * 
-	 * @return Calculated bond G spread from Work-out yield
-	 * 
-	 * @throws java.lang.Exception Thrown if the G spread cannot be calculated
-	 */
-
-	public abstract double calcGSpreadFromYield (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblYield)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond G spread from Yield to maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param dblYield Yield to maturity input
-	 * 
-	 * @return Calculated bond G spread from yield to maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the G spread cannot be calculated
-	 */
-
-	public abstract double calcGSpreadFromYield (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final double dblYield)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond G spread from Yield to maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param dblYield Yield to maturity input
-	 * 
-	 * @return Calculated bond G spread from yield to maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the G spread cannot be calculated
-	 */
-
-	public abstract double calcGSpreadFromYTM (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final double dblYield)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond G spread from Yield to exercise
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param dblYield Yield to maturity input
-	 * 
-	 * @return Calculated bond G spread from yield to exercise
-	 * 
-	 * @throws java.lang.Exception Thrown if the G spread cannot be calculated
-	 */
-
-	public abstract double calcExerciseGSpreadFromYield (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final double dblYield)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond I spread from Work-out Yield
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param dblWorkoutDate JulianDate work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblYield Work-out Yield input
-	 * 
-	 * @return Calculated bond I spread from work-out yield
-	 * 
-	 * @throws java.lang.Exception Thrown if the I spread cannot be calculated
-	 */
-
-	public abstract double calcISpreadFromYield (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblYield)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond I spread from Yield to maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param dblYield Yield to maturity input
-	 * 
-	 * @return Calculated bond I spread from yield to maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the I spread cannot be calculated
-	 */
-
-	public abstract double calcISpreadFromYield (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final double dblYield)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond I spread from Yield to maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param dblYield Yield to maturity input
-	 * 
-	 * @return Calculated bond I spread from yield to maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the I spread cannot be calculated
-	 */
-
-	public abstract double calcISpreadFromYTM (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final double dblYield)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond I spread from Yield to exercise
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param dblYield Yield to exercise input
-	 * 
-	 * @return Calculated bond I spread from yield to exercise
-	 * 
-	 * @throws java.lang.Exception Thrown if the I spread cannot be calculated
-	 */
-
-	public abstract double calcExerciseISpreadFromYield (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final double dblYield)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond Discount Margin from Work-out Yield
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param dblWorkoutDate JulianDate work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblYield Work-out Yield input
-	 * 
-	 * @return Calculated bond Discount Margin from work-out yield
-	 * 
-	 * @throws java.lang.Exception Thrown if the Discount Margin cannot be calculated
-	 */
-
-	public abstract double calcDiscountMarginFromYield (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblYield)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond Discount Margin from Yield to maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param dblYield Yield to maturity input
-	 * 
-	 * @return Calculated bond Discount Margin from yield to maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the Discount Margin cannot be calculated
-	 */
-
-	public abstract double calcDiscountMarginFromYield (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final double dblYield)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond Discount Margin from Yield to maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param dblYield Yield to maturity input
-	 * 
-	 * @return Calculated bond Discount Margin from yield to maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the Discount Margin cannot be calculated
-	 */
-
-	public abstract double calcDiscountMarginFromYTM (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final double dblYield)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond Discount Margin from Yield to exercise
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param dblYield Yield to exercise input
-	 * 
-	 * @return Calculated bond Discount Margin from yield to exercise
-	 * 
-	 * @throws java.lang.Exception Thrown if the Discount Margin cannot be calculated
-	 */
-
-	public abstract double calcExerciseDiscountMarginFromYield (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final double dblYield)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond duration from Work-out Yield
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblWorkoutDate JulianDate Work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblYield Work-out Yield input
-	 * 
-	 * @return Calculated bond duration from Work-out yield
-	 * 
-	 * @throws java.lang.Exception Thrown if the duration cannot be calculated
-	 */
-
-	public abstract double calcDurationFromYield (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblYield)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond duration from Yield to maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblYield Yield to maturity input
-	 * 
-	 * @return Calculated bond duration from yield to maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the duration cannot be calculated
-	 */
-
-	public abstract double calcDurationFromYield (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblYield)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond duration from Yield to maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblYield Yield to maturity input
-	 * 
-	 * @return Calculated bond duration from yield to maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the duration cannot be calculated
-	 */
-
-	public abstract double calcDurationFromYTM (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblYield)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond duration from Yield to exercise
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblYield Yield to exercise input
-	 * 
-	 * @return Calculated bond duration from yield to exercise
-	 * 
-	 * @throws java.lang.Exception Thrown if the duration cannot be calculated
-	 */
-
-	public abstract double calcExerciseDurationFromYield (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblYield)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond Yield01 from Work-out Yield
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblWorkoutDate JulianDate Work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblYield Work-out Yield input
-	 * 
-	 * @return Calculated bond Yield01 from Work-out yield
-	 * 
-	 * @throws java.lang.Exception Thrown if the Yield01 cannot be calculated
-	 */
-
-	public abstract double calcYield01FromYield (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblYield)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond Yield01 from Yield to maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblYield Yield to maturity input
-	 * 
-	 * @return Calculated bond Yield01 from yield to maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the Yield01 cannot be calculated
-	 */
-
-	public abstract double calcYield01FromYield (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblYield)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond Yield01 from Yield to maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblYield Yield to maturity input
-	 * 
-	 * @return Calculated bond Yield01 from yield to maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the Yield01 cannot be calculated
-	 */
-
-	public abstract double calcYield01FromYTM (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblYield)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond Yield01 from Yield to exercise
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblYield Yield to exercise input
-	 * 
-	 * @return Calculated bond Yield01 from yield to exercise
-	 * 
-	 * @throws java.lang.Exception Thrown if the Yield01 cannot be calculated
-	 */
-
-	public abstract double calcExerciseYield01FromYield (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblYield)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond par ASW from Work-out Yield
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblWorkoutDate JulianDate Work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblYield Work-out Yield input
-	 * 
-	 * @return Calculated bond par ASW from Work-out yield
-	 * 
-	 * @throws java.lang.Exception Thrown if the par ASW cannot be calculated
-	 */
-
-	public abstract double calcParASWFromYield (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblYield)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond par ASW from Yield to maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblYield Yield to maturity input
-	 * 
-	 * @return Calculated bond par ASW from yield to maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the par ASW cannot be calculated
-	 */
-
-	public abstract double calcParASWFromYield (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblYield)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond par ASW from Yield to maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblYield Yield to maturity input
-	 * 
-	 * @return Calculated bond par ASW from yield to maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the par ASW cannot be calculated
-	 */
-
-	public abstract double calcParASWFromYTM (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblYield)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond par ASW from Yield to exercise
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblYield Yield to exercise input
-	 * 
-	 * @return Calculated bond par ASW from yield to exercise
-	 * 
-	 * @throws java.lang.Exception Thrown if the par ASW cannot be calculated
-	 */
-
-	public abstract double calcExerciseParASWFromYield (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblYield)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond convexity from Work-out Yield
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblWorkoutDate JulianDate Work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblYield Work-out Yield input
-	 * 
-	 * @return Calculated bond convexity from Work-out yield
-	 * 
-	 * @throws java.lang.Exception Thrown if the convexity cannot be calculated
-	 */
-
-	public abstract double calcConvexityFromYield (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblYield)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond convexity from Yield to maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblYield Yield to maturity input
-	 * 
-	 * @return Calculated bond convexity from yield to maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the convexity cannot be calculated
-	 */
-
-	public abstract double calcConvexityFromYield (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblYield)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond convexity from Yield to maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblYield Yield to maturity input
-	 * 
-	 * @return Calculated bond convexity from yield to maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the convexity cannot be calculated
-	 */
-
-	public abstract double calcConvexityFromYTM (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblYield)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond convexity from Yield to exercise
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblYield Yield to exercise input
-	 * 
-	 * @return Calculated bond convexity from yield to exercise
-	 * 
-	 * @throws java.lang.Exception Thrown if the convexity cannot be calculated
-	 */
-
-	public abstract double calcExerciseConvexityFromYield (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblYield)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond yield to Work-out from price
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblWorkoutDate JulianDate Work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblPrice Price input
-	 * 
-	 * @return Calculated bond yield to Work-out from price
-	 * 
-	 * @throws java.lang.Exception Thrown if the yield to Work-out cannot be calculated
-	 */
-
-	public abstract double calcYieldFromPrice (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblPrice)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond yield to maturity from price
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblPrice Price input
-	 * 
-	 * @return Calculated bond yield to maturity from price
-	 * 
-	 * @throws java.lang.Exception Thrown if the yield to maturity cannot be calculated
-	 */
-
-	public abstract double calcYieldFromPrice (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblPrice)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond yield to maturity from price
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblPrice Price input
-	 * 
-	 * @return Calculated bond yield to maturity from price
-	 * 
-	 * @throws java.lang.Exception Thrown if the yield to maturity cannot be calculated
-	 */
-
-	public abstract double calcYTMFromPrice (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblPrice)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond yield to exercise from price
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblPrice Price input
-	 * 
-	 * @return Calculated bond yield to exercise from price
-	 * 
-	 * @throws java.lang.Exception Thrown if the yield to exercise cannot be calculated
-	 */
-
-	public abstract org.drip.param.valuation.WorkoutInfo calcExerciseYieldFromPrice (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblPrice);
-
-	/**
-	 * Calculate the bond z spread to Work-out from price
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblWorkoutDate JulianDate work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblPrice Price input
-	 * 
-	 * @return Calculated bond z spread to Work-out from price
-	 * 
-	 * @throws java.lang.Exception Thrown if the z spread to Work-out cannot be calculated
-	 */
-
-	public abstract double calcZSpreadFromPrice (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblPrice)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond z spread to maturity from price
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblPrice Price input
-	 * 
-	 * @return Calculated bond z spread to maturity from price
-	 * 
-	 * @throws java.lang.Exception Thrown if the z spread to maturity cannot be calculated
-	 */
-
-	public abstract double calcZSpreadFromPrice (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblPrice)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond z spread to exercise from price
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblPrice Price input
-	 * 
-	 * @return Calculated bond z spread to exercise from price
-	 * 
-	 * @throws java.lang.Exception Thrown if the z spread to exercise cannot be calculated
-	 */
-
-	public abstract double calcExerciseZSpreadFromPrice (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblPrice)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond Option Adjusted spread to Work-out from price
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblWorkoutDate JulianDate work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblPrice Price input
-	 * 
-	 * @return Calculated bond z spread to Work-out from price
-	 * 
-	 * @throws java.lang.Exception Thrown if the Option Adjusted spread to Work-out cannot be calculated
-	 */
-
-	public abstract double calcOASFromPrice (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblPrice)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond Option Adjusted spread to maturity from price
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblPrice Price input
-	 * 
-	 * @return Calculated bond Option Adjusted spread to maturity from price
-	 * 
-	 * @throws java.lang.Exception Thrown if the Option Adjusted spread to maturity cannot be calculated
-	 */
-
-	public abstract double calcOASFromPrice (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblPrice)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond Option Adjusted spread to exercise from price
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblPrice Price input
-	 * 
-	 * @return Calculated bond Option Adjusted spread to exercise from price
-	 * 
-	 * @throws java.lang.Exception Thrown if the Option Adjusted spread to exercise cannot be calculated
-	 */
-
-	public abstract double calcExerciseOASFromPrice (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblPrice)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the Bond Basis to Work-out from price
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblWorkoutDate JulianDate work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblPrice Price input
-	 * 
-	 * @return Calculated Bond Basis to Work-out from price
-	 * 
-	 * @throws java.lang.Exception Thrown if the Bond Basis to Work-out cannot be calculated
-	 */
-
-	public abstract double calcBondBasisFromPrice (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblPrice)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the Bond Basis to maturity from price
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblPrice Price input
-	 * 
-	 * @return Calculated Bond Basis to maturity from price
-	 * 
-	 * @throws java.lang.Exception Thrown if the Bond Basis to maturity cannot be calculated
-	 */
-
-	public abstract double calcBondBasisFromPrice (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblPrice)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the Bond Basis to exercise from price
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblPrice Price input
-	 * 
-	 * @return Calculated Bond Basis to exercise from price
-	 * 
-	 * @throws java.lang.Exception Thrown if the Bond Basis to exercise cannot be calculated
-	 */
-
-	public abstract double calcExerciseBondBasisFromPrice (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblPrice)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the Yield Spread to Work-out from price
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblWorkoutDate JulianDate work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblPrice Price input
-	 * 
-	 * @return Calculated Yield Spread to Work-out from price
-	 * 
-	 * @throws java.lang.Exception Thrown if the Yield Spread to Work-out cannot be calculated
-	 */
-
-	public abstract double calcYieldSpreadFromPrice (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblPrice)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the Yield Spread to maturity from price
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblPrice Price input
-	 * 
-	 * @return Calculated Yield Spread to maturity from price
-	 * 
-	 * @throws java.lang.Exception Thrown if the Yield Spread to maturity cannot be calculated
-	 */
-
-	public abstract double calcYieldSpreadFromPrice (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblPrice)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the Yield Spread to exercise from price
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblPrice Price input
-	 * 
-	 * @return Calculated Yield Spread to exercise from price
-	 * 
-	 * @throws java.lang.Exception Thrown if the Yield Spread to exercise cannot be calculated
-	 */
-
-	public abstract double calcExerciseYieldSpreadFromPrice (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblPrice)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond credit basis to Work-out from price
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblWorkoutDate JulianDate work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblPrice Price input
-	 * 
-	 * @return Calculated bond credit basis to Work-out from price
-	 * 
-	 * @throws java.lang.Exception Thrown if the credit basis to Work-out cannot be calculated
-	 */
-
-	public abstract double calcCreditBasisFromPrice (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblPrice)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond credit basis to maturity from price
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblPrice Price input
-	 * 
-	 * @return Calculated bond credit basis to maturity from price
-	 * 
-	 * @throws java.lang.Exception Thrown if the credit basis to maturity cannot be calculated
-	 */
-
-	public abstract double calcCreditBasisFromPrice (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblPrice)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond credit basis to exercise from price
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param dblPrice Price input
-	 * 
-	 * @return Calculated bond credit basis to exercise from price
-	 * 
-	 * @throws java.lang.Exception Thrown if the credit basis to exercise cannot be calculated
-	 */
-
-	public abstract double calcExerciseCreditBasisFromPrice (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblPrice)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the Bond PECS to Work-out from price
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblWorkoutDate JulianDate work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblPrice Price input
-	 * 
-	 * @return Calculated Bond PECS to Work-out from price
-	 * 
-	 * @throws java.lang.Exception Thrown if the PECS to Work-out cannot be calculated
-	 */
-
-	public abstract double calcPECSFromPrice (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblPrice)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the Bond PECS to maturity from price
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblPrice Price input
-	 * 
-	 * @return Calculated Bond PECS to maturity from price
-	 * 
-	 * @throws java.lang.Exception Thrown if the PECS to maturity cannot be calculated
-	 */
-
-	public abstract double calcPECSFromPrice (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblPrice)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the Bond PECS to exercise from price
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param dblPrice Price input
-	 * 
-	 * @return Calculated Bond PECS to exercise from price
-	 * 
-	 * @throws java.lang.Exception Thrown if the PECS to exercise cannot be calculated
-	 */
-
-	public abstract double calcExercisePECSFromPrice (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblPrice)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond spread to treasury to Work-out from price
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblWorkoutDate JulianDate Work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblPrice Price input
-	 * 
-	 * @return Calculated bond spread to treasury to Work-out from price
-	 * 
-	 * @throws java.lang.Exception Thrown if the spread to treasury to Work-out cannot be calculated
-	 */
-
-	public abstract double calcTSYSpreadFromPrice (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblPrice)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond spread to treasury to maturity from price
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblPrice Price input
-	 * 
-	 * @return Calculated bond spread to treasury to maturity from price
-	 * 
-	 * @throws java.lang.Exception Thrown if the spread to treasury to maturity cannot be calculated
-	 */
-
-	public abstract double calcTSYSpreadFromPrice (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblPrice)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond spread to treasury to exercise from price
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblPrice Price input
-	 * 
-	 * @return Calculated bond spread to treasury to exercise from price
-	 * 
-	 * @throws java.lang.Exception Thrown if the spread to treasury to exercise cannot be calculated
-	 */
-
-	public abstract double calcExerciseTSYSpreadFromPrice (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblPrice)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond G spread to Work-out from price
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblWorkoutDate JulianDate Work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblPrice Price input
-	 * 
-	 * @return Calculated bond G spread to Work-out from price
-	 * 
-	 * @throws java.lang.Exception Thrown if the G spread to Work-out cannot be calculated
-	 */
-
-	public abstract double calcGSpreadFromPrice (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblPrice)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond G spread to maturity from price
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblPrice Price input
-	 * 
-	 * @return Calculated bond G spread to maturity from price
-	 * 
-	 * @throws java.lang.Exception Thrown if the G spread to maturity cannot be calculated
-	 */
-
-	public abstract double calcGSpreadFromPrice (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblPrice)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond G spread to exercise from price
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblPrice Price input
-	 * 
-	 * @return Calculated bond G spread to exercise from price
-	 * 
-	 * @throws java.lang.Exception Thrown if the G spread to exercise cannot be calculated
-	 */
-
-	public abstract double calcExerciseGSpreadFromPrice (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblPrice)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond I spread to Work-out from price
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblWorkoutDate JulianDate Work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblPrice Price input
-	 * 
-	 * @return Calculated bond I spread to Work-out from price
-	 * 
-	 * @throws java.lang.Exception Thrown if the I spread to Work-out cannot be calculated
-	 */
-
-	public abstract double calcISpreadFromPrice (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblPrice)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond I spread to maturity from price
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblPrice Price input
-	 * 
-	 * @return Calculated bond I spread to maturity from price
-	 * 
-	 * @throws java.lang.Exception Thrown if the I spread to maturity cannot be calculated
-	 */
-
-	public abstract double calcISpreadFromPrice (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblPrice)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond I spread to exercise from price
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblPrice Price input
-	 * 
-	 * @return Calculated bond I spread to exercise from price
-	 * 
-	 * @throws java.lang.Exception Thrown if the I spread to exercise cannot be calculated
-	 */
-
-	public abstract double calcExerciseISpreadFromPrice (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblPrice)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond Discount Margin to Work-out from price
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblWorkoutDate JulianDate Work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblPrice Price input
-	 * 
-	 * @return Calculated bond Discount Margin to Work-out from price
-	 * 
-	 * @throws java.lang.Exception Thrown if the Discount Margin to Work-out cannot be calculated
-	 */
-
-	public abstract double calcDiscountMarginFromPrice (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblPrice)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond Discount Margin to maturity from price
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblPrice Price input
-	 * 
-	 * @return Calculated bond Discount Margin to maturity from price
-	 * 
-	 * @throws java.lang.Exception Thrown if the Discount Margin to maturity cannot be calculated
-	 */
-
-	public abstract double calcDiscountMarginFromPrice (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblPrice)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond Discount Margin to exercise from price
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblPrice Price input
-	 * 
-	 * @return Calculated bond Discount Margin to exercise from price
-	 * 
-	 * @throws java.lang.Exception Thrown if the Discount Margin to exercise cannot be calculated
-	 */
-
-	public abstract double calcExerciseDiscountMarginFromPrice (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblPrice)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond duration to Work-out from price
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblWorkoutDate JulianDate Work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblPrice Price input
-	 * 
-	 * @return Calculated bond duration to Work-out from price
-	 * 
-	 * @throws java.lang.Exception Thrown if the duration to Work-out cannot be calculated
-	 */
-
-	public abstract double calcDurationFromPrice (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblPrice)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond duration to maturity from price
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblPrice Price input
-	 * 
-	 * @return Calculated bond duration to maturity from price
-	 * 
-	 * @throws java.lang.Exception Thrown if the duration to maturity cannot be calculated
-	 */
-
-	public abstract double calcDurationFromPrice (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		double dblPrice)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond duration to exercise from price
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblPrice Price input
-	 * 
-	 * @return Calculated bond duration to exercise from price
-	 * 
-	 * @throws java.lang.Exception Thrown if the duration to exercise cannot be calculated
-	 */
-
-	public abstract double calcExerciseDurationFromPrice (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblPrice)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the Bond Yield01 to Work-out from price
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblWorkoutDate JulianDate Work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblPrice Price input
-	 * 
-	 * @return Calculated bond Yield01 to Work-out from price
-	 * 
-	 * @throws java.lang.Exception Thrown if the Yield01 to Work-out cannot be calculated
-	 */
-
-	public abstract double calcYield01FromPrice (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblPrice)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the Bond Yield01 to maturity from price
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblPrice Price input
-	 * 
-	 * @return Calculated bond Yield01 to maturity from price
-	 * 
-	 * @throws java.lang.Exception Thrown if the duration to Yield01 cannot be calculated
-	 */
-
-	public abstract double calcYield01FromPrice (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		double dblPrice)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond Yield01 to exercise from price
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblPrice Price input
-	 * 
-	 * @return Calculated bond Yield01 to exercise from price
-	 * 
-	 * @throws java.lang.Exception Thrown if the Yield01 to exercise cannot be calculated
-	 */
-
-	public abstract double calcExerciseYield01FromPrice (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblPrice)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond par ASW to Work-out from price
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblWorkoutDate JulianDate Work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblPrice Price input
-	 * 
-	 * @return Calculated bond par ASW to Work-out from price
-	 * 
-	 * @throws java.lang.Exception Thrown if the par ASW to Work-out cannot be calculated
-	 */
-
-	public abstract double calcParASWFromPrice (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblPrice)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond par ASW to maturity from price
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblPrice Price input
-	 * 
-	 * @return Calculated bond par ASW to maturity from price
-	 * 
-	 * @throws java.lang.Exception Thrown if the par ASW to maturity cannot be calculated
-	 */
-
-	public abstract double calcParASWFromPrice (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblPrice)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond par ASW to exercise from price
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblPrice Price input
-	 * 
-	 * @return Calculated bond par ASW to exercise from price
-	 * 
-	 * @throws java.lang.Exception Thrown if the par ASW to exercise cannot be calculated
-	 */
-
-	public abstract double calcExerciseParASWFromPrice (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblPrice)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond convexity to Work-out from price
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblWorkoutDate JulianDate Work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblPrice Price input
-	 * 
-	 * @return Calculated bond convexity to Work-out from price
-	 * 
-	 * @throws java.lang.Exception Thrown if the convexity to Work-out cannot be calculated
-	 */
-
-	public abstract double calcConvexityFromPrice (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblPrice)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond convexity to maturity from price
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblPrice Price input
-	 * 
-	 * @return Calculated bond convexity to maturity from price
-	 * 
-	 * @throws java.lang.Exception Thrown if the convexity to maturity cannot be calculated
-	 */
-
-	public abstract double calcConvexityFromPrice (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblPrice)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond convexity to exercise from price
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblPrice Price input
-	 * 
-	 * @return Calculated bond convexity to maturity from price
-	 * 
-	 * @throws java.lang.Exception Thrown if the convexity to exercise cannot be calculated
-	 */
-
-	public abstract double calcExerciseConvexityFromPrice (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblPrice)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond price from Z Spread to Work-out
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblWorkoutDate JulianDate Work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblZSpread Z Spread to Work-out input
-	 * 
-	 * @return Calculated bond price from Z Spread to Work-out
-	 * 
-	 * @throws java.lang.Exception Thrown if the price cannot be calculated
-	 */
-
-	public abstract double calcPriceFromZSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblZSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond price from Z Spread to Maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblZSpread Z Spread to Maturity input
-	 * 
-	 * @return Calculated bond price from Z Spread to Maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the price cannot be calculated
-	 */
-
-	public abstract double calcPriceFromZSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblZSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond price from Z Spread to Exercise
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblZSpread Z Spread to Exercise input
-	 * 
-	 * @return Calculated bond price from Z Spread to Exercise
-	 * 
-	 * @throws java.lang.Exception Thrown if the price cannot be calculated
-	 */
-
-	public abstract double calcExercisePriceFromZSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblZSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the Bond Basis from Z Spread to Work-out
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblWorkoutDate JulianDate work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblZSpread Z Spread to Work-out input
-	 * 
-	 * @return Calculated Bond Basis from Z Spread to Work-out
-	 * 
-	 * @throws java.lang.Exception Thrown if the Bond Basis cannot be calculated
-	 */
-
-	public abstract double calcBondBasisFromZSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblZSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the Bond Basis from Z Spread to Maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblZSpread Z Spread to Maturity input
-	 * 
-	 * @return Calculated Bond Basis from Z Spread to Maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the Bond Basis cannot be calculated
-	 */
-
-	public abstract double calcBondBasisFromZSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblZSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the Bond Basis from Z Spread to Exercise
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblZSpread Z Spread to Exercise input
-	 * 
-	 * @return Calculated Bond Basis from Z Spread to Exercise
-	 * 
-	 * @throws java.lang.Exception Thrown if the Bond Basis cannot be calculated
-	 */
-
-	public abstract double calcExerciseBondBasisFromZSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblZSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the Yield Spread from Z Spread to Work-out
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblWorkoutDate JulianDate work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblZSpread Z Spread to Work-out input
-	 * 
-	 * @return Calculated Yield Spread from Z Spread to Work-out
-	 * 
-	 * @throws java.lang.Exception Thrown if the Yield Spread cannot be calculated
-	 */
-
-	public abstract double calcYieldSpreadFromZSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblZSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the Yield Spread from Z Spread to Maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblZSpread Z Spread to Maturity input
-	 * 
-	 * @return Calculated Yield Spread from Z Spread to Maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the Yield Spread cannot be calculated
-	 */
-
-	public abstract double calcYieldSpreadFromZSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblZSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the Yield Spread from Z Spread to Exercise
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblZSpread Z Spread to Exercise input
-	 * 
-	 * @return Calculated Yield Spread from Z Spread to Exercise
-	 * 
-	 * @throws java.lang.Exception Thrown if the Yield Spread cannot be calculated
-	 */
-
-	public abstract double calcExerciseYieldSpreadFromZSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblZSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond yield from Z Spread to Work-out
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblWorkoutDate JulianDate Work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblZSpread Z Spread to Work-out input
-	 * 
-	 * @return Calculated bond yield from Z Spread to Work-out
-	 * 
-	 * @throws java.lang.Exception Thrown if the yield cannot be calculated
-	 */
-
-	public abstract double calcYieldFromZSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblZSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond yield from Z Spread to Maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblZSpread Z Spread to Maturity input
-	 * 
-	 * @return Calculated bond yield from Z Spread to Maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the yield cannot be calculated
-	 */
-
-	public abstract double calcYieldFromZSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblZSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond yield from Z Spread to Exercise
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblZSpread Z Spread to Exercise input
-	 * 
-	 * @return Calculated bond yield from Z Spread to Exercise
-	 * 
-	 * @throws java.lang.Exception Thrown if the yield cannot be calculated
-	 */
-
-	public abstract double calcExerciseYieldFromZSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblZSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the Bond Option Adjusted Spread from Z Spread to Work-out
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblWorkoutDate JulianDate work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblZSpread Z Spread to Work-out input
-	 * 
-	 * @return Calculated Bond OAS from Z Spread to Work-out
-	 * 
-	 * @throws java.lang.Exception Thrown if the price cannot be calculated
-	 */
-
-	public abstract double calcOASFromZSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblZSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond OAS from Z Spread to Maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblZSpread Z Spread to Maturity input
-	 * 
-	 * @return Calculated bond OAS from Z Spread to Maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the price cannot be calculated
-	 */
-
-	public abstract double calcOASFromZSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblZSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond OAS from Z Spread to Exercise
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblZSpread Z Spread to Exercise input
-	 * 
-	 * @return Calculated bond OAS from Z Spread to Exercise
-	 * 
-	 * @throws java.lang.Exception Thrown if the price cannot be calculated
-	 */
-
-	public abstract double calcExerciseOASFromZSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblZSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond credit basis from Z Spread to Work-out
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblWorkoutDate JulianDate Work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblZSpread Z Spread to Work-out input
-	 * 
-	 * @return Calculated bond credit basis from Z Spread to Work-out
-	 * 
-	 * @throws java.lang.Exception Thrown if the credit basis cannot be calculated
-	 */
-
-	public abstract double calcCreditBasisFromZSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblZSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond credit basis from Z Spread to maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblZSpread Z Spread to maturity input
-	 * 
-	 * @return Calculated bond credit basis from Z Spread to maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the credit basis cannot be calculated
-	 */
-
-	public abstract double calcCreditBasisFromZSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblZSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond credit basis from Z Spread to exercise
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblZSpread Z Spread to exercise input
-	 * 
-	 * @return Calculated bond credit basis from Z Spread to exercise
-	 * 
-	 * @throws java.lang.Exception Thrown if the credit basis cannot be calculated
-	 */
-
-	public abstract double calcExerciseCreditBasisFromZSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblZSpread) throws java.lang.Exception;
-
-	/**
-	 * Calculate the Bond PECS from Z Spread to Work-out
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblWorkoutDate JulianDate Work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblZSpread Z Spread to Work-out input
-	 * 
-	 * @return Calculated Bond PECS from Z Spread to Work-out
-	 * 
-	 * @throws java.lang.Exception Thrown if the PECS cannot be calculated
-	 */
-
-	public abstract double calcPECSFromZSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblZSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the Bond PECS from Z Spread to maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblZSpread Z Spread to maturity input
-	 * 
-	 * @return Calculated Bond PECS from Z Spread to Maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the PECS cannot be calculated
-	 */
-
-	public abstract double calcPECSFromZSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblZSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the Bond PECS from Z Spread to exercise
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblZSpread Z Spread to exercise input
-	 * 
-	 * @return Calculated Bond PECS from Z Spread to exercise
-	 * 
-	 * @throws java.lang.Exception Thrown if the PECS cannot be calculated
-	 */
-
-	public abstract double calcExercisePECSFromZSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblZSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond spread to treasury from Z Spread to Work-out
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblWorkoutDate JulianDate Work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblZSpread Z Spread to Work-out input
-	 * 
-	 * @return Calculated spread to treasury from Z Spread to Work-out
-	 * 
-	 * @throws java.lang.Exception Thrown if the spread to treasury cannot be calculated
-	 */
-
-	public abstract double calcTSYSpreadFromZSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblZSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond spread to treasury from Z Spread to maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblZSpread Z Spread to maturity input
-	 * 
-	 * @return Calculated spread to treasury from Z Spread to maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the spread to treasury cannot be calculated
-	 */
-
-	public abstract double calcTSYSpreadFromZSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblZSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond spread to treasury from Z Spread to exercise
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblZSpread Z Spread to exercise input
-	 * 
-	 * @return Calculated spread to treasury from Z Spread to exercise
-	 * 
-	 * @throws java.lang.Exception Thrown if the spread to treasury cannot be calculated
-	 */
-
-	public abstract double calcExerciseTSYSpreadFromZSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblZSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond G Spread from Z Spread to Work-out
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblWorkoutDate JulianDate Work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblZSpread Z Spread to Work-out input
-	 * 
-	 * @return Calculated G Spread from Z Spread to Work-out
-	 * 
-	 * @throws java.lang.Exception Thrown if the G Spread cannot be calculated
-	 */
-
-	public abstract double calcGSpreadFromZSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblZSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond G Spread from Z Spread to Maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblZSpread Z Spread to Maturity input
-	 * 
-	 * @return Calculated G Spread from Z Spread to Maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the G Spread cannot be calculated
-	 */
-
-	public abstract double calcGSpreadFromZSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblZSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond G Spread from Z Spread to Exercise
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblZSpread Z Spread to Exercise input
-	 * 
-	 * @return Calculated G Spread from Z Spread to Exercise
-	 * 
-	 * @throws java.lang.Exception Thrown if the G Spread cannot be calculated
-	 */
-
-	public abstract double calcExerciseGSpreadFromZSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblZSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond I Spread from Z Spread to Work-out
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblWorkoutDate JulianDate Work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblZSpread Z Spread to Work-out input
-	 * 
-	 * @return Calculated I Spread from Z Spread to Work-out
-	 * 
-	 * @throws java.lang.Exception Thrown if the I Spread cannot be calculated
-	 */
-
-	public abstract double calcISpreadFromZSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblZSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond I Spread from Z Spread to maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblZSpread Z Spread to maturity input
-	 * 
-	 * @return Calculated I Spread from Z Spread to maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the I Spread cannot be calculated
-	 */
-
-	public abstract double calcISpreadFromZSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblZSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond I Spread from Z Spread to exercise
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblZSpread Z Spread to exercise input
-	 * 
-	 * @return Calculated I Spread from Z Spread to exercise
-	 * 
-	 * @throws java.lang.Exception Thrown if the I Spread cannot be calculated
-	 */
-
-	public abstract double calcExerciseISpreadFromZSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblZSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond Discount Margin from Z Spread to Work-out
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblWorkoutDate JulianDate Work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblZSpread Z Spread to Work-out input
-	 * 
-	 * @return Calculated Discount Margin from Z Spread to Work-out
-	 * 
-	 * @throws java.lang.Exception Thrown if the Discount Margin cannot be calculated
-	 */
-
-	public abstract double calcDiscountMarginFromZSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblZSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond Discount Margin from Z Spread to maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblZSpread Z Spread to maturity input
-	 * 
-	 * @return Calculated Discount Margin from Z Spread to maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the Discount Margin cannot be calculated
-	 */
-
-	public abstract double calcDiscountMarginFromZSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblZSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond Discount Margin from Z Spread to exercise
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblZSpread Z Spread to exercise input
-	 * 
-	 * @return Calculated Discount Margin from Z Spread to exercise
-	 * 
-	 * @throws java.lang.Exception Thrown if the I Spread cannot be calculated
-	 */
-
-	public abstract double calcExerciseDiscountMarginFromZSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblZSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond duration from Z Spread to Work-out
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblWorkoutDate JulianDate Work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblZSpread Z Spread to Work-out input
-	 * 
-	 * @return Calculated duration from Z Spread to Work-out
-	 * 
-	 * @throws java.lang.Exception Thrown if the duration cannot be calculated
-	 */
-
-	public abstract double calcDurationFromZSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblZSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond duration from Z Spread to maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblZSpread Z Spread to maturity input
-	 * 
-	 * @return Calculated duration from Z Spread to maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the duration cannot be calculated
-	 */
-
-	public abstract double calcDurationFromZSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblZSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond duration from Z Spread to exercise
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblZSpread Z Spread to exercise input
-	 * 
-	 * @return Calculated duration from Z Spread to exercise
-	 * 
-	 * @throws java.lang.Exception Thrown if the duration cannot be calculated
-	 */
-
-	public abstract double calcExerciseDurationFromZSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblZSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond Yield01 from Z Spread to Work-out
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblWorkoutDate JulianDate Work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblZSpread Z Spread to Work-out input
-	 * 
-	 * @return Calculated Yield01 from Z Spread to Work-out
-	 * 
-	 * @throws java.lang.Exception Thrown if the Yield01 cannot be calculated
-	 */
-
-	public abstract double calcYield01FromZSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblZSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond Yield01 from Z Spread to maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblZSpread Z Spread to maturity input
-	 * 
-	 * @return Calculated Yield01 from Z Spread to maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the Yield01 cannot be calculated
-	 */
-
-	public abstract double calcYield01FromZSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblZSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond Yield01 from Z Spread to exercise
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblZSpread Z Spread to exercise input
-	 * 
-	 * @return Calculated Yield01 from Z Spread to exercise
-	 * 
-	 * @throws java.lang.Exception Thrown if the Yield01 cannot be calculated
-	 */
-
-	public abstract double calcExerciseYield01FromZSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblZSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond par ASW from Z Spread to Work-out
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblWorkoutDate JulianDate Work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblZSpread Z Spread to Work-out input
-	 * 
-	 * @return Calculated par ASW from Z Spread to Work-out
-	 * 
-	 * @throws java.lang.Exception Thrown if the par ASW cannot be calculated
-	 */
-
-	public abstract double calcParASWFromZSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblZSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond par ASW from Z Spread to maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblZSpread Z Spread to maturity input
-	 * 
-	 * @return Calculated par ASW from Z Spread to maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the par ASW cannot be calculated
-	 */
-
-	public abstract double calcParASWFromZSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblZSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond par ASW from Z Spread to exercise
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblZSpread Z Spread to exercise input
-	 * 
-	 * @return Calculated par ASW from Z Spread to exercise
-	 * 
-	 * @throws java.lang.Exception Thrown if the par ASW cannot be calculated
-	 */
-
-	public abstract double calcExerciseParASWFromZSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblZSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond convexity from Z Spread to Work-out
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblWorkoutDate JulianDate Work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblZSpread Z Spread to Work-out input
-	 * 
-	 * @return Calculated convexity from Z Spread to Work-out
-	 * 
-	 * @throws java.lang.Exception Thrown if the convexity cannot be calculated
-	 */
-
-	public abstract double calcConvexityFromZSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblZSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond convexity from Z Spread to maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblZSpread Z Spread to maturity input
-	 * 
-	 * @return Calculated convexity from Z Spread to maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the convexity cannot be calculated
-	 */
-
-	public abstract double calcConvexityFromZSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblZSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond convexity from Z Spread to exercise
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblZSpread Z Spread to exercise input
-	 * 
-	 * @return Calculated convexity from Z Spread to exercise
-	 * 
-	 * @throws java.lang.Exception Thrown if the convexity cannot be calculated
-	 */
-
-	public abstract double calcExerciseConvexityFromZSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblZSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond price from Option Adjusted Spread to Work-out
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblWorkoutDate JulianDate Work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblOAS Option Adjusted Spread to Work-out input
-	 * 
-	 * @return Calculated bond price from Option Adjusted Spread to Work-out
-	 * 
-	 * @throws java.lang.Exception Thrown if the price cannot be calculated
-	 */
-
-	public abstract double calcPriceFromOAS (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblOAS)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond price from Option Adjusted Spread to Maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblOAS Option Adjusted Spread to Maturity input
-	 * 
-	 * @return Calculated bond price from Option Adjusted Spread to Maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the price cannot be calculated
-	 */
-
-	public abstract double calcPriceFromOAS (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblOAS)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond price from Option Adjusted Spread to Exercise
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblOAS Option Adjusted Spread to Exercise input
-	 * 
-	 * @return Calculated bond price from Option Adjusted Spread to Exercise
-	 * 
-	 * @throws java.lang.Exception Thrown if the price cannot be calculated
-	 */
-
-	public abstract double calcExercisePriceFromOAS (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblOAS)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond z spread to Work-out from OAS
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblWorkoutDate JulianDate work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblOAS Bond OAS
-	 * 
-	 * @return Calculated bond z spread to Work-out from OAS
-	 * 
-	 * @throws java.lang.Exception Thrown if the z spread to Work-out cannot be calculated
-	 */
-
-	public abstract double calcZSpreadFromOAS (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblOAS)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond z spread to maturity from OAS
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblOAS Bond OAS input
-	 * 
-	 * @return Calculated bond z spread to maturity from OAS
-	 * 
-	 * @throws java.lang.Exception Thrown if the z spread to maturity cannot be calculated
-	 */
-
-	public abstract double calcZSpreadFromOAS (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblOAS)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond z spread to exercise from OAS
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblOAS Bond OAS Input
-	 * 
-	 * @return Calculated bond z spread to exercise from OAS
-	 * 
-	 * @throws java.lang.Exception Thrown if the z spread to exercise cannot be calculated
-	 */
-
-	public abstract double calcExerciseZSpreadFromOAS (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblOAS)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the Bond Basis from Option Adjusted Spread to Work-out
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblWorkoutDate JulianDate work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblOAS Option Adjusted Spread to Work-out input
-	 * 
-	 * @return Calculated Bond Basis from Option Adjusted Spread to Work-out
-	 * 
-	 * @throws java.lang.Exception Thrown if the Bond Basis cannot be calculated
-	 */
-
-	public abstract double calcBondBasisFromOAS (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblOAS)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the Bond Basis from Option Adjusted Spread to Maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblOAS Option Adjusted Spread to Maturity input
-	 * 
-	 * @return Calculated Bond Basis from Option Adjusted Spread to Maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the Bond Basis cannot be calculated
-	 */
-
-	public abstract double calcBondBasisFromOAS (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblOAS)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the Bond Basis from Option Adjusted Spread to Exercise
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblOAS Option Adjusted Spread to Exercise input
-	 * 
-	 * @return Calculated Bond Basis from Option Adjusted Spread to Exercise
-	 * 
-	 * @throws java.lang.Exception Thrown if the Bond Basis cannot be calculated
-	 */
-
-	public abstract double calcExerciseBondBasisFromOAS (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblOAS)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the Yield Spread from Option Adjusted Spread to Work-out
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblWorkoutDate JulianDate work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblOAS Option Adjusted Spread to Work-out input
-	 * 
-	 * @return Calculated Yield Spread from Option Adjusted Spread to Work-out
-	 * 
-	 * @throws java.lang.Exception Thrown if the Yield Spread cannot be calculated
-	 */
-
-	public abstract double calcYieldSpreadFromOAS (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblOAS)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the Yield Spread from Option Adjusted Spread to Maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblOAS Option Adjusted Spread to Maturity input
-	 * 
-	 * @return Calculated Yield Spread from Option Adjusted Spread to Maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the Yield Spread cannot be calculated
-	 */
-
-	public abstract double calcYieldSpreadFromOAS (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblOAS)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the Yield Spread from Option Adjusted Spread to Exercise
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblOAS Option Adjusted Spread to Exercise input
-	 * 
-	 * @return Calculated Yield Spread from Option Adjusted Spread to Exercise
-	 * 
-	 * @throws java.lang.Exception Thrown if the Yield Spread cannot be calculated
-	 */
-
-	public abstract double calcExerciseYieldSpreadFromOAS (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblOAS)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond yield from Option Adjusted Spread to Work-out
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblWorkoutDate JulianDate work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblOAS OAS to Work-out input
-	 * 
-	 * @return Calculated bond yield from Option Adjusted Spread to Work-out
-	 * 
-	 * @throws java.lang.Exception Thrown if the yield cannot be calculated
-	 */
-
-	public abstract double calcYieldFromOAS (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblOAS)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond yield from Option Adjusted Spread to Maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblOAS Option Adjusted Spread to Maturity input
-	 * 
-	 * @return Calculated bond yield from Option Adjusted Spread to Maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the yield cannot be calculated
-	 */
-
-	public abstract double calcYieldFromOAS (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblOAS)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond yield from Option Adjusted Spread to Exercise
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblOAS Option Adjusted Spread to Exercise input
-	 * 
-	 * @return Calculated bond yield from Option Adjusted Spread to Exercise
-	 * 
-	 * @throws java.lang.Exception Thrown if the yield cannot be calculated
-	 */
-
-	public abstract double calcExerciseYieldFromOAS (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblOAS)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond credit basis from Option Adjusted Spread to Work-out
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblWorkoutDate JulianDate work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblOAS Option Adjusted Spread to Work-out input
-	 * 
-	 * @return Calculated bond credit basis from Option Adjusted Spread to Work-out
-	 * 
-	 * @throws java.lang.Exception Thrown if the credit basis cannot be calculated
-	 */
-
-	public abstract double calcCreditBasisFromOAS (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblOAS)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond credit basis from Option Adjusted Spread to maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblOAS Option Adjusted Spread to maturity input
-	 * 
-	 * @return Calculated bond credit basis from Option Adjusted Spread to maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the credit basis cannot be calculated
-	 */
-
-	public abstract double calcCreditBasisFromOAS (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblOAS)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond credit basis from Option Adjusted Spread to exercise
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblOAS Option Adjusted Spread to exercise input
-	 * 
-	 * @return Calculated bond credit basis from Option Adjusted Spread to exercise
-	 * 
-	 * @throws java.lang.Exception Thrown if the credit basis cannot be calculated
-	 */
-
-	public abstract double calcExerciseCreditBasisFromOAS (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblOAS)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the Bond PECS from Option Adjusted Spread to Work-out
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblWorkoutDate JulianDate work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblOAS Option Adjusted Spread to Work-out input
-	 * 
-	 * @return Calculated Bond PECS from Option Adjusted Spread to Work-out
-	 * 
-	 * @throws java.lang.Exception Thrown if the PECS cannot be calculated
-	 */
-
-	public abstract double calcPECSFromOAS (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblOAS)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the Bond PECS from Option Adjusted Spread to maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblOAS Option Adjusted Spread to maturity input
-	 * 
-	 * @return Calculated Bond PECS from Option Adjusted Spread to maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the PECS cannot be calculated
-	 */
-
-	public abstract double calcPECSFromOAS (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblOAS)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the Bond PECS from Option Adjusted Spread to exercise
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblOAS Option Adjusted Spread to exercise input
-	 * 
-	 * @return Calculated Bond PECS from Option Adjusted Spread to exercise
-	 * 
-	 * @throws java.lang.Exception Thrown if the PECS cannot be calculated
-	 */
-
-	public abstract double calcExercisePECSFromOAS (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblOAS)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond spread to treasury from Option Adjusted Spread to Work-out
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblWorkoutDate JulianDate work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblOAS Option Adjusted Spread to Work-out input
-	 * 
-	 * @return Calculated spread to treasury from Option Adjusted Spread to Work-out
-	 * 
-	 * @throws java.lang.Exception Thrown if the spread to treasury cannot be calculated
-	 */
-
-	public abstract double calcTSYSpreadFromOAS (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblOAS)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond spread to treasury from Option Adjusted Spread to maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblOAS Option Adjusted Spread to maturity input
-	 * 
-	 * @return Calculated spread to treasury from Option Adjusted Spread to maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the spread to treasury cannot be calculated
-	 */
-
-	public abstract double calcTSYSpreadFromOAS (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblOAS)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond spread to treasury from Option Adjusted Spread to exercise
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblOAS Option Adjusted Spread to exercise input
-	 * 
-	 * @return Calculated spread to treasury from Option Adjusted Spread to exercise
-	 * 
-	 * @throws java.lang.Exception Thrown if the spread to treasury cannot be calculated
-	 */
-
-	public abstract double calcExerciseTSYSpreadFromOAS (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblOAS)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond G Spread from Option Adjusted Spread to Work-out
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblWorkoutDate JulianDate work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblOAS Option Adjusted Spread to Work-out input
-	 * 
-	 * @return Calculated G Spread from Option Adjusted Spread to Work-out
-	 * 
-	 * @throws java.lang.Exception Thrown if the G Spread cannot be calculated
-	 */
-
-	public abstract double calcGSpreadFromOAS (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblOAS)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond G Spread from Option Adjusted Spread to Maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblOAS Option Adjusted Spread to Maturity input
-	 * 
-	 * @return Calculated G Spread from Option Adjusted Spread to Maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the G Spread cannot be calculated
-	 */
-
-	public abstract double calcGSpreadFromOAS (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblOAS)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond G Spread from Option Adjusted Spread to Exercise
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblOAS Option Adjusted Spread to Exercise input
-	 * 
-	 * @return Calculated G Spread from Option Adjusted Spread to Exercise
-	 * 
-	 * @throws java.lang.Exception Thrown if the G Spread cannot be calculated
-	 */
-
-	public abstract double calcExerciseGSpreadFromOAS (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblOAS)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond I Spread from Option Adjusted Spread to Work-out
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblWorkoutDate JulianDate work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblOAS Option Adjusted Spread to Work-out input
-	 * 
-	 * @return Calculated I Spread from Option Adjusted Spread to Work-out
-	 * 
-	 * @throws java.lang.Exception Thrown if the I Spread cannot be calculated
-	 */
-
-	public abstract double calcISpreadFromOAS (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblOAS)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond I Spread from Option Adjusted Spread to maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblOAS Option Adjusted Spread to maturity input
-	 * 
-	 * @return Calculated I Spread from Option Adjusted Spread to maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the I Spread cannot be calculated
-	 */
-
-	public abstract double calcISpreadFromOAS (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblOAS)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond I Spread from Option Adjusted Spread to exercise
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblOAS Option Adjusted Spread to exercise input
-	 * 
-	 * @return Calculated I Spread from Option Adjusted Spread to exercise
-	 * 
-	 * @throws java.lang.Exception Thrown if the I Spread cannot be calculated
-	 */
-
-	public abstract double calcExerciseISpreadFromOAS (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblOAS)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond Discount Margin from Option Adjusted Spread to Work-out
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblWorkoutDate JulianDate work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblOAS Option Adjusted Spread to Work-out input
-	 * 
-	 * @return Calculated Discount Margin from Option Adjusted Spread to Work-out
-	 * 
-	 * @throws java.lang.Exception Thrown if the Discount Margin cannot be calculated
-	 */
-
-	public abstract double calcDiscountMarginFromOAS (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblOAS)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond Discount Margin from Option Adjusted Spread to maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblOAS Option Adjusted Spread to maturity input
-	 * 
-	 * @return Calculated Discount Margin from Option Adjusted Spread to maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the Discount Margin cannot be calculated
-	 */
-
-	public abstract double calcDiscountMarginFromOAS (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblOAS)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond Discount Margin from Option Adjusted Spread to exercise
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblOAS Option Adjusted Spread to exercise input
-	 * 
-	 * @return Calculated Discount Margin from Option Adjusted Spread to exercise
-	 * 
-	 * @throws java.lang.Exception Thrown if the Discount Margin cannot be calculated
-	 */
-
-	public abstract double calcExerciseDiscountMarginFromOAS (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblOAS)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond duration from Option Adjusted Spread to Work-out
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblWorkoutDate JulianDate work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblOAS Option Adjusted Spread to Work-out input
-	 * 
-	 * @return Calculated duration from Option Adjusted Spread to Work-out
-	 * 
-	 * @throws java.lang.Exception Thrown if the duration cannot be calculated
-	 */
-
-	public abstract double calcDurationFromOAS (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblOAS)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond duration from Option Adjusted Spread to maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblOAS Option Adjusted Spread to maturity input
-	 * 
-	 * @return Calculated duration from Option Adjusted Spread to maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the duration cannot be calculated
-	 */
-
-	public abstract double calcDurationFromOAS (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblOAS)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond duration from Option Adjusted Spread to exercise
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblOAS Option Adjusted Spread to exercise input
-	 * 
-	 * @return Calculated duration from Option Adjusted Spread to exercise
-	 * 
-	 * @throws java.lang.Exception Thrown if the duration cannot be calculated
-	 */
-
-	public abstract double calcExerciseDurationFromOAS (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblOAS)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond Yield01 from Option Adjusted Spread to Work-out
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblWorkoutDate JulianDate work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblOAS Option Adjusted Spread to Work-out input
-	 * 
-	 * @return Calculated Yield01 from Option Adjusted Spread to Work-out
-	 * 
-	 * @throws java.lang.Exception Thrown if the Yield01 cannot be calculated
-	 */
-
-	public abstract double calcYield01FromOAS (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblOAS)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond Yield01 from Option Adjusted Spread to maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblOAS Option Adjusted Spread to maturity input
-	 * 
-	 * @return Calculated Yield01 from Option Adjusted Spread to maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the Yield01 cannot be calculated
-	 */
-
-	public abstract double calcYield01FromOAS (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblOAS)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond Yield01 from Option Adjusted Spread to exercise
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblOAS Option Adjusted Spread to exercise input
-	 * 
-	 * @return Calculated Yield01 from Option Adjusted Spread to exercise
-	 * 
-	 * @throws java.lang.Exception Thrown if the Yield01 cannot be calculated
-	 */
-
-	public abstract double calcExerciseYield01FromOAS (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblOAS)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond par ASW from Option Adjusted Spread to Work-out
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblWorkoutDate JulianDate work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblOAS Option Adjusted Spread to Work-out input
-	 * 
-	 * @return Calculated par ASW from Option Adjusted Spread to Work-out
-	 * 
-	 * @throws java.lang.Exception Thrown if the par ASW cannot be calculated
-	 */
-
-	public abstract double calcParASWFromOAS (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblOAS)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond par ASW from Option Adjusted Spread to maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblOAS Option Adjusted Spread to maturity input
-	 * 
-	 * @return Calculated par ASW from Option Adjusted Spread to maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the par ASW cannot be calculated
-	 */
-
-	public abstract double calcParASWFromOAS (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblOAS)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond par ASW from Option Adjusted Spread to exercise
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblOAS Option Adjusted Spread to exercise input
-	 * 
-	 * @return Calculated par ASW from Option Adjusted Spread to exercise
-	 * 
-	 * @throws java.lang.Exception Thrown if the par ASW cannot be calculated
-	 */
-
-	public abstract double calcExerciseParASWFromOAS (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblOAS)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond convexity from Option Adjusted Spread to Work-out
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblWorkoutDate JulianDate work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblOAS Option Adjusted Spread to Work-out input
-	 * 
-	 * @return Calculated convexity from Option Adjusted Spread to Work-out
-	 * 
-	 * @throws java.lang.Exception Thrown if the convexity cannot be calculated
-	 */
-
-	public abstract double calcConvexityFromOAS (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblOAS)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond convexity from Option Adjusted Spread to maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblOAS Option Adjusted Spread to maturity input
-	 * 
-	 * @return Calculated convexity from Option Adjusted Spread to maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the convexity cannot be calculated
-	 */
-
-	public abstract double calcConvexityFromOAS (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblOAS)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond convexity from Option Adjusted Spread to exercise
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblOAS Option Adjusted Spread to exercise input
-	 * 
-	 * @return Calculated convexity from Option Adjusted Spread to exercise
-	 * 
-	 * @throws java.lang.Exception Thrown if the convexity cannot be calculated
-	 */
-
-	public abstract double calcExerciseConvexityFromOAS (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblOAS)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond price from Bond Basis to Work-out
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblWorkoutDate JulianDate Work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblBondBasis Bond Basis to Work-out input
-	 * 
-	 * @return Calculated bond price from Bond Basis to Work-out
-	 * 
-	 * @throws java.lang.Exception Thrown if the price cannot be calculated
-	 */
-
-	public abstract double calcPriceFromBondBasis (
+	public abstract double calcASWFromBondBasis (
 		final org.drip.param.valuation.ValuationParams valParams,
 		final org.drip.param.definition.ComponentMarketParams mktParams,
 		final org.drip.param.valuation.QuotingParams quotingParams,
@@ -4717,19 +603,19 @@ public abstract class Bond extends CreditComponent {
 		throws java.lang.Exception;
 
 	/**
-	 * Calculate the bond price from Bond Basis to Maturity
+	 * Calculate ASW from Bond Basis to Maturity
 	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblBondBasis Bond Basis to Maturity input
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblBondBasis Bond Basis to Maturity
 	 * 
-	 * @return Calculated bond price from Bond Basis to Maturity
+	 * @return ASW from Bond Basis to Maturity
 	 * 
-	 * @throws java.lang.Exception Thrown if the price cannot be calculated
+	 * @throws java.lang.Exception Thrown if ASW cannot be calculated
 	 */
 
-	public abstract double calcPriceFromBondBasis (
+	public abstract double calcASWFromBondBasis (
 		final org.drip.param.valuation.ValuationParams valParams,
 		final org.drip.param.definition.ComponentMarketParams mktParams,
 		final org.drip.param.valuation.QuotingParams quotingParams,
@@ -4737,19 +623,19 @@ public abstract class Bond extends CreditComponent {
 		throws java.lang.Exception;
 
 	/**
-	 * Calculate the bond price from Bond Basis to Exercise
+	 * Calculate ASW from Bond Basis to Optimal Exercise
 	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblBondBasis Bond Basis to Exercise input
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblBondBasis Bond Basis to Optimal Exercise
 	 * 
-	 * @return Calculated bond price from Bond Basis to Exercise
+	 * @return ASW from Bond Basis to Optimal Exercise
 	 * 
-	 * @throws java.lang.Exception Thrown if the price cannot be calculated
+	 * @throws java.lang.Exception Thrown if ASW cannot be calculated
 	 */
 
-	public abstract double calcExercisePriceFromBondBasis (
+	public abstract double calcASWFromBondBasisToOptimalExercise (
 		final org.drip.param.valuation.ValuationParams valParams,
 		final org.drip.param.definition.ComponentMarketParams mktParams,
 		final org.drip.param.valuation.QuotingParams quotingParams,
@@ -4757,1877 +643,21 @@ public abstract class Bond extends CreditComponent {
 		throws java.lang.Exception;
 
 	/**
-	 * Calculate the bond Z Spread from Bond Basis to work-out
+	 * Calculate ASW from Credit Basis to Work-out
 	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblWorkoutDate JulianDate work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblBondBasis Bond Basis to work-out input
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblCreditBasis Credit Basis to Work-out
 	 * 
-	 * @return Calculated Z Spread from Bond Basis to work-out
+	 * @return ASW from Credit Basis to Work-out
 	 * 
-	 * @throws java.lang.Exception Thrown if the Z Spread cannot be calculated
+	 * @throws java.lang.Exception Thrown if the ASW cannot be calculated
 	 */
 
-	public abstract double calcZSpreadFromBondBasis (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblBondBasis)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond Z Spread from Bond Basis to maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblBondBasis Bond Basis to maturity input
-	 * 
-	 * @return Calculated Z Spread from Bond Basis to maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the Z Spread cannot be calculated
-	 */
-
-	public abstract double calcZSpreadFromBondBasis (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblBondBasis)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond Z Spread from Bond Basis to exercise
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblBondBasis Bond Basis to exercise input
-	 * 
-	 * @return Calculated Z Spread from Bond Basis to exercise
-	 * 
-	 * @throws java.lang.Exception Thrown if the Z Spread cannot be calculated
-	 */
-
-	public abstract double calcExerciseZSpreadFromBondBasis (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblBondBasis)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond Option Adjusted Spread from Bond Basis to work-out
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblWorkoutDate JulianDate work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblBondBasis Bond Basis to work-out input
-	 * 
-	 * @return Calculated Option Adjusted Spread from Bond Basis to work-out
-	 * 
-	 * @throws java.lang.Exception Thrown if the Option Adjusted Spread cannot be calculated
-	 */
-
-	public abstract double calcOASFromBondBasis (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblBondBasis)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond Option Adjusted Spread from Bond Basis to maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblBondBasis Bond Basis to maturity input
-	 * 
-	 * @return Calculated Option Adjusted Spread from Bond Basis to maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the Option Adjusted Spread cannot be calculated
-	 */
-
-	public abstract double calcOASFromBondBasis (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblBondBasis)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond Option Adjusted Spread from Bond Basis to exercise
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblBondBasis Bond Basis to exercise input
-	 * 
-	 * @return Calculated Option Adjusted Spread from Bond Basis to exercise
-	 * 
-	 * @throws java.lang.Exception Thrown if the Option Adjusted Spread cannot be calculated
-	 */
-
-	public abstract double calcExerciseOASFromBondBasis (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblBondBasis)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond yield from Bond Basis to Work-out
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblWorkoutDate JulianDate Work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblBondBasis Bond Basis to Work-out input
-	 * 
-	 * @return Calculated bond yield from Bond Basis to Work-out
-	 * 
-	 * @throws java.lang.Exception Thrown if the yield cannot be calculated
-	 */
-
-	public abstract double calcYieldFromBondBasis (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblBondBasis)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond yield from Bond Basis to Maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblBondBasis Bond Basis to Maturity input
-	 * 
-	 * @return Calculated bond yield from Bond Basis to Maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the yield cannot be calculated
-	 */
-
-	public abstract double calcYieldFromBondBasis (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblBondBasis)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond yield from Bond Basis to Exercise
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblBondBasis Bond Basis to Exercise input
-	 * 
-	 * @return Calculated bond yield from Bond Basis to Exercise
-	 * 
-	 * @throws java.lang.Exception Thrown if the yield cannot be calculated
-	 */
-
-	public abstract double calcExerciseYieldFromBondBasis (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblBondBasis)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond Yield Spread from Bond Basis to Work-out
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblWorkoutDate JulianDate Work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblBondBasis Bond Basis to Work-out input
-	 * 
-	 * @return Calculated bond Yield Spread from Bond Basis to Work-out
-	 * 
-	 * @throws java.lang.Exception Thrown if the Yield Spread cannot be calculated
-	 */
-
-	public abstract double calcYieldSpreadFromBondBasis (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblBondBasis)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond Yield Spread from Bond Basis to Maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblBondBasis Bond Basis to Maturity input
-	 * 
-	 * @return Calculated bond Yield Spread from Bond Basis to Maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the Yield Spread cannot be calculated
-	 */
-
-	public abstract double calcYieldSpreadFromBondBasis (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblBondBasis)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond Yield Spread from Bond Basis to Exercise
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblBondBasis Bond Basis to Exercise input
-	 * 
-	 * @return Calculated bond Yield Spread from Bond Basis to Exercise
-	 * 
-	 * @throws java.lang.Exception Thrown if the Yield Spread cannot be calculated
-	 */
-
-	public abstract double calcExerciseYieldSpreadFromBondBasis (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblBondBasis)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond credit basis from Bond Basis to Work-out
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblWorkoutDate JulianDate Work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblBondBasis Bond Basis to Work-out input
-	 * 
-	 * @return Calculated bond credit basis from Bond Basis to Work-out
-	 * 
-	 * @throws java.lang.Exception Thrown if the credit basis cannot be calculated
-	 */
-
-	public abstract double calcCreditBasisFromBondBasis (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblBondBasis)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond credit basis from Bond Basis to maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblBondBasis Bond Basis to maturity input
-	 * 
-	 * @return Calculated bond credit basis from Bond Basis to maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the credit basis cannot be calculated
-	 */
-
-	public abstract double calcCreditBasisFromBondBasis (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblBondBasis)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond credit basis from Bond Basis to exercise
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblBondBasis Bond Basis to exercise input
-	 * 
-	 * @return Calculated bond credit basis from Bond Basis to exercise
-	 * 
-	 * @throws java.lang.Exception Thrown if the credit basis cannot be calculated
-	 */
-
-	public abstract double calcExerciseCreditBasisFromBondBasis (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblBondBasis)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the Bond PECS from Bond Basis to Work-out
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblWorkoutDate JulianDate Work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblBondBasis Bond Basis to Work-out input
-	 * 
-	 * @return Calculated Bond PECS from Bond Basis to Work-out
-	 * 
-	 * @throws java.lang.Exception Thrown if the credit basis cannot be calculated
-	 */
-
-	public abstract double calcPECSFromBondBasis (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblBondBasis)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the Bond PECS from Bond Basis to maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblBondBasis Bond Basis to maturity input
-	 * 
-	 * @return Calculated Bond PECS from Bond Basis to maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the PECS cannot be calculated
-	 */
-
-	public abstract double calcPECSFromBondBasis (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblBondBasis)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the Bond PECS from Bond Basis to exercise
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblBondBasis Bond Basis to exercise input
-	 * 
-	 * @return Calculated Bond PECS from Bond Basis to exercise
-	 * 
-	 * @throws java.lang.Exception Thrown if the PECS cannot be calculated
-	 */
-
-	public abstract double calcExercisePECSFromBondBasis (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblBondBasis)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond spread to treasury from Bond Basis to Work-out
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblWorkoutDate JulianDate Work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblBondBasis Bond Basis to Work-out input
-	 * 
-	 * @return Calculated spread to treasury from Bond Basis to Work-out
-	 * 
-	 * @throws java.lang.Exception Thrown if the spread to treasury cannot be calculated
-	 */
-
-	public abstract double calcTSYSpreadFromBondBasis (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblBondBasis)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond spread to treasury from Bond Basis to maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblBondBasis Bond Basis to maturity input
-	 * 
-	 * @return Calculated spread to treasury from Bond Basis to maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the spread to treasury cannot be calculated
-	 */
-
-	public abstract double calcTSYSpreadFromBondBasis (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblBondBasis)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond spread to treasury from Bond Basis to exercise
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblBondBasis Bond Basis to exercise input
-	 * 
-	 * @return Calculated spread to treasury from Bond Basis to exercise
-	 * 
-	 * @throws java.lang.Exception Thrown if the spread to treasury cannot be calculated
-	 */
-
-	public abstract double calcExerciseTSYSpreadFromBondBasis (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblBondBasis)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond G Spread from Bond Basis to Work-out
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblWorkoutDate JulianDate Work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblBondBasis Bond Basis to Work-out input
-	 * 
-	 * @return Calculated G Spread from Bond Basis to Work-out
-	 * 
-	 * @throws java.lang.Exception Thrown if the G Spread cannot be calculated
-	 */
-
-	public abstract double calcGSpreadFromBondBasis (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblBondBasis)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond G Spread from Bond Basis to Maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblBondBasis Bond Basis to Maturity input
-	 * 
-	 * @return Calculated G Spread from Bond Basis to Maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the G Spread cannot be calculated
-	 */
-
-	public abstract double calcGSpreadFromBondBasis (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblBondBasis)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond G Spread from Bond Basis to Exercise
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblBondBasis Bond Basis to Exercise input
-	 * 
-	 * @return Calculated G Spread from Bond Basis to Exercise
-	 * 
-	 * @throws java.lang.Exception Thrown if the G Spread cannot be calculated
-	 */
-
-	public abstract double calcExerciseGSpreadFromBondBasis (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblBondBasis)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond I Spread from Bond Basis to Work-out
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblWorkoutDate JulianDate Work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblBondBasis Bond Basis to Work-out input
-	 * 
-	 * @return Calculated I Spread from Bond Basis to Work-out
-	 * 
-	 * @throws java.lang.Exception Thrown if the I Spread cannot be calculated
-	 */
-
-	public abstract double calcISpreadFromBondBasis (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblBondBasis)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond I Spread from Bond Basis to maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblBondBasis Bond Basis to maturity input
-	 * 
-	 * @return Calculated I Spread from Bond Basis to maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the I Spread cannot be calculated
-	 */
-
-	public abstract double calcISpreadFromBondBasis (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblBondBasis)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond I Spread from Bond Basis to exercise
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblBondBasis Bond Basis to exercise input
-	 * 
-	 * @return Calculated I Spread from Bond Basis to exercise
-	 * 
-	 * @throws java.lang.Exception Thrown if the I Spread cannot be calculated
-	 */
-
-	public abstract double calcExerciseISpreadFromBondBasis (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblBondBasis)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond Discount Margin from Bond Basis to Work-out
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblWorkoutDate JulianDate Work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblBondBasis Bond Basis to Work-out input
-	 * 
-	 * @return Calculated Discount Margin from Bond Basis to Work-out
-	 * 
-	 * @throws java.lang.Exception Thrown if the Discount Margin cannot be calculated
-	 */
-
-	public abstract double calcDiscountMarginFromBondBasis (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblBondBasis)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond Discount Margin from Bond Basis to maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblBondBasis Bond Basis to maturity input
-	 * 
-	 * @return Calculated Discount Margin from Bond Basis to maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the Discount Margin cannot be calculated
-	 */
-
-	public abstract double calcDiscountMarginFromBondBasis (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblBondBasis)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond Discount Margin from Bond Basis to exercise
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblBondBasis Bond Basis to exercise input
-	 * 
-	 * @return Calculated Discount Margin from Bond Basis to exercise
-	 * 
-	 * @throws java.lang.Exception Thrown if the Discount Margin cannot be calculated
-	 */
-
-	public abstract double calcExerciseDiscountMarginFromBondBasis (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblBondBasis)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond duration from Bond Basis to Work-out
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblWorkoutDate JulianDate work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblBondBasis Bond Basis to Work-out input
-	 * 
-	 * @return Calculated Duration from Bond Basis to Work-out
-	 * 
-	 * @throws java.lang.Exception Thrown if the duration cannot be calculated
-	 */
-
-	public abstract double calcDurationFromBondBasis (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblBondBasis)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond duration from Bond Basis to maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblBondBasis Bond Basis to maturity input
-	 * 
-	 * @return Calculated duration from Bond Basis to maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the duration cannot be calculated
-	 */
-
-	public abstract double calcDurationFromBondBasis (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblBondBasis)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond duration from Bond Basis to exercise
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblBondBasis Bond Basis to exercise input
-	 * 
-	 * @return Calculated duration from Bond Basis to exercise
-	 * 
-	 * @throws java.lang.Exception Thrown if the duration cannot be calculated
-	 */
-
-	public abstract double calcExerciseDurationFromBondBasis (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblBondBasis)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond Yield01 from Bond Basis to Work-out
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblWorkoutDate JulianDate work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblBondBasis Bond Basis to Work-out input
-	 * 
-	 * @return Calculated Yield01 from Bond Basis to Work-out
-	 * 
-	 * @throws java.lang.Exception Thrown if the Yield01 cannot be calculated
-	 */
-
-	public abstract double calcYield01FromBondBasis (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblBondBasis)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond Yield01 from Bond Basis to maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblBondBasis Bond Basis to maturity input
-	 * 
-	 * @return Calculated Yield01 from Bond Basis to maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the Yield01 cannot be calculated
-	 */
-
-	public abstract double calcYield01FromBondBasis (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblBondBasis)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond Yield01 from Bond Basis to exercise
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblBondBasis Bond Basis to exercise input
-	 * 
-	 * @return Calculated Yield01 from Bond Basis to exercise
-	 * 
-	 * @throws java.lang.Exception Thrown if the Yield01 cannot be calculated
-	 */
-
-	public abstract double calcExerciseYield01FromBondBasis (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblBondBasis)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the Bond Par ASW from Bond Basis to Work-out
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblWorkoutDate JulianDate Work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblBondBasis Bond Basis to Work-out input
-	 * 
-	 * @return Calculated par ASW from Bond Basis to Work-out
-	 * 
-	 * @throws java.lang.Exception Thrown if the Par ASW cannot be calculated
-	 */
-
-	public abstract double calcParASWFromBondBasis (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblBondBasis)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the Bond Par ASW from Bond Basis to maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblBondBasis Bond Basis to maturity input
-	 * 
-	 * @return Calculated Par ASW from Bond Basis to maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the Par ASW cannot be calculated
-	 */
-
-	public abstract double calcParASWFromBondBasis (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblBondBasis)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the Bond Par ASW from Bond Basis to exercise
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblBondBasis Bond Basis to exercise input
-	 * 
-	 * @return Calculated par ASW from Bond Basis to exercise
-	 * 
-	 * @throws java.lang.Exception Thrown if the par ASW cannot be calculated
-	 */
-
-	public abstract double calcExerciseParASWFromBondBasis (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblBondBasis)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the Bond Convexity from Bond Basis to Work-out
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblWorkoutDate JulianDate Work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblBondBasis Bond Basis to Work-out input
-	 * 
-	 * @return Calculated convexity from Bond Basis to Work-out
-	 * 
-	 * @throws java.lang.Exception Thrown if the convexity cannot be calculated
-	 */
-
-	public abstract double calcConvexityFromBondBasis (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblBondBasis)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the Bond Convexity from Bond Basis to maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblBondBasis Bond Basis to maturity input
-	 * 
-	 * @return Calculated Convexity from Bond Basis to maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the convexity cannot be calculated
-	 */
-
-	public abstract double calcConvexityFromBondBasis (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblBondBasis)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond convexity from Bond Basis to exercise
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblBondBasis Bond Basis to exercise input
-	 * 
-	 * @return Calculated Convexity from Bond Basis to exercise
-	 * 
-	 * @throws java.lang.Exception Thrown if the Convexity cannot be calculated
-	 */
-
-	public abstract double calcExerciseConvexityFromBondBasis (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblBondBasis)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond price from Yield Spread to Work-out
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblWorkoutDate JulianDate Work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblYieldSpread Yield Spread to Work-out input
-	 * 
-	 * @return Calculated bond price from Yield Spread to Work-out
-	 * 
-	 * @throws java.lang.Exception Thrown if the price cannot be calculated
-	 */
-
-	public abstract double calcPriceFromYieldSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblYieldSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond price from Yield Spread to Maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblYieldSpread Yield Spread to Maturity input
-	 * 
-	 * @return Calculated bond price from Yield Spread to Maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the price cannot be calculated
-	 */
-
-	public abstract double calcPriceFromYieldSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblYieldSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond price from Yield Spread to Exercise
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblYieldSpread Yield Spread to Exercise input
-	 * 
-	 * @return Calculated bond price from Yield Spread to Exercise
-	 * 
-	 * @throws java.lang.Exception Thrown if the price cannot be calculated
-	 */
-
-	public abstract double calcExercisePriceFromYieldSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblYieldSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond Z Spread from Yield Spread to work-out
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblWorkoutDate JulianDate work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblYieldSpread YieldSpread to work-out input
-	 * 
-	 * @return Calculated Z Spread from Yield Spread to work-out
-	 * 
-	 * @throws java.lang.Exception Thrown if the Z Spread cannot be calculated
-	 */
-
-	public abstract double calcZSpreadFromYieldSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblYieldSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond Z Spread from Yield Spread to maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblYieldSpread Yield Spread to maturity input
-	 * 
-	 * @return Calculated Z Spread from Yield Spread to maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the Z Spread cannot be calculated
-	 */
-
-	public abstract double calcZSpreadFromYieldSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblYieldSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond Z Spread from Yield Spread to exercise
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblYieldSpread Yield Spread to exercise input
-	 * 
-	 * @return Calculated Z Spread from Yield Spread to exercise
-	 * 
-	 * @throws java.lang.Exception Thrown if the Z Spread cannot be calculated
-	 */
-
-	public abstract double calcExerciseZSpreadFromYieldSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblYieldSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond Option Adjusted Spread from Yield Spread to work-out
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblWorkoutDate JulianDate work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblYieldSpread Yield Spread to work-out input
-	 * 
-	 * @return Calculated Option Adjusted Spread from Yield Spread to work-out
-	 * 
-	 * @throws java.lang.Exception Thrown if the Option Adjusted Spread cannot be calculated
-	 */
-
-	public abstract double calcOASFromYieldSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblYieldSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond Option Adjusted Spread from Yield Spread to maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblYieldSpread Yield Spread to maturity input
-	 * 
-	 * @return Calculated Option Adjusted Spread from Yield Spread to maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the Option Adjusted Spread cannot be calculated
-	 */
-
-	public abstract double calcOASFromYieldSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblYieldSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond Option Adjusted Spread from Yield Spread to exercise
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblYieldSpread Yield Spread to exercise input
-	 * 
-	 * @return Calculated Option Adjusted Spread from Yield Spread to exercise
-	 * 
-	 * @throws java.lang.Exception Thrown if the Option Adjusted Spread cannot be calculated
-	 */
-
-	public abstract double calcExerciseOASFromYieldSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblYieldSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond yield from Yield Spread to Work-out
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblWorkoutDate JulianDate Work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblYieldSpread Yield Spread to Work-out input
-	 * 
-	 * @return Calculated bond yield from Yield Spread to Work-out
-	 * 
-	 * @throws java.lang.Exception Thrown if the yield cannot be calculated
-	 */
-
-	public abstract double calcYieldFromYieldSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblYieldSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond yield from Yield Spread to Maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblYieldSpread Yield Spread to Maturity input
-	 * 
-	 * @return Calculated bond yield from Yield Spread to Maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the yield cannot be calculated
-	 */
-
-	public abstract double calcYieldFromYieldSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblYieldSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond yield from Yield Spread to Exercise
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblYieldSpread Yield Spread to Exercise input
-	 * 
-	 * @return Calculated bond yield from Yield Spread to Exercise
-	 * 
-	 * @throws java.lang.Exception Thrown if the yield cannot be calculated
-	 */
-
-	public abstract double calcExerciseYieldFromYieldSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblYieldSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the Bond Basis from Yield Spread to Work-out
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblWorkoutDate JulianDate Work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblYieldSpread Yield Spread to Work-out input
-	 * 
-	 * @return Calculated Bond Basis from Yield Spread to Work-out
-	 * 
-	 * @throws java.lang.Exception Thrown if the Bond Basis cannot be calculated
-	 */
-
-	public abstract double calcBondBasisFromYieldSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblYieldSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the Bond Basis from Yield Spread to Maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblYieldSpread Yield Spread to Maturity input
-	 * 
-	 * @return Calculated Bond Basis from Yield Spread to Maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the Bond Basis cannot be calculated
-	 */
-
-	public abstract double calcBondBasisFromYieldSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblYieldSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the Bond Basis from Yield Spread to Exercise
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblYieldSpread Yield Spread to Exercise input
-	 * 
-	 * @return Calculated Bond Basis from Yield Spread to Exercise
-	 * 
-	 * @throws java.lang.Exception Thrown if the Bond Basis cannot be calculated
-	 */
-
-	public abstract double calcExerciseBondBasisFromYieldSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblYieldSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond credit basis from Yield Spread to Work-out
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblWorkoutDate JulianDate Work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblYieldSpread Yield Spread to Work-out input
-	 * 
-	 * @return Calculated bond credit basis from Yield Spread to Work-out
-	 * 
-	 * @throws java.lang.Exception Thrown if the credit basis cannot be calculated
-	 */
-
-	public abstract double calcCreditBasisFromYieldSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblYieldSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond credit basis from Yield Spread to maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblYieldSpread Yield Spread to maturity input
-	 * 
-	 * @return Calculated bond credit basis from Yield Spread to maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the credit basis cannot be calculated
-	 */
-
-	public abstract double calcCreditBasisFromYieldSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblYieldSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond credit basis from Yield Spread to exercise
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblYieldSpread Yield Spread to exercise input
-	 * 
-	 * @return Calculated bond credit basis from Yield Spread to exercise
-	 * 
-	 * @throws java.lang.Exception Thrown if the credit basis cannot be calculated
-	 */
-
-	public abstract double calcExerciseCreditBasisFromYieldSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblYieldSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the Bond PECS from Yield Spread to Work-out
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblWorkoutDate JulianDate Work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblYieldSpread Yield Spread to Work-out input
-	 * 
-	 * @return Calculated Bond PECS from Yield Spread to Work-out
-	 * 
-	 * @throws java.lang.Exception Thrown if the PECS cannot be calculated
-	 */
-
-	public abstract double calcPECSFromYieldSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblYieldSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the Bond PECS from Yield Spread to maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblYieldSpread Yield Spread to maturity input
-	 * 
-	 * @return Calculated Bond PECS from Yield Spread to maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the PECS cannot be calculated
-	 */
-
-	public abstract double calcPECSFromYieldSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblYieldSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the Bond PECS from Yield Spread to exercise
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblYieldSpread Yield Spread to exercise input
-	 * 
-	 * @return Calculated Bond PECS from Yield Spread to exercise
-	 * 
-	 * @throws java.lang.Exception Thrown if the PECS cannot be calculated
-	 */
-
-	public abstract double calcExercisePECSFromYieldSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblYieldSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond spread to treasury from Yield Spread to Work-out
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblWorkoutDate JulianDate work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblYieldSpread Yield Spread to Work-out input
-	 * 
-	 * @return Calculated spread to treasury from Yield Spread to Work-out
-	 * 
-	 * @throws java.lang.Exception Thrown if the spread to treasury cannot be calculated
-	 */
-
-	public abstract double calcTSYSpreadFromYieldSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblYieldSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond spread to treasury from Yield Spread to maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblYieldSpread Yield Spread to maturity input
-	 * 
-	 * @return Calculated spread to treasury from Yield Spread to maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the spread to treasury cannot be calculated
-	 */
-
-	public abstract double calcTSYSpreadFromYieldSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblYieldSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond spread to treasury from Yield Spread to exercise
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblYieldSpread Yield Spread to exercise input
-	 * 
-	 * @return Calculated spread to treasury from Yield Spread to exercise
-	 * 
-	 * @throws java.lang.Exception Thrown if the spread to treasury cannot be calculated
-	 */
-
-	public abstract double calcExerciseTSYSpreadFromYieldSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblYieldSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond G Spread from Yield Spread to Work-out
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblWorkoutDate JulianDate work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblYieldSpread Yield Spread to Work-out input
-	 * 
-	 * @return Calculated G Spread from Yield Spread to Work-out
-	 * 
-	 * @throws java.lang.Exception Thrown if the G Spread cannot be calculated
-	 */
-
-	public abstract double calcGSpreadFromYieldSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblYieldSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond G Spread from Yield Spread to Maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblYieldSpread Yield Spread to Maturity input
-	 * 
-	 * @return Calculated G Spread from Yield Spread to Maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the G Spread cannot be calculated
-	 */
-
-	public abstract double calcGSpreadFromYieldSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblYieldSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond G Spread from Yield Spread to Exercise
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblYieldSpread Yield Spread to Exercise input
-	 * 
-	 * @return Calculated G Spread from Bond Basis to Exercise
-	 * 
-	 * @throws java.lang.Exception Thrown if the G Spread cannot be calculated
-	 */
-
-	public abstract double calcExerciseGSpreadFromYieldSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblYieldSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond I Spread from Yield Spread to Work-out
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblWorkoutDate JulianDate work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblYieldSpread Yield Spread to Work-out input
-	 * 
-	 * @return Calculated I Spread from Yield Spread to Work-out
-	 * 
-	 * @throws java.lang.Exception Thrown if the I Spread cannot be calculated
-	 */
-
-	public abstract double calcISpreadFromYieldSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblYieldSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond I Spread from Yield Spread to maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblYieldSpread Yield Spread to maturity input
-	 * 
-	 * @return Calculated I Spread from Yield Spread to maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the I Spread cannot be calculated
-	 */
-
-	public abstract double calcISpreadFromYieldSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblYieldSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond I Spread from Yield Spread to exercise
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblYieldSpread Yield Spread to exercise input
-	 * 
-	 * @return Calculated I Spread from Yield Spread to exercise
-	 * 
-	 * @throws java.lang.Exception Thrown if the I Spread cannot be calculated
-	 */
-
-	public abstract double calcExerciseISpreadFromYieldSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblYieldSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond Discount Margin from Yield Spread to Work-out
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblWorkoutDate JulianDate work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblYieldSpread Yield Spread to Work-out input
-	 * 
-	 * @return Calculated Discount Margin from Yield Spread to Work-out
-	 * 
-	 * @throws java.lang.Exception Thrown if the Discount Margin cannot be calculated
-	 */
-
-	public abstract double calcDiscountMarginFromYieldSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblYieldSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond Discount Margin from Yield Spread to maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblYieldSpread Yield Spread to maturity input
-	 * 
-	 * @return Calculated Discount Margin from Yield Spread to maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the Discount Margin cannot be calculated
-	 */
-
-	public abstract double calcDiscountMarginFromYieldSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblYieldSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond Discount Margin from Yield Spread to exercise
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblYieldSpread Yield Spread to exercise input
-	 * 
-	 * @return Calculated Discount Margin from Yield Spread to exercise
-	 * 
-	 * @throws java.lang.Exception Thrown if the Discount Margin cannot be calculated
-	 */
-
-	public abstract double calcExerciseDiscountMarginFromYieldSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblYieldSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond duration from Yield Spread to Work-out
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblWorkoutDate JulianDate work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblYieldSpread Yield Spread to Work-out input
-	 * 
-	 * @return Calculated Duration from Yield Spread to Work-out
-	 * 
-	 * @throws java.lang.Exception Thrown if the duration cannot be calculated
-	 */
-
-	public abstract double calcDurationFromYieldSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblYieldSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the Bond Duration from Yield Spread to maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblYieldSpread Yield Spread to maturity input
-	 * 
-	 * @return Calculated duration from Yield Spread to maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the duration cannot be calculated
-	 */
-
-	public abstract double calcDurationFromYieldSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblYieldSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the Duration from Yield Spread to exercise
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblYieldSpread Yield Spread to exercise input
-	 * 
-	 * @return Calculated duration from Yield Spread to exercise
-	 * 
-	 * @throws java.lang.Exception Thrown if the duration cannot be calculated
-	 */
-
-	public abstract double calcExerciseDurationFromYieldSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblYieldSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond Yield01 from Yield Spread to Work-out
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblWorkoutDate JulianDate work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblYieldSpread Yield Spread to Work-out input
-	 * 
-	 * @return Calculated Yield01 from Yield Spread to Work-out
-	 * 
-	 * @throws java.lang.Exception Thrown if the Yield01 cannot be calculated
-	 */
-
-	public abstract double calcYield01FromYieldSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblYieldSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the Bond Yield01 from Yield Spread to maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblYieldSpread Yield Spread to maturity input
-	 * 
-	 * @return Calculated Yield01 from Yield Spread to maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the Yield01 cannot be calculated
-	 */
-
-	public abstract double calcYield01FromYieldSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblYieldSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the Yield01 from Yield Spread to exercise
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblYieldSpread Yield Spread to exercise input
-	 * 
-	 * @return Calculated Yield01 from Yield Spread to exercise
-	 * 
-	 * @throws java.lang.Exception Thrown if the Yield01 cannot be calculated
-	 */
-
-	public abstract double calcExerciseYield01FromYieldSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblYieldSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the Bond Par ASW from Yield Spread to Work-out
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblWorkoutDate JulianDate Work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblYieldSpread Yield Spread to Work-out input
-	 * 
-	 * @return Calculated par ASW from Yield Spread to Work-out
-	 * 
-	 * @throws java.lang.Exception Thrown if the Par ASW cannot be calculated
-	 */
-
-	public abstract double calcParASWFromYieldSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblYieldSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the Bond Par ASW from Yield Spread to maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblYieldSpread Yield Spread to maturity input
-	 * 
-	 * @return Calculated Par ASW from Yield Spread to maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the Par ASW cannot be calculated
-	 */
-
-	public abstract double calcParASWFromYieldSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblYieldSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the Bond Par ASW from Yield Spread to exercise
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblYieldSpread Yield Spread to exercise input
-	 * 
-	 * @return Calculated par ASW from Yield Spread to exercise
-	 * 
-	 * @throws java.lang.Exception Thrown if the par ASW cannot be calculated
-	 */
-
-	public abstract double calcExerciseParASWFromYieldSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblYieldSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the Bond Convexity from Yield Spread to Work-out
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblWorkoutDate JulianDate work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblYieldSpread Yield Spread to Work-out input
-	 * 
-	 * @return Calculated convexity from Yield Spread to Work-out
-	 * 
-	 * @throws java.lang.Exception Thrown if the convexity cannot be calculated
-	 */
-
-	public abstract double calcConvexityFromYieldSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblYieldSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the Bond Convexity from Yield Spread to maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblYieldSpread Yield Spread to maturity input
-	 * 
-	 * @return Calculated Convexity from Yield Spread to maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the convexity cannot be calculated
-	 */
-
-	public abstract double calcConvexityFromYieldSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblYieldSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond convexity from Yield Spread to exercise
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblYieldSpread Yield Spread to exercise input
-	 * 
-	 * @return Calculated Convexity from Yield Spread to exercise
-	 * 
-	 * @throws java.lang.Exception Thrown if the Convexity cannot be calculated
-	 */
-
-	public abstract double calcExerciseConvexityFromYieldSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblYieldSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond price from credit basis to Work-out
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblWorkoutDate JulianDate Work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblCreditBasis credit basis to Work-out input
-	 * 
-	 * @return Calculated price from credit basis to Work-out
-	 * 
-	 * @throws java.lang.Exception Thrown if the price cannot be calculated
-	 */
-
-	public abstract double calcPriceFromCreditBasis (
+	public abstract double calcASWFromCreditBasis (
 		final org.drip.param.valuation.ValuationParams valParams,
 		final org.drip.param.definition.ComponentMarketParams mktParams,
 		final org.drip.param.valuation.QuotingParams quotingParams,
@@ -6637,19 +667,19 @@ public abstract class Bond extends CreditComponent {
 		throws java.lang.Exception;
 
 	/**
-	 * Calculate the bond price from credit basis to Maturity
+	 * Calculate ASW from Credit Basis to Maturity
 	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblCreditBasis credit basis to Maturity input
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblCreditBasis Credit Basis to Maturity
 	 * 
-	 * @return Calculated price from credit basis to Maturity
+	 * @return ASW from Credit Basis to Maturity
 	 * 
-	 * @throws java.lang.Exception Thrown if the price cannot be calculated
+	 * @throws java.lang.Exception Thrown if ASW cannot be calculated
 	 */
 
-	public abstract double calcPriceFromCreditBasis (
+	public abstract double calcASWFromCreditBasis (
 		final org.drip.param.valuation.ValuationParams valParams,
 		final org.drip.param.definition.ComponentMarketParams mktParams,
 		final org.drip.param.valuation.QuotingParams quotingParams,
@@ -6657,19 +687,19 @@ public abstract class Bond extends CreditComponent {
 		throws java.lang.Exception;
 
 	/**
-	 * Calculate the bond price from credit basis to Exercise
+	 * Calculate ASW from Credit Basis to Optimal Exercise
 	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblCreditBasis credit basis to Exercise input
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblCreditBasis Credit Basis to Optimal Exercise
 	 * 
-	 * @return Calculated price from credit basis to Exercise
+	 * @return ASW from Credit Basis to Optimal Exercise
 	 * 
-	 * @throws java.lang.Exception Thrown if the price cannot be calculated
+	 * @throws java.lang.Exception Thrown if ASW cannot be calculated
 	 */
 
-	public abstract double calcExercisePriceFromCreditBasis (
+	public abstract double calcASWFromCreditBasisToOptimalExercise (
 		final org.drip.param.valuation.ValuationParams valParams,
 		final org.drip.param.definition.ComponentMarketParams mktParams,
 		final org.drip.param.valuation.QuotingParams quotingParams,
@@ -6677,208 +707,720 @@ public abstract class Bond extends CreditComponent {
 		throws java.lang.Exception;
 
 	/**
-	 * Calculate the bond yield from credit basis to Work-out
+	 * Calculate ASW from Discount Margin to Work-out
 	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblWorkoutDate JulianDate Work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblCreditBasis credit basis to Work-out input
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblDiscountMargin Discount Margin to Work-out
 	 * 
-	 * @return Calculated yield from credit basis to Work-out
+	 * @return ASW from Discount Margin to Work-out
 	 * 
-	 * @throws java.lang.Exception Thrown if the yield cannot be calculated
+	 * @throws java.lang.Exception Thrown if the ASW cannot be calculated
 	 */
 
-	public abstract double calcYieldFromCreditBasis (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblCreditBasis)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond yield from credit basis to Maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblCreditBasis credit basis to Maturity input
-	 * 
-	 * @return Calculated yield from credit basis to Maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the yield cannot be calculated
-	 */
-
-	public abstract double calcYieldFromCreditBasis (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblCreditBasis)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond yield from credit basis to Exercise
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblCreditBasis credit basis to Exercise input
-	 * 
-	 * @return Calculated yield from credit basis to Exercise
-	 * 
-	 * @throws java.lang.Exception Thrown if the yield cannot be calculated
-	 */
-
-	public abstract double calcExerciseYieldFromCreditBasis (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblCreditBasis)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond Z Spread from credit basis to Work-out
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblWorkoutDate JulianDate Work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblCreditBasis credit basis to Work-out input
-	 * 
-	 * @return Calculated Z Spread from credit basis to Work-out
-	 * 
-	 * @throws java.lang.Exception Thrown if the Z Spread cannot be calculated
-	 */
-
-	public abstract double calcZSpreadFromCreditBasis (
+	public abstract double calcASWFromDiscountMargin (
 		final org.drip.param.valuation.ValuationParams valParams,
 		final org.drip.param.definition.ComponentMarketParams mktParams,
 		final org.drip.param.valuation.QuotingParams quotingParams,
 		final double dblWorkoutDate,
 		final double dblWorkoutFactor,
-		final double dblCreditBasis)
+		final double dblDiscountMargin)
 		throws java.lang.Exception;
 
 	/**
-	 * Calculate the bond Z Spread from credit basis to Maturity
+	 * Calculate ASW from Discount Margin to Maturity
 	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblCreditBasis credit basis to Maturity input
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblDiscountMargin Discount Margin to Maturity
 	 * 
-	 * @return Calculated Z Spread from credit basis to Maturity
+	 * @return ASW from Discount Margin to Maturity
 	 * 
-	 * @throws java.lang.Exception Thrown if the Z Spread cannot be calculated
+	 * @throws java.lang.Exception Thrown if ASW cannot be calculated
 	 */
 
-	public abstract double calcZSpreadFromCreditBasis (
+	public abstract double calcASWFromDiscountMargin (
 		final org.drip.param.valuation.ValuationParams valParams,
 		final org.drip.param.definition.ComponentMarketParams mktParams,
 		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblCreditBasis)
+		final double dblDiscountMargin)
 		throws java.lang.Exception;
 
 	/**
-	 * Calculate the bond Z Spread from credit basis to Exercise
+	 * Calculate ASW from Discount Margin to Optimal Exercise
 	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblCreditBasis credit basis to Exercise input
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblDiscountMargin Discount Margin to Optimal Exercise
 	 * 
-	 * @return Calculated Z Spread from credit basis to Exercise
+	 * @return ASW from Discount Margin to Optimal Exercise
 	 * 
-	 * @throws java.lang.Exception Thrown if the Z Spread cannot be calculated
+	 * @throws java.lang.Exception Thrown if ASW cannot be calculated
 	 */
 
-	public abstract double calcExerciseZSpreadFromCreditBasis (
+	public abstract double calcASWFromDiscountMarginToOptimalExercise (
 		final org.drip.param.valuation.ValuationParams valParams,
 		final org.drip.param.definition.ComponentMarketParams mktParams,
 		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblCreditBasis)
+		final double dblDiscountMargin)
 		throws java.lang.Exception;
 
 	/**
-	 * Calculate the bond Option Adjusted Spread from credit basis to Work-out
+	 * Calculate ASW from G Spread to Work-out
 	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblWorkoutDate JulianDate work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblCreditBasis credit basis to Work-out input
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblGSpread G Spread to Work-out
 	 * 
-	 * @return Calculated Option Adjusted Spread from credit basis to Work-out
+	 * @return ASW from G Spread to Work-out
 	 * 
-	 * @throws java.lang.Exception Thrown if the Option Adjusted Spread cannot be calculated
+	 * @throws java.lang.Exception Thrown if the ASW cannot be calculated
 	 */
 
-	public abstract double calcOASFromCreditBasis (
+	public abstract double calcASWFromGSpread (
 		final org.drip.param.valuation.ValuationParams valParams,
 		final org.drip.param.definition.ComponentMarketParams mktParams,
 		final org.drip.param.valuation.QuotingParams quotingParams,
 		final double dblWorkoutDate,
 		final double dblWorkoutFactor,
-		final double dblCreditBasis)
+		final double dblGSpread)
 		throws java.lang.Exception;
 
 	/**
-	 * Calculate the bond Option Adjusted Spread from credit basis to Maturity
+	 * Calculate ASW from G Spread to Maturity
 	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblCreditBasis credit basis to Maturity input
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblGSpread G Spread to Maturity
 	 * 
-	 * @return Calculated Option Adjusted Spread from credit basis to Maturity
+	 * @return ASW from G Spread to Maturity
 	 * 
-	 * @throws java.lang.Exception Thrown if the Option Adjusted Spread cannot be calculated
+	 * @throws java.lang.Exception Thrown if ASW cannot be calculated
 	 */
 
-	public abstract double calcOASFromCreditBasis (
+	public abstract double calcASWFromGSpread (
 		final org.drip.param.valuation.ValuationParams valParams,
 		final org.drip.param.definition.ComponentMarketParams mktParams,
 		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblCreditBasis)
+		final double dblGSpread)
 		throws java.lang.Exception;
 
 	/**
-	 * Calculate the bond Option Adjusted Spread from credit basis to Exercise
+	 * Calculate ASW from G Spread to Optimal Exercise
 	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblCreditBasis credit basis to Exercise input
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblGSpread G Spread to Optimal Exercise
 	 * 
-	 * @return Calculated Option Adjusted Spread from credit basis to Exercise
+	 * @return ASW from G Spread to Optimal Exercise
 	 * 
-	 * @throws java.lang.Exception Thrown if the Option Adjusted Spread cannot be calculated
+	 * @throws java.lang.Exception Thrown if ASW cannot be calculated
 	 */
 
-	public abstract double calcExerciseOASFromCreditBasis (
+	public abstract double calcASWFromGSpreadToOptimalExercise (
 		final org.drip.param.valuation.ValuationParams valParams,
 		final org.drip.param.definition.ComponentMarketParams mktParams,
 		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblCreditBasis)
+		final double dblGSpread)
 		throws java.lang.Exception;
 
 	/**
-	 * Calculate the Bond Basis from credit basis to Work-out
+	 * Calculate ASW from I Spread to Work-out
 	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblWorkoutDate JulianDate Work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblCreditBasis credit basis to Work-out input
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblISpread I Spread to Work-out
 	 * 
-	 * @return Calculated Bond Basis from credit basis to Work-out
+	 * @return ASW from I Spread to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if the ASW cannot be calculated
+	 */
+
+	public abstract double calcASWFromISpread (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblISpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate ASW from I Spread to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblISpread I Spread to Maturity
+	 * 
+	 * @return ASW from I Spread to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if ASW cannot be calculated
+	 */
+
+	public abstract double calcASWFromISpread (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblISpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate ASW from I Spread to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblISpread I Spread to Optimal Exercise
+	 * 
+	 * @return ASW from I Spread to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if ASW cannot be calculated
+	 */
+
+	public abstract double calcASWFromISpreadToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblISpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate ASW from OAS to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblOAS OAS to Work-out
+	 * 
+	 * @return ASW from OAS to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if the ASW cannot be calculated
+	 */
+
+	public abstract double calcASWFromOAS (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblOAS)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate ASW from OAS to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblOAS OAS to Maturity
+	 * 
+	 * @return ASW from OAS to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if ASW cannot be calculated
+	 */
+
+	public abstract double calcASWFromOAS (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblOAS)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate ASW from OAS to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblOAS OAS to Optimal Exercise
+	 * 
+	 * @return ASW from OAS to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if ASW cannot be calculated
+	 */
+
+	public abstract double calcASWFromOASToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblOAS)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate ASW from PECS to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblPECS PECS to Work-out
+	 * 
+	 * @return ASW from PECS to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if the ASW cannot be calculated
+	 */
+
+	public abstract double calcASWFromPECS (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblPECS)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate ASW from PECS to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblPECS PECS to Maturity
+	 * 
+	 * @return ASW from PECS to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if ASW cannot be calculated
+	 */
+
+	public abstract double calcASWFromPECS (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblPECS)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate ASW from PECS to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblPECS PECS to Optimal Exercise
+	 * 
+	 * @return ASW from PECS to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if ASW cannot be calculated
+	 */
+
+	public abstract double calcASWFromPECSToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblPECS)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate ASW from Price to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblPrice Price to Work-out
+	 * 
+	 * @return ASW from Price to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if ASW cannot be calculated
+	 */
+
+	public abstract double calcASWFromPrice (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblPrice)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate ASW from Price to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblPrice Price to Maturity
+	 * 
+	 * @return ASW from Price to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if ASW cannot be calculated
+	 */
+
+	public abstract double calcASWFromPrice (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblPrice)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate ASW from Price to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblPrice Price to Optimal Exercise
+	 * 
+	 * @return ASW from Price to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if ASW cannot be calculated
+	 */
+
+	public abstract double calcASWFromPriceToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblPrice)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate ASW from TSY Spread to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblTSYSpread TSY Spread to Work-out
+	 * 
+	 * @return ASW from TSY Spread to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if the ASW cannot be calculated
+	 */
+
+	public abstract double calcASWFromTSYSpread (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblTSYSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate ASW from TSY Spread to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblTSYSpread TSY Spread to Maturity
+	 * 
+	 * @return ASW from TSY Spread to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if ASW cannot be calculated
+	 */
+
+	public abstract double calcASWFromTSYSpread (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblTSYSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate ASW from TSY Spread to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblTSYSpread TSY Spread to Optimal Exercise
+	 * 
+	 * @return ASW from TSY Spread to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if ASW cannot be calculated
+	 */
+
+	public abstract double calcASWFromTSYSpreadToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblTSYSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate ASW from Yield to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblYield Yield to Work-out
+	 * 
+	 * @return ASW from Yield to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if the ASW cannot be calculated
+	 */
+
+	public abstract double calcASWFromYield (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblYield)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate ASW from Yield to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblYield Yield to Maturity
+	 * 
+	 * @return ASW from Yield to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if ASW cannot be calculated
+	 */
+
+	public abstract double calcASWFromYield (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblYield)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate ASW from Yield to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblYield Yield to Optimal Exercise
+	 * 
+	 * @return ASW from Yield to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if ASW cannot be calculated
+	 */
+
+	public abstract double calcASWFromYieldToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblYield)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate ASW from Yield Spread to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblYieldSpread Yield Spread to Work-out
+	 * 
+	 * @return ASW from Yield Spread to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if the ASW cannot be calculated
+	 */
+
+	public abstract double calcASWFromYieldSpread (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblYieldSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate ASW from Yield Spread to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblYieldSpread Yield Spread to Maturity
+	 * 
+	 * @return ASW from Yield Spread to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if ASW cannot be calculated
+	 */
+
+	public abstract double calcASWFromYieldSpread (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblYieldSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate ASW from Yield Spread to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblYieldSpread Yield Spread to Optimal Exercise
+	 * 
+	 * @return ASW from Yield Spread to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if ASW cannot be calculated
+	 */
+
+	public abstract double calcASWFromYieldSpreadToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblYieldSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate ASW from Z Spread to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblZSpread Z Spread to Work-out
+	 * 
+	 * @return ASW from Z Spread to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if the ASW cannot be calculated
+	 */
+
+	public abstract double calcASWFromZSpread (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblZSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate ASW from Z Spread to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblZSpread Z Spread to Maturity
+	 * 
+	 * @return ASW from Z Spread to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if ASW cannot be calculated
+	 */
+
+	public abstract double calcASWFromZSpread (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblZSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate ASW from Z Spread to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblZSpread Z Spread to Optimal Exercise
+	 * 
+	 * @return ASW from Z Spread to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if ASW cannot be calculated
+	 */
+
+	public abstract double calcASWFromZSpreadToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblZSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Bond Basis from ASW to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblASW ASW to Work-out
+	 * 
+	 * @return Bond Basis from ASW to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if the Bond Basis cannot be calculated
+	 */
+
+	public abstract double calcBondBasisFromASW (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblASW)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Bond Basis from ASW to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblASW ASW to Maturity
+	 * 
+	 * @return Bond Basis from ASW to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if Bond Basis cannot be calculated
+	 */
+
+	public abstract double calcBondBasisFromASW (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblASW)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Bond Basis from ASW to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblASW ASW to Optimal Exercise
+	 * 
+	 * @return Bond Basis from ASW to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if Bond Basis cannot be calculated
+	 */
+
+	public abstract double calcBondBasisFromASWToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblASW)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Bond Basis from Credit Basis to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblCreditBasis Credit Basis to Work-out
+	 * 
+	 * @return Bond Basis from Credit Basis to Work-out
 	 * 
 	 * @throws java.lang.Exception Thrown if the Bond Basis cannot be calculated
 	 */
@@ -6893,16 +1435,16 @@ public abstract class Bond extends CreditComponent {
 		throws java.lang.Exception;
 
 	/**
-	 * Calculate the Bond Basis from credit basis to Maturity
+	 * Calculate Bond Basis from Credit Basis to Maturity
 	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblCreditBasis credit basis to Maturity input
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblCreditBasis Credit Basis to Maturity
 	 * 
-	 * @return Calculated Bond Basis from credit basis to Maturity
+	 * @return Bond Basis from Credit Basis to Maturity
 	 * 
-	 * @throws java.lang.Exception Thrown if the Bond Basis cannot be calculated
+	 * @throws java.lang.Exception Thrown if Bond Basis cannot be calculated
 	 */
 
 	public abstract double calcBondBasisFromCreditBasis (
@@ -6913,19 +1455,19 @@ public abstract class Bond extends CreditComponent {
 		throws java.lang.Exception;
 
 	/**
-	 * Calculate the Bond Basis from credit basis to Exercise
+	 * Calculate Bond Basis from Credit Basis to Optimal Exercise
 	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblCreditBasis credit basis to Exercise input
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblCreditBasis Credit Basis to Optimal Exercise
 	 * 
-	 * @return Calculated Bond Basis from credit basis to Exercise
+	 * @return Bond Basis from Credit Basis to Optimal Exercise
 	 * 
-	 * @throws java.lang.Exception Thrown if the Bond Basis cannot be calculated
+	 * @throws java.lang.Exception Thrown if Bond Basis cannot be calculated
 	 */
 
-	public abstract double calcExerciseBondBasisFromCreditBasis (
+	public abstract double calcBondBasisFromCreditBasisToOptimalExercise (
 		final org.drip.param.valuation.ValuationParams valParams,
 		final org.drip.param.definition.ComponentMarketParams mktParams,
 		final org.drip.param.valuation.QuotingParams quotingParams,
@@ -6933,4555 +1475,16 @@ public abstract class Bond extends CreditComponent {
 		throws java.lang.Exception;
 
 	/**
-	 * Calculate the Yield Spread from credit basis to Work-out
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblWorkoutDate JulianDate Work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblCreditBasis credit basis to Work-out input
-	 * 
-	 * @return Calculated Yield Spread from credit basis to Work-out
-	 * 
-	 * @throws java.lang.Exception Thrown if the Yield Spread cannot be calculated
-	 */
-
-	public abstract double calcYieldSpreadFromCreditBasis (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblCreditBasis)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the Yield Spread from credit basis to Maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblCreditBasis credit basis to Maturity input
-	 * 
-	 * @return Calculated Yield Spread from credit basis to Maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the Yield Spread cannot be calculated
-	 */
-
-	public abstract double calcYieldSpreadFromCreditBasis (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblCreditBasis)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the Yield Spread from credit basis to Exercise
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblCreditBasis credit basis to Exercise input
-	 * 
-	 * @return Calculated Yield Spread from credit basis to Exercise
-	 * 
-	 * @throws java.lang.Exception Thrown if the Yield Spread cannot be calculated
-	 */
-
-	public abstract double calcExerciseYieldSpreadFromCreditBasis (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblCreditBasis)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond Spread to Treasury from credit basis to Work-out
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblWorkoutDate JulianDate Work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblCreditBasis credit basis to Work-out input
-	 * 
-	 * @return Calculated Spread to Treasury from credit basis to Work-out
-	 * 
-	 * @throws java.lang.Exception Thrown if the Spread to Treasury cannot be calculated
-	 */
-
-	public abstract double calcTSYSpreadFromCreditBasis (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblCreditBasis)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond Spread to Treasury from credit basis to Maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblCreditBasis credit basis to Maturity input
-	 * 
-	 * @return Calculated Spread to Treasury from credit basis to Maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the Spread to Treasury cannot be calculated
-	 */
-
-	public abstract double calcTSYSpreadFromCreditBasis (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblCreditBasis)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond Spread to Treasury from credit basis to Exercise
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblCreditBasis credit basis to Exercise input
-	 * 
-	 * @return Calculated Spread to Treasury from credit basis to Exercise
-	 * 
-	 * @throws java.lang.Exception Thrown if the Spread to Treasury cannot be calculated
-	 */
-
-	public abstract double calcExerciseTSYSpreadFromCreditBasis (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblCreditBasis)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond G Spread from credit basis to Work-out
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblWorkoutDate JulianDate Work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblCreditBasis credit basis to Work-out input
-	 * 
-	 * @return Calculated G Spread from credit basis to Work-out
-	 * 
-	 * @throws java.lang.Exception Thrown if the G Spread cannot be calculated
-	 */
-
-	public abstract double calcGSpreadFromCreditBasis (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblCreditBasis)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond G Spread from credit basis to Maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblCreditBasis credit basis to Maturity input
-	 * 
-	 * @return Calculated G Spread from credit basis to Maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the G Spread cannot be calculated
-	 */
-
-	public abstract double calcGSpreadFromCreditBasis (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblCreditBasis)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond G Spread from credit basis to Exercise
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblCreditBasis credit basis to Exercise input
-	 * 
-	 * @return Calculated G Spread from credit basis to Exercise
-	 * 
-	 * @throws java.lang.Exception Thrown if the G Spread cannot be calculated
-	 */
-
-	public abstract double calcExerciseGSpreadFromCreditBasis (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblCreditBasis)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond I Spread from credit basis to Work-out
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblWorkoutDate JulianDate Work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblCreditBasis credit basis to Work-out input
-	 * 
-	 * @return Calculated I Spread from credit basis to Work-out
-	 * 
-	 * @throws java.lang.Exception Thrown if the I Spread cannot be calculated
-	 */
-
-	public abstract double calcISpreadFromCreditBasis (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblCreditBasis)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond I Spread from credit basis to Maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblCreditBasis credit basis to Maturity input
-	 * 
-	 * @return Calculated I Spread from credit basis to Maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the I Spread cannot be calculated
-	 */
-
-	public abstract double calcISpreadFromCreditBasis (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblCreditBasis)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond I Spread from credit basis to Exercise
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblCreditBasis credit basis to Exercise input
-	 * 
-	 * @return Calculated I Spread from credit basis to Exercise
-	 * 
-	 * @throws java.lang.Exception Thrown if the I Spread cannot be calculated
-	 */
-
-	public abstract double calcExerciseISpreadFromCreditBasis (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblCreditBasis)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond Discount Margin from credit basis to Work-out
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblWorkoutDate JulianDate Work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblCreditBasis credit basis to Work-out input
-	 * 
-	 * @return Calculated Discount Margin from credit basis to Work-out
-	 * 
-	 * @throws java.lang.Exception Thrown if the Discount Margin cannot be calculated
-	 */
-
-	public abstract double calcDiscountMarginFromCreditBasis (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblCreditBasis)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond Discount Margin from credit basis to Maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblCreditBasis credit basis to Maturity input
-	 * 
-	 * @return Calculated Discount Margin from credit basis to Maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the Discount Margin cannot be calculated
-	 */
-
-	public abstract double calcDiscountMarginFromCreditBasis (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblCreditBasis)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond Discount Margin from credit basis to Exercise
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblCreditBasis credit basis to Exercise input
-	 * 
-	 * @return Calculated Discount Margin from credit basis to Exercise
-	 * 
-	 * @throws java.lang.Exception Thrown if the Discount Margin cannot be calculated
-	 */
-
-	public abstract double calcExerciseDiscountMarginFromCreditBasis (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblCreditBasis)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the Bond PECS from credit basis to Work-out
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param dblWorkoutDate JulianDate Work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblCreditBasis credit basis to Work-out input
-	 * 
-	 * @return Calculated PECS from credit basis to Work-out
-	 * 
-	 * @throws java.lang.Exception Thrown if the PECS cannot be calculated
-	 */
-
-	public abstract double calcPECSFromCreditBasis (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblCreditBasis)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the Bond PECS from credit basis to Maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param dblCreditBasis credit basis to Maturity input
-	 * 
-	 * @return Calculated PECS from credit basis to Maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the PECS cannot be calculated
-	 */
-
-	public abstract double calcPECSFromCreditBasis (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final double dblCreditBasis)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the Bond PECS from credit basis to Exercise
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param dblCreditBasis credit basis to Exercise input
-	 * 
-	 * @return Calculated PECS from credit basis to Exercise
-	 * 
-	 * @throws java.lang.Exception Thrown if the PECS cannot be calculated
-	 */
-
-	public abstract double calcExercisePECSFromCreditBasis (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final double dblCreditBasis)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond Duration from credit basis to Work-out
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param dblWorkoutDate JulianDate Work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblCreditBasis credit basis to Work-out input
-	 * 
-	 * @return Calculated Duration from credit basis to Work-out
-	 * 
-	 * @throws java.lang.Exception Thrown if the Duration cannot be calculated
-	 */
-
-	public abstract double calcDurationFromCreditBasis (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblCreditBasis)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond Duration from credit basis to Maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param dblCreditBasis credit basis to Maturity input
-	 * 
-	 * @return Calculated Duration from credit basis to Maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the Duration cannot be calculated
-	 */
-
-	public abstract double calcDurationFromCreditBasis (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final double dblCreditBasis)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond Duration from credit basis to Exercise
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param dblCreditBasis credit basis to Exercise input
-	 * 
-	 * @return Calculated Duration from credit basis to Exercise
-	 * 
-	 * @throws java.lang.Exception Thrown if the Duration cannot be calculated
-	 */
-
-	public abstract double calcExerciseDurationFromCreditBasis (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final double dblCreditBasis)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond Yield01 from credit basis to Work-out
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param dblWorkoutDate JulianDate Work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblCreditBasis credit basis to Work-out input
-	 * 
-	 * @return Calculated Yield01 from credit basis to Work-out
-	 * 
-	 * @throws java.lang.Exception Thrown if the Yield01 cannot be calculated
-	 */
-
-	public abstract double calcYield01FromCreditBasis (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblCreditBasis)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond Yield01 from credit basis to Maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param dblCreditBasis credit basis to Maturity input
-	 * 
-	 * @return Calculated Yield01 from credit basis to Maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the Yield01 cannot be calculated
-	 */
-
-	public abstract double calcYield01FromCreditBasis (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final double dblCreditBasis)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond Yield01 from credit basis to Exercise
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param dblCreditBasis credit basis to Exercise input
-	 * 
-	 * @return Calculated Yield01 from credit basis to Exercise
-	 * 
-	 * @throws java.lang.Exception Thrown if the Yield01 cannot be calculated
-	 */
-
-	public abstract double calcExerciseYield01FromCreditBasis (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final double dblCreditBasis)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond par ASW from credit basis to Work-out
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param dblWorkoutDate JulianDate Work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblCreditBasis credit basis to Work-out input
-	 * 
-	 * @return Calculated par ASW from credit basis to Work-out
-	 * 
-	 * @throws java.lang.Exception Thrown if the par ASW cannot be calculated
-	 */
-
-	public abstract double calcParASWFromCreditBasis (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblCreditBasis)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond par ASW from credit basis to Maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param dblCreditBasis credit basis to Maturity input
-	 * 
-	 * @return Calculated par ASW from credit basis to Maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the par ASW cannot be calculated
-	 */
-
-	public abstract double calcParASWFromCreditBasis (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final double dblCreditBasis)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond par ASW from credit basis to Exercise
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param dblCreditBasis credit basis to Exercise input
-	 * 
-	 * @return Calculated par ASW from credit basis to Exercise
-	 * 
-	 * @throws java.lang.Exception Thrown if the par ASW cannot be calculated
-	 */
-
-	public abstract double calcExerciseParASWFromCreditBasis (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final double dblCreditBasis)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond convexity from credit basis to Work-out
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param dblWorkoutDate JulianDate Work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblCreditBasis credit basis to Work-out input
-	 * 
-	 * @return Calculated convexity from credit basis to Work-out
-	 * 
-	 * @throws java.lang.Exception Thrown if the convexity cannot be calculated
-	 */
-
-	public abstract double calcConvexityFromCreditBasis (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblCreditBasis)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond convexity from credit basis to Maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param dblCreditBasis credit basis to Maturity input
-	 * 
-	 * @return Calculated convexity from credit basis to Maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the convexity cannot be calculated
-	 */
-
-	public abstract double calcConvexityFromCreditBasis (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final double dblCreditBasis)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond convexity from credit basis to Exercise
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param dblCreditBasis credit basis to Exercise input
-	 * 
-	 * @return Calculated convexity from credit basis to Exercise
-	 * 
-	 * @throws java.lang.Exception Thrown if the convexity cannot be calculated
-	 */
-
-	public abstract double calcExerciseConvexityFromCreditBasis (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final double dblCreditBasis)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the Bond Price from PECS to Work-out
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblWorkoutDate JulianDate Work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblPECS PECS to Work-out input
-	 * 
-	 * @return Calculated Price from PECS to Work-out
-	 * 
-	 * @throws java.lang.Exception Thrown if the Price cannot be calculated
-	 */
-
-	public abstract double calcPriceFromPECS (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblPECS)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the Bond Price from PECS to Maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblPECS PECS to Maturity input
-	 * 
-	 * @return Calculated Price from PECS to Maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the Price cannot be calculated
-	 */
-
-	public abstract double calcPriceFromPECS (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblPECS)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the Bond Price from PECS to Exercise
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblPECS PECS to Exercise input
-	 * 
-	 * @return Calculated Price from PECS to Exercise
-	 * 
-	 * @throws java.lang.Exception Thrown if the Price cannot be calculated
-	 */
-
-	public abstract double calcExercisePriceFromPECS (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblPECS)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the Bond Yield from PECS to Work-out
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblWorkoutDate JulianDate Work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblPECS PECS to Work-out input
-	 * 
-	 * @return Calculated Yield from PECS to Work-out
-	 * 
-	 * @throws java.lang.Exception Thrown if the Yield cannot be calculated
-	 */
-
-	public abstract double calcYieldFromPECS (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblPECS)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the Bond Yield from PECS to Maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblPECS PECS to Maturity input
-	 * 
-	 * @return Calculated Yield from PECS to Maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the Yield cannot be calculated
-	 */
-
-	public abstract double calcYieldFromPECS (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblPECS)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the Bond Yield from PECS to Exercise
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblPECS PECS to Exercise input
-	 * 
-	 * @return Calculated Yield from PECS to Exercise
-	 * 
-	 * @throws java.lang.Exception Thrown if the Yield cannot be calculated
-	 */
-
-	public abstract double calcExerciseYieldFromPECS (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblPECS)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the Bond Z Spread from PECS to Work-out
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblWorkoutDate JulianDate Work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblPECS PECS to Work-out input
-	 * 
-	 * @return Calculated Z Spread from PECS to Work-out
-	 * 
-	 * @throws java.lang.Exception Thrown if the Z Spread cannot be calculated
-	 */
-
-	public abstract double calcZSpreadFromPECS (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblPECS)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the Bond Z Spread from PECS to Maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblPECS PECS to Maturity input
-	 * 
-	 * @return Calculated Z Spread from PECS to Maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the Z Spread cannot be calculated
-	 */
-
-	public abstract double calcZSpreadFromPECS (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblPECS)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the Bond Z Spread from PECS to Exercise
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblPECS PECS to Exercise input
-	 * 
-	 * @return Calculated Z Spread from PECS to Exercise
-	 * 
-	 * @throws java.lang.Exception Thrown if the Z Spread cannot be calculated
-	 */
-
-	public abstract double calcExerciseZSpreadFromPECS (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblPECS)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the Bond Option Adjusted Spread from PECS to Work-out
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblWorkoutDate JulianDate work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblPECS PECS to Work-out input
-	 * 
-	 * @return Calculated Option Adjusted Spread from PECS to Work-out
-	 * 
-	 * @throws java.lang.Exception Thrown if the Option Adjusted Spread cannot be calculated
-	 */
-
-	public abstract double calcOASFromPECS (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblPECS)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond Option Adjusted Spread from PECS to Maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblPECS PECS to Maturity input
-	 * 
-	 * @return Calculated Option Adjusted Spread from PECS to Maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the Option Adjusted Spread cannot be calculated
-	 */
-
-	public abstract double calcOASFromPECS (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblPECS)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond Option Adjusted Spread from PECS to Exercise
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblPECS PECS to Exercise input
-	 * 
-	 * @return Calculated Option Adjusted Spread from PECS to Exercise
-	 * 
-	 * @throws java.lang.Exception Thrown if the Option Adjusted Spread cannot be calculated
-	 */
-
-	public abstract double calcExerciseOASFromPECS (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblPECS)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the Bond Basis from PECS to Work-out
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblWorkoutDate JulianDate Work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblPECS PECS to Work-out input
-	 * 
-	 * @return Calculated Bond Basis from PECS to Work-out
-	 * 
-	 * @throws java.lang.Exception Thrown if the Bond Basis cannot be calculated
-	 */
-
-	public abstract double calcBondBasisFromPECS (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblPECS)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the Bond Basis from PECS to Maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblPECS PECS to Maturity input
-	 * 
-	 * @return Calculated Bond Basis from PECS to Maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the Bond Basis cannot be calculated
-	 */
-
-	public abstract double calcBondBasisFromPECS (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblPECS)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the Bond Basis from PECS to Exercise
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblPECS PECS to Exercise input
-	 * 
-	 * @return Calculated Bond Basis from PECS to Exercise
-	 * 
-	 * @throws java.lang.Exception Thrown if the Bond Basis cannot be calculated
-	 */
-
-	public abstract double calcExerciseBondBasisFromPECS (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblPECS)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the Yield Spread from PECS to Work-out
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblWorkoutDate JulianDate Work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblPECS PECS to Work-out input
-	 * 
-	 * @return Calculated Yield Spread from PECS to Work-out
-	 * 
-	 * @throws java.lang.Exception Thrown if the Yield Spread cannot be calculated
-	 */
-
-	public abstract double calcYieldSpreadFromPECS (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblPECS)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the Yield Spread from PECS to Maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblPECS PECS to Maturity input
-	 * 
-	 * @return Calculated Yield Spread from PECS to Maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the Yield Spread cannot be calculated
-	 */
-
-	public abstract double calcYieldSpreadFromPECS (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblPECS)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the Yield Spread from PECS to Exercise
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblPECS PECS to Exercise input
-	 * 
-	 * @return Calculated Yield Spread from PECS to Exercise
-	 * 
-	 * @throws java.lang.Exception Thrown if the Yield Spread cannot be calculated
-	 */
-
-	public abstract double calcExerciseYieldSpreadFromPECS (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblPECS)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the Bond Spread to Treasury from PECS to Work-out
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblWorkoutDate JulianDate Work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblPECS PECS to Work-out input
-	 * 
-	 * @return Calculated Spread to Treasury from PECS to Work-out
-	 * 
-	 * @throws java.lang.Exception Thrown if the Spread to Treasury cannot be calculated
-	 */
-
-	public abstract double calcTSYSpreadFromPECS (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblPECS)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the Bond Spread to Treasury from PECS to Maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblPECS PECS to Maturity input
-	 * 
-	 * @return Calculated Spread to Treasury from PECS to Maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the Spread to Treasury cannot be calculated
-	 */
-
-	public abstract double calcTSYSpreadFromPECS (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblPECS)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the Bond Spread to Treasury from PECS to Exercise
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblPECS PECS to Exercise input
-	 * 
-	 * @return Calculated Spread to Treasury from PECS to Exercise
-	 * 
-	 * @throws java.lang.Exception Thrown if the Spread to Treasury cannot be calculated
-	 */
-
-	public abstract double calcExerciseTSYSpreadFromPECS (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblPECS)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the Bond G Spread from PECS to Work-out
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblWorkoutDate JulianDate Work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblPECS PECS to Work-out input
-	 * 
-	 * @return Calculated G Spread from PECS to Work-out
-	 * 
-	 * @throws java.lang.Exception Thrown if the G Spread cannot be calculated
-	 */
-
-	public abstract double calcGSpreadFromPECS (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblPECS)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the Bond G Spread from PECS to Maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblPECS PECS to Maturity input
-	 * 
-	 * @return Calculated G Spread from credit basis to Maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the G Spread cannot be calculated
-	 */
-
-	public abstract double calcGSpreadFromPECS (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblPECS)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the Bond G Spread from PECS to Exercise
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblPECS PECS to Exercise input
-	 * 
-	 * @return Calculated G Spread from PECS to Exercise
-	 * 
-	 * @throws java.lang.Exception Thrown if the G Spread cannot be calculated
-	 */
-
-	public abstract double calcExerciseGSpreadFromPECS (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblPECS)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the Bond I Spread from PECS to Work-out
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblWorkoutDate JulianDate Work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblPECS PECS to Work-out input
-	 * 
-	 * @return Calculated I Spread from PECS to Work-out
-	 * 
-	 * @throws java.lang.Exception Thrown if the I Spread cannot be calculated
-	 */
-
-	public abstract double calcISpreadFromPECS (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblPECS)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the Bond I Spread from PECS to Maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblPECS PECS to Maturity input
-	 * 
-	 * @return Calculated I Spread from PECS to Maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the I Spread cannot be calculated
-	 */
-
-	public abstract double calcISpreadFromPECS (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblPECS)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the Bond I Spread from PECS to Exercise
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblPECS PECS to Exercise input
-	 * 
-	 * @return Calculated I Spread from PECS to Exercise
-	 * 
-	 * @throws java.lang.Exception Thrown if the I Spread cannot be calculated
-	 */
-
-	public abstract double calcExerciseISpreadFromPECS (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblPECS)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the Bond Discount Margin from PECS to Work-out
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblWorkoutDate JulianDate Work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblPECS PECS to Work-out input
-	 * 
-	 * @return Calculated Discount Margin from PECS to Work-out
-	 * 
-	 * @throws java.lang.Exception Thrown if the Discount Margin cannot be calculated
-	 */
-
-	public abstract double calcDiscountMarginFromPECS (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblPECS)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the Bond Discount Margin from PECS to Maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblPECS PECS to Maturity input
-	 * 
-	 * @return Calculated Discount Margin from PECS to Maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the Discount Margin cannot be calculated
-	 */
-
-	public abstract double calcDiscountMarginFromPECS (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblPECS)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the Bond Discount Margin from PECS to Exercise
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblPECS PECS to Exercise input
-	 * 
-	 * @return Calculated Discount Margin from PECS to Exercise
-	 * 
-	 * @throws java.lang.Exception Thrown if the Discount Margin cannot be calculated
-	 */
-
-	public abstract double calcExerciseDiscountMarginFromPECS (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblPECS)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the Bond Credit Basis from PECS to Work-out
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param dblWorkoutDate JulianDate Work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblPECS PECS to Work-out input
-	 * 
-	 * @return Calculated Credit Basis from PECS to Work-out
-	 * 
-	 * @throws java.lang.Exception Thrown if the Credit Basis cannot be calculated
-	 */
-
-	public abstract double calcCreditBasisFromPECS (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblPECS)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the Bond Credit Basis from PECS to Maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param dblPECS PECS to Maturity input
-	 * 
-	 * @return Calculated Credit Basis from PECS to Maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the Credit Basis cannot be calculated
-	 */
-
-	public abstract double calcCreditBasisFromPECS (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final double dblPECS)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the Bond Credit Basis from PECS to Exercise
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param dblPECS PECS to Exercise input
-	 * 
-	 * @return Calculated Credit Basis from PECS to Exercise
-	 * 
-	 * @throws java.lang.Exception Thrown if the Credit Basis cannot be calculated
-	 */
-
-	public abstract double calcExerciseCreditBasisFromPECS (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final double dblPECS)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the Bond Duration from PECS to Work-out
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param dblWorkoutDate JulianDate Work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblPECS PECS to Work-out input
-	 * 
-	 * @return Calculated Duration from PECS to Work-out
-	 * 
-	 * @throws java.lang.Exception Thrown if the Duration cannot be calculated
-	 */
-
-	public abstract double calcDurationFromPECS (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblPECS)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the Bond Duration from PECS to Maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param dblPECS PECS to Maturity input
-	 * 
-	 * @return Calculated Duration from PECS to Maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the Duration cannot be calculated
-	 */
-
-	public abstract double calcDurationFromPECS (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final double dblPECS)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the Bond Duration from PECS to Exercise
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param dblPECS PECS to Exercise input
-	 * 
-	 * @return Calculated Duration from PECS to Exercise
-	 * 
-	 * @throws java.lang.Exception Thrown if the Duration cannot be calculated
-	 */
-
-	public abstract double calcExerciseDurationFromPECS (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final double dblPECS)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the Bond Yield01 from PECS to Work-out
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param dblWorkoutDate JulianDate Work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblPECS PECS to Work-out input
-	 * 
-	 * @return Calculated Yield01 from PECS to Work-out
-	 * 
-	 * @throws java.lang.Exception Thrown if the Yield01 cannot be calculated
-	 */
-
-	public abstract double calcYield01FromPECS (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblPECS)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the Bond Yield01 from PECS to Maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param dblPECS PECS to Maturity input
-	 * 
-	 * @return Calculated Yield01 from PECS to Maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the Yield01 cannot be calculated
-	 */
-
-	public abstract double calcYield01FromPECS (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final double dblPECS)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the Bond Yield01 from PECS to Exercise
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param dblPECS PECS to Exercise input
-	 * 
-	 * @return Calculated Yield01 from PECS to Exercise
-	 * 
-	 * @throws java.lang.Exception Thrown if the Yield01 cannot be calculated
-	 */
-
-	public abstract double calcExerciseYield01FromPECS (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final double dblPECS)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the Bond Par ASW from PECS to Work-out
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param dblWorkoutDate JulianDate Work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblPECS PECS to Work-out input
-	 * 
-	 * @return Calculated Par ASW from PECS to Work-out
-	 * 
-	 * @throws java.lang.Exception Thrown if the par ASW cannot be calculated
-	 */
-
-	public abstract double calcParASWFromPECS (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblPECS)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the Bond Par ASW from credit basis to Maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param dblPECS PECS to Maturity input
-	 * 
-	 * @return Calculated Par ASW from PECS to Maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the Par ASW cannot be calculated
-	 */
-
-	public abstract double calcParASWFromPECS (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final double dblPECS)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the Bond Par ASW from PECS to Exercise
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param dblPECS PECS to Exercise input
-	 * 
-	 * @return Calculated Par ASW from PECS to Exercise
-	 * 
-	 * @throws java.lang.Exception Thrown if the Par ASW cannot be calculated
-	 */
-
-	public abstract double calcExerciseParASWFromPECS (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final double dblPECS)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the Bond Convexity from PECS to Work-out
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param dblWorkoutDate JulianDate Work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblPECS PECS to Work-out input
-	 * 
-	 * @return Calculated Convexity from PECS to Work-out
-	 * 
-	 * @throws java.lang.Exception Thrown if the Convexity cannot be calculated
-	 */
-
-	public abstract double calcConvexityFromPECS (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblPECS)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the Bond Convexity from credit basis to Maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param dblPECS PECS to Maturity input
-	 * 
-	 * @return Calculated Convexity from PECS to Maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the Convexity cannot be calculated
-	 */
-
-	public abstract double calcConvexityFromPECS (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final double dblPECS)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the Bond Convexity from credit basis to Exercise
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param dblPECS PECS to Exercise input
-	 * 
-	 * @return Calculated Convexity from PECS to Exercise
-	 * 
-	 * @throws java.lang.Exception Thrown if the Convexity cannot be calculated
-	 */
-
-	public abstract double calcExerciseConvexityFromPECS (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final double dblPECS)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond price from spread treasury benchmark to Work-out
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblWorkoutDate JulianDate Work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblTSYSpread The spread treasury benchmark to Work-out input
-	 * 
-	 * @return Calculated price from the spread treasury benchmark to Work-out
-	 * 
-	 * @throws java.lang.Exception Thrown if the price cannot be calculated
-	 */
-
-	public abstract double calcPriceFromTSYSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblTSYSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond price from spread treasury benchmark to Maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblTSYSpread The spread treasury benchmark to Maturity input
-	 * 
-	 * @return Calculated price from the spread treasury benchmark to Maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the price cannot be calculated
-	 */
-
-	public abstract double calcPriceFromTSYSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblTSYSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond price from spread treasury benchmark to Exercise
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblTSYSpread The spread treasury benchmark to Exercise input
-	 * 
-	 * @return Calculated price from the spread treasury benchmark to Exercise
-	 * 
-	 * @throws java.lang.Exception Thrown if the price cannot be calculated
-	 */
-
-	public abstract double calcExercisePriceFromTSYSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblTSYSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond yield from spread treasury benchmark to Work-out
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param dblWorkoutDate JulianDate Work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblTSYSpread The spread treasury benchmark to Work-out input
-	 * 
-	 * @return Calculated yield from the spread treasury benchmark to Work-out
-	 * 
-	 * @throws java.lang.Exception Thrown if the yield cannot be calculated
-	 */
-
-	public abstract double calcYieldFromTSYSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblTSYSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond yield from spread treasury benchmark to Maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param dblTSYSpread The spread treasury benchmark to Maturity input
-	 * 
-	 * @return Calculated yield from the spread treasury benchmark to Maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the yield cannot be calculated
-	 */
-
-	public abstract double calcYieldFromTSYSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final double dblTSYSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond yield from spread treasury benchmark to Exercise
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param dblTSYSpread The spread treasury benchmark to Exercise input
-	 * 
-	 * @return Calculated yield from the spread treasury benchmark to Exercise
-	 * 
-	 * @throws java.lang.Exception Thrown if the yield cannot be calculated
-	 */
-
-	public abstract double calcExerciseYieldFromTSYSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final double dblTSYSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond Z Spread from spread treasury benchmark to Work-out
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblWorkoutDate JulianDate Work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblTSYSpread The spread treasury benchmark to Work-out input
-	 * 
-	 * @return Calculated Z Spread from the spread treasury benchmark to Work-out
-	 * 
-	 * @throws java.lang.Exception Thrown if the Z Spread cannot be calculated
-	 */
-
-	public abstract double calcZSpreadFromTSYSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblTSYSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond Z Spread from spread treasury benchmark to Maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblTSYSpread The spread treasury benchmark to Maturity input
-	 * 
-	 * @return Calculated Z Spread from the spread treasury benchmark to Maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the Z Spread cannot be calculated
-	 */
-
-	public abstract double calcZSpreadFromTSYSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblTSYSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond Z Spread from spread treasury benchmark to Exercise
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblTSYSpread The spread treasury benchmark to Exercise input
-	 * 
-	 * @return Calculated Z Spread from the spread treasury benchmark to Exercise
-	 * 
-	 * @throws java.lang.Exception Thrown if the Z Spread cannot be calculated
-	 */
-
-	public abstract double calcExerciseZSpreadFromTSYSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblTSYSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond Option Adjusted Spread from spread treasury benchmark to Work-out
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblWorkoutDate JulianDate Work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblTSYSpread The spread treasury benchmark to Work-out input
-	 * 
-	 * @return Calculated Option Adjusted Spread from the spread treasury benchmark to Work-out
-	 * 
-	 * @throws java.lang.Exception Thrown if the Option Adjusted Spread cannot be calculated
-	 */
-
-	public abstract double calcOASFromTSYSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblTSYSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond Option Adjusted Spread from spread treasury benchmark to Maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblTSYSpread The spread treasury benchmark to Maturity input
-	 * 
-	 * @return Calculated Option Adjusted Spread from the spread treasury benchmark to Maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the Option Adjusted Spread cannot be calculated
-	 */
-
-	public abstract double calcOASFromTSYSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblTSYSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond Option Adjusted Spread from spread treasury benchmark to Exercise
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblTSYSpread The spread treasury benchmark to Exercise input
-	 * 
-	 * @return Calculated Option Adjusted Spread from the spread treasury benchmark to Exercise
-	 * 
-	 * @throws java.lang.Exception Thrown if the Option Adjusted Spread cannot be calculated
-	 */
-
-	public abstract double calcExerciseOASFromTSYSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblTSYSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the Bond Basis from spread treasury benchmark to Work-out
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblWorkoutDate JulianDate Work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblTSYSpread The spread treasury benchmark to Work-out input
-	 * 
-	 * @return Calculated Bond Basis from the spread treasury benchmark to Work-out
-	 * 
-	 * @throws java.lang.Exception Thrown if the Bond Basis cannot be calculated
-	 */
-
-	public abstract double calcBondBasisFromTSYSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblTSYSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the Bond Basis from spread treasury benchmark to Maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblTSYSpread The spread treasury benchmark to Maturity input
-	 * 
-	 * @return Calculated Bond Basis from the spread treasury benchmark to Maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the Bond Basis cannot be calculated
-	 */
-
-	public abstract double calcBondBasisFromTSYSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblTSYSpread)
-		throws java.lang.Exception;
-	/**
-	 * Calculate the Bond Basis from spread treasury benchmark to Exercise
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblTSYSpread The spread treasury benchmark to Exercise input
-	 * 
-	 * @return Calculated Bond Basis from the spread treasury benchmark to Exercise
-	 * 
-	 * @throws java.lang.Exception Thrown if the Bond Basis cannot be calculated
-	 */
-
-	public abstract double calcExerciseBondBasisFromTSYSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblTSYSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the Yield Spread from spread treasury benchmark to Work-out
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblWorkoutDate JulianDate Work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblTSYSpread The spread treasury benchmark to Work-out input
-	 * 
-	 * @return Calculated Yield Spread from the spread treasury benchmark to Work-out
-	 * 
-	 * @throws java.lang.Exception Thrown if the Yield Spread cannot be calculated
-	 */
-
-	public abstract double calcYieldSpreadFromTSYSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblTSYSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the Yield Spread from spread treasury benchmark to Maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblTSYSpread The spread treasury benchmark to Maturity input
-	 * 
-	 * @return Calculated Yield Spread from the spread treasury benchmark to Maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the Yield Spread cannot be calculated
-	 */
-
-	public abstract double calcYieldSpreadFromTSYSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblTSYSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the Yield Spread from spread treasury benchmark to Exercise
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblTSYSpread The spread treasury benchmark to Exercise input
-	 * 
-	 * @return Calculated Yield Spread from the spread treasury benchmark to Exercise
-	 * 
-	 * @throws java.lang.Exception Thrown if the Yield Spread cannot be calculated
-	 */
-
-	public abstract double calcExerciseYieldSpreadFromTSYSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblTSYSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond Credit Basis from spread treasury benchmark to Work-out
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblWorkoutDate JulianDate Work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblTSYSpread The spread treasury benchmark to Work-out input
-	 * 
-	 * @return Calculated Credit Basis from the spread treasury benchmark to Work-out
-	 * 
-	 * @throws java.lang.Exception Thrown if the Credit Basis cannot be calculated
-	 */
-
-	public abstract double calcCreditBasisFromTSYSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblTSYSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond Credit Basis from spread treasury benchmark to Maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblTSYSpread The spread treasury benchmark to Maturity input
-	 * 
-	 * @return Calculated Credit Basis from the spread treasury benchmark to Maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the Credit Basis cannot be calculated
-	 */
-
-	public abstract double calcCreditBasisFromTSYSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblTSYSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond Credit Basis from spread treasury benchmark to Exercise
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblTSYSpread The spread treasury benchmark to Exercise input
-	 * 
-	 * @return Calculated Credit Basis from the spread treasury benchmark to Exercise
-	 * 
-	 * @throws java.lang.Exception Thrown if the Credit Basis cannot be calculated
-	 */
-
-	public abstract double calcExerciseCreditBasisFromTSYSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblTSYSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the Bond PECS from spread treasury benchmark to Work-out
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblWorkoutDate JulianDate Work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblTSYSpread The spread treasury benchmark to Work-out input
-	 * 
-	 * @return Calculated PECS from the spread treasury benchmark to Work-out
-	 * 
-	 * @throws java.lang.Exception Thrown if the PECS cannot be calculated
-	 */
-
-	public abstract double calcPECSFromTSYSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblTSYSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the Bond PECS from spread treasury benchmark to Maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblTSYSpread The spread treasury benchmark to Maturity input
-	 * 
-	 * @return Calculated PECS from the spread treasury benchmark to Maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the PECS cannot be calculated
-	 */
-
-	public abstract double calcPECSFromTSYSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblTSYSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the Bond PECS from spread treasury benchmark to Exercise
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblTSYSpread The spread treasury benchmark to Exercise input
-	 * 
-	 * @return Calculated PECS from the spread treasury benchmark to Exercise
-	 * 
-	 * @throws java.lang.Exception Thrown if the PECS cannot be calculated
-	 */
-
-	public abstract double calcExercisePECSFromTSYSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblTSYSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond G Spread from spread treasury benchmark to Work-out
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param dblWorkoutDate JulianDate Work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblTSYSpread The spread treasury benchmark to Work-out input
-	 * 
-	 * @return Calculated G Spread from the spread treasury benchmark to Work-out
-	 * 
-	 * @throws java.lang.Exception Thrown if the G Spread cannot be calculated
-	 */
-
-	public abstract double calcGSpreadFromTSYSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblTSYSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond G Spread from spread treasury benchmark to Maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param dblTSYSpread The spread treasury benchmark to Maturity input
-	 * 
-	 * @return Calculated G Spread from the spread treasury benchmark to Maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the G Spread cannot be calculated
-	 */
-
-	public abstract double calcGSpreadFromTSYSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final double dblTSYSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond G Spread from spread treasury benchmark to Exercise
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param dblTSYSpread The spread treasury benchmark to Exercise input
-	 * 
-	 * @return Calculated G Spread from the spread treasury benchmark to Exercise
-	 * 
-	 * @throws java.lang.Exception Thrown if the G Spread cannot be calculated
-	 */
-
-	public abstract double calcExerciseGSpreadFromTSYSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final double dblTSYSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond I Spread from spread treasury benchmark to Work-out
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param dblWorkoutDate JulianDate Work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblTSYSpread The spread treasury benchmark to Work-out input
-	 * 
-	 * @return Calculated I Spread from the spread treasury benchmark to Work-out
-	 * 
-	 * @throws java.lang.Exception Thrown if the I Spread cannot be calculated
-	 */
-
-	public abstract double calcISpreadFromTSYSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblTSYSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond I Spread from spread treasury benchmark to Maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param dblTSYSpread The spread treasury benchmark to Maturity input
-	 * 
-	 * @return Calculated I Spread from the spread treasury benchmark to Maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the I Spread cannot be calculated
-	 */
-
-	public abstract double calcISpreadFromTSYSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final double dblTSYSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond I Spread from spread treasury benchmark to Exercise
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param dblTSYSpread The spread treasury benchmark to Exercise input
-	 * 
-	 * @return Calculated I Spread from the spread treasury benchmark to Exercise
-	 * 
-	 * @throws java.lang.Exception Thrown if the I Spread cannot be calculated
-	 */
-
-	public abstract double calcExerciseISpreadFromTSYSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final double dblTSYSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond Discount Margin from spread treasury benchmark to Work-out
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param dblWorkoutDate JulianDate Work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblTSYSpread The spread treasury benchmark to Work-out input
-	 * 
-	 * @return Calculated Discount Margin from the spread treasury benchmark to Work-out
-	 * 
-	 * @throws java.lang.Exception Thrown if the Discount Margin cannot be calculated
-	 */
-
-	public abstract double calcDiscountMarginFromTSYSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblTSYSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond Discount Margin from spread treasury benchmark to Maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param dblTSYSpread The spread treasury benchmark to Maturity input
-	 * 
-	 * @return Calculated Discount Margin from the spread treasury benchmark to Maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the Discount Margin cannot be calculated
-	 */
-
-	public abstract double calcDiscountMarginFromTSYSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final double dblTSYSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond Discount Margin from spread treasury benchmark to Exercise
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param dblTSYSpread The spread treasury benchmark to Exercise input
-	 * 
-	 * @return Calculated Discount Margin from the spread treasury benchmark to Exercise
-	 * 
-	 * @throws java.lang.Exception Thrown if the Discount Margin cannot be calculated
-	 */
-
-	public abstract double calcExerciseDiscountMarginFromTSYSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final double dblTSYSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond duration from spread treasury benchmark to Work-out
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblWorkoutDate JulianDate Work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblTSYSpread The spread treasury benchmark to Work-out input
-	 * 
-	 * @return Calculated duration from the spread treasury benchmark to Work-out
-	 * 
-	 * @throws java.lang.Exception Thrown if the duration cannot be calculated
-	 */
-
-	public abstract double calcDurationFromTSYSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblTSYSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond duration from spread treasury benchmark to Maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblTSYSpread The spread treasury benchmark to Maturity input
-	 * 
-	 * @return Calculated duration from the spread treasury benchmark to Maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the duration cannot be calculated
-	 */
-
-	public abstract double calcDurationFromTSYSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblTSYSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond duration from spread treasury benchmark to Exercise
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblTSYSpread The spread treasury benchmark to Exercise input
-	 * 
-	 * @return Calculated duration from the spread treasury benchmark to Exercise
-	 * 
-	 * @throws java.lang.Exception Thrown if the duration cannot be calculated
-	 */
-
-	public abstract double calcExerciseDurationFromTSYSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblTSYSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond Yield01 from spread treasury benchmark to Work-out
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblWorkoutDate JulianDate Work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblTSYSpread The spread treasury benchmark to Work-out input
-	 * 
-	 * @return Calculated Yield01 from the spread treasury benchmark to Work-out
-	 * 
-	 * @throws java.lang.Exception Thrown if the Yield01 cannot be calculated
-	 */
-
-	public abstract double calcYield01FromTSYSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblTSYSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond Yield01 from spread treasury benchmark to Maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblTSYSpread The spread treasury benchmark to Maturity input
-	 * 
-	 * @return Calculated Yield01 from the spread treasury benchmark to Maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the Yield01 cannot be calculated
-	 */
-
-	public abstract double calcYield01FromTSYSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblTSYSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond Yield01 from spread treasury benchmark to Exercise
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblTSYSpread The spread treasury benchmark to Exercise input
-	 * 
-	 * @return Calculated Yield01 from the spread treasury benchmark to Exercise
-	 * 
-	 * @throws java.lang.Exception Thrown if the Yield01 cannot be calculated
-	 */
-
-	public abstract double calcExerciseYield01FromTSYSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblTSYSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond par ASW from spread treasury benchmark to Work-out
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblWorkoutDate JulianDate Work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblTSYSpread The spread treasury benchmark to Work-out input
-	 * 
-	 * @return Calculated par ASW from the spread treasury benchmark to Work-out
-	 * 
-	 * @throws java.lang.Exception Thrown if the par ASW cannot be calculated
-	 */
-
-	public abstract double calcParASWFromTSYSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblTSYSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond par ASW from spread treasury benchmark to Maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblTSYSpread The spread treasury benchmark to Maturity input
-	 * 
-	 * @return Calculated par ASW from the spread treasury benchmark to Maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the par ASW cannot be calculated
-	 */
-
-	public abstract double calcParASWFromTSYSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblTSYSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond par ASW from spread treasury benchmark to Exercise
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblTSYSpread The spread treasury benchmark to Exercise input
-	 * 
-	 * @return Calculated par ASW from the spread treasury benchmark to Exercise
-	 * 
-	 * @throws java.lang.Exception Thrown if the par ASW cannot be calculated
-	 */
-
-	public abstract double calcExerciseParASWFromTSYSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblTSYSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond convexity from spread treasury benchmark to Work-out
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblWorkoutDate JulianDate Work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblTSYSpread The spread treasury benchmark to Work-out input
-	 * 
-	 * @return Calculated convexity from the spread treasury benchmark to Work-out
-	 * 
-	 * @throws java.lang.Exception Thrown if the convexity cannot be calculated
-	 */
-
-	public abstract double calcConvexityFromTSYSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblTSYSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond convexity from spread treasury benchmark to Maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblTSYSpread The spread treasury benchmark to Maturity input
-	 * 
-	 * @return Calculated convexity from the spread treasury benchmark to Maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the convexity cannot be calculated
-	 */
-
-	public abstract double calcConvexityFromTSYSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblTSYSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond convexity from spread treasury benchmark to Exercise
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblTSYSpread The spread treasury benchmark to Exercise input
-	 * 
-	 * @return Calculated convexity from the spread treasury benchmark to Exercise
-	 * 
-	 * @throws java.lang.Exception Thrown if the convexity cannot be calculated
-	 */
-
-	public abstract double calcExerciseConvexityFromTSYSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblTSYSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond price from G Spread to Work-out
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblWorkoutDate JulianDate Work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblGSpread The G Spread to Work-out input
-	 * 
-	 * @return Calculated price from the G Spread to Work-out
-	 * 
-	 * @throws java.lang.Exception Thrown if the price cannot be calculated
-	 */
-
-	public abstract double calcPriceFromGSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblGSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond price from G Spread to Maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblGSpread The G Spread to Maturity input
-	 * 
-	 * @return Calculated price from the G Spread to Maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the price cannot be calculated
-	 */
-
-	public abstract double calcPriceFromGSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblGSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond price from G Spread to Exercise
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblGSpread The G Spread to Exercise input
-	 * 
-	 * @return Calculated price from the G Spread to Exercise
-	 * 
-	 * @throws java.lang.Exception Thrown if the price cannot be calculated
-	 */
-
-	public abstract double calcExercisePriceFromGSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblGSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond yield from G Spread to Work-out
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param dblWorkoutDate JulianDate Work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblGSpread The G Spread to Work-out input
-	 * 
-	 * @return Calculated yield from the G Spread to Work-out
-	 * 
-	 * @throws java.lang.Exception Thrown if the yield cannot be calculated
-	 */
-
-	public abstract double calcYieldFromGSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblGSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond yield from G Spread to Maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param dblGSpread The G Spread to Maturity input
-	 * 
-	 * @return Calculated yield from the G Spread to Maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the yield cannot be calculated
-	 */
-
-	public abstract double calcYieldFromGSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final double dblGSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond yield from G Spread to Exercise
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param dblGSpread The G Spread to Exercise input
-	 * 
-	 * @return Calculated yield from the G Spread to Exercise
-	 * 
-	 * @throws java.lang.Exception Thrown if the yield cannot be calculated
-	 */
-
-	public abstract double calcExerciseYieldFromGSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final double dblGSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond Z Spread from G Spread to Work-out
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblWorkoutDate JulianDate Work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblGSpread The G Spread to Work-out input
-	 * 
-	 * @return Calculated Z Spread from the G Spread to Work-out
-	 * 
-	 * @throws java.lang.Exception Thrown if the Z Spread cannot be calculated
-	 */
-
-	public abstract double calcZSpreadFromGSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblGSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond Z Spread from G Spread to Maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblGSpread The G Spread to Maturity input
-	 * 
-	 * @return Calculated Z Spread from the G Spread to Maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the Z Spread cannot be calculated
-	 */
-
-	public abstract double calcZSpreadFromGSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblGSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond Z Spread from G Spread to Exercise
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblGSpread The G Spread to Exercise input
-	 * 
-	 * @return Calculated Z Spread from the G Spread to Exercise
-	 * 
-	 * @throws java.lang.Exception Thrown if the Z Spread cannot be calculated
-	 */
-
-	public abstract double calcExerciseZSpreadFromGSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblGSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond Option Adjusted Spread from G Spread to Work-out
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblWorkoutDate JulianDate Work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblGSpread The G Spread to Work-out input
-	 * 
-	 * @return Calculated Option Adjusted Spread from the G Spread to Work-out
-	 * 
-	 * @throws java.lang.Exception Thrown if the Option Adjusted Spread cannot be calculated
-	 */
-
-	public abstract double calcOASFromGSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblGSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond Option Adjusted Spread from G Spread to Maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblGSpread The G Spread to Maturity input
-	 * 
-	 * @return Calculated Option Adjusted Spread from the G Spread to Maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the Option Adjusted Spread cannot be calculated
-	 */
-
-	public abstract double calcOASFromGSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblGSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond Option Adjusted Spread from G Spread to Exercise
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblGSpread The G Spread to Exercise input
-	 * 
-	 * @return Calculated Option Adjusted Spread from the G Spread to Exercise
-	 * 
-	 * @throws java.lang.Exception Thrown if the Option Adjusted Spread cannot be calculated
-	 */
-
-	public abstract double calcExerciseOASFromGSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblGSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the Bond Basis from G Spread to Work-out
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblWorkoutDate JulianDate Work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblGSpread The G Spread to Work-out input
-	 * 
-	 * @return Calculated Bond Basis from the G Spread to Work-out
-	 * 
-	 * @throws java.lang.Exception Thrown if the Bond Basis cannot be calculated
-	 */
-
-	public abstract double calcBondBasisFromGSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblGSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the Bond Basis from G Spread to Maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblGSpread The G Spread to Maturity input
-	 * 
-	 * @return Calculated Bond Basis from the G Spread to Maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the Bond Basis cannot be calculated
-	 */
-
-	public abstract double calcBondBasisFromGSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblGSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the Bond Basis from G Spread to Exercise
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblGSpread The G Spread to Exercise input
-	 * 
-	 * @return Calculated Bond Basis from the G Spread to Exercise
-	 * 
-	 * @throws java.lang.Exception Thrown if the Bond Basis cannot be calculated
-	 */
-
-	public abstract double calcExerciseBondBasisFromGSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblGSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the Yield Spread from G Spread to Work-out
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblWorkoutDate JulianDate Work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblGSpread The G Spread to Work-out input
-	 * 
-	 * @return Calculated Yield Spread from the G Spread to Work-out
-	 * 
-	 * @throws java.lang.Exception Thrown if the Yield Spread cannot be calculated
-	 */
-
-	public abstract double calcYieldSpreadFromGSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblGSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the Yield Spread from G Spread to Maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblGSpread The G Spread to Maturity input
-	 * 
-	 * @return Calculated Yield Spread from the G Spread to Maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the Yield Spread cannot be calculated
-	 */
-
-	public abstract double calcYieldSpreadFromGSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblGSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the Yield Spread from G Spread to Exercise
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblGSpread The G Spread to Exercise input
-	 * 
-	 * @return Calculated Yield Spread from the G Spread to Exercise
-	 * 
-	 * @throws java.lang.Exception Thrown if the Yield Spread cannot be calculated
-	 */
-
-	public abstract double calcExerciseYieldSpreadFromGSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblGSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond Credit Basis from G Spread to Work-out
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblWorkoutDate JulianDate Work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblGSpread The Credit Basis to Work-out input
-	 * 
-	 * @return Calculated Credit Basis from the G Spread to Work-out
-	 * 
-	 * @throws java.lang.Exception Thrown if the Z Spread cannot be calculated
-	 */
-
-	public abstract double calcCreditBasisFromGSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblGSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond Credit Basis from G Spread to Maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblGSpread The Credit Basis to Maturity input
-	 * 
-	 * @return Calculated Credit Basis from the G Spread to Maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the Z Spread cannot be calculated
-	 */
-
-	public abstract double calcCreditBasisFromGSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblGSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond Credit Basis from G Spread to Exercise
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblGSpread The Credit Basis to Exercise input
-	 * 
-	 * @return Calculated Credit Basis from the G Spread to Exercise
-	 * 
-	 * @throws java.lang.Exception Thrown if the Z Spread cannot be calculated
-	 */
-
-	public abstract double calcExerciseCreditBasisFromGSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblGSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the Bond PECS from G Spread to Work-out
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblWorkoutDate JulianDate Work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblGSpread The PECS to Work-out input
-	 * 
-	 * @return Calculated PECS from the G Spread to Work-out
-	 * 
-	 * @throws java.lang.Exception Thrown if the Z Spread cannot be calculated
-	 */
-
-	public abstract double calcPECSFromGSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblGSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the Bond PECS from G Spread to Maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblGSpread The G Spread to Maturity input
-	 * 
-	 * @return Calculated PECS from the G Spread to Maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the PECS cannot be calculated
-	 */
-
-	public abstract double calcPECSFromGSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblGSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the Bond PECS from G Spread to Exercise
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblGSpread The G Spread to Exercise input
-	 * 
-	 * @return Calculated PECS from the G Spread to Exercise
-	 * 
-	 * @throws java.lang.Exception Thrown if the PECS cannot be calculated
-	 */
-
-	public abstract double calcExercisePECSFromGSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblGSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond Spread to Treasury from G Spread to Work-out
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param dblWorkoutDate JulianDate Work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblGSpread The Credit Basis to Work-out input
-	 * 
-	 * @return Calculated Spread to Treasury from the G Spread to Work-out
-	 * 
-	 * @throws java.lang.Exception Thrown if the Spread to Treasury cannot be calculated
-	 */
-
-	public abstract double calcTSYSpreadFromGSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblGSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond Spread to Treasury from G Spread to Maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param dblGSpread The Credit Basis to Maturity input
-	 * 
-	 * @return Calculated Spread to Treasury from the G Spread to Maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the Spread to Treasury cannot be calculated
-	 */
-
-	public abstract double calcTSYSpreadFromGSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final double dblGSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond Spread to Treasury from G Spread to Exercise
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param dblGSpread The Credit Basis to Exercise input
-	 * 
-	 * @return Calculated Spread to Treasury from the G Spread to Exercise
-	 * 
-	 * @throws java.lang.Exception Thrown if the Spread to Treasury cannot be calculated
-	 */
-
-	public abstract double calcExerciseTSYSpreadFromGSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final double dblGSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond I Spread from G Spread to Work-out
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param dblWorkoutDate JulianDate Work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblGSpread The Credit Basis to Work-out input
-	 * 
-	 * @return Calculated I Spread from the G Spread to Work-out
-	 * 
-	 * @throws java.lang.Exception Thrown if the I Spread cannot be calculated
-	 */
-
-	public abstract double calcISpreadFromGSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblGSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond I Spread from G Spread to Maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param dblGSpread The Credit Basis to Maturity input
-	 * 
-	 * @return Calculated I Spread from the G Spread to Maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the I Spread cannot be calculated
-	 */
-
-	public abstract double calcISpreadFromGSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final double dblGSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond I Spread from G Spread to Exercise
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param dblGSpread The Credit Basis to Exercise input
-	 * 
-	 * @return Calculated I Spread from the G Spread to Exercise
-	 * 
-	 * @throws java.lang.Exception Thrown if the I Spread cannot be calculated
-	 */
-
-	public abstract double calcExerciseISpreadFromGSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final double dblGSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond Discount Margin from G Spread to Work-out
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param dblWorkoutDate JulianDate Work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblGSpread The Credit Basis to Work-out input
-	 * 
-	 * @return Calculated Discount Margin from the G Spread to Work-out
-	 * 
-	 * @throws java.lang.Exception Thrown if the Discount Margin cannot be calculated
-	 */
-
-	public abstract double calcDiscountMarginFromGSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblGSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond Discount Margin from G Spread to Maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param dblGSpread The Credit Basis to Maturity input
-	 * 
-	 * @return Calculated Discount Margin from the G Spread to Maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the Discount Margin cannot be calculated
-	 */
-
-	public abstract double calcDiscountMarginFromGSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final double dblGSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond Discount Margin from G Spread to Exercise
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param dblGSpread The Credit Basis to Exercise input
-	 * 
-	 * @return Calculated Discount Margin from the G Spread to Exercise
-	 * 
-	 * @throws java.lang.Exception Thrown if the Discount Margin cannot be calculated
-	 */
-
-	public abstract double calcExerciseDiscountMarginFromGSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final double dblGSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond Duration from G Spread to Work-out
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblWorkoutDate JulianDate Work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblGSpread The Credit Basis to Work-out input
-	 * 
-	 * @return Calculated Duration from the G Spread to Work-out
-	 * 
-	 * @throws java.lang.Exception Thrown if the Duration cannot be calculated
-	 */
-
-	public abstract double calcDurationFromGSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblGSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond Duration from G Spread to Maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblGSpread The Credit Basis to Maturity input
-	 * 
-	 * @return Calculated Duration from the G Spread to Maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the Duration cannot be calculated
-	 */
-
-	public abstract double calcDurationFromGSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblGSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond Duration from G Spread to Exercise
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblGSpread The Credit Basis to Exercise input
-	 * 
-	 * @return Calculated Duration from the G Spread to Exercise
-	 * 
-	 * @throws java.lang.Exception Thrown if the Duration cannot be calculated
-	 */
-
-	public abstract double calcExerciseDurationFromGSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblGSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond Yield01 from G Spread to Work-out
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblWorkoutDate JulianDate Work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblGSpread The Credit Basis to Work-out input
-	 * 
-	 * @return Calculated Yield01 from the G Spread to Work-out
-	 * 
-	 * @throws java.lang.Exception Thrown if the Yield01 cannot be calculated
-	 */
-
-	public abstract double calcYield01FromGSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblGSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond Yield01 from G Spread to Maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblGSpread The Credit Basis to Maturity input
-	 * 
-	 * @return Calculated Yield01 from the G Spread to Maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the Yield01 cannot be calculated
-	 */
-
-	public abstract double calcYield01FromGSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblGSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond Yield01 from G Spread to Exercise
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblGSpread The Credit Basis to Exercise input
-	 * 
-	 * @return Calculated Yield01 from the G Spread to Exercise
-	 * 
-	 * @throws java.lang.Exception Thrown if the Yield01 cannot be calculated
-	 */
-
-	public abstract double calcExerciseYield01FromGSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblGSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond Par ASW from G Spread to Work-out
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblWorkoutDate JulianDate Work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblGSpread The Credit Basis to Work-out input
-	 * 
-	 * @return Calculated Par ASW from the G Spread to Work-out
-	 * 
-	 * @throws java.lang.Exception Thrown if the Par ASW cannot be calculated
-	 */
-
-	public abstract double calcParASWFromGSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblGSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond Par ASW from G Spread to Maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblGSpread The Credit Basis to Maturity input
-	 * 
-	 * @return Calculated Par ASW from the G Spread to Maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the Par ASW cannot be calculated
-	 */
-
-	public abstract double calcParASWFromGSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblGSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond Par ASW from G Spread to Exercise
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblGSpread The Credit Basis to Exercise input
-	 * 
-	 * @return Calculated Par ASW from the G Spread to Exercise
-	 * 
-	 * @throws java.lang.Exception Thrown if the Par ASW cannot be calculated
-	 */
-
-	public abstract double calcExerciseParASWFromGSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblGSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond convexity from G Spread to Work-out
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblWorkoutDate JulianDate Work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblGSpread The Credit Basis to Work-out input
-	 * 
-	 * @return Calculated convexity from the G Spread to Work-out
-	 * 
-	 * @throws java.lang.Exception Thrown if the convexity cannot be calculated
-	 */
-
-	public abstract double calcConvexityFromGSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblGSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond convexity from G Spread to Maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblGSpread The Credit Basis to Maturity input
-	 * 
-	 * @return Calculated convexity from the G Spread to Maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the convexity cannot be calculated
-	 */
-
-	public abstract double calcConvexityFromGSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblGSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond convexity from G Spread to Exercise
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblGSpread The Credit Basis to Exercise input
-	 * 
-	 * @return Calculated convexity from the G Spread to Exercise
-	 * 
-	 * @throws java.lang.Exception Thrown if the convexity cannot be calculated
-	 */
-
-	public abstract double calcExerciseConvexityFromGSpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblGSpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond price from I Spread to Work-out
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblWorkoutDate JulianDate Work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblISpread The I Spread to Work-out input
-	 * 
-	 * @return Calculated price from the I Spread to Work-out
-	 * 
-	 * @throws java.lang.Exception Thrown if the price cannot be calculated
-	 */
-
-	public abstract double calcPriceFromISpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblISpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond price from I Spread to Maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblISpread The I Spread to Maturity input
-	 * 
-	 * @return Calculated price from the I Spread to Maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the price cannot be calculated
-	 */
-
-	public abstract double calcPriceFromISpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		double dblISpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond price from I Spread to Exercise
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblISpread The I Spread to Exercise input
-	 * 
-	 * @return Calculated price from the I Spread to Exercise
-	 * 
-	 * @throws java.lang.Exception Thrown if the price cannot be calculated
-	 */
-
-	public abstract double calcExercisePriceFromISpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblISpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond yield from I Spread to Work-out
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param dblWorkoutDate JulianDate Work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblISpread The I Spread to Work-out input
-	 * 
-	 * @return Calculated yield from the I Spread to Work-out
-	 * 
-	 * @throws java.lang.Exception Thrown if the yield cannot be calculated
-	 */
-
-	public abstract double calcYieldFromISpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblISpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond yield from I Spread to Maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param dblISpread The I Spread to Maturity input
-	 * 
-	 * @return Calculated yield from the I Spread to Maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the yield cannot be calculated
-	 */
-
-	public abstract double calcYieldFromISpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final double dblISpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond yield from I Spread to Exercise
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param dblISpread The I Spread to Exercise input
-	 * 
-	 * @return Calculated yield from the I Spread to Exercise
-	 * 
-	 * @throws java.lang.Exception Thrown if the yield cannot be calculated
-	 */
-
-	public abstract double calcExerciseYieldFromISpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final double dblISpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond Z Spread from I Spread to Work-out
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblWorkoutDate JulianDate Work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblISpread The I Spread to Work-out input
-	 * 
-	 * @return Calculated Z Spread from the I Spread to Work-out
-	 * 
-	 * @throws java.lang.Exception Thrown if the Z Spread cannot be calculated
-	 */
-
-	public abstract double calcZSpreadFromISpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblISpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond Z Spread from I Spread to Maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblISpread The I Spread to Maturity input
-	 * 
-	 * @return Calculated Z Spread from the I Spread to Maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the Z Spread cannot be calculated
-	 */
-
-	public abstract double calcZSpreadFromISpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblISpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond Z Spread from I Spread to Exercise
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblISpread The I Spread to Exercise input
-	 * 
-	 * @return Calculated Z Spread from the I Spread to Exercise
-	 * 
-	 * @throws java.lang.Exception Thrown if the Z Spread cannot be calculated
-	 */
-
-	public abstract double calcExerciseZSpreadFromISpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblISpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond Option Adjusted Spread from I Spread to Work-out
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblWorkoutDate JulianDate Work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblISpread The I Spread to Work-out input
-	 * 
-	 * @return Calculated Option Adjusted Spread from the I Spread to Work-out
-	 * 
-	 * @throws java.lang.Exception Thrown if the Option Adjusted Spread cannot be calculated
-	 */
-
-	public abstract double calcOASFromISpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblISpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond Option Adjusted Spread from I Spread to Maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblISpread The I Spread to Maturity input
-	 * 
-	 * @return Calculated Option Adjusted Spread from the I Spread to Maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the Option Adjusted Spread cannot be calculated
-	 */
-
-	public abstract double calcOASFromISpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblISpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond Option Adjusted Spread from I Spread to Exercise
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblISpread The I Spread to Exercise input
-	 * 
-	 * @return Calculated Option Adjusted Spread from the I Spread to Exercise
-	 * 
-	 * @throws java.lang.Exception Thrown if the Option Adjusted Spread cannot be calculated
-	 */
-
-	public abstract double calcExerciseOASFromISpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblISpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the Bond Basis from I Spread to Work-out
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblWorkoutDate JulianDate Work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblISpread The I Spread to Work-out input
-	 * 
-	 * @return Calculated Bond Basis from the I Spread to Work-out
-	 * 
-	 * @throws java.lang.Exception Thrown if the Bond Basis cannot be calculated
-	 */
-
-	public abstract double calcBondBasisFromISpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblISpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the Bond Basis from I Spread to Maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblISpread The I Spread to Maturity input
-	 * 
-	 * @return Calculated Bond Basis from the I Spread to Maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the Bond Basis cannot be calculated
-	 */
-
-	public abstract double calcBondBasisFromISpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblISpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the Bond Basis from I Spread to Exercise
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblISpread The I Spread to Exercise input
-	 * 
-	 * @return Calculated Bond Basis from the I Spread to Exercise
-	 * 
-	 * @throws java.lang.Exception Thrown if the Bond Basis cannot be calculated
-	 */
-
-	public abstract double calcExerciseBondBasisFromISpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblISpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the Yield Spread from I Spread to Work-out
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblWorkoutDate JulianDate Work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblISpread The I Spread to Work-out input
-	 * 
-	 * @return Calculated Yield Spread from the I Spread to Work-out
-	 * 
-	 * @throws java.lang.Exception Thrown if the Yield Spread cannot be calculated
-	 */
-
-	public abstract double calcYieldSpreadFromISpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblISpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the Yield Spread from I Spread to Maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblISpread The I Spread to Maturity input
-	 * 
-	 * @return Calculated Yield Spread from the I Spread to Maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the Yield Spread cannot be calculated
-	 */
-
-	public abstract double calcYieldSpreadFromISpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblISpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the Yield Spread from I Spread to Exercise
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblISpread The I Spread to Exercise input
-	 * 
-	 * @return Calculated Yield Spread from the I Spread to Exercise
-	 * 
-	 * @throws java.lang.Exception Thrown if the Yield Spread cannot be calculated
-	 */
-
-	public abstract double calcExerciseYieldSpreadFromISpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblISpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond Credit Basis from I Spread to Work-out
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblWorkoutDate JulianDate Work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblISpread The I Spread to Work-out input
-	 * 
-	 * @return Calculated Credit Basis from the I Spread to Work-out
-	 * 
-	 * @throws java.lang.Exception Thrown if the Credit Basis cannot be calculated
-	 */
-
-	public abstract double calcCreditBasisFromISpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblISpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond Credit Basis from I Spread to Maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblISpread The I Spread to Maturity input
-	 * 
-	 * @return Calculated Credit Basis from the I Spread to Maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the Credit Basis cannot be calculated
-	 */
-
-	public abstract double calcCreditBasisFromISpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblISpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond Credit Basis from I Spread to Exercise
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblISpread The I Spread to Exercise input
-	 * 
-	 * @return Calculated Credit Basis from the I Spread to Exercise
-	 * 
-	 * @throws java.lang.Exception Thrown if the Credit Basis cannot be calculated
-	 */
-
-	public abstract double calcExerciseCreditBasisFromISpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblISpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the Bond PECS from I Spread to Work-out
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblWorkoutDate JulianDate Work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblISpread The I Spread to Work-out input
-	 * 
-	 * @return Calculated PECS from the I Spread to Work-out
-	 * 
-	 * @throws java.lang.Exception Thrown if the PECS cannot be calculated
-	 */
-
-	public abstract double calcPECSFromISpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblISpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the Bond PECS from I Spread to Maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblISpread The I Spread to Maturity input
-	 * 
-	 * @return Calculated PECS from the I Spread to Maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the PECS cannot be calculated
-	 */
-
-	public abstract double calcPECSFromISpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblISpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the Bond PECS from I Spread to Exercise
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblISpread The I Spread to Exercise input
-	 * 
-	 * @return Calculated PECS from the I Spread to Exercise
-	 * 
-	 * @throws java.lang.Exception Thrown if the PECS cannot be calculated
-	 */
-
-	public abstract double calcExercisePECSFromISpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblISpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond Spread to Treasury from I Spread to Work-out
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param dblWorkoutDate JulianDate Work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblISpread The I Spread to Work-out input
-	 * 
-	 * @return Calculated Spread to Treasury from the I Spread to Work-out
-	 * 
-	 * @throws java.lang.Exception Thrown if the Spread to Treasury cannot be calculated
-	 */
-
-	public abstract double calcTSYSpreadFromISpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblISpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond Spread to Treasury from I Spread to Maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param dblISpread The I Spread to Maturity input
-	 * 
-	 * @return Calculated Spread to Treasury from the I Spread to Maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the Spread to Treasury cannot be calculated
-	 */
-
-	public abstract double calcTSYSpreadFromISpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final double dblISpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond Spread to Treasury from I Spread to Exercise
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param dblISpread The I Spread to Exercise input
-	 * 
-	 * @return Calculated Spread to Treasury from the I Spread to Exercise
-	 * 
-	 * @throws java.lang.Exception Thrown if the Spread to Treasury cannot be calculated
-	 */
-
-	public abstract double calcExerciseTSYSpreadFromISpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final double dblISpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond G Spread from I Spread to Work-out
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param dblWorkoutDate JulianDate Work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblISpread The I Spread to Work-out input
-	 * 
-	 * @return Calculated G Spread from the I Spread to Work-out
-	 * 
-	 * @throws java.lang.Exception Thrown if the G Spread cannot be calculated
-	 */
-
-	public abstract double calcGSpreadFromISpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblISpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond G Spread from I Spread to Maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param dblISpread The I Spread to Maturity input
-	 * 
-	 * @return Calculated G Spread from the I Spread to Maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the G Spread cannot be calculated
-	 */
-
-	public abstract double calcGSpreadFromISpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final double dblISpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond G Spread from I Spread to Exercise
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param dblISpread The I Spread to Exercise input
-	 * 
-	 * @return Calculated G Spread from the I Spread to Exercise
-	 * 
-	 * @throws java.lang.Exception Thrown if the G Spread cannot be calculated
-	 */
-
-	public abstract double calcExerciseGSpreadFromISpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final double dblISpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond Duration from I Spread to Work-out
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblWorkoutDate JulianDate Work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblISpread The I Spread to Work-out input
-	 * 
-	 * @return Calculated Duration from the I Spread to Work-out
-	 * 
-	 * @throws java.lang.Exception Thrown if the Duration cannot be calculated
-	 */
-
-	public abstract double calcDurationFromISpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblISpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond Duration from I Spread to Maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblISpread The I Spread to Maturity input
-	 * 
-	 * @return Calculated Duration from the I Spread to Maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the Duration cannot be calculated
-	 */
-
-	public abstract double calcDurationFromISpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblISpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond Duration from I Spread to Exercise
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblISpread The I Spread to Exercise input
-	 * 
-	 * @return Calculated Duration from the I Spread to Exercise
-	 * 
-	 * @throws java.lang.Exception Thrown if the Duration cannot be calculated
-	 */
-
-	public abstract double calcExerciseDurationFromISpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblISpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond Yield01 from I Spread to Work-out
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblWorkoutDate JulianDate Work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblISpread The I Spread to Work-out input
-	 * 
-	 * @return Calculated Yield01 from the I Spread to Work-out
-	 * 
-	 * @throws java.lang.Exception Thrown if the Yield01 cannot be calculated
-	 */
-
-	public abstract double calcYield01FromISpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblISpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond Yield01 from I Spread to Maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblISpread The I Spread to Maturity input
-	 * 
-	 * @return Calculated Yield01 from the I Spread to Maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the Yield01 cannot be calculated
-	 */
-
-	public abstract double calcYield01FromISpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblISpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond Yield01 from I Spread to Exercise
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblISpread The I Spread to Exercise input
-	 * 
-	 * @return Calculated Yield01 from the I Spread to Exercise
-	 * 
-	 * @throws java.lang.Exception Thrown if the Yield01 cannot be calculated
-	 */
-
-	public abstract double calcExerciseYield01FromISpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblISpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond Par ASW from I Spread to Work-out
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblWorkoutDate JulianDate Work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblISpread The I Spread to Work-out input
-	 * 
-	 * @return Calculated Par ASW from the I Spread to Work-out
-	 * 
-	 * @throws java.lang.Exception Thrown if the Par ASW cannot be calculated
-	 */
-
-	public abstract double calcParASWFromISpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblISpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond Par ASW from I Spread to Maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblISpread The I Spread to Maturity input
-	 * 
-	 * @return Calculated Par ASW from the I Spread to Maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the Par ASW cannot be calculated
-	 */
-
-	public abstract double calcParASWFromISpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblISpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond Par ASW from I Spread to Exercise
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblISpread The I Spread to Exercise input
-	 * 
-	 * @return Calculated Par ASW from the I Spread to Exercise
-	 * 
-	 * @throws java.lang.Exception Thrown if the Par ASW cannot be calculated
-	 */
-
-	public abstract double calcExerciseParASWFromISpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblISpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond convexity from I Spread to Work-out
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblWorkoutDate JulianDate Work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblISpread The I Spread to Work-out input
-	 * 
-	 * @return Calculated convexity from the I Spread to Work-out
-	 * 
-	 * @throws java.lang.Exception Thrown if the convexity cannot be calculated
-	 */
-
-	public abstract double calcConvexityFromISpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblISpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond convexity from I Spread to Maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblISpread The I Spread to Maturity input
-	 * 
-	 * @return Calculated convexity from the I Spread to Maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the convexity cannot be calculated
-	 */
-
-	public abstract double calcConvexityFromISpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblISpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond convexity from I Spread to Exercise
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblISpread The I Spread to Exercise input
-	 * 
-	 * @return Calculated convexity from the I Spread to Exercise
-	 * 
-	 * @throws java.lang.Exception Thrown if the convexity cannot be calculated
-	 */
-
-	public abstract double calcExerciseConvexityFromISpread (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblISpread)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond price from Discount Margin to Work-out
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblWorkoutDate JulianDate Work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblDiscountMargin The Discount Margin to Work-out input
-	 * 
-	 * @return Calculated price from the Discount Margin to Work-out
-	 * 
-	 * @throws java.lang.Exception Thrown if the price cannot be calculated
-	 */
-
-	public abstract double calcPriceFromDiscountMargin (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblDiscountMargin)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond price from Discount Margin to Maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblDiscountMargin The Discount Margin to Maturity input
-	 * 
-	 * @return Calculated price from the Discount Margin to Maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the price cannot be calculated
-	 */
-
-	public abstract double calcPriceFromDiscountMargin (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		double dblDiscountMargin)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond price from Discount Margin to Exercise
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblDiscountMargin The Discount Margin to Exercise input
-	 * 
-	 * @return Calculated price from the Discount Margin to Exercise
-	 * 
-	 * @throws java.lang.Exception Thrown if the price cannot be calculated
-	 */
-
-	public abstract double calcExercisePriceFromDiscountMargin (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblDiscountMargin)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond yield from Discount Margin to Work-out
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param dblWorkoutDate JulianDate Work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblDiscountMargin The Discount Margin to Work-out input
-	 * 
-	 * @return Calculated yield from the Discount Margin to Work-out
-	 * 
-	 * @throws java.lang.Exception Thrown if the yield cannot be calculated
-	 */
-
-	public abstract double calcYieldFromDiscountMargin (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblDiscountMargin)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond yield from Discount Margin to Maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param dblDiscountMargin The Discount Margin to Maturity input
-	 * 
-	 * @return Calculated yield from the Discount Margin to Maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the yield cannot be calculated
-	 */
-
-	public abstract double calcYieldFromDiscountMargin (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final double dblDiscountMargin)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond yield from Discount Margin to Exercise
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param dblDiscountMargin The Discount Margin to Exercise input
-	 * 
-	 * @return Calculated yield from the Discount Margin to Exercise
-	 * 
-	 * @throws java.lang.Exception Thrown if the yield cannot be calculated
-	 */
-
-	public abstract double calcExerciseYieldFromDiscountMargin (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final double dblDiscountMargin)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond Z Spread from Discount Margin to Work-out
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblWorkoutDate JulianDate Work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblDiscountMargin The Discount Margin to Work-out input
-	 * 
-	 * @return Calculated Z Spread from the Discount Margin to Work-out
-	 * 
-	 * @throws java.lang.Exception Thrown if the Z Spread cannot be calculated
-	 */
-
-	public abstract double calcZSpreadFromDiscountMargin (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblDiscountMargin)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond Z Spread from Discount Margin to Maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblDiscountMargin The Discount Margin to Maturity input
-	 * 
-	 * @return Calculated Z Spread from the Discount Margin to Maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the Z Spread cannot be calculated
-	 */
-
-	public abstract double calcZSpreadFromDiscountMargin (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblDiscountMargin)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond Z Spread from Discount Margin to Exercise
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblDiscountMargin The Discount Margin to Exercise input
-	 * 
-	 * @return Calculated Z Spread from the Discount Margin to Exercise
-	 * 
-	 * @throws java.lang.Exception Thrown if the Discount Margin cannot be calculated
-	 */
-
-	public abstract double calcExerciseZSpreadFromDiscountMargin (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblDiscountMargin)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond Option Adjusted Spread from Discount Margin to Work-out
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblWorkoutDate JulianDate Work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblDiscountMargin The Discount Margin to Work-out input
-	 * 
-	 * @return Calculated Option Adjusted Spread from the Discount Margin to Work-out
-	 * 
-	 * @throws java.lang.Exception Thrown if the Option Adjusted Spread cannot be calculated
-	 */
-
-	public abstract double calcOASFromDiscountMargin (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblDiscountMargin)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond Option Adjusted Spread from Discount Margin to Maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblDiscountMargin The Discount Margin to Maturity input
-	 * 
-	 * @return Calculated Option Adjusted Spread from the Discount Margin to Maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the Option Adjusted Spread cannot be calculated
-	 */
-
-	public abstract double calcOASFromDiscountMargin (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblDiscountMargin)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond Option Adjusted Spread from Discount Margin to Exercise
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblDiscountMargin The Discount Margin to Exercise input
-	 * 
-	 * @return Calculated Option Adjusted Spread from the Discount Margin to Exercise
-	 * 
-	 * @throws java.lang.Exception Thrown if the Option Adjusted Spread cannot be calculated
-	 */
-
-	public abstract double calcExerciseOASFromDiscountMargin (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblDiscountMargin)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the Bond Basis from Discount Margin to Work-out
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblWorkoutDate JulianDate Work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblDiscountMargin The Discount Margin to Work-out input
-	 * 
-	 * @return Calculated Bond Basis from the Discount Margin to Work-out
+	 * Calculate Bond Basis from Discount Margin to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblDiscountMargin Discount Margin to Work-out
+	 * 
+	 * @return Bond Basis from Discount Margin to Work-out
 	 * 
 	 * @throws java.lang.Exception Thrown if the Bond Basis cannot be calculated
 	 */
@@ -11496,16 +1499,16 @@ public abstract class Bond extends CreditComponent {
 		throws java.lang.Exception;
 
 	/**
-	 * Calculate the Bond Basis from Discount Margin to Maturity
+	 * Calculate Bond Basis from Discount Margin to Maturity
 	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblDiscountMargin The Discount Margin to Maturity input
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblDiscountMargin Discount Margin to Maturity
 	 * 
-	 * @return Calculated Bond Basis from the Discount Margin to Maturity
+	 * @return Bond Basis from Discount Margin to Maturity
 	 * 
-	 * @throws java.lang.Exception Thrown if the Bond Basis cannot be calculated
+	 * @throws java.lang.Exception Thrown if Bond Basis cannot be calculated
 	 */
 
 	public abstract double calcBondBasisFromDiscountMargin (
@@ -11516,19 +1519,19 @@ public abstract class Bond extends CreditComponent {
 		throws java.lang.Exception;
 
 	/**
-	 * Calculate the Bond Basis from Discount Margin to Exercise
+	 * Calculate Bond Basis from Discount Margin to Optimal Exercise
 	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblDiscountMargin The Discount Margin to Exercise input
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblDiscountMargin Discount Margin to Optimal Exercise
 	 * 
-	 * @return Calculated Bond Basis from the Discount Margin to Exercise
+	 * @return Bond Basis from Discount Margin to Optimal Exercise
 	 * 
-	 * @throws java.lang.Exception Thrown if the Bond Basis cannot be calculated
+	 * @throws java.lang.Exception Thrown if Bond Basis cannot be calculated
 	 */
 
-	public abstract double calcExerciseBondBasisFromDiscountMargin (
+	public abstract double calcBondBasisFromDiscountMarginToOptimalExercise (
 		final org.drip.param.valuation.ValuationParams valParams,
 		final org.drip.param.definition.ComponentMarketParams mktParams,
 		final org.drip.param.valuation.QuotingParams quotingParams,
@@ -11536,21 +1539,789 @@ public abstract class Bond extends CreditComponent {
 		throws java.lang.Exception;
 
 	/**
-	 * Calculate the Yield Spread from Discount Margin to Work-out
+	 * Calculate Bond Basis from G Spread to Work-out
 	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblWorkoutDate JulianDate Work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblDiscountMargin The Discount Margin to Work-out input
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblGSpread G Spread to Work-out
 	 * 
-	 * @return Calculated Yield Spread from the Discount Margin to Work-out
+	 * @return Bond Basis from G Spread to Work-out
 	 * 
-	 * @throws java.lang.Exception Thrown if the Yield Spread cannot be calculated
+	 * @throws java.lang.Exception Thrown if the Bond Basis cannot be calculated
 	 */
 
-	public abstract double calcYieldSpreadFromDiscountMargin (
+	public abstract double calcBondBasisFromGSpread (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblGSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Bond Basis from G Spread to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblGSpread G Spread to Maturity
+	 * 
+	 * @return Bond Basis from G Spread to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if Bond Basis cannot be calculated
+	 */
+
+	public abstract double calcBondBasisFromGSpread (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblGSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Bond Basis from G Spread to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblGSpread G Spread to Optimal Exercise
+	 * 
+	 * @return Bond Basis from G Spread to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if Bond Basis cannot be calculated
+	 */
+
+	public abstract double calcBondBasisFromGSpreadToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblGSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Bond Basis from I Spread to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblISpread I Spread to Work-out
+	 * 
+	 * @return Bond Basis from I Spread to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if the Bond Basis cannot be calculated
+	 */
+
+	public abstract double calcBondBasisFromISpread (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblISpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Bond Basis from I Spread to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblISpread I Spread to Maturity
+	 * 
+	 * @return Bond Basis from I Spread to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if Bond Basis cannot be calculated
+	 */
+
+	public abstract double calcBondBasisFromISpread (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblISpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Bond Basis from I Spread to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblISpread I Spread to Optimal Exercise
+	 * 
+	 * @return Bond Basis from I Spread to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if Bond Basis cannot be calculated
+	 */
+
+	public abstract double calcBondBasisFromISpreadToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblISpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Bond Basis from OAS to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblOAS OAS to Work-out
+	 * 
+	 * @return Bond Basis from OAS to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if the Bond Basis cannot be calculated
+	 */
+
+	public abstract double calcBondBasisFromOAS (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblOAS)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Bond Basis from OAS to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblOAS OAS to Maturity
+	 * 
+	 * @return Bond Basis from OAS to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if Bond Basis cannot be calculated
+	 */
+
+	public abstract double calcBondBasisFromOAS (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblOAS)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Bond Basis from OAS to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblOAS OAS to Optimal Exercise
+	 * 
+	 * @return Bond Basis from OAS to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if Bond Basis cannot be calculated
+	 */
+
+	public abstract double calcBondBasisFromOASToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblOAS)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Bond Basis from PECS to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblPECS PECS to Work-out
+	 * 
+	 * @return Bond Basis from PECS to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if the Bond Basis cannot be calculated
+	 */
+
+	public abstract double calcBondBasisFromPECS (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblPECS)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Bond Basis from PECS to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblPECS PECS to Maturity
+	 * 
+	 * @return Bond Basis from PECS to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if Bond Basis cannot be calculated
+	 */
+
+	public abstract double calcBondBasisFromPECS (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblPECS)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Bond Basis from PECS to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblPECS PECS to Optimal Exercise
+	 * 
+	 * @return Bond Basis from PECS to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if Bond Basis cannot be calculated
+	 */
+
+	public abstract double calcBondBasisFromPECSToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblPECS)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Bond Basis from Price to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblPrice Price to Work-out
+	 * 
+	 * @return Bond Basis from Price to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if the Bond Basis cannot be calculated
+	 */
+
+	public abstract double calcBondBasisFromPrice (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblPrice)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Bond Basis from Price to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblPrice Price to Maturity
+	 * 
+	 * @return Bond Basis from Price to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if Bond Basis cannot be calculated
+	 */
+
+	public abstract double calcBondBasisFromPrice (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblPrice)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Bond Basis from Price to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblPrice Price to Optimal Exercise
+	 * 
+	 * @return Bond Basis from Price to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if Bond Basis cannot be calculated
+	 */
+
+	public abstract double calcBondBasisFromPriceToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblPrice)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Bond Basis from TSY Spread to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblTSYSpread TSY Spread to Work-out
+	 * 
+	 * @return Bond Basis from TSY Spread to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if the Bond Basis cannot be calculated
+	 */
+
+	public abstract double calcBondBasisFromTSYSpread (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblTSYSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Bond Basis from TSY Spread to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblTSYSpread TSY Spread to Maturity
+	 * 
+	 * @return Bond Basis from TSY Spread to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if Bond Basis cannot be calculated
+	 */
+
+	public abstract double calcBondBasisFromTSYSpread (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblTSYSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Bond Basis from TSY Spread to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblTSYSpread TSY Spread to Optimal Exercise
+	 * 
+	 * @return Bond Basis from TSY Spread to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if Bond Basis cannot be calculated
+	 */
+
+	public abstract double calcBondBasisFromTSYSpreadToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblTSYSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Bond Basis from Yield to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblYield Yield to Work-out
+	 * 
+	 * @return Bond Basis from Yield to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if the Bond Basis cannot be calculated
+	 */
+
+	public abstract double calcBondBasisFromYield (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblYield)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Bond Basis from Yield to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblYield Yield to Maturity
+	 * 
+	 * @return Bond Basis from Yield to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if Bond Basis cannot be calculated
+	 */
+
+	public abstract double calcBondBasisFromYield (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblYield)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Bond Basis from Yield to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblYield Yield to Optimal Exercise
+	 * 
+	 * @return Bond Basis from Yield to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if Bond Basis cannot be calculated
+	 */
+
+	public abstract double calcBondBasisFromYieldToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblYield)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Bond Basis from Yield Spread to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblYieldSpread Yield Spread to Work-out
+	 * 
+	 * @return Bond Basis from Yield Spread to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if the Bond Basis cannot be calculated
+	 */
+
+	public abstract double calcBondBasisFromYieldSpread (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblYieldSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Bond Basis from Yield Spread to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblYieldSpread Yield Spread to Maturity
+	 * 
+	 * @return Bond Basis from Yield Spread to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if Bond Basis cannot be calculated
+	 */
+
+	public abstract double calcBondBasisFromYieldSpread (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblYieldSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Bond Basis from Yield Spread to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblYieldSpread Yield Spread to Optimal Exercise
+	 * 
+	 * @return Bond Basis from Yield Spread to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if Bond Basis cannot be calculated
+	 */
+
+	public abstract double calcBondBasisFromYieldSpreadToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblYieldSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Bond Basis from Z Spread to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblZSpread Z Spread to Work-out
+	 * 
+	 * @return Bond Basis from Z Spread to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if the Bond Basis cannot be calculated
+	 */
+
+	public abstract double calcBondBasisFromZSpread (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblZSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Bond Basis from Z Spread to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblZSpread Z Spread to Maturity
+	 * 
+	 * @return Bond Basis from Z Spread to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if Bond Basis cannot be calculated
+	 */
+
+	public abstract double calcBondBasisFromZSpread (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblZSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Bond Basis from Z Spread to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblZSpread Z Spread to Optimal Exercise
+	 * 
+	 * @return Bond Basis from Z Spread to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if Bond Basis cannot be calculated
+	 */
+
+	public abstract double calcBondBasisFromZSpreadToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblZSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Convexity from ASW to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblASW ASW to Work-out
+	 * 
+	 * @return Convexity from ASW to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if the Convexity cannot be calculated
+	 */
+
+	public abstract double calcConvexityFromASW (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblASW)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Convexity from ASW to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblASW ASW to Maturity
+	 * 
+	 * @return Convexity from ASW to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if Convexity cannot be calculated
+	 */
+
+	public abstract double calcConvexityFromASW (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblASW)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Convexity from ASW to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblASW ASW to Optimal Exercise
+	 * 
+	 * @return Convexity from ASW to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if Convexity cannot be calculated
+	 */
+
+	public abstract double calcConvexityFromASWToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblASW)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Convexity from Bond Basis to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblBondBasis Bond Basis to Work-out
+	 * 
+	 * @return Convexity from Bond Basis to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if the Convexity cannot be calculated
+	 */
+
+	public abstract double calcConvexityFromBondBasis (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblBondBasis)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Convexity from Bond Basis to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblBondBasis Bond Basis to Maturity
+	 * 
+	 * @return Convexity from Bond Basis to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if Convexity cannot be calculated
+	 */
+
+	public abstract double calcConvexityFromBondBasis (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblBondBasis)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Convexity from Bond Basis to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblBondBasis Bond Basis to Optimal Exercise
+	 * 
+	 * @return Convexity from Bond Basis to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if Convexity cannot be calculated
+	 */
+
+	public abstract double calcConvexityFromBondBasisToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblBondBasis)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Convexity from Credit Basis to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblCreditBasis Credit Basis to Work-out
+	 * 
+	 * @return Convexity from Credit Basis to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if the Convexity cannot be calculated
+	 */
+
+	public abstract double calcConvexityFromCreditBasis (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblCreditBasis)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Convexity from Credit Basis to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblCreditBasis Credit Basis to Maturity
+	 * 
+	 * @return Convexity from Credit Basis to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if Convexity cannot be calculated
+	 */
+
+	public abstract double calcConvexityFromCreditBasis (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblCreditBasis)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Convexity from Credit Basis to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblCreditBasis Credit Basis to Optimal Exercise
+	 * 
+	 * @return Convexity from Credit Basis to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if Convexity cannot be calculated
+	 */
+
+	public abstract double calcConvexityFromCreditBasisToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblCreditBasis)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Convexity from Discount Margin to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblDiscountMargin Discount Margin to Work-out
+	 * 
+	 * @return Convexity from Discount Margin to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if the Convexity cannot be calculated
+	 */
+
+	public abstract double calcConvexityFromDiscountMargin (
 		final org.drip.param.valuation.ValuationParams valParams,
 		final org.drip.param.definition.ComponentMarketParams mktParams,
 		final org.drip.param.valuation.QuotingParams quotingParams,
@@ -11560,19 +2331,19 @@ public abstract class Bond extends CreditComponent {
 		throws java.lang.Exception;
 
 	/**
-	 * Calculate the Yield Spread from Discount Margin to Maturity
+	 * Calculate Convexity from Discount Margin to Maturity
 	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblDiscountMargin The Discount Margin to Maturity input
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblDiscountMargin Discount Margin to Maturity
 	 * 
-	 * @return Calculated Yield Spread from the Discount Margin to Maturity
+	 * @return Convexity from Discount Margin to Maturity
 	 * 
-	 * @throws java.lang.Exception Thrown if the Yield Spread cannot be calculated
+	 * @throws java.lang.Exception Thrown if Convexity cannot be calculated
 	 */
 
-	public abstract double calcYieldSpreadFromDiscountMargin (
+	public abstract double calcConvexityFromDiscountMargin (
 		final org.drip.param.valuation.ValuationParams valParams,
 		final org.drip.param.definition.ComponentMarketParams mktParams,
 		final org.drip.param.valuation.QuotingParams quotingParams,
@@ -11580,19 +2351,19 @@ public abstract class Bond extends CreditComponent {
 		throws java.lang.Exception;
 
 	/**
-	 * Calculate the Yield Spread from Discount Margin to Exercise
+	 * Calculate Convexity from Discount Margin to Optimal Exercise
 	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblDiscountMargin The Discount Margin to Exercise input
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblDiscountMargin Discount Margin to Optimal Exercise
 	 * 
-	 * @return Calculated Yield Spread from the Discount Margin to Exercise
+	 * @return Convexity from Discount Margin to Optimal Exercise
 	 * 
-	 * @throws java.lang.Exception Thrown if the Yield Spread cannot be calculated
+	 * @throws java.lang.Exception Thrown if Convexity cannot be calculated
 	 */
 
-	public abstract double calcExerciseYieldSpreadFromDiscountMargin (
+	public abstract double calcConvexityFromDiscountMarginToOptimalExercise (
 		final org.drip.param.valuation.ValuationParams valParams,
 		final org.drip.param.definition.ComponentMarketParams mktParams,
 		final org.drip.param.valuation.QuotingParams quotingParams,
@@ -11600,16 +2371,720 @@ public abstract class Bond extends CreditComponent {
 		throws java.lang.Exception;
 
 	/**
-	 * Calculate the bond Credit Basis from Discount Margin to Work-out
+	 * Calculate Convexity from G Spread to Work-out
 	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblWorkoutDate JulianDate Work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblDiscountMargin The Discount Margin to Work-out input
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblGSpread G Spread to Work-out
 	 * 
-	 * @return Calculated Credit Basis from the Discount Margin to Work-out
+	 * @return Convexity from G Spread to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if the Convexity cannot be calculated
+	 */
+
+	public abstract double calcConvexityFromGSpread (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblGSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Convexity from G Spread to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblGSpread G Spread to Maturity
+	 * 
+	 * @return Convexity from G Spread to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if Convexity cannot be calculated
+	 */
+
+	public abstract double calcConvexityFromGSpread (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblGSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Convexity from G Spread to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblGSpread G Spread to Optimal Exercise
+	 * 
+	 * @return Convexity from G Spread to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if Convexity cannot be calculated
+	 */
+
+	public abstract double calcConvexityFromGSpreadToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblGSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Convexity from I Spread to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblISpread I Spread to Work-out
+	 * 
+	 * @return Convexity from I Spread to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if the Convexity cannot be calculated
+	 */
+
+	public abstract double calcConvexityFromISpread (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblISpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Convexity from I Spread to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblISpread I Spread to Maturity
+	 * 
+	 * @return Convexity from I Spread to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if Convexity cannot be calculated
+	 */
+
+	public abstract double calcConvexityFromISpread (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblISpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Convexity from I Spread to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblISpread I Spread to Optimal Exercise
+	 * 
+	 * @return Convexity from I Spread to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if Convexity cannot be calculated
+	 */
+
+	public abstract double calcConvexityFromISpreadToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblISpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Convexity from OAS to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblOAS OAS to Work-out
+	 * 
+	 * @return Convexity from OAS to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if the Convexity cannot be calculated
+	 */
+
+	public abstract double calcConvexityFromOAS (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblOAS)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Convexity from OAS to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblOAS OAS to Maturity
+	 * 
+	 * @return Convexity from OAS to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if Convexity cannot be calculated
+	 */
+
+	public abstract double calcConvexityFromOAS (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblOAS)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Convexity from OAS to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblOAS OAS to Optimal Exercise
+	 * 
+	 * @return Convexity from OAS to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if Convexity cannot be calculated
+	 */
+
+	public abstract double calcConvexityFromOASToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblOAS)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Convexity from PECS to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblPECS PECS to Work-out
+	 * 
+	 * @return Convexity from PECS to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if the Convexity cannot be calculated
+	 */
+
+	public abstract double calcConvexityFromPECS (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblPECS)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Convexity from PECS to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblPECS PECS to Maturity
+	 * 
+	 * @return Convexity from PECS to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if Convexity cannot be calculated
+	 */
+
+	public abstract double calcConvexityFromPECS (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblPECS)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Convexity from PECS to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblPECS PECS to Optimal Exercise
+	 * 
+	 * @return Convexity from PECS to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if Convexity cannot be calculated
+	 */
+
+	public abstract double calcConvexityFromPECSToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblPECS)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Convexity from Price to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblPrice Price to Work-out
+	 * 
+	 * @return Convexity from Price to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if the Convexity cannot be calculated
+	 */
+
+	public abstract double calcConvexityFromPrice (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblPrice)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Convexity from Price to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblPrice Price to Maturity
+	 * 
+	 * @return Convexity from Price to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if Convexity cannot be calculated
+	 */
+
+	public abstract double calcConvexityFromPrice (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblPrice)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Convexity from Price to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblPrice Price to Optimal Exercise
+	 * 
+	 * @return Convexity from Price to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if Convexity cannot be calculated
+	 */
+
+	public abstract double calcConvexityFromPriceToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblPrice)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Convexity from TSY Spread to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblTSYSpread TSY Spread to Work-out
+	 * 
+	 * @return Convexity from TSY Spread to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if the Convexity cannot be calculated
+	 */
+
+	public abstract double calcConvexityFromTSYSpread (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblTSYSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Convexity from TSY Spread to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblTSYSpread TSY Spread to Maturity
+	 * 
+	 * @return Convexity from TSY Spread to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if Convexity cannot be calculated
+	 */
+
+	public abstract double calcConvexityFromTSYSpread (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblTSYSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Convexity from TSY Spread to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblTSYSpread TSY Spread to Optimal Exercise
+	 * 
+	 * @return Convexity from TSY Spread to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if Convexity cannot be calculated
+	 */
+
+	public abstract double calcConvexityFromTSYSpreadToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblTSYSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Convexity from Yield to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblYield Yield to Work-out
+	 * 
+	 * @return Convexity from Yield to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if the Convexity cannot be calculated
+	 */
+
+	public abstract double calcConvexityFromYield (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblYield)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Convexity from Yield to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblYield Yield to Maturity
+	 * 
+	 * @return Convexity from Yield to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if Convexity cannot be calculated
+	 */
+
+	public abstract double calcConvexityFromYield (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblYield)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Convexity from Yield to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblYield Yield to Optimal Exercise
+	 * 
+	 * @return Convexity from Yield to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if Convexity cannot be calculated
+	 */
+
+	public abstract double calcConvexityFromYieldToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblYield)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Convexity from Yield Spread to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblYieldSpread Yield Spread to Work-out
+	 * 
+	 * @return Convexity from Yield Spread to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if the Convexity cannot be calculated
+	 */
+
+	public abstract double calcConvexityFromYieldSpread (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblYieldSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Convexity from Yield Spread to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblYieldSpread Yield Spread to Maturity
+	 * 
+	 * @return Convexity from Yield Spread to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if Convexity cannot be calculated
+	 */
+
+	public abstract double calcConvexityFromYieldSpread (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblYieldSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Convexity from Yield Spread to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblYieldSpread Yield Spread to Optimal Exercise
+	 * 
+	 * @return Convexity from Yield Spread to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if Convexity cannot be calculated
+	 */
+
+	public abstract double calcConvexityFromYieldSpreadToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblYieldSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Convexity from Z Spread to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblZSpread Z Spread to Work-out
+	 * 
+	 * @return Convexity from Z Spread to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if the Convexity cannot be calculated
+	 */
+
+	public abstract double calcConvexityFromZSpread (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblZSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Convexity from Z Spread to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblZSpread Z Spread to Maturity
+	 * 
+	 * @return Convexity from Z Spread to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if Convexity cannot be calculated
+	 */
+
+	public abstract double calcConvexityFromZSpread (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblZSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Convexity from Z Spread to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblZSpread Z Spread to Optimal Exercise
+	 * 
+	 * @return Convexity from Z to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if Convexity cannot be calculated
+	 */
+
+	public abstract double calcConvexityFromZSpreadToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblYieldSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Credit Basis from ASW to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblASW ASW to Work-out
+	 * 
+	 * @return Credit Basis from ASW to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if the Credit Basis cannot be calculated
+	 */
+
+	public abstract double calcCreditBasisFromASW (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblASW)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Credit Basis from ASW to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblASW ASW to Maturity
+	 * 
+	 * @return Credit Basis from ASW to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if Credit Basis cannot be calculated
+	 */
+
+	public abstract double calcCreditBasisFromASW (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblASW)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Credit Basis from ASW to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblASW ASW to Optimal Exercise
+	 * 
+	 * @return Credit Basis from ASW to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if Credit Basis cannot be calculated
+	 */
+
+	public abstract double calcCreditBasisFromASWToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblASW)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Credit Basis from Bond Basis to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblBondBasis Bond Basis to Work-out
+	 * 
+	 * @return Credit Basis from Bond Basis to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if the Credit Basis cannot be calculated
+	 */
+
+	public abstract double calcCreditBasisFromBondBasis (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblBondBasis)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Credit Basis from Bond Basis to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblBondBasis Bond Basis to Maturity
+	 * 
+	 * @return Credit Basis from Bond Basis to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if Credit Basis cannot be calculated
+	 */
+
+	public abstract double calcCreditBasisFromBondBasis (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblBondBasis)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Credit Basis from Bond Basis to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblBondBasis Bond Basis to Optimal Exercise
+	 * 
+	 * @return Credit Basis from Bond Basis to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if Credit Basis cannot be calculated
+	 */
+
+	public abstract double calcCreditBasisFromBondBasisToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblBondBasis)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Credit Basis from Discount Margin to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblDiscountMargin Discount Margin to Work-out
+	 * 
+	 * @return Credit Basis from Discount Margin to Work-out
 	 * 
 	 * @throws java.lang.Exception Thrown if the Credit Basis cannot be calculated
 	 */
@@ -11624,16 +3099,16 @@ public abstract class Bond extends CreditComponent {
 		throws java.lang.Exception;
 
 	/**
-	 * Calculate the bond Credit Basis from Discount Margin to Maturity
+	 * Calculate Credit Basis from Discount Margin to Maturity
 	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblDiscountMargin The Discount Margin to Maturity input
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblDiscountMargin Discount Margin to Maturity
 	 * 
-	 * @return Calculated Credit Basis from the Discount Margin to Maturity
+	 * @return Credit Basis from Discount Margin to Maturity
 	 * 
-	 * @throws java.lang.Exception Thrown if the Credit Basis cannot be calculated
+	 * @throws java.lang.Exception Thrown if Credit Basis cannot be calculated
 	 */
 
 	public abstract double calcCreditBasisFromDiscountMargin (
@@ -11644,19 +3119,19 @@ public abstract class Bond extends CreditComponent {
 		throws java.lang.Exception;
 
 	/**
-	 * Calculate the bond Credit Basis from Discount Margin to Exercise
+	 * Calculate Credit Basis from Discount Margin to Optimal Exercise
 	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblDiscountMargin The Discount Margin to Exercise input
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblDiscountMargin Discount Margin to Optimal Exercise
 	 * 
-	 * @return Calculated Credit Basis from the Discount Margin to Exercise
+	 * @return Credit Basis from Discount Margin to Optimal Exercise
 	 * 
-	 * @throws java.lang.Exception Thrown if the Credit Basis cannot be calculated
+	 * @throws java.lang.Exception Thrown if Discount Margin cannot be calculated
 	 */
 
-	public abstract double calcExerciseCreditBasisFromDiscountMargin (
+	public abstract double calcCreditBasisFromDiscountMarginToOptimalExercise (
 		final org.drip.param.valuation.ValuationParams valParams,
 		final org.drip.param.definition.ComponentMarketParams mktParams,
 		final org.drip.param.valuation.QuotingParams quotingParams,
@@ -11664,16 +3139,6352 @@ public abstract class Bond extends CreditComponent {
 		throws java.lang.Exception;
 
 	/**
-	 * Calculate the Bond PECS from Discount Margin to Work-out
+	 * Calculate Credit Basis from G Spread to Work-out
 	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblWorkoutDate JulianDate Work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblDiscountMargin The Discount Margin to Work-out input
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblGSpread G Spread to Work-out
 	 * 
-	 * @return Calculated PECS from the Discount Margin to Work-out
+	 * @return Credit Basis from G Spread to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if the Credit Basis cannot be calculated
+	 */
+
+	public abstract double calcCreditBasisFromGSpread (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblGSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Credit Basis from G Spread to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblGSpread G Spread to Maturity
+	 * 
+	 * @return Credit Basis from G Spread to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if Credit Basis cannot be calculated
+	 */
+
+	public abstract double calcCreditBasisFromGSpread (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblGSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Credit Basis from G Spread to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblGSpread G Spread to Optimal Exercise
+	 * 
+	 * @return Credit Basis from G Spread to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if Credit Basis cannot be calculated
+	 */
+
+	public abstract double calcCreditBasisFromGSpreadToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblGSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Credit Basis from I Spread to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblISpread I Spread to Work-out
+	 * 
+	 * @return Credit Basis from I Spread to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if the Credit Basis cannot be calculated
+	 */
+
+	public abstract double calcCreditBasisFromISpread (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblISpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Credit Basis from I Spread to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblISpread I Spread to Maturity
+	 * 
+	 * @return Credit Basis from I Spread to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if Credit Basis cannot be calculated
+	 */
+
+	public abstract double calcCreditBasisFromISpread (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblISpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Credit Basis from I Spread to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblISpread I Spread to Optimal Exercise
+	 * 
+	 * @return Credit Basis from I Spread to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if Credit Basis cannot be calculated
+	 */
+
+	public abstract double calcCreditBasisFromISpreadToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblISpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Credit Basis from OAS to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblOAS OAS to Work-out
+	 * 
+	 * @return Credit Basis from OAS to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if the Credit Basis cannot be calculated
+	 */
+
+	public abstract double calcCreditBasisFromOAS (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblOAS)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Credit Basis from OAS to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblOAS OAS to Maturity
+	 * 
+	 * @return Credit Basis from OAS to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if Credit Basis cannot be calculated
+	 */
+
+	public abstract double calcCreditBasisFromOAS (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblOAS)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Credit Basis from OAS to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblOAS OAS to Optimal Exercise
+	 * 
+	 * @return Credit Basis from OAS to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if Credit Basis cannot be calculated
+	 */
+
+	public abstract double calcCreditBasisFromOASToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblOAS)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Credit Basis from PECS to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblPECS PECS to Work-out
+	 * 
+	 * @return Credit Basis from PECS to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if the Credit Basis cannot be calculated
+	 */
+
+	public abstract double calcCreditBasisFromPECS (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblPECS)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Credit Basis from PECS to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblPECS PECS to Maturity
+	 * 
+	 * @return Credit Basis from PECS to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if Credit Basis cannot be calculated
+	 */
+
+	public abstract double calcCreditBasisFromPECS (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblPECS)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Credit Basis from PECS to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblPECS PECS to Optimal Exercise
+	 * 
+	 * @return Credit Basis from PECS to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if Credit Basis cannot be calculated
+	 */
+
+	public abstract double calcCreditBasisFromPECSToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblPECS)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Credit Basis from Price to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblPrice Price to Work-out
+	 * 
+	 * @return Credit Basis from Price to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if the Credit Basis cannot be calculated
+	 */
+
+	public abstract double calcCreditBasisFromPrice (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblPrice)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Credit Basis from Price to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblPrice Price to Maturity
+	 * 
+	 * @return Credit Basis from Price to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if Credit Basis cannot be calculated
+	 */
+
+	public abstract double calcCreditBasisFromPrice (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblPrice)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Credit Basis from Price to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblPrice Price to Optimal Exercise
+	 * 
+	 * @return Credit Basis from Price to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if Credit Basis cannot be calculated
+	 */
+
+	public abstract double calcCreditBasisFromPriceToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblPrice)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Credit Basis from TSY Spread to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblTSYSpread TSY Spread to Work-out
+	 * 
+	 * @return Credit Basis from TSY Spread to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if the Credit Basis cannot be calculated
+	 */
+
+	public abstract double calcCreditBasisFromTSYSpread (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblTSYSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Credit Basis from TSY Spread to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblTSYSpread TSY Spread to Maturity
+	 * 
+	 * @return Credit Basis from TSY Spread to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if Credit Basis cannot be calculated
+	 */
+
+	public abstract double calcCreditBasisFromTSYSpread (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblTSYSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Credit Basis from TSY Spread to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblTSYSpread TSY Spread to Optimal Exercise
+	 * 
+	 * @return Credit Basis from TSY Spread to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if Credit Basis cannot be calculated
+	 */
+
+	public abstract double calcCreditBasisFromTSYSpreadToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblTSYSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Credit Basis from Yield to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblYield Yield to Work-out
+	 * 
+	 * @return Credit Basis from Yield to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if the Credit Basis cannot be calculated
+	 */
+
+	public abstract double calcCreditBasisFromYield (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblYield)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Credit Basis from Yield to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblYield Yield to Maturity
+	 * 
+	 * @return Credit Basis from Yield to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if Credit Basis cannot be calculated
+	 */
+
+	public abstract double calcCreditBasisFromYield (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblYield)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Credit Basis from Yield to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblYield Yield to Optimal Exercise
+	 * 
+	 * @return Credit Basis from Yield to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if Credit Basis cannot be calculated
+	 */
+
+	public abstract double calcCreditBasisFromYieldToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblYield)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Credit Basis from Yield Spread to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblYieldSpread Yield Spread to Work-out
+	 * 
+	 * @return Credit Basis from Yield Spread to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if the Credit Basis cannot be calculated
+	 */
+
+	public abstract double calcCreditBasisFromYieldSpread (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblYieldSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Credit Basis from Yield Spread to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblYieldSpread Yield Spread to Maturity
+	 * 
+	 * @return Credit Basis from Yield Spread to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if Credit Basis cannot be calculated
+	 */
+
+	public abstract double calcCreditBasisFromYieldSpread (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblYieldSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Credit Basis from Yield Spread to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblYieldSpread Yield Spread to Optimal Exercise
+	 * 
+	 * @return Credit Basis from Yield Spread to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if Credit Basis cannot be calculated
+	 */
+
+	public abstract double calcCreditBasisFromYieldSpreadToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblYieldSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Credit Basis from Z Spread to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblZSpread Z Spread to Work-out
+	 * 
+	 * @return Credit Basis from Z Spread to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if the Credit Basis cannot be calculated
+	 */
+
+	public abstract double calcCreditBasisFromZSpread (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblZSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Credit Basis from Z Spread to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblZSpread Z Spread to Maturity
+	 * 
+	 * @return Credit Basis from Z Spread to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if Credit Basis cannot be calculated
+	 */
+
+	public abstract double calcCreditBasisFromZSpread (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblZSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Credit Basis from Z Spread to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblZSpread Z Spread to Optimal Exercise
+	 * 
+	 * @return Credit Basis from Z Spread to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if Credit Basis cannot be calculated
+	 */
+
+	public abstract double calcCreditBasisFromZSpreadToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblZSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Discount Margin from ASW to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblASW ASW to Work-out
+	 * 
+	 * @return Discount Margin from ASW to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if the Discount Margin cannot be calculated
+	 */
+
+	public abstract double calcDiscountMarginFromASW (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblASW)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Discount Margin from ASW to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblASW ASW to Maturity
+	 * 
+	 * @return Discount Margin from ASW to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if Discount Margin cannot be calculated
+	 */
+
+	public abstract double calcDiscountMarginFromASW (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblASW)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Discount Margin from ASW to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblASW ASW to Optimal Exercise
+	 * 
+	 * @return Discount Margin from ASW to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if Discount Margin cannot be calculated
+	 */
+
+	public abstract double calcDiscountMarginFromASWToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblASW)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Discount Margin from Bond Basis to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblBondBasis Bond Basis to Work-out
+	 * 
+	 * @return Discount Margin from Bond Basis to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if the Discount Margin cannot be calculated
+	 */
+
+	public abstract double calcDiscountMarginFromBondBasis (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblBondBasis)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Discount Margin from Bond Basis to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblBondBasis Bond Basis to Maturity
+	 * 
+	 * @return Discount Margin from Bond Basis to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if Discount Margin cannot be calculated
+	 */
+
+	public abstract double calcDiscountMarginFromBondBasis (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblBondBasis)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Discount Margin from Bond Basis to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblBondBasis Bond Basis to Optimal Exercise
+	 * 
+	 * @return Discount Margin from Bond Basis to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if Discount Margin cannot be calculated
+	 */
+
+	public abstract double calcDiscountMarginFromBondBasisToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblBondBasis)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Discount Margin from Credit Basis to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblCreditBasis Credit Basis to Work-out
+	 * 
+	 * @return Discount Margin from Credit Basis to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if the Discount Margin cannot be calculated
+	 */
+
+	public abstract double calcDiscountMarginFromCreditBasis (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblCreditBasis)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Discount Margin from Credit Basis to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblCreditBasis Credit Basis to Maturity
+	 * 
+	 * @return Discount Margin from Credit Basis to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if Discount Margin cannot be calculated
+	 */
+
+	public abstract double calcDiscountMarginFromCreditBasis (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblCreditBasis)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Discount Margin from Credit Basis to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblCreditBasis Credit Basis to Optimal Exercise
+	 * 
+	 * @return Discount Margin from Credit Basis to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if Discount Margin cannot be calculated
+	 */
+
+	public abstract double calcDiscountMarginFromCreditBasisToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblCreditBasis)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Discount Margin from G Spread to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblGSpread G Spread to Work-out
+	 * 
+	 * @return Discount Margin from G Spread to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if the Discount Margin cannot be calculated
+	 */
+
+	public abstract double calcDiscountMarginFromGSpread (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblGSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Discount Margin from G Spread to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblGSpread G Spread to Maturity
+	 * 
+	 * @return Discount Margin from G Spread to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if Discount Margin cannot be calculated
+	 */
+
+	public abstract double calcDiscountMarginFromGSpread (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblGSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Discount Margin from G Spread to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblGSpread G Spread to Optimal Exercise
+	 * 
+	 * @return Discount Margin from G Spread to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if Discount Margin cannot be calculated
+	 */
+
+	public abstract double calcDiscountMarginFromGSpreadToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblGSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Discount Margin from I Spread to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblISpread I Spread to Work-out
+	 * 
+	 * @return Discount Margin from I Spread to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if the Discount Margin cannot be calculated
+	 */
+
+	public abstract double calcDiscountMarginFromISpread (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblISpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Discount Margin from I Spread to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblISpread I Spread to Maturity
+	 * 
+	 * @return Discount Margin from I Spread to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if Discount Margin cannot be calculated
+	 */
+
+	public abstract double calcDiscountMarginFromISpread (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblISpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Discount Margin from I Spread to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblISpread I Spread to Optimal Exercise
+	 * 
+	 * @return Discount Margin from I Spread to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if Discount Margin cannot be calculated
+	 */
+
+	public abstract double calcDiscountMarginFromISpreadToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblISpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Discount Margin from OAS to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblOAS OAS to Work-out
+	 * 
+	 * @return Discount Margin from OAS to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if the Discount Margin cannot be calculated
+	 */
+
+	public abstract double calcDiscountMarginFromOAS (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblOAS)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Discount Margin from OAS to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblOAS OAS to Maturity
+	 * 
+	 * @return Discount Margin from OAS to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if Discount Margin cannot be calculated
+	 */
+
+	public abstract double calcDiscountMarginFromOAS (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblOAS)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Discount Margin from OAS to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblOAS OAS to Optimal Exercise
+	 * 
+	 * @return Discount Margin from OAS to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if Discount Margin cannot be calculated
+	 */
+
+	public abstract double calcDiscountMarginFromOASToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblOAS)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Discount Margin from PECS to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblPECS PECS to Work-out
+	 * 
+	 * @return Discount Margin from PECS to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if the Discount Margin cannot be calculated
+	 */
+
+	public abstract double calcDiscountMarginFromPECS (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblPECS)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Discount Margin from PECS to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblPECS PECS to Maturity
+	 * 
+	 * @return Discount Margin from PECS to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if Discount Margin cannot be calculated
+	 */
+
+	public abstract double calcDiscountMarginFromPECS (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblPECS)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Discount Margin from PECS to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblPECS PECS to Optimal Exercise
+	 * 
+	 * @return Discount Margin from PECS to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if Discount Margin cannot be calculated
+	 */
+
+	public abstract double calcDiscountMarginFromPECSToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblPECS)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Discount Margin from Price to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblPrice Price to Work-out
+	 * 
+	 * @return Discount Margin from Price to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if the Discount Margin cannot be calculated
+	 */
+
+	public abstract double calcDiscountMarginFromPrice (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblPrice)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Discount Margin from Price to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblPrice Price to Maturity
+	 * 
+	 * @return Discount Margin from Price to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if Discount Margin cannot be calculated
+	 */
+
+	public abstract double calcDiscountMarginFromPrice (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblPrice)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Discount Margin from Price to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblPrice Price to Optimal Exercise
+	 * 
+	 * @return Discount Margin from Price to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if Discount Margin cannot be calculated
+	 */
+
+	public abstract double calcDiscountMarginFromPriceToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblPrice)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Discount Margin from TSY Spread to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblTSYSpread TSY Spread to Work-out
+	 * 
+	 * @return Discount Margin from TSY Spread to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if the Discount Margin cannot be calculated
+	 */
+
+	public abstract double calcDiscountMarginFromTSYSpread (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblTSYSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Discount Margin from TSY Spread to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblTSYSpread TSY Spread to Maturity
+	 * 
+	 * @return Discount Margin from TSY Spread to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if Discount Margin cannot be calculated
+	 */
+
+	public abstract double calcDiscountMarginFromTSYSpread (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblTSYSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Discount Margin from TSY Spread to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblTSYSpread TSY Spread to Optimal Exercise
+	 * 
+	 * @return Discount Margin from TSY Spread to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if Discount Margin cannot be calculated
+	 */
+
+	public abstract double calcDiscountMarginFromTSYSpreadToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblTSYSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Discount Margin from Yield to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblYield Yield to Work-out
+	 * 
+	 * @return Discount Margin from Yield to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if the Discount Margin cannot be calculated
+	 */
+
+	public abstract double calcDiscountMarginFromYield (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblYield)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Discount Margin from Yield to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblYield Yield to Maturity
+	 * 
+	 * @return Discount Margin from Yield to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if Discount Margin cannot be calculated
+	 */
+
+	public abstract double calcDiscountMarginFromYield (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblYield)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Discount Margin from Yield to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblYield Yield to Optimal Exercise
+	 * 
+	 * @return Discount Margin from Yield to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if Discount Margin cannot be calculated
+	 */
+
+	public abstract double calcDiscountMarginFromYieldToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblYield)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Discount Margin from Yield Spread to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblYieldSpread Yield Spread to Work-out
+	 * 
+	 * @return Discount Margin from Yield Spread to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if the Discount Margin cannot be calculated
+	 */
+
+	public abstract double calcDiscountMarginFromYieldSpread (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblYieldSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Discount Margin from Yield Spread to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblYieldSpread Yield Spread to Maturity
+	 * 
+	 * @return Discount Margin from Yield Spread to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if Discount Margin cannot be calculated
+	 */
+
+	public abstract double calcDiscountMarginFromYieldSpread (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblYieldSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Discount Margin from Yield Spread to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblYieldSpread Yield Spread to Optimal Exercise
+	 * 
+	 * @return Discount Margin from Yield Spread to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if Discount Margin cannot be calculated
+	 */
+
+	public abstract double calcDiscountMarginFromYieldSpreadToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblYieldSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Discount Margin from Z Spread to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblZSpread Z Spread to Work-out
+	 * 
+	 * @return Discount Margin from Z Spread to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if the Discount Margin cannot be calculated
+	 */
+
+	public abstract double calcDiscountMarginFromZSpread (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblZSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Discount Margin from Z Spread to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblZSpread Z Spread to Maturity
+	 * 
+	 * @return Discount Margin from Z Spread to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if Discount Margin cannot be calculated
+	 */
+
+	public abstract double calcDiscountMarginFromZSpread (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblZSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Discount Margin from Z Spread to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblZSpread Z Spread to Optimal Exercise
+	 * 
+	 * @return Discount Margin from Z Spread to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if Discount Margin cannot be calculated
+	 */
+
+	public abstract double calcDiscountMarginFromZSpreadToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblZSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Duration from ASW to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblASW ASW to Work-out
+	 * 
+	 * @return Duration from ASW to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if the Duration cannot be calculated
+	 */
+
+	public abstract double calcDurationFromASW (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblASW)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Duration from ASW to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblASW ASW to Maturity
+	 * 
+	 * @return Duration from ASW to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if Duration cannot be calculated
+	 */
+
+	public abstract double calcDurationFromASW (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblASW)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Duration from ASW to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblASW ASW to Optimal Exercise
+	 * 
+	 * @return Duration from ASW to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if Duration cannot be calculated
+	 */
+
+	public abstract double calcDurationFromASWToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblASW)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Duration from Bond Basis to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblBondBasis Bond Basis to Work-out
+	 * 
+	 * @return Duration from Bond Basis to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if Duration cannot be calculated
+	 */
+
+	public abstract double calcDurationFromBondBasis (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblBondBasis)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Duration from Bond Basis to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblBondBasis Bond Basis to Maturity
+	 * 
+	 * @return Duration from Bond Basis to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if Duration cannot be calculated
+	 */
+
+	public abstract double calcDurationFromBondBasis (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblBondBasis)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Duration from Bond Basis to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblBondBasis Bond Basis to Optimal Exercise
+	 * 
+	 * @return Duration from Bond Basis to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if Duration cannot be calculated
+	 */
+
+	public abstract double calcDurationFromBondBasisToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblBondBasis)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Duration from Credit Basis to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblCreditBasis Credit Basis to Work-out
+	 * 
+	 * @return Duration from Credit Basis to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if Duration cannot be calculated
+	 */
+
+	public abstract double calcDurationFromCreditBasis (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblCreditBasis)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Duration from Credit Basis to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblCreditBasis Credit Basis to Maturity
+	 * 
+	 * @return Duration from Credit Basis to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if Duration cannot be calculated
+	 */
+
+	public abstract double calcDurationFromCreditBasis (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblCreditBasis)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Duration from Credit Basis to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblCreditBasis Credit Basis to Optimal Exercise
+	 * 
+	 * @return Duration from Credit Basis to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if Duration cannot be calculated
+	 */
+
+	public abstract double calcDurationFromCreditBasisToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblCreditBasis)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Duration from Discount Margin to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblDiscountMargin Discount Margin to Work-out
+	 * 
+	 * @return Duration from Discount Margin to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if Duration cannot be calculated
+	 */
+
+	public abstract double calcDurationFromDiscountMargin (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblDiscountMargin)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Duration from Discount Margin to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblDiscountMargin Discount Margin to Maturity
+	 * 
+	 * @return Duration from Discount Margin to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if Duration cannot be calculated
+	 */
+
+	public abstract double calcDurationFromDiscountMargin (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblDiscountMargin)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Duration from Discount Margin to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblDiscountMargin Discount Margin to Optimal Exercise
+	 * 
+	 * @return Duration from Discount Margin to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if Duration cannot be calculated
+	 */
+
+	public abstract double calcDurationFromDiscountMarginToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblDiscountMargin)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Duration from G Spread to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblGSpread G Spread to Work-out
+	 * 
+	 * @return Duration from G Spread to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if Duration cannot be calculated
+	 */
+
+	public abstract double calcDurationFromGSpread (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblGSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Duration from G Spread to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblGSpread G Spread to Maturity
+	 * 
+	 * @return Duration from G Spread to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if Duration cannot be calculated
+	 */
+
+	public abstract double calcDurationFromGSpread (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblGSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Duration from G Spread to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblGSpread G Spread to Optimal Exercise
+	 * 
+	 * @return Duration from G Spread to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if Duration cannot be calculated
+	 */
+
+	public abstract double calcDurationFromGSpreadToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblGSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Duration from I Spread to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblISpread I Spread to Work-out
+	 * 
+	 * @return Duration from I Spread to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if Duration cannot be calculated
+	 */
+
+	public abstract double calcDurationFromISpread (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblISpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Duration from I Spread to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblISpread I Spread to Maturity
+	 * 
+	 * @return Duration from I Spread to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if Duration cannot be calculated
+	 */
+
+	public abstract double calcDurationFromISpread (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblISpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Duration from I Spread to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblISpread I Spread to Optimal Exercise
+	 * 
+	 * @return Duration from I Spread to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if Duration cannot be calculated
+	 */
+
+	public abstract double calcDurationFromISpreadToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblISpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Duration from OAS to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblOAS OAS to Work-out
+	 * 
+	 * @return Duration from OAS to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if Duration cannot be calculated
+	 */
+
+	public abstract double calcDurationFromOAS (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblOAS)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Duration from OAS to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblOAS OAS to Maturity
+	 * 
+	 * @return Duration from OAS to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if Duration cannot be calculated
+	 */
+
+	public abstract double calcDurationFromOAS (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblOAS)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Duration from OAS to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblOAS OAS to Optimal Exercise
+	 * 
+	 * @return Duration from OAS to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if Duration cannot be calculated
+	 */
+
+	public abstract double calcDurationFromOASToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblOAS)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Duration from PECS to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblPECS PECS to Work-out
+	 * 
+	 * @return Duration from PECS to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if Duration cannot be calculated
+	 */
+
+	public abstract double calcDurationFromPECS (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblPECS)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Duration from PECS to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblPECS PECS to Maturity
+	 * 
+	 * @return Duration from PECS to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if Duration cannot be calculated
+	 */
+
+	public abstract double calcDurationFromPECS (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblPECS)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Duration from PECS to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblPECS PECS to Optimal Exercise
+	 * 
+	 * @return Duration from PECS to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if Duration cannot be calculated
+	 */
+
+	public abstract double calcDurationFromPECSToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblPECS)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Duration from Price to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblPrice Price to Work-out
+	 * 
+	 * @return Duration from Price to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if Duration cannot be calculated
+	 */
+
+	public abstract double calcDurationFromPrice (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblPrice)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Duration from Price to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblPrice Price to Maturity
+	 * 
+	 * @return Duration from Price to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if Duration cannot be calculated
+	 */
+
+	public abstract double calcDurationFromPrice (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblPrice)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Duration from Price to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblPrice Price to Optimal Exercise
+	 * 
+	 * @return Duration from Price to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if Duration cannot be calculated
+	 */
+
+	public abstract double calcDurationFromPriceToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblPrice)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Duration from TSY Spread to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblTSYSpread TSY Spread to Work-out
+	 * 
+	 * @return Duration from TSY Spread to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if Duration cannot be calculated
+	 */
+
+	public abstract double calcDurationFromTSYSpread (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblTSYSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Duration from TSY Spread to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblTSYSpread TSY Spread to Maturity
+	 * 
+	 * @return Duration from TSY Spread to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if Duration cannot be calculated
+	 */
+
+	public abstract double calcDurationFromTSYSpread (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblTSYSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Duration from TSY Spread to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblTSYSpread TSY Spread to Optimal Exercise
+	 * 
+	 * @return Duration from TSY Spread to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if Duration cannot be calculated
+	 */
+
+	public abstract double calcDurationFromTSYSpreadToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblTSYSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Duration from Yield to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblYield Yield to Work-out
+	 * 
+	 * @return Duration from Yield to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if Duration cannot be calculated
+	 */
+
+	public abstract double calcDurationFromYield (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblYield)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Duration from Yield to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblYield Yield to Maturity
+	 * 
+	 * @return Duration from Yield to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if Duration cannot be calculated
+	 */
+
+	public abstract double calcDurationFromYield (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblYield)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Duration from Yield to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblYield Yield to Optimal Exercise
+	 * 
+	 * @return Duration from Yield to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if Duration cannot be calculated
+	 */
+
+	public abstract double calcDurationFromYieldToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblYield)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Duration from Yield Spread to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblYieldSpread Yield Spread to Work-out
+	 * 
+	 * @return Duration from Yield Spread to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if Duration cannot be calculated
+	 */
+
+	public abstract double calcDurationFromYieldSpread (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblYieldSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Duration from Yield Spread to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblYieldSpread Yield Spread to Maturity
+	 * 
+	 * @return Duration from Yield Spread to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if Duration cannot be calculated
+	 */
+
+	public abstract double calcDurationFromYieldSpread (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblYieldSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Duration from Yield Spread to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblYieldSpread Yield Spread to Optimal Exercise
+	 * 
+	 * @return Duration from Yield Spread to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if Duration cannot be calculated
+	 */
+
+	public abstract double calcDurationFromYieldSpreadToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblYieldSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Duration from Z Spread to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblZSpread Z Spread to Work-out
+	 * 
+	 * @return Duration from Z Spread to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if Duration cannot be calculated
+	 */
+
+	public abstract double calcDurationFromZSpread (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblZSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Duration from Z Spread to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblZSpread Z Spread to Maturity
+	 * 
+	 * @return Duration from Z Spread to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if Duration cannot be calculated
+	 */
+
+	public abstract double calcDurationFromZSpread (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblZSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Duration from Z Spread to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblZSpread Z Spread to Optimal Exercise
+	 * 
+	 * @return Duration from Z Spread to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if Duration cannot be calculated
+	 */
+
+	public abstract double calcDurationFromZSpreadToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblZSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate G Spread from ASW to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblASW ASW to Work-out
+	 * 
+	 * @return G Spread from ASW to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if the G Spread cannot be calculated
+	 */
+
+	public abstract double calcGSpreadFromASW (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblASW)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate G Spread from ASW to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblASW ASW to Maturity
+	 * 
+	 * @return G Spread from ASW to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if G Spread cannot be calculated
+	 */
+
+	public abstract double calcGSpreadFromASW (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblASW)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate G Spread from ASW to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblASW ASW to Optimal Exercise
+	 * 
+	 * @return G Spread from ASW to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if G Spread cannot be calculated
+	 */
+
+	public abstract double calcGSpreadFromASWToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblASW)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate G Spread from Bond Basis to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblBondBasis Bond Basis to Work-out
+	 * 
+	 * @return G Spread from Bond Basis to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if the G Spread cannot be calculated
+	 */
+
+	public abstract double calcGSpreadFromBondBasis (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblBondBasis)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate G Spread from Bond Basis to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblBondBasis Bond Basis to Maturity
+	 * 
+	 * @return G Spread from Bond Basis to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if G Spread cannot be calculated
+	 */
+
+	public abstract double calcGSpreadFromBondBasis (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblBondBasis)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate G Spread from Bond Basis to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblBondBasis Bond Basis to Optimal Exercise
+	 * 
+	 * @return G Spread from Bond Basis to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if G Spread cannot be calculated
+	 */
+
+	public abstract double calcGSpreadFromBondBasisToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblBondBasis)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate G Spread from Credit Basis to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblCreditBasis Credit Basis to Work-out
+	 * 
+	 * @return G Spread from Credit Basis to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if the G Spread cannot be calculated
+	 */
+
+	public abstract double calcGSpreadFromCreditBasis (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblCreditBasis)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate G Spread from Credit Basis to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblCreditBasis Credit Basis to Maturity
+	 * 
+	 * @return G Spread from Credit Basis to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if G Spread cannot be calculated
+	 */
+
+	public abstract double calcGSpreadFromCreditBasis (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblCreditBasis)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate G Spread from Credit Basis to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblCreditBasis Credit Basis to Optimal Exercise
+	 * 
+	 * @return G Spread from Credit Basis to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if G Spread cannot be calculated
+	 */
+
+	public abstract double calcGSpreadFromCreditBasisToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblCreditBasis)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate G Spread from Discount Margin to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblDiscountMargin Discount Margin to Work-out
+	 * 
+	 * @return G Spread from Discount Margin to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if the G Spread cannot be calculated
+	 */
+
+	public abstract double calcGSpreadFromDiscountMargin (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblDiscountMargin)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate G Spread from Discount Margin to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblDiscountMargin Discount Margin to Maturity
+	 * 
+	 * @return G Spread from Discount Margin to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if G Spread cannot be calculated
+	 */
+
+	public abstract double calcGSpreadFromDiscountMargin (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblDiscountMargin)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate G Spread from Discount Margin to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblDiscountMargin Discount Margin to Optimal Exercise
+	 * 
+	 * @return G Spread from Discount Margin to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if G Spread cannot be calculated
+	 */
+
+	public abstract double calcGSpreadFromDiscountMarginToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblDiscountMargin)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate G Spread from I Spread to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblISpread I Spread to Work-out
+	 * 
+	 * @return G Spread from I Spread to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if the G Spread cannot be calculated
+	 */
+
+	public abstract double calcGSpreadFromISpread (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblISpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate G Spread from I Spread to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblISpread I Spread to Maturity
+	 * 
+	 * @return G Spread from I Spread to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if G Spread cannot be calculated
+	 */
+
+	public abstract double calcGSpreadFromISpread (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblISpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate G Spread from I Spread to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblISpread I Spread to Optimal Exercise
+	 * 
+	 * @return G Spread from I Spread to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if G Spread cannot be calculated
+	 */
+
+	public abstract double calcGSpreadFromISpreadToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblISpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate G Spread from OAS to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblOAS OAS to Work-out
+	 * 
+	 * @return G Spread from OAS to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if the G Spread cannot be calculated
+	 */
+
+	public abstract double calcGSpreadFromOAS (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblOAS)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate G Spread from OAS to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblOAS OAS to Maturity
+	 * 
+	 * @return G Spread from OAS to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if G Spread cannot be calculated
+	 */
+
+	public abstract double calcGSpreadFromOAS (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblOAS)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate G Spread from OAS to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblOAS OAS to Optimal Exercise
+	 * 
+	 * @return G Spread from OAS to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if G Spread cannot be calculated
+	 */
+
+	public abstract double calcGSpreadFromOASToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblOAS)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate G Spread from PECS to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblPECS PECS to Work-out
+	 * 
+	 * @return G Spread from PECS to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if the G Spread cannot be calculated
+	 */
+
+	public abstract double calcGSpreadFromPECS (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblPECS)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate G Spread from PECS to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblPECS PECS to Maturity
+	 * 
+	 * @return G Spread from PECS to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if G Spread cannot be calculated
+	 */
+
+	public abstract double calcGSpreadFromPECS (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblPECS)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate G Spread from PECS to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblPECS PECS to Optimal Exercise
+	 * 
+	 * @return G Spread from PECS to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if G Spread cannot be calculated
+	 */
+
+	public abstract double calcGSpreadFromPECSToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblPECS)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate G Spread from Price to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblPrice Price to Work-out
+	 * 
+	 * @return G Spread from Price to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if the G Spread cannot be calculated
+	 */
+
+	public abstract double calcGSpreadFromPrice (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblPrice)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate G Spread from Price to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblPrice Price to Maturity
+	 * 
+	 * @return G Spread from Price to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if G Spread cannot be calculated
+	 */
+
+	public abstract double calcGSpreadFromPrice (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblPrice)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate G Spread from Price to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblPrice Price to Optimal Exercise
+	 * 
+	 * @return G Spread from Price to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if G Spread cannot be calculated
+	 */
+
+	public abstract double calcGSpreadFromPriceToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblPrice)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate G Spread from TSY Spread to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblTSYSpread TSY Spread to Work-out
+	 * 
+	 * @return G Spread from TSY Spread to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if the G Spread cannot be calculated
+	 */
+
+	public abstract double calcGSpreadFromTSYSpread (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblTSYSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate G Spread from TSY Spread to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblTSYSpread TSY Spread to Maturity
+	 * 
+	 * @return G Spread from TSY Spread to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if G Spread cannot be calculated
+	 */
+
+	public abstract double calcGSpreadFromTSYSpread (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblTSYSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate G Spread from TSY Spread to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblTSYSpread TSY Spread to Optimal Exercise
+	 * 
+	 * @return G Spread from TSY Spread to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if G Spread cannot be calculated
+	 */
+
+	public abstract double calcGSpreadFromTSYSpreadToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblTSYSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate G Spread from Yield to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblYield Yield to Work-out
+	 * 
+	 * @return G Spread from Yield to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if the G Spread cannot be calculated
+	 */
+
+	public abstract double calcGSpreadFromYield (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblYield)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate G Spread from Yield to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblYield Yield to Maturity
+	 * 
+	 * @return G Spread from Yield to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if G Spread cannot be calculated
+	 */
+
+	public abstract double calcGSpreadFromYield (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblYield)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate G Spread from Yield to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblYield Yield to Optimal Exercise
+	 * 
+	 * @return G Spread from Yield to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if G Spread cannot be calculated
+	 */
+
+	public abstract double calcGSpreadFromYieldToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblYield)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate G Spread from Yield Spread to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblYieldSpread Yield Spread to Work-out
+	 * 
+	 * @return G Spread from Yield Spread to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if the G Spread cannot be calculated
+	 */
+
+	public abstract double calcGSpreadFromYieldSpread (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblYieldSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate G Spread from Yield Spread to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblYieldSpread Yield Spread to Maturity
+	 * 
+	 * @return G Spread from Yield Spread to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if G Spread cannot be calculated
+	 */
+
+	public abstract double calcGSpreadFromYieldSpread (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblYieldSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate G Spread from Yield Spread to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblYieldSpread Yield Spread to Optimal Exercise
+	 * 
+	 * @return G Spread from Yield Spread to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if G Spread cannot be calculated
+	 */
+
+	public abstract double calcGSpreadFromYieldSpreadToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblYieldSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate G Spread from Z Spread to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblZSpread Z Spread to Work-out
+	 * 
+	 * @return G Spread from Z Spread to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if the G Spread cannot be calculated
+	 */
+
+	public abstract double calcGSpreadFromZSpread (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblZSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate G Spread from Z Spread to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblZSpread Z Spread to Maturity
+	 * 
+	 * @return G Spread from Z Spread to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if G Spread cannot be calculated
+	 */
+
+	public abstract double calcGSpreadFromZSpread (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblZSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate G Spread from Z Spread to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblZSpread Z Spread to Optimal Exercise
+	 * 
+	 * @return G Spread from Z Spread to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if G Spread cannot be calculated
+	 */
+
+	public abstract double calcGSpreadFromZSpreadToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblZSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate I Spread from ASW to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblASW ASW to Work-out
+	 * 
+	 * @return I Spread from ASW to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if the I Spread cannot be calculated
+	 */
+
+	public abstract double calcISpreadFromASW (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblASW)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate I Spread from ASW to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblASW ASW to Maturity
+	 * 
+	 * @return I Spread from ASW to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if I Spread cannot be calculated
+	 */
+
+	public abstract double calcISpreadFromASW (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblASW)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate I Spread from ASW to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblASW ASW to Optimal Exercise
+	 * 
+	 * @return I Spread from ASW to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if I Spread cannot be calculated
+	 */
+
+	public abstract double calcISpreadFromASWToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblASW)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate I Spread from Bond Basis to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblBondBasis Bond Basis to Work-out
+	 * 
+	 * @return I Spread from Bond Basis to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if the I Spread cannot be calculated
+	 */
+
+	public abstract double calcISpreadFromBondBasis (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblBondBasis)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate I Spread from Bond Basis to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblBondBasis Bond Basis to Maturity
+	 * 
+	 * @return I Spread from Bond Basis to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if I Spread cannot be calculated
+	 */
+
+	public abstract double calcISpreadFromBondBasis (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblBondBasis)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate I Spread from Bond Basis to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblBondBasis Bond Basis to Optimal Exercise
+	 * 
+	 * @return I Spread from Bond Basis to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if I Spread cannot be calculated
+	 */
+
+	public abstract double calcISpreadFromBondBasisToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblBondBasis)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate I Spread from Credit Basis to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblCreditBasis Credit Basis to Work-out
+	 * 
+	 * @return I Spread from Credit Basis to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if the I Spread cannot be calculated
+	 */
+
+	public abstract double calcISpreadFromCreditBasis (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblCreditBasis)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate I Spread from Credit Basis to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblCreditBasis Credit Basis to Maturity
+	 * 
+	 * @return I Spread from Credit Basis to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if I Spread cannot be calculated
+	 */
+
+	public abstract double calcISpreadFromCreditBasis (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblCreditBasis)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate I Spread from Credit Basis to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblCreditBasis Credit Basis to Optimal Exercise
+	 * 
+	 * @return I Spread from Credit Basis to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if I Spread cannot be calculated
+	 */
+
+	public abstract double calcISpreadFromCreditBasisToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblCreditBasis)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate I Spread from Discount Margin to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblDiscountMargin Discount Margin to Work-out
+	 * 
+	 * @return I Spread from Discount Margin to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if the I Spread cannot be calculated
+	 */
+
+	public abstract double calcISpreadFromDiscountMargin (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblDiscountMargin)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate I Spread from Discount Margin to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblDiscountMargin Discount Margin to Maturity
+	 * 
+	 * @return I Spread from Discount Margin to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if I Spread cannot be calculated
+	 */
+
+	public abstract double calcISpreadFromDiscountMargin (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblDiscountMargin)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate I Spread from Discount Margin to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblDiscountMargin Discount Margin to Optimal Exercise
+	 * 
+	 * @return I Spread from Discount Margin to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if I Spread cannot be calculated
+	 */
+
+	public abstract double calcISpreadFromDiscountMarginToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblDiscountMargin)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate I Spread from G Spread to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblGSpread G Spread to Work-out
+	 * 
+	 * @return I Spread from G Spread to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if the I Spread cannot be calculated
+	 */
+
+	public abstract double calcISpreadFromGSpread (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblGSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate I Spread from G Spread to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblGSpread G Spread to Maturity
+	 * 
+	 * @return I Spread from G Spread to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if I Spread cannot be calculated
+	 */
+
+	public abstract double calcISpreadFromGSpread (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblGSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate I Spread from G Spread to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblGSpread G Spread to Optimal Exercise
+	 * 
+	 * @return I Spread from G Spread to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if I Spread cannot be calculated
+	 */
+
+	public abstract double calcISpreadFromGSpreadToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblGSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate I Spread from OAS to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblOAS OAS to Work-out
+	 * 
+	 * @return I Spread from OAS to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if the I Spread cannot be calculated
+	 */
+
+	public abstract double calcISpreadFromOAS (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblOAS)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate I Spread from OAS to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblOAS OAS to Maturity
+	 * 
+	 * @return I Spread from OAS to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if I Spread cannot be calculated
+	 */
+
+	public abstract double calcISpreadFromOAS (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblOAS)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate I Spread from OAS to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblOAS OAS to Optimal Exercise
+	 * 
+	 * @return I Spread from OAS to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if I Spread cannot be calculated
+	 */
+
+	public abstract double calcISpreadFromOASToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblOAS)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate I Spread from PECS to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblPECS PECS to Work-out
+	 * 
+	 * @return I Spread from PECS to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if the I Spread cannot be calculated
+	 */
+
+	public abstract double calcISpreadFromPECS (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblPECS)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate I Spread from PECS to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblPECS PECS to Maturity
+	 * 
+	 * @return I Spread from PECS to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if I Spread cannot be calculated
+	 */
+
+	public abstract double calcISpreadFromPECS (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblPECS)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate I Spread from PECS to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblPECS PECS to Optimal Exercise
+	 * 
+	 * @return I Spread from PECS to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if I Spread cannot be calculated
+	 */
+
+	public abstract double calcISpreadFromPECSToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblPECS)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate I Spread from Price to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblPrice Price to Work-out
+	 * 
+	 * @return I Spread from Price to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if the I Spread cannot be calculated
+	 */
+
+	public abstract double calcISpreadFromPrice (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblPrice)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate I Spread from Price to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblPrice Price to Maturity
+	 * 
+	 * @return I Spread from Price to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if I Spread cannot be calculated
+	 */
+
+	public abstract double calcISpreadFromPrice (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblPrice)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate I Spread from Price to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblPrice Price to Optimal Exercise
+	 * 
+	 * @return I Spread from Price to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if I Spread cannot be calculated
+	 */
+
+	public abstract double calcISpreadFromPriceToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblPrice)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate I Spread from TSY Spread to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblTSYSpread TSY Spread to Work-out
+	 * 
+	 * @return I Spread from TSY Spread to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if the I Spread cannot be calculated
+	 */
+
+	public abstract double calcISpreadFromTSYSpread (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblTSYSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate I Spread from TSY Spread to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblTSYSpread TSY Spread to Maturity
+	 * 
+	 * @return I Spread from TSY Spread to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if I Spread cannot be calculated
+	 */
+
+	public abstract double calcISpreadFromTSYSpread (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblTSYSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate I Spread from TSY Spread to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblTSYSpread TSY Spread to Optimal Exercise
+	 * 
+	 * @return I Spread from TSY Spread to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if I Spread cannot be calculated
+	 */
+
+	public abstract double calcISpreadFromTSYSpreadToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblTSYSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate I Spread from Yield to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblYield Yield to Work-out
+	 * 
+	 * @return I Spread from Yield to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if the I Spread cannot be calculated
+	 */
+
+	public abstract double calcISpreadFromYield (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblYield)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate I Spread from Yield to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblYield Yield to Maturity
+	 * 
+	 * @return I Spread from Yield to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if I Spread cannot be calculated
+	 */
+
+	public abstract double calcISpreadFromYield (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblYield)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate I Spread from Yield to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblYield Yield to Optimal Exercise
+	 * 
+	 * @return I Spread from Yield to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if I Spread cannot be calculated
+	 */
+
+	public abstract double calcISpreadFromYieldToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblYield)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate I Spread from Yield Spread to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblYieldSpread Yield Spread to Work-out
+	 * 
+	 * @return I Spread from Yield Spread to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if the I Spread cannot be calculated
+	 */
+
+	public abstract double calcISpreadFromYieldSpread (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblYieldSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate I Spread from Yield Spread to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblYieldSpread Yield Spread to Maturity
+	 * 
+	 * @return I Spread from Yield Spread to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if I Spread cannot be calculated
+	 */
+
+	public abstract double calcISpreadFromYieldSpread (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblYieldSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate I Spread from Yield Spread to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblYieldSpread Yield Spread to Optimal Exercise
+	 * 
+	 * @return I Spread from Yield Spread to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if I Spread cannot be calculated
+	 */
+
+	public abstract double calcISpreadFromYieldSpreadToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblYieldSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate I Spread from Z Spread to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblZSpread Z Spread to Work-out
+	 * 
+	 * @return I Spread from Z Spread to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if the I Spread cannot be calculated
+	 */
+
+	public abstract double calcISpreadFromZSpread (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblZSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate I Spread from Z Spread to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblZSpread Z Spread to Maturity
+	 * 
+	 * @return I Spread from Z Spread to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if I Spread cannot be calculated
+	 */
+
+	public abstract double calcISpreadFromZSpread (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblZSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate I Spread from Z Spread to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblZSpread Z Spread to Optimal Exercise
+	 * 
+	 * @return I Spread from Z Spread to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if I Spread cannot be calculated
+	 */
+
+	public abstract double calcISpreadFromZSpreadToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblZSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Macaulay Duration from ASW to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblASW ASW to Work-out
+	 * 
+	 * @return Macaulay Duration from ASW to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if Macaulay Duration cannot be calculated
+	 */
+
+	public abstract double calcMacaulayDurationFromASW (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblASW)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Macaulay Duration from ASW to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblASW ASW to Maturity
+	 * 
+	 * @return Macaulay Duration from ASW to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if Macaulay Duration cannot be calculated
+	 */
+
+	public abstract double calcMacaulayDurationFromASW (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblASW)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Macaulay Duration from ASW to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblASW ASW to Optimal Exercise
+	 * 
+	 * @return Macaulay Duration from ASW to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if Macaulay Duration cannot be calculated
+	 */
+
+	public abstract double calcMacaulayDurationFromASWToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblASW)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Macaulay Duration from Bond Basis to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblBondBasis Bond Basis to Work-out
+	 * 
+	 * @return Macaulay Duration from Bond Basis to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if Macaulay Duration cannot be calculated
+	 */
+
+	public abstract double calcMacaulayDurationFromBondBasis (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblBondBasis)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Macaulay Duration from Bond Basis to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblBondBasis Bond Basis to Maturity
+	 * 
+	 * @return Macaulay Duration from Bond Basis to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if Macaulay Duration cannot be calculated
+	 */
+
+	public abstract double calcMacaulayDurationFromBondBasis (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblBondBasis)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Macaulay Duration from Bond Basis to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblBondBasis Bond Basis to Optimal Exercise
+	 * 
+	 * @return Macaulay Duration from Bond Basis to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if Macaulay Duration cannot be calculated
+	 */
+
+	public abstract double calcMacaulayDurationFromBondBasisToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblBondBasis)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Macaulay Duration from Credit Basis to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblCreditBasis Credit Basis to Work-out
+	 * 
+	 * @return Macaulay Duration from Credit Basis to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if Macaulay Duration cannot be calculated
+	 */
+
+	public abstract double calcMacaulayDurationFromCreditBasis (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblCreditBasis)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Macaulay Duration from Credit Basis to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblCreditBasis Credit Basis to Maturity
+	 * 
+	 * @return Macaulay Duration from Credit Basis to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if Macaulay Duration cannot be calculated
+	 */
+
+	public abstract double calcMacaulayDurationFromCreditBasis (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblCreditBasis)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Macaulay Duration from Credit Basis to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblCreditBasis Credit Basis to Optimal Exercise
+	 * 
+	 * @return Macaulay Duration from Credit Basis to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if Macaulay Duration cannot be calculated
+	 */
+
+	public abstract double calcMacaulayDurationFromCreditBasisToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblCreditBasis)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Macaulay Duration from Discount Margin to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblDiscountMargin Discount Margin to Work-out
+	 * 
+	 * @return Macaulay Duration from Discount Margin to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if Macaulay Duration cannot be calculated
+	 */
+
+	public abstract double calcMacaulayDurationFromDiscountMargin (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblDiscountMargin)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Macaulay Duration from Discount Margin to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblDiscountMargin Discount Margin to Maturity
+	 * 
+	 * @return Macaulay Duration from Discount Margin to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if Macaulay Duration cannot be calculated
+	 */
+
+	public abstract double calcMacaulayDurationFromDiscountMargin (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblDiscountMargin)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Macaulay Duration from Discount Margin to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblDiscountMargin Discount Margin to Optimal Exercise
+	 * 
+	 * @return Macaulay Duration from Discount Margin to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if Macaulay Duration cannot be calculated
+	 */
+
+	public abstract double calcMacaulayDurationFromDiscountMarginToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblDiscountMargin)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Macaulay Duration from G Spread to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblGSpread G Spread to Work-out
+	 * 
+	 * @return Macaulay Duration from G Spread to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if Macaulay Duration cannot be calculated
+	 */
+
+	public abstract double calcMacaulayDurationFromGSpread (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblGSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Macaulay Duration from G Spread to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblGSpread G Spread to Maturity
+	 * 
+	 * @return Macaulay Duration from G Spread to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if Macaulay Duration cannot be calculated
+	 */
+
+	public abstract double calcMacaulayDurationFromGSpread (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblGSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Macaulay Duration from G Spread to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblGSpread G Spread to Optimal Exercise
+	 * 
+	 * @return Macaulay Duration from G Spread to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if Macaulay Duration cannot be calculated
+	 */
+
+	public abstract double calcMacaulayDurationFromGSpreadToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblGSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Macaulay Duration from I Spread to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblISpread I Spread to Work-out
+	 * 
+	 * @return Macaulay Duration from I Spread to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if Macaulay Duration cannot be calculated
+	 */
+
+	public abstract double calcMacaulayDurationFromISpread (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblISpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Macaulay Duration from I Spread to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblISpread I Spread to Maturity
+	 * 
+	 * @return Macaulay Duration from I Spread to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if Macaulay Duration cannot be calculated
+	 */
+
+	public abstract double calcMacaulayDurationFromISpread (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblISpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Macaulay Duration from I Spread to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblISpread I Spread to Optimal Exercise
+	 * 
+	 * @return Macaulay Duration from I Spread to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if Macaulay Duration cannot be calculated
+	 */
+
+	public abstract double calcMacaulayDurationFromISpreadToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblISpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Macaulay Duration from OAS to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblOAS OAS to Work-out
+	 * 
+	 * @return Macaulay Duration from OAS to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if Macaulay Duration cannot be calculated
+	 */
+
+	public abstract double calcMacaulayDurationFromOAS (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblOAS)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Macaulay Duration from OAS to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblOAS OAS to Maturity
+	 * 
+	 * @return Macaulay Duration from OAS to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if Macaulay Duration cannot be calculated
+	 */
+
+	public abstract double calcMacaulayDurationFromOAS (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblOAS)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Macaulay Duration from OAS to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblOAS OAS to Optimal Exercise
+	 * 
+	 * @return Macaulay Duration from OAS to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if Macaulay Duration cannot be calculated
+	 */
+
+	public abstract double calcMacaulayDurationFromOASToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblOAS)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Macaulay Duration from PECS to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblPECS PECS to Work-out
+	 * 
+	 * @return Macaulay Duration from PECS to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if Macaulay Duration cannot be calculated
+	 */
+
+	public abstract double calcMacaulayDurationFromPECS (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblPECS)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Macaulay Duration from PECS to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblPECS PECS to Maturity
+	 * 
+	 * @return Macaulay Duration from PECS to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if Macaulay Duration cannot be calculated
+	 */
+
+	public abstract double calcMacaulayDurationFromPECS (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblPECS)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Macaulay Duration from PECS to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblPECS PECS to Optimal Exercise
+	 * 
+	 * @return Macaulay Duration from PECS to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if Macaulay Duration cannot be calculated
+	 */
+
+	public abstract double calcMacaulayDurationFromPECSToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblPECS)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Macaulay Duration from Price to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblPrice Price to Work-out
+	 * 
+	 * @return Macaulay Duration from Price to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if Macaulay Duration cannot be calculated
+	 */
+
+	public abstract double calcMacaulayDurationFromPrice (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblPrice)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Macaulay Duration from Price to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblPrice Price to Maturity
+	 * 
+	 * @return Macaulay Duration from Price to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if Macaulay Duration cannot be calculated
+	 */
+
+	public abstract double calcMacaulayDurationFromPrice (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblPrice)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Macaulay Duration from Price to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblPrice Price to Optimal Exercise
+	 * 
+	 * @return Macaulay Duration from Price to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if Macaulay Duration cannot be calculated
+	 */
+
+	public abstract double calcMacaulayDurationFromPriceToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblPrice)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Macaulay Duration from TSY Spread to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblTSYSpread TSY Spread to Work-out
+	 * 
+	 * @return Macaulay Duration from TSY Spread to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if Macaulay Duration cannot be calculated
+	 */
+
+	public abstract double calcMacaulayDurationFromTSYSpread (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblTSYSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Macaulay Duration from TSY Spread to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblTSYSpread TSY Spread to Maturity
+	 * 
+	 * @return Macaulay Duration from TSY Spread to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if Macaulay Duration cannot be calculated
+	 */
+
+	public abstract double calcMacaulayDurationFromTSYSpread (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblTSYSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Macaulay Duration from TSY Spread to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblTSYSpread TSY Spread to Optimal Exercise
+	 * 
+	 * @return Macaulay Duration from TSY Spread to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if Macaulay Duration cannot be calculated
+	 */
+
+	public abstract double calcMacaulayDurationFromTSYSpreadToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblTSYSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Macaulay Duration from Yield to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblYield Yield to Work-out
+	 * 
+	 * @return Macaulay Duration from Yield to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if Macaulay Duration cannot be calculated
+	 */
+
+	public abstract double calcMacaulayDurationFromYield (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblYield)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Macaulay Duration from Yield to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblYield Yield to Maturity
+	 * 
+	 * @return Macaulay Duration from Yield to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if Macaulay Duration cannot be calculated
+	 */
+
+	public abstract double calcMacaulayDurationFromYield (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblYield)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Macaulay Duration from Yield to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblYield Yield to Optimal Exercise
+	 * 
+	 * @return Macaulay Duration from Yield to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if Macaulay Duration cannot be calculated
+	 */
+
+	public abstract double calcMacaulayDurationFromYieldToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblYield)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Macaulay Duration from Yield Spread to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblYieldSpread Yield Spread to Work-out
+	 * 
+	 * @return Macaulay Duration from Yield Spread to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if Macaulay Duration cannot be calculated
+	 */
+
+	public abstract double calcMacaulayDurationFromYieldSpread (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblYieldSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Macaulay Duration from Yield Spread to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblYieldSpread Yield Spread to Maturity
+	 * 
+	 * @return Macaulay Duration from Yield Spread to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if Macaulay Duration cannot be calculated
+	 */
+
+	public abstract double calcMacaulayDurationFromYieldSpread (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblYieldSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Macaulay Duration from Yield Spread to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblYieldSpread Yield Spread to Optimal Exercise
+	 * 
+	 * @return Macaulay Duration from Yield Spread to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if Macaulay Duration cannot be calculated
+	 */
+
+	public abstract double calcMacaulayDurationFromYieldSpreadToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblYieldSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Macaulay Duration from Z Spread to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblZSpread Z Spread to Work-out
+	 * 
+	 * @return Macaulay Duration from Z Spread to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if Macaulay Duration cannot be calculated
+	 */
+
+	public abstract double calcMacaulayDurationFromZSpread (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblZSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Macaulay Duration from Z Spread to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblZSpread Z Spread to Maturity
+	 * 
+	 * @return Macaulay Duration from Z Spread to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if Macaulay Duration cannot be calculated
+	 */
+
+	public abstract double calcMacaulayDurationFromZSpread (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblZSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Macaulay Duration from Z Spread to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblZSpread Z Spread to Optimal Exercise
+	 * 
+	 * @return Macaulay Duration from Z Spread to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if Macaulay Duration cannot be calculated
+	 */
+
+	public abstract double calcMacaulayDurationFromZSpreadToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblZSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Modified Duration from ASW to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblASW ASW to Work-out
+	 * 
+	 * @return Modified Duration from ASW to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if Modified Duration cannot be calculated
+	 */
+
+	public abstract double calcModifiedDurationFromASW (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblASW)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Modified Duration from ASW to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblASW ASW to Maturity
+	 * 
+	 * @return Modified Duration from ASW to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if Modified Duration cannot be calculated
+	 */
+
+	public abstract double calcModifiedDurationFromASW (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblASW)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Modified Duration from ASW to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblASW ASW to Optimal Exercise
+	 * 
+	 * @return Modified Duration from ASW to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if Modified Duration cannot be calculated
+	 */
+
+	public abstract double calcModifiedDurationFromASWToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblASW)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Modified Duration from Bond Basis to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblBondBasis Bond Basis to Work-out
+	 * 
+	 * @return Modified Duration from Bond Basis to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if Modified Duration cannot be calculated
+	 */
+
+	public abstract double calcModifiedDurationFromBondBasis (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblBondBasis)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Modified Duration from Bond Basis to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblBondBasis Bond Basis to Maturity
+	 * 
+	 * @return Modified Duration from Bond Basis to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if Modified Duration cannot be calculated
+	 */
+
+	public abstract double calcModifiedDurationFromBondBasis (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblBondBasis)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Modified Duration from Bond Basis to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblBondBasis Bond Basis to Optimal Exercise
+	 * 
+	 * @return Modified Duration from Bond Basis to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if Modified Duration cannot be calculated
+	 */
+
+	public abstract double calcModifiedDurationFromBondBasisToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblBondBasis)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Modified Duration from Credit Basis to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblCreditBasis Credit Basis to Work-out
+	 * 
+	 * @return Modified Duration from Credit Basis to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if Modified Duration cannot be calculated
+	 */
+
+	public abstract double calcModifiedDurationFromCreditBasis (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblCreditBasis)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Modified Duration from Credit Basis to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblCreditBasis Credit Basis to Maturity
+	 * 
+	 * @return Modified Duration from Credit Basis to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if Modified Duration cannot be calculated
+	 */
+
+	public abstract double calcModifiedDurationFromCreditBasis (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblCreditBasis)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Modified Duration from Credit Basis to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblCreditBasis Credit Basis to Optimal Exercise
+	 * 
+	 * @return Modified Duration from Credit Basis to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if Modified Duration cannot be calculated
+	 */
+
+	public abstract double calcModifiedDurationFromCreditBasisToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblCreditBasis)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Modified Duration from Discount Margin to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblDiscountMargin Discount Margin to Work-out
+	 * 
+	 * @return Modified Duration from Discount Margin to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if Modified Duration cannot be calculated
+	 */
+
+	public abstract double calcModifiedDurationFromDiscountMargin (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblDiscountMargin)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Modified Duration from Discount Margin to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblDiscountMargin Discount Margin to Maturity
+	 * 
+	 * @return Modified Duration from Discount Margin to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if Modified Duration cannot be calculated
+	 */
+
+	public abstract double calcModifiedDurationFromDiscountMargin (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblDiscountMargin)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Modified Duration from Discount Margin to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblDiscountMargin Discount Margin to Optimal Exercise
+	 * 
+	 * @return Modified Duration from Discount Margin to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if Modified Duration cannot be calculated
+	 */
+
+	public abstract double calcModifiedDurationFromDiscountMarginToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblDiscountMargin)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Modified Duration from G Spread to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblGSpread G Spread to Work-out
+	 * 
+	 * @return Modified Duration from G Spread to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if Modified Duration cannot be calculated
+	 */
+
+	public abstract double calcModifiedDurationFromGSpread (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblGSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Modified Duration from G Spread to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblGSpread G Spread to Maturity
+	 * 
+	 * @return Modified Duration from G Spread to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if Modified Duration cannot be calculated
+	 */
+
+	public abstract double calcModifiedDurationFromGSpread (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblGSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Modified Duration from G Spread to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblGSpread G Spread to Optimal Exercise
+	 * 
+	 * @return Modified Duration from G Spread to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if Modified Duration cannot be calculated
+	 */
+
+	public abstract double calcModifiedDurationFromGSpreadToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblGSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Modified Duration from I Spread to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblISpread I Spread to Work-out
+	 * 
+	 * @return Modified Duration from I Spread to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if Modified Duration cannot be calculated
+	 */
+
+	public abstract double calcModifiedDurationFromISpread (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblISpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Modified Duration from I Spread to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblISpread I Spread to Maturity
+	 * 
+	 * @return Modified Duration from I Spread to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if Modified Duration cannot be calculated
+	 */
+
+	public abstract double calcModifiedDurationFromISpread (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblISpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Modified Duration from I Spread to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblISpread I Spread to Optimal Exercise
+	 * 
+	 * @return Modified Duration from I Spread to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if Modified Duration cannot be calculated
+	 */
+
+	public abstract double calcModifiedDurationFromISpreadToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblISpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Modified Duration from OAS to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblOAS OAS to Work-out
+	 * 
+	 * @return Modified Duration from OAS to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if Modified Duration cannot be calculated
+	 */
+
+	public abstract double calcModifiedDurationFromOAS (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblOAS)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Modified Duration from OAS to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblOAS OAS to Maturity
+	 * 
+	 * @return Modified Duration from OAS to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if Modified Duration cannot be calculated
+	 */
+
+	public abstract double calcModifiedDurationFromOAS (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblOAS)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Modified Duration from OAS to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblOAS OAS to Optimal Exercise
+	 * 
+	 * @return Modified Duration from OAS to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if Modified Duration cannot be calculated
+	 */
+
+	public abstract double calcModifiedDurationFromOASToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblOAS)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Modified Duration from PECS to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblPECS PECS to Work-out
+	 * 
+	 * @return Modified Duration from PECS to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if Modified Duration cannot be calculated
+	 */
+
+	public abstract double calcModifiedDurationFromPECS (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblPECS)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Modified Duration from PECS to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblPECS PECS to Maturity
+	 * 
+	 * @return Modified Duration from PECS to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if Modified Duration cannot be calculated
+	 */
+
+	public abstract double calcModifiedDurationFromPECS (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblPECS)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Modified Duration from PECS to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblPECS PECS to Optimal Exercise
+	 * 
+	 * @return Modified Duration from PECS to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if Modified Duration cannot be calculated
+	 */
+
+	public abstract double calcModifiedDurationFromPECSToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblPECS)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Modified Duration from Price to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblPrice Price to Work-out
+	 * 
+	 * @return Modified Duration from Price to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if Modified Duration cannot be calculated
+	 */
+
+	public abstract double calcModifiedDurationFromPrice (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblPrice)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Modified Duration from Price to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblPrice Price to Maturity
+	 * 
+	 * @return Modified Duration from Price to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if Modified Duration cannot be calculated
+	 */
+
+	public abstract double calcModifiedDurationFromPrice (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblPrice)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Modified Duration from Price to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblPrice Price to Optimal Exercise
+	 * 
+	 * @return Modified Duration from Price to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if Modified Duration cannot be calculated
+	 */
+
+	public abstract double calcModifiedDurationFromPriceToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblPrice)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Modified Duration from TSY Spread to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblTSYSpread TSY Spread to Work-out
+	 * 
+	 * @return Modified Duration from TSY Spread to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if Modified Duration cannot be calculated
+	 */
+
+	public abstract double calcModifiedDurationFromTSYSpread (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblTSYSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Modified Duration from TSY Spread to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblTSYSpread TSY Spread to Maturity
+	 * 
+	 * @return Modified Duration from TSY Spread to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if Modified Duration cannot be calculated
+	 */
+
+	public abstract double calcModifiedDurationFromTSYSpread (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblTSYSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Modified Duration from TSY Spread to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblTSYSpread TSY Spread to Optimal Exercise
+	 * 
+	 * @return Modified Duration from TSY Spread to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if Modified Duration cannot be calculated
+	 */
+
+	public abstract double calcModifiedDurationFromTSYSpreadToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblTSYSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Modified Duration from Yield to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblYield Yield to Work-out
+	 * 
+	 * @return Modified Duration from Yield to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if Modified Duration cannot be calculated
+	 */
+
+	public abstract double calcModifiedDurationFromYield (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblYield)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Modified Duration from Yield to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblYield Yield to Maturity
+	 * 
+	 * @return Modified Duration from Yield to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if Modified Duration cannot be calculated
+	 */
+
+	public abstract double calcModifiedDurationFromYield (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblYield)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Modified Duration from Yield to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblYield Yield to Optimal Exercise
+	 * 
+	 * @return Modified Duration from Yield to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if Modified Duration cannot be calculated
+	 */
+
+	public abstract double calcModifiedDurationFromYieldToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblYield)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Modified Duration from Yield Spread to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblYieldSpread Yield Spread to Work-out
+	 * 
+	 * @return Modified Duration from Yield Spread to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if Modified Duration cannot be calculated
+	 */
+
+	public abstract double calcModifiedDurationFromYieldSpread (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblYieldSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Modified Duration from Yield Spread to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblYieldSpread Yield Spread to Maturity
+	 * 
+	 * @return Modified Duration from Yield Spread to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if Modified Duration cannot be calculated
+	 */
+
+	public abstract double calcModifiedDurationFromYieldSpread (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblYieldSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Modified Duration from Yield Spread to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblYieldSpread Yield Spread to Optimal Exercise
+	 * 
+	 * @return Modified Duration from Yield Spread to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if Modified Duration cannot be calculated
+	 */
+
+	public abstract double calcModifiedDurationFromYieldSpreadToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblYieldSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Modified Duration from Z Spread to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblZSpread Z Spread to Work-out
+	 * 
+	 * @return Modified Duration from Z Spread to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if Modified Duration cannot be calculated
+	 */
+
+	public abstract double calcModifiedDurationFromZSpread (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblZSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Modified Duration from Z Spread to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblZSpread Z Spread to Maturity
+	 * 
+	 * @return Modified Duration from Z Spread to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if Modified Duration cannot be calculated
+	 */
+
+	public abstract double calcModifiedDurationFromZSpread (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblZSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Modified Duration from Z Spread to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblZSpread Z Spread to Optimal Exercise
+	 * 
+	 * @return Modified Duration from Z Spread to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if Modified Duration cannot be calculated
+	 */
+
+	public abstract double calcModifiedDurationFromZSpreadToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblZSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate OAS from ASW to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblASW ASW to Work-out
+	 * 
+	 * @return OAS from ASW to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if the OAS cannot be calculated
+	 */
+
+	public abstract double calcOASFromASW (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblASW)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate OAS from ASW to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblASW ASW to Maturity
+	 * 
+	 * @return OAS from ASW to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if OAS cannot be calculated
+	 */
+
+	public abstract double calcOASFromASW (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblASW)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate OAS from ASW to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblASW ASW to Optimal Exercise
+	 * 
+	 * @return OAS from ASW to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if OAS cannot be calculated
+	 */
+
+	public abstract double calcOASFromASWToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblASW)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate OAS from Bond Basis to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblBondBasis Bond Basis to Work-out
+	 * 
+	 * @return OAS from Bond Basis to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if the OAS cannot be calculated
+	 */
+
+	public abstract double calcOASFromBondBasis (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblBondBasis)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate OAS from Bond Basis to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblBondBasis Bond Basis to Maturity
+	 * 
+	 * @return OAS from Bond Basis to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if OAS cannot be calculated
+	 */
+
+	public abstract double calcOASFromBondBasis (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblBondBasis)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate OAS from Bond Basis to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblBondBasis Bond Basis to Optimal Exercise
+	 * 
+	 * @return OAS from Bond Basis to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if OAS cannot be calculated
+	 */
+
+	public abstract double calcOASFromBondBasisToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblBondBasis)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate OAS from Credit Basis to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblCreditBasis Credit Basis to Work-out
+	 * 
+	 * @return OAS from Credit Basis to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if the OAS cannot be calculated
+	 */
+
+	public abstract double calcOASFromCreditBasis (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblCreditBasis)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate OAS from Credit Basis to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblCreditBasis Credit Basis to Maturity
+	 * 
+	 * @return OAS from Credit Basis to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if OAS cannot be calculated
+	 */
+
+	public abstract double calcOASFromCreditBasis (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblCreditBasis)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate OAS from Credit Basis to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblCreditBasis Credit Basis to Optimal Exercise
+	 * 
+	 * @return OAS from Credit Basis to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if OAS cannot be calculated
+	 */
+
+	public abstract double calcOASFromCreditBasisToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblCreditBasis)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate OAS from Discount Margin to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblDiscountMargin Discount Margin to Work-out
+	 * 
+	 * @return OAS from Discount Margin to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if the OAS cannot be calculated
+	 */
+
+	public abstract double calcOASFromDiscountMargin (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblDiscountMargin)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate OAS from Discount Margin to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblDiscountMargin Discount Margin to Maturity
+	 * 
+	 * @return OAS from Discount Margin to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if OAS cannot be calculated
+	 */
+
+	public abstract double calcOASFromDiscountMargin (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblDiscountMargin)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate OAS from Discount Margin to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblDiscountMargin Discount Margin to Optimal Exercise
+	 * 
+	 * @return OAS from Discount Margin to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if OAS cannot be calculated
+	 */
+
+	public abstract double calcOASFromDiscountMarginToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblDiscountMargin)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate OAS from G Spread to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblGSpread G Spread to Work-out
+	 * 
+	 * @return OAS from G Spread to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if the OAS cannot be calculated
+	 */
+
+	public abstract double calcOASFromGSpread (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblGSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate OAS from G Spread to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblGSpread G Spread to Maturity
+	 * 
+	 * @return OAS from G Spread to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if OAS cannot be calculated
+	 */
+
+	public abstract double calcOASFromGSpread (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblGSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate OAS from G Spread to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblGSpread G Spread to Optimal Exercise
+	 * 
+	 * @return OAS from G Spread to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if OAS cannot be calculated
+	 */
+
+	public abstract double calcOASFromGSpreadToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblGSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate OAS from I Spread to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblISpread I Spread to Work-out
+	 * 
+	 * @return OAS from I Spread to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if the OAS cannot be calculated
+	 */
+
+	public abstract double calcOASFromISpread (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblISpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate OAS from I Spread to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblISpread I Spread to Maturity
+	 * 
+	 * @return OAS from I Spread to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if OAS cannot be calculated
+	 */
+
+	public abstract double calcOASFromISpread (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblISpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate OAS from I Spread to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblISpread ISpread to Optimal Exercise
+	 * 
+	 * @return OAS from I Spread to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if OAS cannot be calculated
+	 */
+
+	public abstract double calcOASFromISpreadToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblISpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate OAS from PECS to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblPECS PECS to Work-out
+	 * 
+	 * @return OAS from PECS to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if the OAS cannot be calculated
+	 */
+
+	public abstract double calcOASFromPECS (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblPECS)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate OAS from PECS to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblPECS PECS to Maturity
+	 * 
+	 * @return OAS from PECS to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if OAS cannot be calculated
+	 */
+
+	public abstract double calcOASFromPECS (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblPECS)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate OAS from PECS to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblPECS PECS to Optimal Exercise
+	 * 
+	 * @return OAS from PECS to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if OAS cannot be calculated
+	 */
+
+	public abstract double calcOASFromPECSToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblPECS)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate OAS from Price to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblPrice Price to Work-out
+	 * 
+	 * @return OAS from Price to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if the OAS cannot be calculated
+	 */
+
+	public abstract double calcOASFromPrice (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblPrice)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate OAS from Price to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblPrice Price to Maturity
+	 * 
+	 * @return OAS from Price to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if OAS cannot be calculated
+	 */
+
+	public abstract double calcOASFromPrice (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblPrice)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate OAS from Price to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblPrice Price to Optimal Exercise
+	 * 
+	 * @return OAS from Price to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if OAS cannot be calculated
+	 */
+
+	public abstract double calcOASFromPriceToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblPrice)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate OAS from TSY Spread to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblTSYSpread TSY Spread to Work-out
+	 * 
+	 * @return OAS from TSY Spread to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if the OAS cannot be calculated
+	 */
+
+	public abstract double calcOASFromTSYSpread (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblTSYSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate OAS from TSY Spread to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblTSYSpread TSY Spread to Maturity
+	 * 
+	 * @return OAS from TSY Spread to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if OAS cannot be calculated
+	 */
+
+	public abstract double calcOASFromTSYSpread (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblTSYSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate OAS from TSY Spread to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblTSYSpread TSY Spread to Optimal Exercise
+	 * 
+	 * @return OAS from TSY Spread to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if OAS cannot be calculated
+	 */
+
+	public abstract double calcOASFromTSYSpreadToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblTSYSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate OAS from Yield to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblYield Yield to Work-out
+	 * 
+	 * @return OAS from Yield to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if the OAS cannot be calculated
+	 */
+
+	public abstract double calcOASFromYield (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblYield)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate OAS from Yield to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblYield Yield to Maturity
+	 * 
+	 * @return OAS from Yield to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if OAS cannot be calculated
+	 */
+
+	public abstract double calcOASFromYield (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblYield)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate OAS from Yield to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblYield Yield to Optimal Exercise
+	 * 
+	 * @return OAS from Yield to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if OAS cannot be calculated
+	 */
+
+	public abstract double calcOASFromYieldToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblYield)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate OAS from Yield Spread to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblYieldSpread Yield Spread to Work-out
+	 * 
+	 * @return OAS from Yield Spread to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if the OAS cannot be calculated
+	 */
+
+	public abstract double calcOASFromYieldSpread (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblYieldSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate OAS from Yield Spread to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblYieldSpread Yield Spread to Maturity
+	 * 
+	 * @return OAS from Yield Spread to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if OAS cannot be calculated
+	 */
+
+	public abstract double calcOASFromYieldSpread (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblYieldSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate OAS from Yield Spread to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblYieldSpread Yield Spread to Optimal Exercise
+	 * 
+	 * @return OAS from Yield Spread to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if OAS cannot be calculated
+	 */
+
+	public abstract double calcOASFromYieldSpreadToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblYieldSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate OAS from Z Spread to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblZSpread Z Spread to Work-out
+	 * 
+	 * @return OAS from Z Spread to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if the OAS cannot be calculated
+	 */
+
+	public abstract double calcOASFromZSpread (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblZSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate OAS from Z Spread to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblZSpread Z Spread to Maturity
+	 * 
+	 * @return OAS from Z Spread to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if OAS cannot be calculated
+	 */
+
+	public abstract double calcOASFromZSpread (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblZSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate OAS from Z Spread to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblZSpread Z Spread to Optimal Exercise
+	 * 
+	 * @return OAS from Z Spread to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if OAS cannot be calculated
+	 */
+
+	public abstract double calcOASFromZSpreadToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblZSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate PECS from ASW to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblASW ASW to Work-out
+	 * 
+	 * @return PECS from ASW to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if the PECS cannot be calculated
+	 */
+
+	public abstract double calcPECSFromASW (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblASW)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate PECS from ASW to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblASW ASW to Maturity
+	 * 
+	 * @return PECS from ASW to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if PECS cannot be calculated
+	 */
+
+	public abstract double calcPECSFromASW (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblASW)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate PECS from ASW to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblASW ASW to Optimal Exercise
+	 * 
+	 * @return PECS from ASW to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if PECS cannot be calculated
+	 */
+
+	public abstract double calcPECSFromASWToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblASW)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate PECS from Bond Basis to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblBondBasis Bond Basis to Work-out
+	 * 
+	 * @return PECS from Bond Basis to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if the PECS cannot be calculated
+	 */
+
+	public abstract double calcPECSFromBondBasis (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblBondBasis)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate PECS from Bond Basis to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblBondBasis Bond Basis to Maturity
+	 * 
+	 * @return PECS from Bond Basis to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if PECS cannot be calculated
+	 */
+
+	public abstract double calcPECSFromBondBasis (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblBondBasis)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate PECS from Bond Basis to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblBondBasis Bond Basis to Optimal Exercise
+	 * 
+	 * @return PECS from Bond Basis to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if PECS cannot be calculated
+	 */
+
+	public abstract double calcPECSFromBondBasisToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblBondBasis)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate PECS from Credit Basis to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblCreditBasis Credit Basis to Work-out
+	 * 
+	 * @return PECS from Credit Basis to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if the PECS cannot be calculated
+	 */
+
+	public abstract double calcPECSFromCreditBasis (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblCreditBasis)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate PECS from Credit Basis to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblCreditBasis Credit Basis to Maturity
+	 * 
+	 * @return PECS from Credit Basis to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if PECS cannot be calculated
+	 */
+
+	public abstract double calcPECSFromCreditBasis (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblCreditBasis)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate PECS from Credit Basis to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblCreditBasis Credit Basis to Optimal Exercise
+	 * 
+	 * @return PECS from Credit Basis to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if PECS cannot be calculated
+	 */
+
+	public abstract double calcPECSFromCreditBasisToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblCreditBasis)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate PECS from Discount Margin to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblDiscountMargin Discount Margin to Work-out
+	 * 
+	 * @return PECS from Discount Margin to Work-out
 	 * 
 	 * @throws java.lang.Exception Thrown if the PECS cannot be calculated
 	 */
@@ -11688,16 +9499,16 @@ public abstract class Bond extends CreditComponent {
 		throws java.lang.Exception;
 
 	/**
-	 * Calculate the Bond PECS from Discount Margin to Maturity
+	 * Calculate PECS from Discount Margin to Maturity
 	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblDiscountMargin The Discount Margin to Maturity input
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblDiscountMargin Discount Margin to Maturity
 	 * 
-	 * @return Calculated PECS from the Discount Margin to Maturity
+	 * @return PECS from Discount Margin to Maturity
 	 * 
-	 * @throws java.lang.Exception Thrown if the PECS cannot be calculated
+	 * @throws java.lang.Exception Thrown if PECS cannot be calculated
 	 */
 
 	public abstract double calcPECSFromDiscountMargin (
@@ -11708,19 +9519,767 @@ public abstract class Bond extends CreditComponent {
 		throws java.lang.Exception;
 
 	/**
-	 * Calculate the Bond PECS from Discount Margin to Exercise
+	 * Calculate PECS from Discount Margin to Optimal Exercise
 	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblDiscountMargin The Discount Margin to Exercise input
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblDiscountMargin Discount Margin to Optimal Exercise
 	 * 
-	 * @return Calculated PECS from the Discount Margin to Exercise
+	 * @return PECS from Discount Margin to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if PECS cannot be calculated
+	 */
+
+	public abstract double calcPECSFromDiscountMarginToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblDiscountMargin)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate PECS from G Spread to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblGSpread G Spread to Work-out
+	 * 
+	 * @return PECS from G Spread to Work-out
 	 * 
 	 * @throws java.lang.Exception Thrown if the PECS cannot be calculated
 	 */
 
-	public abstract double calcExercisePECSFromDiscountMargin (
+	public abstract double calcPECSFromGSpread (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblGSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate PECS from G Spread to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblGSpread G Spread to Maturity
+	 * 
+	 * @return PECS from G Spread to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if PECS cannot be calculated
+	 */
+
+	public abstract double calcPECSFromGSpread (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblGSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate PECS from G Spread to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblGSpread G Spread to Optimal Exercise
+	 * 
+	 * @return PECS from G Spread to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if PECS cannot be calculated
+	 */
+
+	public abstract double calcPECSFromGSpreadToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblGSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate PECS from I Spread to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblISpread I Spread to Work-out
+	 * 
+	 * @return PECS from I Spread to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if the PECS cannot be calculated
+	 */
+
+	public abstract double calcPECSFromISpread (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblISpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate PECS from I Spread to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblISpread I Spread to Maturity
+	 * 
+	 * @return PECS from I Spread to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if PECS cannot be calculated
+	 */
+
+	public abstract double calcPECSFromISpread (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblISpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate PECS from I Spread to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblISpread ISpread to Optimal Exercise
+	 * 
+	 * @return PECS from I Spread to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if PECS cannot be calculated
+	 */
+
+	public abstract double calcPECSFromISpreadToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblISpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate PECS from OAS to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblOAS OAS to Work-out
+	 * 
+	 * @return PECS from OAS to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if the PECS cannot be calculated
+	 */
+
+	public abstract double calcPECSFromOAS (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblOAS)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate PECS from OAS to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblOAS OAS to Maturity
+	 * 
+	 * @return PECS from OAS to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if PECS cannot be calculated
+	 */
+
+	public abstract double calcPECSFromOAS (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblOAS)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate PECS from OAS to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblOAS OAS to Optimal Exercise
+	 * 
+	 * @return PECS from OAS to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if PECS cannot be calculated
+	 */
+
+	public abstract double calcPECSFromOASToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblOAS)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate PECS from Price to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblPrice Price to Work-out
+	 * 
+	 * @return PECS from Price to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if the Price cannot be calculated
+	 */
+
+	public abstract double calcPECSFromPrice (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblPrice)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate PECS from Price to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblPrice Price to Maturity
+	 * 
+	 * @return PECS from Price to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if PECS cannot be calculated
+	 */
+
+	public abstract double calcPECSFromPrice (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblPrice)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate PECS from Price to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblPrice Price to Optimal Exercise
+	 * 
+	 * @return PECS from Price to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if PECS cannot be calculated
+	 */
+
+	public abstract double calcPECSFromPriceToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblPrice)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate PECS from TSY Spread to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblTSYSpread TSY Spread to Work-out
+	 * 
+	 * @return PECS from TSY Spread to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if the PECS cannot be calculated
+	 */
+
+	public abstract double calcPECSFromTSYSpread (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblTSYSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate PECS from TSY Spread to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblTSYSpread TSY Spread to Maturity
+	 * 
+	 * @return PECS from TSY Spread to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if PECS cannot be calculated
+	 */
+
+	public abstract double calcPECSFromTSYSpread (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblTSYSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate PECS from TSY Spread to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblTSYSpread TSY Spread to Optimal Exercise
+	 * 
+	 * @return PECS from TSY Spread to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if PECS cannot be calculated
+	 */
+
+	public abstract double calcPECSFromTSYSpreadToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblTSYSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate PECS from Yield to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblYield Yield to Work-out
+	 * 
+	 * @return PECS from Yield to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if the PECS cannot be calculated
+	 */
+
+	public abstract double calcPECSFromYield (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblYield)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate PECS from Yield to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblYield Yield to Maturity
+	 * 
+	 * @return PECS from Yield to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if PECS cannot be calculated
+	 */
+
+	public abstract double calcPECSFromYield (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblYield)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate PECS from Yield to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblYield Yield to Optimal Exercise
+	 * 
+	 * @return PECS from Yield to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if PECS cannot be calculated
+	 */
+
+	public abstract double calcPECSFromYieldToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblYield)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate PECS from Yield Spread to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblYieldSpread Yield Spread to Work-out
+	 * 
+	 * @return PECS from Yield Spread to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if the PECS cannot be calculated
+	 */
+
+	public abstract double calcPECSFromYieldSpread (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblYieldSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate PECS from Yield Spread to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblYieldSpread Yield Spread to Maturity
+	 * 
+	 * @return PECS from Yield Spread to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if PECS cannot be calculated
+	 */
+
+	public abstract double calcPECSFromYieldSpread (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblYieldSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate PECS from Yield Spread to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblYieldSpread Yield Spread to Optimal Exercise
+	 * 
+	 * @return PECS from Yield Spread to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if PECS cannot be calculated
+	 */
+
+	public abstract double calcPECSFromYieldSpreadToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblYieldSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate PECS from Z Spread to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblZSpread Z Spread to Work-out
+	 * 
+	 * @return PECS from Z Spread to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if the PECS cannot be calculated
+	 */
+
+	public abstract double calcPECSFromZSpread (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblZSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate PECS from Z Spread to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblZSpread Z Spread to Maturity
+	 * 
+	 * @return PECS from Z Spread to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if PECS cannot be calculated
+	 */
+
+	public abstract double calcPECSFromZSpread (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblZSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate PECS from Z Spread to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblZSpread Z Spread to Optimal Exercise
+	 * 
+	 * @return PECS from Z Spread to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if PECS cannot be calculated
+	 */
+
+	public abstract double calcPECSFromZSpreadToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblZSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Price from ASW to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblASW ASW to Work-out
+	 * 
+	 * @return Price from ASW to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if the Price cannot be calculated
+	 */
+
+	public abstract double calcPriceFromASW (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblASW)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Price from ASW to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblASW ASW to Maturity
+	 * 
+	 * @return Price from ASW to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if Price cannot be calculated
+	 */
+
+	public abstract double calcPriceFromASW (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblASW)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Price from ASW to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblASW ASW to Optimal Exercise
+	 * 
+	 * @return Price from ASW to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if Price cannot be calculated
+	 */
+
+	public abstract double calcPriceFromASWToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblASW)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Price from Bond Basis to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblBondBasis Bond Basis to Work-out
+	 * 
+	 * @return Price from Bond Basis to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if the Price cannot be calculated
+	 */
+
+	public abstract double calcPriceFromBondBasis (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblBondBasis)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Price from Bond Basis to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblBondBasis Bond Basis to Maturity
+	 * 
+	 * @return Price from Bond Basis to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if Price cannot be calculated
+	 */
+
+	public abstract double calcPriceFromBondBasis (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblBondBasis)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Price from Bond Basis to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblBondBasis Bond Basis to Optimal Exercise
+	 * 
+	 * @return Price from Bond Basis to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if Price cannot be calculated
+	 */
+
+	public abstract double calcPriceFromBondBasisToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblBondBasis)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Price from Credit Basis to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblCreditBasis Credit Basis to Work-out
+	 * 
+	 * @return Price from Credit Basis to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if the Price cannot be calculated
+	 */
+
+	public abstract double calcPriceFromCreditBasis (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblCreditBasis)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Price from Credit Basis to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblCreditBasis Credit Basis to Maturity
+	 * 
+	 * @return Price from Credit Basis to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if Price cannot be calculated
+	 */
+
+	public abstract double calcPriceFromCreditBasis (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblCreditBasis)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Price from Credit Basis to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblCreditBasis Credit Basis to Optimal Exercise
+	 * 
+	 * @return Price from Credit Basis to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if Price cannot be calculated
+	 */
+
+	public abstract double calcPriceFromCreditBasisToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblCreditBasis)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Price from Discount Margin to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblDiscountMargin Discount Margin to Work-out
+	 * 
+	 * @return Price from Discount Margin to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if the Price cannot be calculated
+	 */
+
+	public abstract double calcPriceFromDiscountMargin (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblDiscountMargin)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Price from Discount Margin to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblDiscountMargin Discount Margin to Maturity
+	 * 
+	 * @return Price from Discount Margin to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if Price cannot be calculated
+	 */
+
+	public abstract double calcPriceFromDiscountMargin (
 		final org.drip.param.valuation.ValuationParams valParams,
 		final org.drip.param.definition.ComponentMarketParams mktParams,
 		final org.drip.param.valuation.QuotingParams quotingParams,
@@ -11728,196 +10287,2276 @@ public abstract class Bond extends CreditComponent {
 		throws java.lang.Exception;
 
 	/**
-	 * Calculate the bond Spread to Treasury from Discount Margin to Work-out
+	 * Calculate Price from Discount Margin to Optimal Exercise
 	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param dblWorkoutDate JulianDate Work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblDiscountMargin The Discount Margin to Work-out input
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblDiscountMargin Discount Margin to Optimal Exercise
 	 * 
-	 * @return Calculated Spread to Treasury from the Discount Margin to Work-out
+	 * @return Price from Discount Margin to Optimal Exercise
 	 * 
-	 * @throws java.lang.Exception Thrown if the Spread to Treasury cannot be calculated
+	 * @throws java.lang.Exception Thrown if Price cannot be calculated
+	 */
+
+	public abstract double calcPriceFromDiscountMarginToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblDiscountMargin)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Price from G Spread to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblGSpread G Spread to Work-out
+	 * 
+	 * @return Price from G Spread to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if the Price cannot be calculated
+	 */
+
+	public abstract double calcPriceFromGSpread (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblGSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Price from G Spread to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblGSpread G Spread to Maturity
+	 * 
+	 * @return Price from G Spread to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if Price cannot be calculated
+	 */
+
+	public abstract double calcPriceFromGSpread (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblGSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Price from G Spread to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblGSpread G Spread to Optimal Exercise
+	 * 
+	 * @return Price from G Spread to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if Price cannot be calculated
+	 */
+
+	public abstract double calcPriceFromGSpreadToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblGSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Price from I Spread to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblISpread I Spread to Work-out
+	 * 
+	 * @return Price from I Spread to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if the Price cannot be calculated
+	 */
+
+	public abstract double calcPriceFromISpread (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblISpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Price from I Spread to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblISpread I Spread to Maturity
+	 * 
+	 * @return Price from I Spread to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if Price cannot be calculated
+	 */
+
+	public abstract double calcPriceFromISpread (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblISpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Price from I Spread to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblISpread ISpread to Optimal Exercise
+	 * 
+	 * @return Price from I Spread to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if Price cannot be calculated
+	 */
+
+	public abstract double calcPriceFromISpreadToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblISpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Price from OAS to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblOAS OAS to Work-out
+	 * 
+	 * @return Price from OAS to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if the Price cannot be calculated
+	 */
+
+	public abstract double calcPriceFromOAS (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblOAS)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Price from OAS to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblOAS OAS to Maturity
+	 * 
+	 * @return Price from OAS to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if Price cannot be calculated
+	 */
+
+	public abstract double calcPriceFromOAS (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblOAS)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Price from OAS to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblOAS OAS to Optimal Exercise
+	 * 
+	 * @return Price from OAS to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if Price cannot be calculated
+	 */
+
+	public abstract double calcPriceFromOASToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblOAS)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Price from PECS to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblPECS PECS to Work-out
+	 * 
+	 * @return Price from PECS to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if the PECS cannot be calculated
+	 */
+
+	public abstract double calcPriceFromPECS (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblPECS)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Price from PECS to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblPECS PECS to Maturity
+	 * 
+	 * @return Price from PECS to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if Price cannot be calculated
+	 */
+
+	public abstract double calcPriceFromPECS (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblPECS)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Price from PECS to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblPECS PECS to Optimal Exercise
+	 * 
+	 * @return Price from PECS to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if Price cannot be calculated
+	 */
+
+	public abstract double calcPriceFromPECSToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblPECS)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Price from TSY Spread to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblTSYSpread TSY Spread to Work-out
+	 * 
+	 * @return Price from TSY Spread to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if the Price cannot be calculated
+	 */
+
+	public abstract double calcPriceFromTSYSpread (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblTSYSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Price from TSY Spread to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblTSYSpread TSY Spread to Maturity
+	 * 
+	 * @return Price from TSY Spread to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if Price cannot be calculated
+	 */
+
+	public abstract double calcPriceFromTSYSpread (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblTSYSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Price from TSY Spread to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblTSYSpread TSY Spread to Optimal Exercise
+	 * 
+	 * @return Price from TSY Spread to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if Price cannot be calculated
+	 */
+
+	public abstract double calcPriceFromTSYSpreadToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblTSYSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Price from Yield to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblYield Yield to Work-out
+	 * 
+	 * @return Price from Yield to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if the Price cannot be calculated
+	 */
+
+	public abstract double calcPriceFromYield (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblYield)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Price from Yield to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblYield Yield to Maturity
+	 * 
+	 * @return Price from Yield to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if Price cannot be calculated
+	 */
+
+	public abstract double calcPriceFromYield (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblYield)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Price from Yield to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblYield Yield to Optimal Exercise
+	 * 
+	 * @return Price from Yield to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if Price cannot be calculated
+	 */
+
+	public abstract double calcPriceFromYieldToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblYield)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Price from Yield Spread to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblYieldSpread Yield Spread to Work-out
+	 * 
+	 * @return Price from Yield Spread to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if the Price cannot be calculated
+	 */
+
+	public abstract double calcPriceFromYieldSpread (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblYieldSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Price from Yield Spread to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblYieldSpread Yield Spread to Maturity
+	 * 
+	 * @return Price from Yield Spread to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if Price cannot be calculated
+	 */
+
+	public abstract double calcPriceFromYieldSpread (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblYieldSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Price from Yield Spread to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblYieldSpread Yield Spread to Optimal Exercise
+	 * 
+	 * @return Price from Yield Spread to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if Price cannot be calculated
+	 */
+
+	public abstract double calcPriceFromYieldSpreadToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblYieldSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Price from Z Spread to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblZSpread Z Spread to Work-out
+	 * 
+	 * @return Price from Z Spread to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if the Price cannot be calculated
+	 */
+
+	public abstract double calcPriceFromZSpread (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblZSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Price from Z Spread to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblZSpread Z Spread to Maturity
+	 * 
+	 * @return Price from Z Spread to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if Price cannot be calculated
+	 */
+
+	public abstract double calcPriceFromZSpread (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblZSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Price from Z Spread to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblZSpread Z Spread to Optimal Exercise
+	 * 
+	 * @return Price from Z Spread to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if Price cannot be calculated
+	 */
+
+	public abstract double calcPriceFromZSpreadToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblZSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate TSY Spread from ASW to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblASW ASW to Work-out
+	 * 
+	 * @return TSY Spread from ASW to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if the TSY Spread cannot be calculated
+	 */
+
+	public abstract double calcTSYSpreadFromASW (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblASW)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate TSY Spread from ASW to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblASW ASW to Maturity
+	 * 
+	 * @return TSY Spread from ASW to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if TSY Spread cannot be calculated
+	 */
+
+	public abstract double calcTSYSpreadFromASW (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblASW)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate TSY Spread from ASW to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblASW ASW to Optimal Exercise
+	 * 
+	 * @return TSY Spread from ASW to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if TSY Spread cannot be calculated
+	 */
+
+	public abstract double calcTSYSpreadFromASWToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblASW)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate TSY Spread from Bond Basis to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblBondBasis Bond Basis to Work-out
+	 * 
+	 * @return TSY Spread from Bond Basis to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if the TSY Spread cannot be calculated
+	 */
+
+	public abstract double calcTSYSpreadFromBondBasis (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblBondBasis)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate TSY Spread from Bond Basis to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblBondBasis Bond Basis to Maturity
+	 * 
+	 * @return TSY Spread from Bond Basis to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if TSY Spread cannot be calculated
+	 */
+
+	public abstract double calcTSYSpreadFromBondBasis (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblBondBasis)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate TSY Spread from Bond Basis to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblBondBasis Bond Basis to Optimal Exercise
+	 * 
+	 * @return TSY Spread from Bond Basis to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if TSY Spread cannot be calculated
+	 */
+
+	public abstract double calcTSYSpreadFromBondBasisToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblBondBasis)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate TSY Spread from Credit Basis to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblCreditBasis Credit Basis to Work-out
+	 * 
+	 * @return TSY Spread from Credit Basis to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if the TSY Spread cannot be calculated
+	 */
+
+	public abstract double calcTSYSpreadFromCreditBasis (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblCreditBasis)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate TSY Spread from Credit Basis to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblCreditBasis Credit Basis to Maturity
+	 * 
+	 * @return TSY Spread from Credit Basis to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if TSY Spread cannot be calculated
+	 */
+
+	public abstract double calcTSYSpreadFromCreditBasis (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblCreditBasis)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate TSY Spread from Credit Basis to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblCreditBasis Credit Basis to Optimal Exercise
+	 * 
+	 * @return TSY Spread from Credit Basis to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if TSY Spread cannot be calculated
+	 */
+
+	public abstract double calcTSYSpreadFromCreditBasisToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblCreditBasis)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate TSY Spread from Discount Margin to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblDiscountMargin Discount Margin to Work-out
+	 * 
+	 * @return TSY Spread from Discount Margin to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if the TSY Spread cannot be calculated
 	 */
 
 	public abstract double calcTSYSpreadFromDiscountMargin (
 		final org.drip.param.valuation.ValuationParams valParams,
 		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
 		final double dblWorkoutDate,
 		final double dblWorkoutFactor,
 		final double dblDiscountMargin)
 		throws java.lang.Exception;
 
 	/**
-	 * Calculate the bond Spread to Treasury from Discount Margin to Maturity
+	 * Calculate TSY Spread from Discount Margin to Maturity
 	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param dblDiscountMargin The Discount Margin to Maturity input
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblDiscountMargin Discount Margin to Maturity
 	 * 
-	 * @return Calculated Spread to Treasury from the Discount Margin to Maturity
+	 * @return TSY Spread from Discount Margin to Maturity
 	 * 
-	 * @throws java.lang.Exception Thrown if the Spread to Treasury cannot be calculated
+	 * @throws java.lang.Exception Thrown if TSY Spread cannot be calculated
 	 */
 
 	public abstract double calcTSYSpreadFromDiscountMargin (
 		final org.drip.param.valuation.ValuationParams valParams,
 		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
 		final double dblDiscountMargin)
 		throws java.lang.Exception;
 
 	/**
-	 * Calculate the bond Spread to Treasury from Discount Margin to Exercise
+	 * Calculate TSY Spread from Discount Margin to Optimal Exercise
 	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param dblDiscountMargin The Discount Margin to Exercise input
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblDiscountMargin Discount Margin to Optimal Exercise
 	 * 
-	 * @return Calculated Spread to Treasury from the Discount Margin to Exercise
+	 * @return TSY Spread from Discount Margin to Optimal Exercise
 	 * 
-	 * @throws java.lang.Exception Thrown if the Spread to Treasury cannot be calculated
+	 * @throws java.lang.Exception Thrown if TSY Spread cannot be calculated
 	 */
 
-	public abstract double calcExerciseTSYSpreadFromDiscountMargin (
+	public abstract double calcTSYSpreadFromDiscountMarginToOptimalExercise (
 		final org.drip.param.valuation.ValuationParams valParams,
 		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
 		final double dblDiscountMargin)
 		throws java.lang.Exception;
 
 	/**
-	 * Calculate the bond G Spread from Discount Margin to Work-out
+	 * Calculate TSY Spread from I Spread to Work-out
 	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param dblWorkoutDate JulianDate Work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblDiscountMargin The Discount Margin to Work-out input
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblISpread I Spread to Work-out
 	 * 
-	 * @return Calculated G Spread from the Discount Margin to Work-out
+	 * @return TSY Spread from I Spread to Work-out
 	 * 
-	 * @throws java.lang.Exception Thrown if the G Spread cannot be calculated
+	 * @throws java.lang.Exception Thrown if the TSY Spread cannot be calculated
 	 */
 
-	public abstract double calcGSpreadFromDiscountMargin (
+	public abstract double calcTSYSpreadFromISpread (
 		final org.drip.param.valuation.ValuationParams valParams,
 		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblISpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate TSY Spread from I Spread to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblISpread I Spread to Maturity
+	 * 
+	 * @return TSY Spread from I Spread to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if TSY Spread cannot be calculated
+	 */
+
+	public abstract double calcTSYSpreadFromISpread (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblISpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate TSY Spread from I Spread to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblISpread I Spread to Optimal Exercise
+	 * 
+	 * @return TSY Spread from I Spread to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if TSY Spread cannot be calculated
+	 */
+
+	public abstract double calcTSYSpreadFromISpreadToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblISpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate TSY Spread from G Spread to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblGSpread G Spread to Work-out
+	 * 
+	 * @return TSY Spread from G Spread to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if the TSY Spread cannot be calculated
+	 */
+
+	public abstract double calcTSYSpreadFromGSpread (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblGSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate TSY Spread from G Spread to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblGSpread G Spread to Maturity
+	 * 
+	 * @return TSY Spread from G Spread to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if TSY Spread cannot be calculated
+	 */
+
+	public abstract double calcTSYSpreadFromGSpread (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblGSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate TSY Spread from G Spread to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblGSpread G Spread to Optimal Exercise
+	 * 
+	 * @return TSY Spread from G Spread to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if TSY Spread cannot be calculated
+	 */
+
+	public abstract double calcTSYSpreadFromGSpreadToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblGSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate TSY Spread from OAS to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblOAS OAS to Work-out
+	 * 
+	 * @return TSY Spread from OAS to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if the TSY Spread cannot be calculated
+	 */
+
+	public abstract double calcTSYSpreadFromOAS (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblOAS)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate TSY Spread from OAS to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblOAS OAS to Maturity
+	 * 
+	 * @return TSY Spread from OAS to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if TSY Spread cannot be calculated
+	 */
+
+	public abstract double calcTSYSpreadFromOAS (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblOAS)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate TSY Spread from OAS to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblOAS OAS to Optimal Exercise
+	 * 
+	 * @return TSY Spread from OAS to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if TSY Spread cannot be calculated
+	 */
+
+	public abstract double calcTSYSpreadFromOASToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblOAS)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate TSY Spread from PECS to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblPECS PECS to Work-out
+	 * 
+	 * @return TSY Spread from PECS to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if the TSY Spread cannot be calculated
+	 */
+
+	public abstract double calcTSYSpreadFromPECS (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblPECS)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate TSY Spread from PECS to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblPECS PECS to Maturity
+	 * 
+	 * @return TSY Spread from PECS to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if TSY Spread cannot be calculated
+	 */
+
+	public abstract double calcTSYSpreadFromPECS (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblPECS)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate TSY Spread from PECS to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblPECS PECS to Optimal Exercise
+	 * 
+	 * @return TSY Spread from PECS to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if TSY Spread cannot be calculated
+	 */
+
+	public abstract double calcTSYSpreadFromPECSToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblPECS)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate TSY Spread from Price to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblPrice Price to Work-out
+	 * 
+	 * @return TSY Spread from Price to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if the TSY Spread cannot be calculated
+	 */
+
+	public abstract double calcTSYSpreadFromPrice (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblPrice)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate TSY Spread from Price to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblPrice Price to Maturity
+	 * 
+	 * @return TSY Spread from Price to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if TSY Spread cannot be calculated
+	 */
+
+	public abstract double calcTSYSpreadFromPrice (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblPrice)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate TSY Spread from Price to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblPrice Price to Optimal Exercise
+	 * 
+	 * @return TSY Spread from Price to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if TSY Spread cannot be calculated
+	 */
+
+	public abstract double calcTSYSpreadFromPriceToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblPrice)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate TSY Spread from Yield to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblYield Yield to Work-out
+	 * 
+	 * @return TSY Spread from Yield to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if the TSY Spread cannot be calculated
+	 */
+
+	public abstract double calcTSYSpreadFromYield (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblYield)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate TSY Spread from Yield to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblYield Yield to Maturity
+	 * 
+	 * @return TSY Spread from Yield to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if TSY Spread cannot be calculated
+	 */
+
+	public abstract double calcTSYSpreadFromYield (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblYield)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate TSY Spread from Yield to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblYield Yield to Optimal Exercise
+	 * 
+	 * @return TSY Spread from Yield to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if TSY Spread cannot be calculated
+	 */
+
+	public abstract double calcTSYSpreadFromYieldToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblYield)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate TSY Spread from Yield Spread to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblYieldSpread Yield Spread to Work-out
+	 * 
+	 * @return TSY Spread from Yield Spread to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if the TSY Spread cannot be calculated
+	 */
+
+	public abstract double calcTSYSpreadFromYieldSpread (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblYieldSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate TSY Spread from Yield Spread to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblYieldSpread Yield Spread to Maturity
+	 * 
+	 * @return TSY Spread from Yield Spread to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if TSY Spread cannot be calculated
+	 */
+
+	public abstract double calcTSYSpreadFromYieldSpread (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblYieldSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate TSY Spread from Yield Spread to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblYieldSpread Yield Spread to Optimal Exercise
+	 * 
+	 * @return TSY Spread from Yield Spread to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if TSY Spread cannot be calculated
+	 */
+
+	public abstract double calcTSYSpreadFromYieldSpreadToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblYieldSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate TSY Spread from Z Spread to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblZSpread Z Spread to Work-out
+	 * 
+	 * @return TSY Spread from Z Spread to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if the TSY Spread cannot be calculated
+	 */
+
+	public abstract double calcTSYSpreadFromZSpread (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblZSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate TSY Spread from Z Spread to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblZSpread Z Spread to Maturity
+	 * 
+	 * @return TSY Spread from Z Spread to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if TSY Spread cannot be calculated
+	 */
+
+	public abstract double calcTSYSpreadFromZSpread (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblZSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate TSY Spread from Z Spread to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblZSpread Z Spread to Optimal Exercise
+	 * 
+	 * @return TSY Spread from Z Spread to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if TSY Spread cannot be calculated
+	 */
+
+	public abstract double calcTSYSpreadFromZSpreadToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblZSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Yield from ASW to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblASW ASW to Work-out
+	 * 
+	 * @return Yield from ASW to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if the Yield cannot be calculated
+	 */
+
+	public abstract double calcYieldFromASW (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblASW)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Yield from ASW to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblASW ASW to Maturity
+	 * 
+	 * @return Yield from ASW to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if Yield cannot be calculated
+	 */
+
+	public abstract double calcYieldFromASW (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblASW)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Yield from ASW to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblASW ASW to Optimal Exercise
+	 * 
+	 * @return Yield from ASW to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if Yield cannot be calculated
+	 */
+
+	public abstract double calcYieldFromASWToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblASW)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Yield from Bond Basis to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblBondBasis Bond Basis to Work-out
+	 * 
+	 * @return Yield from Bond Basis to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if the Yield cannot be calculated
+	 */
+
+	public abstract double calcYieldFromBondBasis (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblBondBasis)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Yield from Bond Basis to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblBondBasis Bond Basis to Maturity
+	 * 
+	 * @return Yield from Bond Basis to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if Yield cannot be calculated
+	 */
+
+	public abstract double calcYieldFromBondBasis (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblBondBasis)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Yield from Bond Basis to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblBondBasis Bond Basis to Optimal Exercise
+	 * 
+	 * @return Yield from Bond Basis to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if Yield cannot be calculated
+	 */
+
+	public abstract double calcYieldFromBondBasisToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblBondBasis)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Yield from Credit Basis to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblCreditBasis Credit Basis to Work-out
+	 * 
+	 * @return Yield from Credit Basis to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if the Yield cannot be calculated
+	 */
+
+	public abstract double calcYieldFromCreditBasis (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblCreditBasis)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Yield from Credit Basis to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblCreditBasis Credit Basis to Maturity
+	 * 
+	 * @return Yield from Credit Basis to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if Yield cannot be calculated
+	 */
+
+	public abstract double calcYieldFromCreditBasis (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblCreditBasis)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Yield from Credit Basis to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblCreditBasis Credit Basis to Optimal Exercise
+	 * 
+	 * @return Yield from Credit Basis to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if Yield cannot be calculated
+	 */
+
+	public abstract double calcYieldFromCreditBasisToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblCreditBasis)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Yield from Discount Margin to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblDiscountMargin Discount Margin to Work-out
+	 * 
+	 * @return Yield from Discount Margin to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if the Yield cannot be calculated
+	 */
+
+	public abstract double calcYieldFromDiscountMargin (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
 		final double dblWorkoutDate,
 		final double dblWorkoutFactor,
 		final double dblDiscountMargin)
 		throws java.lang.Exception;
 
 	/**
-	 * Calculate the bond G Spread from Discount Margin to Maturity
+	 * Calculate Yield from Discount Margin to Maturity
 	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param dblDiscountMargin The Discount Margin to Maturity input
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblDiscountMargin Discount Margin to Maturity
 	 * 
-	 * @return Calculated G Spread from the Discount Margin to Maturity
+	 * @return Yield from Discount Margin to Maturity
 	 * 
-	 * @throws java.lang.Exception Thrown if the G Spread cannot be calculated
+	 * @throws java.lang.Exception Thrown if Yield cannot be calculated
 	 */
 
-	public abstract double calcGSpreadFromDiscountMargin (
+	public abstract double calcYieldFromDiscountMargin (
 		final org.drip.param.valuation.ValuationParams valParams,
 		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
 		final double dblDiscountMargin)
 		throws java.lang.Exception;
 
 	/**
-	 * Calculate the bond G Spread from Discount Margin to Exercise
+	 * Calculate Yield from Discount Margin to Optimal Exercise
 	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param dblDiscountMargin The Discount Margin to Exercise input
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblDiscountMargin Discount Margin to Optimal Exercise
 	 * 
-	 * @return Calculated G Spread from the Discount Margin to Exercise
+	 * @return Yield from Discount Margin to Optimal Exercise
 	 * 
-	 * @throws java.lang.Exception Thrown if the G Spread cannot be calculated
+	 * @throws java.lang.Exception Thrown if Yield cannot be calculated
 	 */
 
-	public abstract double calcExerciseGSpreadFromDiscountMargin (
+	public abstract double calcYieldFromDiscountMarginToOptimalExercise (
 		final org.drip.param.valuation.ValuationParams valParams,
 		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
 		final double dblDiscountMargin)
 		throws java.lang.Exception;
 
 	/**
-	 * Calculate the bond Duration from Discount Margin to Work-out
+	 * Calculate Yield from G Spread to Work-out
 	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblWorkoutDate JulianDate Work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblDiscountMargin The Discount Margin to Work-out input
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblGSpread G Spread to Work-out
 	 * 
-	 * @return Calculated Duration from the Discount Margin to Work-out
+	 * @return Yield from G Spread to Work-out
 	 * 
-	 * @throws java.lang.Exception Thrown if the Duration cannot be calculated
+	 * @throws java.lang.Exception Thrown if the Yield cannot be calculated
 	 */
 
-	public abstract double calcDurationFromDiscountMargin (
+	public abstract double calcYieldFromGSpread (
 		final org.drip.param.valuation.ValuationParams valParams,
 		final org.drip.param.definition.ComponentMarketParams mktParams,
 		final org.drip.param.valuation.QuotingParams quotingParams,
 		final double dblWorkoutDate,
 		final double dblWorkoutFactor,
-		final double dblDiscountMargin)
+		final double dblGSpread)
 		throws java.lang.Exception;
 
 	/**
-	 * Calculate the bond Duration from Discount Margin to Maturity
+	 * Calculate Yield from G Spread to Maturity
 	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblDiscountMargin The Discount Margin to Maturity input
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblGSpread G Spread to Maturity
 	 * 
-	 * @return Calculated Duration from the Discount Margin to Maturity
+	 * @return Yield from G Spread to Maturity
 	 * 
-	 * @throws java.lang.Exception Thrown if the Duration cannot be calculated
+	 * @throws java.lang.Exception Thrown if Yield cannot be calculated
 	 */
 
-	public abstract double calcDurationFromDiscountMargin (
+	public abstract double calcYieldFromGSpread (
 		final org.drip.param.valuation.ValuationParams valParams,
 		final org.drip.param.definition.ComponentMarketParams mktParams,
 		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblDiscountMargin)
+		final double dblGSpread)
 		throws java.lang.Exception;
 
 	/**
-	 * Calculate the bond Duration from Discount Margin to Exercise
+	 * Calculate Yield from G Spread to Optimal Exercise
 	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblDiscountMargin The Discount Margin to Exercise input
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblGSpread G Spread to Optimal Exercise
 	 * 
-	 * @return Calculated Duration from the Discount Margin to Exercise
+	 * @return Yield from G Spread to Optimal Exercise
 	 * 
-	 * @throws java.lang.Exception Thrown if the Duration cannot be calculated
+	 * @throws java.lang.Exception Thrown if Yield cannot be calculated
 	 */
 
-	public abstract double calcExerciseDurationFromDiscountMargin (
+	public abstract double calcYieldFromGSpreadToOptimalExercise (
 		final org.drip.param.valuation.ValuationParams valParams,
 		final org.drip.param.definition.ComponentMarketParams mktParams,
 		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblDiscountMargin)
+		final double dblGSpread)
 		throws java.lang.Exception;
 
 	/**
-	 * Calculate the bond Yield01 from Discount Margin to Work-out
+	 * Calculate Yield from I Spread to Work-out
 	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblWorkoutDate JulianDate Work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblDiscountMargin The Discount Margin to Work-out input
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblISpread I Spread to Work-out
 	 * 
-	 * @return Calculated Yield01 from the Discount Margin to Work-out
+	 * @return Yield from I Spread to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if the Yield cannot be calculated
+	 */
+
+	public abstract double calcYieldFromISpread (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblISpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Yield from I Spread to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblISpread I Spread to Maturity
+	 * 
+	 * @return Yield from I Spread to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if Yield cannot be calculated
+	 */
+
+	public abstract double calcYieldFromISpread (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblISpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Yield from I Spread to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblISpread ISpread to Optimal Exercise
+	 * 
+	 * @return Yield from I Spread to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if Yield cannot be calculated
+	 */
+
+	public abstract double calcYieldFromISpreadToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblISpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Yield from OAS to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblOAS OAS to Work-out
+	 * 
+	 * @return Yield from OAS to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if the Yield cannot be calculated
+	 */
+
+	public abstract double calcYieldFromOAS (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblOAS)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Yield from OAS to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblOAS OAS to Maturity
+	 * 
+	 * @return Yield from OAS to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if Yield cannot be calculated
+	 */
+
+	public abstract double calcYieldFromOAS (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblOAS)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Yield from OAS to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblOAS OAS to Optimal Exercise
+	 * 
+	 * @return Yield from OAS to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if Yield cannot be calculated
+	 */
+
+	public abstract double calcYieldFromOASToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblOAS)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Yield from PECS to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblPECS PECS to Work-out
+	 * 
+	 * @return Yield from PECS to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if the Yield cannot be calculated
+	 */
+
+	public abstract double calcYieldFromPECS (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblPECS)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Yield from PECS to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblPECS PECS to Maturity
+	 * 
+	 * @return Yield from PECS to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if Yield cannot be calculated
+	 */
+
+	public abstract double calcYieldFromPECS (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblPECS)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Yield from PECS to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblPECS PECS to Optimal Exercise
+	 * 
+	 * @return Yield from PECS to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if Yield cannot be calculated
+	 */
+
+	public abstract double calcYieldFromPECSToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblPECS)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Yield from Price to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblPrice Price to Work-out
+	 * 
+	 * @return Yield from Price to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if the Yield cannot be calculated
+	 */
+
+	public abstract double calcYieldFromPrice (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblPrice)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Yield from Price to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblPrice Price to Maturity
+	 * 
+	 * @return Yield from Price to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if Yield cannot be calculated
+	 */
+
+	public abstract double calcYieldFromPrice (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblPrice)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Yield from Price to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblPrice Price to Optimal Exercise
+	 * 
+	 * @return Yield from Price to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if Yield cannot be calculated
+	 */
+
+	public abstract double calcYieldFromPriceToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblPrice)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Yield from TSY Spread to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblTSYSpread TSY Spread to Work-out
+	 * 
+	 * @return Yield from TSY Spread to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if the Yield cannot be calculated
+	 */
+
+	public abstract double calcYieldFromTSYSpread (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblTSYSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Yield from TSY Spread to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblTSYSpread TSY Spread to Maturity
+	 * 
+	 * @return Yield from TSY Spread to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if Yield cannot be calculated
+	 */
+
+	public abstract double calcYieldFromTSYSpread (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblTSYSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Yield from TSY Spread to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblTSYSpread TSY Spread to Optimal Exercise
+	 * 
+	 * @return Yield from TSY Spread to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if Yield cannot be calculated
+	 */
+
+	public abstract double calcYieldFromTSYSpreadToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblTSYSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Yield from Yield Spread to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblYieldSpread Yield Spread to Work-out
+	 * 
+	 * @return Yield from Yield Spread to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if the Yield cannot be calculated
+	 */
+
+	public abstract double calcYieldFromYieldSpread (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblYieldSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Yield from Yield Spread to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblYieldSpread Yield Spread to Maturity
+	 * 
+	 * @return Yield from Yield Spread to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if Yield cannot be calculated
+	 */
+
+	public abstract double calcYieldFromYieldSpread (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblYieldSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Yield from Yield Spread to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblYieldSpread Yield Spread to Optimal Exercise
+	 * 
+	 * @return Yield from Yield Spread to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if Yield cannot be calculated
+	 */
+
+	public abstract double calcYieldFromYieldSpreadToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblYieldSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Yield from Z Spread to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblZSpread Z Spread to Work-out
+	 * 
+	 * @return Yield from Z Spread to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if the Yield cannot be calculated
+	 */
+
+	public abstract double calcYieldFromZSpread (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblZSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Yield from Z Spread to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblZSpread Z Spread to Maturity
+	 * 
+	 * @return Yield from Z Spread to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if Yield cannot be calculated
+	 */
+
+	public abstract double calcYieldFromZSpread (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblZSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Yield from Z Spread to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblZSpread Z Spread to Optimal Exercise
+	 * 
+	 * @return Yield from Z Spread to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if Yield cannot be calculated
+	 */
+
+	public abstract double calcYieldFromZSpreadToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblZSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Yield01 from ASW to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblASW ASW to Work-out
+	 * 
+	 * @return Yield01 from ASW to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if the Yield01 cannot be calculated
+	 */
+
+	public abstract double calcYield01FromASW (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblASW)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Yield01 from ASW to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblASW ASW to Maturity
+	 * 
+	 * @return Yield01 from ASW to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if Yield01 cannot be calculated
+	 */
+
+	public abstract double calcYield01FromASW (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblASW)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Yield01 from ASW to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblASW ASW to Optimal Exercise
+	 * 
+	 * @return Yield01 from ASW to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if Yield01 cannot be calculated
+	 */
+
+	public abstract double calcYield01FromASWToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblASW)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Yield01 from Bond Basis to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblBondBasis Bond Basis to Work-out
+	 * 
+	 * @return Yield01 from Bond Basis to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if the Yield01 cannot be calculated
+	 */
+
+	public abstract double calcYield01FromBondBasis (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblBondBasis)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Yield01 from Bond Basis to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblBondBasis Bond Basis to Maturity
+	 * 
+	 * @return Yield01 from Bond Basis to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if Yield01 cannot be calculated
+	 */
+
+	public abstract double calcYield01FromBondBasis (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblBondBasis)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Yield01 from Bond Basis to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblBondBasis Bond Basis to Optimal Exercise
+	 * 
+	 * @return Yield01 from Bond Basis to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if Yield01 cannot be calculated
+	 */
+
+	public abstract double calcYield01FromBondBasisToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblBondBasis)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Yield01 from Credit Basis to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblCreditBasis Credit Basis to Work-out
+	 * 
+	 * @return Yield01 from Credit Basis to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if the Yield01 cannot be calculated
+	 */
+
+	public abstract double calcYield01FromCreditBasis (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblCreditBasis)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Yield01 from Credit Basis to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblCreditBasis Credit Basis to Maturity
+	 * 
+	 * @return Yield01 from Credit Basis to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if Yield01 cannot be calculated
+	 */
+
+	public abstract double calcYield01FromCreditBasis (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblCreditBasis)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Yield01 from Credit Basis to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblCreditBasis Credit Basis to Optimal Exercise
+	 * 
+	 * @return Yield01 from Credit Basis to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if Yield01 cannot be calculated
+	 */
+
+	public abstract double calcYield01FromCreditBasisToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblCreditBasis)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Yield01 from Discount Margin to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblDiscountMargin Discount Margin to Work-out
+	 * 
+	 * @return Yield01 from Discount Margin to Work-out
 	 * 
 	 * @throws java.lang.Exception Thrown if the Yield01 cannot be calculated
 	 */
@@ -11932,16 +12571,16 @@ public abstract class Bond extends CreditComponent {
 		throws java.lang.Exception;
 
 	/**
-	 * Calculate the bond Yield01 from Discount Margin to Maturity
+	 * Calculate Yield01 from Discount Margin to Maturity
 	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblDiscountMargin The Discount Margin to Maturity input
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblDiscountMargin Discount Margin to Maturity
 	 * 
-	 * @return Calculated Yield01 from the Discount Margin to Maturity
+	 * @return Yield01 from Discount Margin to Maturity
 	 * 
-	 * @throws java.lang.Exception Thrown if the Yield01 cannot be calculated
+	 * @throws java.lang.Exception Thrown if Yield01 cannot be calculated
 	 */
 
 	public abstract double calcYield01FromDiscountMargin (
@@ -11952,1087 +12591,2135 @@ public abstract class Bond extends CreditComponent {
 		throws java.lang.Exception;
 
 	/**
-	 * Calculate the bond Yield01 from Discount Margin to Exercise
+	 * Calculate Yield01 from Discount Margin to Optimal Exercise
 	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblDiscountMargin The Discount Margin to Exercise input
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblDiscountMargin Discount Margin to Optimal Exercise
 	 * 
-	 * @return Calculated Yield01 from the Discount Margin to Exercise
+	 * @return Yield01 from Discount Margin to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if Yield01 cannot be calculated
+	 */
+
+	public abstract double calcYield01FromDiscountMarginToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblDiscountMargin)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Yield01 from G Spread to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblGSpread G Spread to Work-out
+	 * 
+	 * @return Yield01 from G Spread to Work-out
 	 * 
 	 * @throws java.lang.Exception Thrown if the Yield01 cannot be calculated
 	 */
 
-	public abstract double calcExerciseYield01FromDiscountMargin (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblDiscountMargin)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond Par ASW from Discount Margin to Work-out
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblWorkoutDate JulianDate Work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblDiscountMargin The Discount Margin to Work-out input
-	 * 
-	 * @return Calculated Par ASW from the Discount Margin to Work-out
-	 * 
-	 * @throws java.lang.Exception Thrown if the Par ASW cannot be calculated
-	 */
-
-	public abstract double calcParASWFromDiscountMargin (
+	public abstract double calcYield01FromGSpread (
 		final org.drip.param.valuation.ValuationParams valParams,
 		final org.drip.param.definition.ComponentMarketParams mktParams,
 		final org.drip.param.valuation.QuotingParams quotingParams,
 		final double dblWorkoutDate,
 		final double dblWorkoutFactor,
-		final double dblDiscountMargin)
+		final double dblGSpread)
 		throws java.lang.Exception;
 
 	/**
-	 * Calculate the bond Par ASW from Discount Margin to Maturity
+	 * Calculate Yield01 from G Spread to Maturity
 	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblDiscountMargin The Discount Margin to Maturity input
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblGSpread G Spread to Maturity
 	 * 
-	 * @return Calculated Par ASW from the Discount Margin to Maturity
+	 * @return Yield01 from G Spread to Maturity
 	 * 
-	 * @throws java.lang.Exception Thrown if the Par ASW cannot be calculated
+	 * @throws java.lang.Exception Thrown if Yield01 cannot be calculated
 	 */
 
-	public abstract double calcParASWFromDiscountMargin (
+	public abstract double calcYield01FromGSpread (
 		final org.drip.param.valuation.ValuationParams valParams,
 		final org.drip.param.definition.ComponentMarketParams mktParams,
 		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblDiscountMargin)
+		final double dblGSpread)
 		throws java.lang.Exception;
 
 	/**
-	 * Calculate the bond Par ASW from Discount Margin to Exercise
+	 * Calculate Yield01 from G Spread to Optimal Exercise
 	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblDiscountMargin The Discount Margin to Exercise input
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblGSpread G Spread to Optimal Exercise
 	 * 
-	 * @return Calculated Par ASW from the Discount Margin to Exercise
+	 * @return Yield01 from G Spread to Optimal Exercise
 	 * 
-	 * @throws java.lang.Exception Thrown if the Par ASW cannot be calculated
+	 * @throws java.lang.Exception Thrown if Yield01 cannot be calculated
 	 */
 
-	public abstract double calcExerciseParASWFromDiscountMargin (
+	public abstract double calcYield01FromGSpreadToOptimalExercise (
 		final org.drip.param.valuation.ValuationParams valParams,
 		final org.drip.param.definition.ComponentMarketParams mktParams,
 		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblDiscountMargin)
+		final double dblGSpread)
 		throws java.lang.Exception;
 
 	/**
-	 * Calculate the bond convexity from Discount Margin to Work-out
+	 * Calculate Yield01 from I Spread to Work-out
 	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblWorkoutDate JulianDate Work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblDiscountMargin The Discount Margin to Work-out input
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblISpread I Spread to Work-out
 	 * 
-	 * @return Calculated convexity from the Discount Margin to Work-out
+	 * @return Yield01 from I Spread to Work-out
 	 * 
-	 * @throws java.lang.Exception Thrown if the convexity cannot be calculated
+	 * @throws java.lang.Exception Thrown if the Yield01 cannot be calculated
 	 */
 
-	public abstract double calcConvexityFromDiscountMargin (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblDiscountMargin)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond convexity from Discount Margin to Maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblDiscountMargin The Discount Margin to Maturity input
-	 * 
-	 * @return Calculated convexity from the Discount Margin to Maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the convexity cannot be calculated
-	 */
-
-	public abstract double calcConvexityFromDiscountMargin (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblDiscountMargin)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond convexity from Discount Margin to Exercise
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblDiscountMargin The Discount Margin to Exercise input
-	 * 
-	 * @return Calculated convexity from the Discount Margin to Exercise
-	 * 
-	 * @throws java.lang.Exception Thrown if the convexity cannot be calculated
-	 */
-
-	public abstract double calcExerciseConvexityFromDiscountMargin (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblDiscountMargin)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond price from Par ASW to Work-out
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblWorkoutDate JulianDate Work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblParASW The Par ASW to Work-out input
-	 * 
-	 * @return Calculated price from the Par ASW to Work-out
-	 * 
-	 * @throws java.lang.Exception Thrown if the price cannot be calculated
-	 */
-
-	public abstract double calcPriceFromParASW (
+	public abstract double calcYield01FromISpread (
 		final org.drip.param.valuation.ValuationParams valParams,
 		final org.drip.param.definition.ComponentMarketParams mktParams,
 		final org.drip.param.valuation.QuotingParams quotingParams,
 		final double dblWorkoutDate,
 		final double dblWorkoutFactor,
-		final double dblParASW)
+		final double dblISpread)
 		throws java.lang.Exception;
 
 	/**
-	 * Calculate the bond price from Par ASW to Maturity
+	 * Calculate Yield01 from I Spread to Maturity
 	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblParASW The Par ASW to Maturity input
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblISpread I Spread to Maturity
 	 * 
-	 * @return Calculated price from the Par ASW to Maturity
+	 * @return Yield01 from I Spread to Maturity
 	 * 
-	 * @throws java.lang.Exception Thrown if the price cannot be calculated
+	 * @throws java.lang.Exception Thrown if Yield01 cannot be calculated
 	 */
 
-	public abstract double calcPriceFromParASW (
+	public abstract double calcYield01FromISpread (
 		final org.drip.param.valuation.ValuationParams valParams,
 		final org.drip.param.definition.ComponentMarketParams mktParams,
 		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblParASW)
+		final double dblISpread)
 		throws java.lang.Exception;
 
 	/**
-	 * Calculate the bond price from Par ASW to Exercise
+	 * Calculate Yield01 from I Spread to Optimal Exercise
 	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblParASW The Par ASW to Exercise input
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblISpread ISpread to Optimal Exercise
 	 * 
-	 * @return Calculated price from the Par ASW to Exercise
+	 * @return Yield01 from I Spread to Optimal Exercise
 	 * 
-	 * @throws java.lang.Exception Thrown if the price cannot be calculated
+	 * @throws java.lang.Exception Thrown if Yield01 cannot be calculated
 	 */
 
-	public abstract double calcExercisePriceFromParASW (
+	public abstract double calcYield01FromISpreadToOptimalExercise (
 		final org.drip.param.valuation.ValuationParams valParams,
 		final org.drip.param.definition.ComponentMarketParams mktParams,
 		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblParASW)
+		final double dblISpread)
 		throws java.lang.Exception;
 
 	/**
-	 * Calculate the bond yield from Par ASW to Work-out
+	 * Calculate Yield01 from OAS to Work-out
 	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param dblWorkoutDate JulianDate Work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblParASW The Par ASW to Work-out input
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblOAS OAS to Work-out
 	 * 
-	 * @return Calculated yield from the Par ASW to Work-out
+	 * @return Yield01 from OAS to Work-out
 	 * 
-	 * @throws java.lang.Exception Thrown if the yield cannot be calculated
+	 * @throws java.lang.Exception Thrown if the Yield01 cannot be calculated
 	 */
 
-	public abstract double calcYieldFromParASW (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblParASW)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond yield from Par ASW to Maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param dblParASW The Par ASW to Maturity input
-	 * 
-	 * @return Calculated yield from the Par ASW to Maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the yield cannot be calculated
-	 */
-
-	public abstract double calcYieldFromParASW (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final double dblParASW)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond yield from Par ASW to Exercise
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param dblParASW The Par ASW to Exercise input
-	 * 
-	 * @return Calculated yield from the Par ASW to Exercise
-	 * 
-	 * @throws java.lang.Exception Thrown if the yield cannot be calculated
-	 */
-
-	public abstract double calcExerciseYieldFromParASW (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final double dblParASW)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond Z Spread from Par ASW to Work-out
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblWorkoutDate JulianDate Work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblParASW The Par ASW to Work-out input
-	 * 
-	 * @return Calculated Z Spread from the Par ASW to Work-out
-	 * 
-	 * @throws java.lang.Exception Thrown if the Z Spread cannot be calculated
-	 */
-
-	public abstract double calcZSpreadFromParASW (
+	public abstract double calcYield01FromOAS (
 		final org.drip.param.valuation.ValuationParams valParams,
 		final org.drip.param.definition.ComponentMarketParams mktParams,
 		final org.drip.param.valuation.QuotingParams quotingParams,
 		final double dblWorkoutDate,
 		final double dblWorkoutFactor,
-		final double dblParASW)
+		final double dblOAS)
 		throws java.lang.Exception;
 
 	/**
-	 * Calculate the bond Z Spread from Par ASW to Maturity
+	 * Calculate Yield01 from OAS to Maturity
 	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblParASW The Par ASW to Maturity input
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblOAS OAS to Maturity
 	 * 
-	 * @return Calculated Z Spread from the Par ASW to Maturity
+	 * @return Yield01 from OAS to Maturity
 	 * 
-	 * @throws java.lang.Exception Thrown if the Z Spread cannot be calculated
+	 * @throws java.lang.Exception Thrown if Yield01 cannot be calculated
 	 */
 
-	public abstract double calcZSpreadFromParASW (
+	public abstract double calcYield01FromOAS (
 		final org.drip.param.valuation.ValuationParams valParams,
 		final org.drip.param.definition.ComponentMarketParams mktParams,
 		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblParASW)
+		final double dblOAS)
 		throws java.lang.Exception;
 
 	/**
-	 * Calculate the bond Z Spread from Par ASW to Exercise
+	 * Calculate Yield01 from OAS to Optimal Exercise
 	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblParASW The Par ASW to Exercise input
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblOAS OAS to Optimal Exercise
 	 * 
-	 * @return Calculated Z Spread from the Par ASW to Exercise
+	 * @return Yield01 from OAS to Optimal Exercise
 	 * 
-	 * @throws java.lang.Exception Thrown if the Z Spread cannot be calculated
+	 * @throws java.lang.Exception Thrown if Yield01 cannot be calculated
 	 */
 
-	public abstract double calcExerciseZSpreadFromParASW (
+	public abstract double calcYield01FromOASToOptimalExercise (
 		final org.drip.param.valuation.ValuationParams valParams,
 		final org.drip.param.definition.ComponentMarketParams mktParams,
 		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblParASW)
+		final double dblOAS)
 		throws java.lang.Exception;
 
 	/**
-	 * Calculate the bond Option Adjusted Spread from Par ASW to Work-out
+	 * Calculate Yield01 from PECS to Work-out
 	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblWorkoutDate JulianDate work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblParASW The Par ASW to Work-out input
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblPECS PECS to Work-out
 	 * 
-	 * @return Calculated Option Adjusted Spread from the Par ASW to Work-out
+	 * @return Yield01 from PECS to Work-out
 	 * 
-	 * @throws java.lang.Exception Thrown if the Option Adjusted Spread cannot be calculated
+	 * @throws java.lang.Exception Thrown if the Yield01 cannot be calculated
 	 */
 
-	public abstract double calcOASFromParASW (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblParASW)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond Option Adjusted Spread from Par ASW to Maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblParASW The Par ASW to Maturity input
-	 * 
-	 * @return Calculated Option Adjusted Spread from the Par ASW to Maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the Option Adjusted Spread cannot be calculated
-	 */
-
-	public abstract double calcOASFromParASW (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblParASW)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond Option Adjusted Spread from Par ASW to Exercise
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblParASW The Par ASW to Exercise input
-	 * 
-	 * @return Calculated Option Adjusted Spread from the Par ASW to Exercise
-	 * 
-	 * @throws java.lang.Exception Thrown if the Option Adjusted Spread cannot be calculated
-	 */
-
-	public abstract double calcExerciseOASFromParASW (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblParASW)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the Bond Basis from Par ASW to Work-out
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblWorkoutDate JulianDate Work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblParASW The Par ASW to Work-out input
-	 * 
-	 * @return Calculated Bond Basis from the Par ASW to Work-out
-	 * 
-	 * @throws java.lang.Exception Thrown if the Bond Basis cannot be calculated
-	 */
-
-	public abstract double calcBondBasisFromParASW (
+	public abstract double calcYield01FromPECS (
 		final org.drip.param.valuation.ValuationParams valParams,
 		final org.drip.param.definition.ComponentMarketParams mktParams,
 		final org.drip.param.valuation.QuotingParams quotingParams,
 		final double dblWorkoutDate,
 		final double dblWorkoutFactor,
-		final double dblParASW)
+		final double dblPECS)
 		throws java.lang.Exception;
 
 	/**
-	 * Calculate the Bond Basis from Par ASW to Maturity
+	 * Calculate Yield01 from PECS to Maturity
 	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblParASW The Par ASW to Maturity input
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblPECS PECS to Maturity
 	 * 
-	 * @return Calculated Bond Basis from the Par ASW to Maturity
+	 * @return Yield01 from PECS to Maturity
 	 * 
-	 * @throws java.lang.Exception Thrown if the Bond Basis cannot be calculated
+	 * @throws java.lang.Exception Thrown if Yield01 cannot be calculated
 	 */
 
-	public abstract double calcBondBasisFromParASW (
+	public abstract double calcYield01FromPECS (
 		final org.drip.param.valuation.ValuationParams valParams,
 		final org.drip.param.definition.ComponentMarketParams mktParams,
 		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblParASW)
+		final double dblPECS)
 		throws java.lang.Exception;
 
 	/**
-	 * Calculate the Bond Basis from Par ASW to Exercise
+	 * Calculate Yield01 from PECS to Optimal Exercise
 	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblParASW The Par ASW to Exercise input
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblPECS PECS to Optimal Exercise
 	 * 
-	 * @return Calculated Bond Basis from the Par ASW to Exercise
+	 * @return Yield01 from PECS to Optimal Exercise
 	 * 
-	 * @throws java.lang.Exception Thrown if the Bond Basis cannot be calculated
+	 * @throws java.lang.Exception Thrown if Yield01 cannot be calculated
 	 */
 
-	public abstract double calcExerciseBondBasisFromParASW (
+	public abstract double calcYield01FromPECSToOptimalExercise (
 		final org.drip.param.valuation.ValuationParams valParams,
 		final org.drip.param.definition.ComponentMarketParams mktParams,
 		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblParASW)
+		final double dblPECS)
 		throws java.lang.Exception;
 
 	/**
-	 * Calculate the Yield Spread from Par ASW to Work-out
+	 * Calculate Yield01 from Price to Work-out
 	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblWorkoutDate JulianDate Work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblParASW The Par ASW to Work-out input
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblPrice Price to Work-out
 	 * 
-	 * @return Calculated Yield Spread from the Par ASW to Work-out
+	 * @return Yield01 from Price to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if the Yield01 cannot be calculated
+	 */
+
+	public abstract double calcYield01FromPrice (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblPrice)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Yield01 from Price to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblPrice Price to Maturity
+	 * 
+	 * @return Yield01 from Price to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if Yield01 cannot be calculated
+	 */
+
+	public abstract double calcYield01FromPrice (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblPrice)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Yield01 from Price to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblPrice Price to Optimal Exercise
+	 * 
+	 * @return Yield01 from Price to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if Yield01 cannot be calculated
+	 */
+
+	public abstract double calcYield01FromPriceToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblPrice)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Yield01 from TSY Spread to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblTSYSpread TSY Spread to Work-out
+	 * 
+	 * @return Yield01 from TSY Spread to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if the Yield01 cannot be calculated
+	 */
+
+	public abstract double calcYield01FromTSYSpread (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblTSYSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Yield01 from TSY Spread to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblTSYSpread TSY Spread to Maturity
+	 * 
+	 * @return Yield01 from TSY Spread to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if Yield01 cannot be calculated
+	 */
+
+	public abstract double calcYield01FromTSYSpread (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblTSYSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Yield01 from TSY Spread to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblTSYSpread TSY Spread to Optimal Exercise
+	 * 
+	 * @return Yield01 from TSY Spread to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if Yield01 cannot be calculated
+	 */
+
+	public abstract double calcYield01FromTSYSpreadToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblTSYSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Yield01 from Yield to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblYield Yield to Work-out
+	 * 
+	 * @return Yield01 from Yield to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if the Yield01 cannot be calculated
+	 */
+
+	public abstract double calcYield01FromYield (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblYield)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Yield01 from Yield to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblYield Yield to Maturity
+	 * 
+	 * @return Yield01 from Yield to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if Yield01 cannot be calculated
+	 */
+
+	public abstract double calcYield01FromYield (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblYield)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Yield01 from Yield to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblYield Yield to Optimal Exercise
+	 * 
+	 * @return Yield01 from Yield to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if Yield01 cannot be calculated
+	 */
+
+	public abstract double calcYield01FromYieldToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblYield)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Yield01 from Yield Spread to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblYieldSpread Yield Spread to Work-out
+	 * 
+	 * @return Yield01 from Yield Spread to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if the Yield01 cannot be calculated
+	 */
+
+	public abstract double calcYield01FromYieldSpread (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblYieldSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Yield01 from Yield Spread to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblYieldSpread Yield Spread to Maturity
+	 * 
+	 * @return Yield01 from Yield Spread to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if Yield01 cannot be calculated
+	 */
+
+	public abstract double calcYield01FromYieldSpread (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblYieldSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Yield01 from Yield Spread to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblYieldSpread Yield Spread to Optimal Exercise
+	 * 
+	 * @return Yield01 from Yield Spread to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if Yield01 cannot be calculated
+	 */
+
+	public abstract double calcYield01FromYieldSpreadToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblYieldSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Yield01 from Z Spread to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblZSpread Z Spread to Work-out
+	 * 
+	 * @return Yield01 from Z Spread to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if the Yield01 cannot be calculated
+	 */
+
+	public abstract double calcYield01FromZSpread (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblZSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Yield01 from Z Spread to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblZSpread Z Spread to Maturity
+	 * 
+	 * @return Yield01 from Z Spread to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if Yield01 cannot be calculated
+	 */
+
+	public abstract double calcYield01FromZSpread (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblZSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Yield01 from Z Spread to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblZSpread Z Spread to Optimal Exercise
+	 * 
+	 * @return Yield01 from Z Spread to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if Yield01 cannot be calculated
+	 */
+
+	public abstract double calcYield01FromZSpreadToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblZSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Yield Spread from ASW to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblASW ASW to Work-out
+	 * 
+	 * @return Yield Spread from ASW to Work-out
 	 * 
 	 * @throws java.lang.Exception Thrown if the Yield Spread cannot be calculated
 	 */
 
-	public abstract double calcYieldSpreadFromParASW (
+	public abstract double calcYieldSpreadFromASW (
 		final org.drip.param.valuation.ValuationParams valParams,
 		final org.drip.param.definition.ComponentMarketParams mktParams,
 		final org.drip.param.valuation.QuotingParams quotingParams,
 		final double dblWorkoutDate,
 		final double dblWorkoutFactor,
-		final double dblParASW)
+		final double dblASW)
 		throws java.lang.Exception;
 
 	/**
-	 * Calculate the Yield Spread from Par ASW to Maturity
+	 * Calculate Yield Spread from ASW to Maturity
 	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblParASW The Par ASW to Maturity input
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblASW ASW to Maturity
 	 * 
-	 * @return Calculated Yield Spread from the Par ASW to Maturity
+	 * @return Yield Spread from ASW to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if Yield Spread cannot be calculated
+	 */
+
+	public abstract double calcYieldSpreadFromASW (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblASW)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Yield Spread from ASW to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblASW ASW to Optimal Exercise
+	 * 
+	 * @return Yield Spread from ASW to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if Yield Spread cannot be calculated
+	 */
+
+	public abstract double calcYieldSpreadFromASWToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblASW)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Yield Spread from Bond Basis to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblBondBasis Bond Basis to Work-out
+	 * 
+	 * @return Yield Spread from Bond Basis to Work-out
 	 * 
 	 * @throws java.lang.Exception Thrown if the Yield Spread cannot be calculated
 	 */
 
-	public abstract double calcYieldSpreadFromParASW (
+	public abstract double calcYieldSpreadFromBondBasis (
 		final org.drip.param.valuation.ValuationParams valParams,
 		final org.drip.param.definition.ComponentMarketParams mktParams,
 		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblParASW)
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblBondBasis)
 		throws java.lang.Exception;
 
 	/**
-	 * Calculate the Yield Spread from Par ASW to Exercise
+	 * Calculate Yield Spread from Bond Basis to Maturity
 	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblParASW The Par ASW to Exercise input
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblBondBasis Bond Basis to Maturity
 	 * 
-	 * @return Calculated Yield Spread from the Par ASW to Exercise
+	 * @return Yield Spread from Bond Basis to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if Yield Spread cannot be calculated
+	 */
+
+	public abstract double calcYieldSpreadFromBondBasis (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblBondBasis)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Yield Spread from Bond Basis to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblBondBasis Bond Basis to Optimal Exercise
+	 * 
+	 * @return Yield Spread from Bond Basis to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if Yield Spread cannot be calculated
+	 */
+
+	public abstract double calcYieldSpreadFromBondBasisToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblBondBasis)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Yield Spread from Credit Basis to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblCreditBasis Credit Basis to Work-out
+	 * 
+	 * @return Yield Spread from Credit Basis to Work-out
 	 * 
 	 * @throws java.lang.Exception Thrown if the Yield Spread cannot be calculated
 	 */
 
-	public abstract double calcExerciseYieldSpreadFromParASW (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblParASW)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond Credit Basis from Par ASW to Work-out
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblWorkoutDate JulianDate Work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblParASW The Par ASW to Work-out input
-	 * 
-	 * @return Calculated Credit Basis from the Par ASW to Work-out
-	 * 
-	 * @throws java.lang.Exception Thrown if the Credit Basis cannot be calculated
-	 */
-
-	public abstract double calcCreditBasisFromParASW (
+	public abstract double calcYieldSpreadFromCreditBasis (
 		final org.drip.param.valuation.ValuationParams valParams,
 		final org.drip.param.definition.ComponentMarketParams mktParams,
 		final org.drip.param.valuation.QuotingParams quotingParams,
 		final double dblWorkoutDate,
 		final double dblWorkoutFactor,
-		final double dblParASW)
+		final double dblCreditBasis)
 		throws java.lang.Exception;
 
 	/**
-	 * Calculate the bond Credit Basis from Par ASW to Maturity
+	 * Calculate Yield Spread from Credit Basis to Maturity
 	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblParASW The Par ASW to Maturity input
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblCreditBasis Credit Basis to Maturity
 	 * 
-	 * @return Calculated Credit Basis from the Par ASW to Maturity
+	 * @return Yield Spread from Credit Basis to Maturity
 	 * 
-	 * @throws java.lang.Exception Thrown if the Credit Basis cannot be calculated
+	 * @throws java.lang.Exception Thrown if Yield Spread cannot be calculated
 	 */
 
-	public abstract double calcCreditBasisFromParASW (
+	public abstract double calcYieldSpreadFromCreditBasis (
 		final org.drip.param.valuation.ValuationParams valParams,
 		final org.drip.param.definition.ComponentMarketParams mktParams,
 		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblParASW)
+		final double dblCreditBasis)
 		throws java.lang.Exception;
 
 	/**
-	 * Calculate the bond Credit Basis from Par ASW to Exercise
+	 * Calculate Yield Spread from Credit Basis to Optimal Exercise
 	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblParASW The Par ASW to Exercise input
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblCreditBasis Credit Basis to Optimal Exercise
 	 * 
-	 * @return Calculated Credit Basis from the Par ASW to Exercise
+	 * @return Yield Spread from Credit Basis to Optimal Exercise
 	 * 
-	 * @throws java.lang.Exception Thrown if the Credit Basis cannot be calculated
+	 * @throws java.lang.Exception Thrown if Yield Spread cannot be calculated
 	 */
 
-	public abstract double calcExerciseCreditBasisFromParASW (
+	public abstract double calcYieldSpreadFromCreditBasisToOptimalExercise (
 		final org.drip.param.valuation.ValuationParams valParams,
 		final org.drip.param.definition.ComponentMarketParams mktParams,
 		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblParASW)
+		final double dblCreditBasis)
 		throws java.lang.Exception;
 
 	/**
-	 * Calculate the Bond PECS from Par ASW to Work-out
+	 * Calculate Yield Spread from Discount Margin to Work-out
 	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblWorkoutDate JulianDate Work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblParASW The Par ASW to Work-out input
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblDiscountMargin Discount Margin to Work-out
 	 * 
-	 * @return Calculated PECS from the Par ASW to Work-out
+	 * @return Yield Spread from Discount Margin to Work-out
 	 * 
-	 * @throws java.lang.Exception Thrown if the PECS cannot be calculated
+	 * @throws java.lang.Exception Thrown if the Yield Spread cannot be calculated
 	 */
 
-	public abstract double calcPECSFromParASW (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblParASW)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the Bond PECS from Par ASW to Maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblParASW The Par ASW to Maturity input
-	 * 
-	 * @return Calculated PECS from the Par ASW to Maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the PECS cannot be calculated
-	 */
-
-	public abstract double calcPECSFromParASW (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblParASW)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the Bond PECS from Par ASW to Exercise
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblParASW The Par ASW to Exercise input
-	 * 
-	 * @return Calculated PECS from the Par ASW to Exercise
-	 * 
-	 * @throws java.lang.Exception Thrown if the PECS cannot be calculated
-	 */
-
-	public abstract double calcExercisePECSFromParASW (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblParASW)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond Spread to Treasury Benchmark from Par ASW to Work-out
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblWorkoutDate JulianDate Work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblParASW The Par ASW to Work-out input
-	 * 
-	 * @return Calculated Spread to Treasury Benchmark from the Par ASW to Work-out
-	 * 
-	 * @throws java.lang.Exception Thrown if the Spread to Treasury Benchmark cannot be calculated
-	 */
-
-	public abstract double calcTSYSpreadFromParASW (
+	public abstract double calcYieldSpreadFromDiscountMargin (
 		final org.drip.param.valuation.ValuationParams valParams,
 		final org.drip.param.definition.ComponentMarketParams mktParams,
 		final org.drip.param.valuation.QuotingParams quotingParams,
 		final double dblWorkoutDate,
 		final double dblWorkoutFactor,
-		final double dblParASW)
+		final double dblDiscountMargin)
 		throws java.lang.Exception;
 
 	/**
-	 * Calculate the bond Spread to Treasury Benchmark from Par ASW to Maturity
+	 * Calculate Yield Spread from Discount Margin to Maturity
 	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblParASW The Par ASW to Maturity input
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblDiscountMargin Discount Margin to Maturity
 	 * 
-	 * @return Calculated Spread to Treasury Benchmark from the Par ASW to Maturity
+	 * @return Yield Spread from Discount Margin to Maturity
 	 * 
-	 * @throws java.lang.Exception Thrown if the Spread to Treasury Benchmark cannot be calculated
+	 * @throws java.lang.Exception Thrown if Yield Spread cannot be calculated
 	 */
 
-	public abstract double calcTSYSpreadFromParASW (
+	public abstract double calcYieldSpreadFromDiscountMargin (
 		final org.drip.param.valuation.ValuationParams valParams,
 		final org.drip.param.definition.ComponentMarketParams mktParams,
 		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblParASW)
+		final double dblDiscountMargin)
 		throws java.lang.Exception;
 
 	/**
-	 * Calculate the bond Spread to Treasury Benchmark from Par ASW to Exercise
+	 * Calculate Yield Spread from Discount Margin to Optimal Exercise
 	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblParASW The Par ASW to Exercise input
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblDiscountMargin Discount Margin to Optimal Exercise
 	 * 
-	 * @return Calculated Spread to Treasury Benchmark from the Par ASW to Exercise
+	 * @return Yield Spread from Discount Margin to Optimal Exercise
 	 * 
-	 * @throws java.lang.Exception Thrown if the Spread to Treasury Benchmark cannot be calculated
+	 * @throws java.lang.Exception Thrown if Yield Spread cannot be calculated
 	 */
 
-	public abstract double calcExerciseTSYSpreadFromParASW (
+	public abstract double calcYieldSpreadFromDiscountMarginToOptimalExercise (
 		final org.drip.param.valuation.ValuationParams valParams,
 		final org.drip.param.definition.ComponentMarketParams mktParams,
 		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblParASW)
+		final double dblDiscountMargin)
 		throws java.lang.Exception;
 
 	/**
-	 * Calculate the bond G Spread from Par ASW to Work-out
+	 * Calculate Yield Spread from G Spread to Work-out
 	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param dblWorkoutDate JulianDate Work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblParASW The Par ASW to Work-out input
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblGSpread G Spread to Work-out
 	 * 
-	 * @return Calculated G Spread from the Par ASW to Work-out
+	 * @return Yield Spread from G Spread to Work-out
 	 * 
-	 * @throws java.lang.Exception Thrown if the G Spread cannot be calculated
+	 * @throws java.lang.Exception Thrown if the Yield Spread cannot be calculated
 	 */
 
-	public abstract double calcGSpreadFromParASW (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblParASW)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond G Spread from Par ASW to Maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param dblParASW The Par ASW to Maturity input
-	 * 
-	 * @return Calculated G Spread from the Par ASW to Maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the G Spread cannot be calculated
-	 */
-
-	public abstract double calcGSpreadFromParASW (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final double dblParASW)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond G Spread from Par ASW to Exercise
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param dblParASW The Par ASW to Exercise input
-	 * 
-	 * @return Calculated G Spread from the Par ASW to Exercise
-	 * 
-	 * @throws java.lang.Exception Thrown if the G Spread cannot be calculated
-	 */
-
-	public abstract double calcExerciseGSpreadFromParASW (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final double dblParASW)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond I Spread from Par ASW to Work-out
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param dblWorkoutDate JulianDate Work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblParASW The Par ASW to Work-out input
-	 * 
-	 * @return Calculated I Spread from the Par ASW to Work-out
-	 * 
-	 * @throws java.lang.Exception Thrown if the I Spread cannot be calculated
-	 */
-
-	public abstract double calcISpreadFromParASW (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblParASW)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond I Spread from Par ASW to Maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param dblParASW The Par ASW to Maturity input
-	 * 
-	 * @return Calculated I Spread from the Par ASW to Maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the I Spread cannot be calculated
-	 */
-
-	public abstract double calcISpreadFromParASW (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final double dblParASW)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond I Spread from Par ASW to Exercise
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param dblParASW The Par ASW to Exercise input
-	 * 
-	 * @return Calculated I Spread from the Par ASW to Exercise
-	 * 
-	 * @throws java.lang.Exception Thrown if the I Spread cannot be calculated
-	 */
-
-	public abstract double calcExerciseISpreadFromParASW (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final double dblParASW)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond Discount Margin from Par ASW to Work-out
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param dblWorkoutDate JulianDate Work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblParASW The Par ASW to Work-out input
-	 * 
-	 * @return Calculated Discount Margin from the Par ASW to Work-out
-	 * 
-	 * @throws java.lang.Exception Thrown if the Discount Margin cannot be calculated
-	 */
-
-	public abstract double calcDiscountMarginFromParASW (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblParASW)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond Discount Margin from Par ASW to Maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param dblParASW The Par ASW to Maturity input
-	 * 
-	 * @return Calculated Discount Margin from the Par ASW to Maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the Discount Margin cannot be calculated
-	 */
-
-	public abstract double calcDiscountMarginFromParASW (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final double dblParASW)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond Discount Margin from Par ASW to Exercise
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param dblParASW The Par ASW to Exercise input
-	 * 
-	 * @return Calculated Discount Margin from the Par ASW to Exercise
-	 * 
-	 * @throws java.lang.Exception Thrown if the Discount Margin cannot be calculated
-	 */
-
-	public abstract double calcExerciseDiscountMarginFromParASW (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final double dblParASW)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond Duration from Par ASW to Work-out
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblWorkoutDate JulianDate Work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblParASW The Par ASW to Work-out input
-	 * 
-	 * @return Calculated Duration from the Par ASW to Work-out
-	 * 
-	 * @throws java.lang.Exception Thrown if the Duration cannot be calculated
-	 */
-
-	public abstract double calcDurationFromParASW (
+	public abstract double calcYieldSpreadFromGSpread (
 		final org.drip.param.valuation.ValuationParams valParams,
 		final org.drip.param.definition.ComponentMarketParams mktParams,
 		final org.drip.param.valuation.QuotingParams quotingParams,
 		final double dblWorkoutDate,
 		final double dblWorkoutFactor,
-		final double dblParASW)
+		final double dblGSpread)
 		throws java.lang.Exception;
 
 	/**
-	 * Calculate the bond Duration from Par ASW to Maturity
+	 * Calculate Yield Spread from G Spread to Maturity
 	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblParASW The Par ASW to Maturity input
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblGSpread G Spread to Maturity
 	 * 
-	 * @return Calculated Duration from the Par ASW to Maturity
+	 * @return Yield Spread from G Spread to Maturity
 	 * 
-	 * @throws java.lang.Exception Thrown if the Duration cannot be calculated
+	 * @throws java.lang.Exception Thrown if Yield Spread cannot be calculated
 	 */
 
-	public abstract double calcDurationFromParASW (
+	public abstract double calcYieldSpreadFromGSpread (
 		final org.drip.param.valuation.ValuationParams valParams,
 		final org.drip.param.definition.ComponentMarketParams mktParams,
 		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblParASW)
+		final double dblGSpread)
 		throws java.lang.Exception;
 
 	/**
-	 * Calculate the bond Duration from Par ASW to Exercise
+	 * Calculate Yield Spread from G Spread to Optimal Exercise
 	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblParASW The Par ASW to Exercise input
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblGSpread G Spread to Optimal Exercise
 	 * 
-	 * @return Calculated Duration from the Par ASW to Exercise
+	 * @return Yield Spread from G Spread to Optimal Exercise
 	 * 
-	 * @throws java.lang.Exception Thrown if the Duration cannot be calculated
+	 * @throws java.lang.Exception Thrown if Yield Spread cannot be calculated
 	 */
 
-	public abstract double calcExerciseDurationFromParASW (
+	public abstract double calcYieldSpreadFromGSpreadToOptimalExercise (
 		final org.drip.param.valuation.ValuationParams valParams,
 		final org.drip.param.definition.ComponentMarketParams mktParams,
 		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblParASW)
+		final double dblGSpread)
 		throws java.lang.Exception;
 
 	/**
-	 * Calculate the bond Yield01 from Par ASW to Work-out
+	 * Calculate Yield Spread from I Spread to Work-out
 	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblWorkoutDate JulianDate Work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblParASW The Par ASW to Work-out input
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblISpread I Spread to Work-out
 	 * 
-	 * @return Calculated Yield01 from the Par ASW to Work-out
+	 * @return Yield Spread from I Spread to Work-out
 	 * 
-	 * @throws java.lang.Exception Thrown if the Yield01 cannot be calculated
+	 * @throws java.lang.Exception Thrown if the Yield Spread cannot be calculated
 	 */
 
-	public abstract double calcYield01FromParASW (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblWorkoutDate,
-		final double dblWorkoutFactor,
-		final double dblParASW)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond Yield01 from Par ASW to Maturity
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblParASW The Par ASW to Maturity input
-	 * 
-	 * @return Calculated Yield01 from the Par ASW to Maturity
-	 * 
-	 * @throws java.lang.Exception Thrown if the Yield01 cannot be calculated
-	 */
-
-	public abstract double calcYield01FromParASW (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblParASW)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond Yield01 from Par ASW to Exercise
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblParASW The Par ASW to Exercise input
-	 * 
-	 * @return Calculated Yield01 from the Par ASW to Exercise
-	 * 
-	 * @throws java.lang.Exception Thrown if the Yield01 cannot be calculated
-	 */
-
-	public abstract double calcExerciseYield01FromParASW (
-		final org.drip.param.valuation.ValuationParams valParams,
-		final org.drip.param.definition.ComponentMarketParams mktParams,
-		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblParASW)
-		throws java.lang.Exception;
-
-	/**
-	 * Calculate the bond convexity from Par ASW to Work-out
-	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblWorkoutDate JulianDate Work-out
-	 * @param dblWorkoutFactor Work-out factor
-	 * @param dblParASW The Par ASW to Work-out input
-	 * 
-	 * @return Calculated convexity from the Par ASW to Work-out
-	 * 
-	 * @throws java.lang.Exception Thrown if the convexity cannot be calculated
-	 */
-
-	public abstract double calcConvexityFromParASW (
+	public abstract double calcYieldSpreadFromISpread (
 		final org.drip.param.valuation.ValuationParams valParams,
 		final org.drip.param.definition.ComponentMarketParams mktParams,
 		final org.drip.param.valuation.QuotingParams quotingParams,
 		final double dblWorkoutDate,
 		final double dblWorkoutFactor,
-		final double dblParASW)
+		final double dblISpread)
 		throws java.lang.Exception;
 
 	/**
-	 * Calculate the bond convexity from Par ASW to Maturity
+	 * Calculate Yield Spread from I Spread to Maturity
 	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblParASW The Par ASW to Maturity input
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblISpread I Spread to Maturity
 	 * 
-	 * @return Calculated convexity from the Par ASW to Maturity
+	 * @return Yield Spread from I Spread to Maturity
 	 * 
-	 * @throws java.lang.Exception Thrown if the convexity cannot be calculated
+	 * @throws java.lang.Exception Thrown if Yield Spread cannot be calculated
 	 */
 
-	public abstract double calcConvexityFromParASW (
+	public abstract double calcYieldSpreadFromISpread (
 		final org.drip.param.valuation.ValuationParams valParams,
 		final org.drip.param.definition.ComponentMarketParams mktParams,
 		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblParASW)
+		final double dblISpread)
 		throws java.lang.Exception;
 
 	/**
-	 * Calculate the bond convexity from Par ASW to Exercise
+	 * Calculate Yield Spread from I Spread to Optimal Exercise
 	 * 
-	 * @param valParams ValuationParams
-	 * @param mktParams Bond market parameters
-	 * @param quotingParams Bond Quoting parameters
-	 * @param dblParASW The Par ASW to Exercise input
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblISpread ISpread to Optimal Exercise
 	 * 
-	 * @return Calculated convexity from the Par ASW to Exercise
+	 * @return Yield Spread from I Spread to Optimal Exercise
 	 * 
-	 * @throws java.lang.Exception Thrown if the convexity cannot be calculated
+	 * @throws java.lang.Exception Thrown if Yield Spread cannot be calculated
 	 */
 
-	public abstract double calcExerciseConvexityFromParASW (
+	public abstract double calcYieldSpreadFromISpreadToOptimalExercise (
 		final org.drip.param.valuation.ValuationParams valParams,
 		final org.drip.param.definition.ComponentMarketParams mktParams,
 		final org.drip.param.valuation.QuotingParams quotingParams,
-		final double dblParASW)
+		final double dblISpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Yield Spread from OAS to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblOAS OAS to Work-out
+	 * 
+	 * @return Yield Spread from OAS to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if the Yield Spread cannot be calculated
+	 */
+
+	public abstract double calcYieldSpreadFromOAS (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblOAS)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Yield Spread from OAS to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblOAS OAS to Maturity
+	 * 
+	 * @return Yield Spread from OAS to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if Yield Spread cannot be calculated
+	 */
+
+	public abstract double calcYieldSpreadFromOAS (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblOAS)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Yield Spread from OAS to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblOAS OAS to Optimal Exercise
+	 * 
+	 * @return Yield Spread from OAS to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if Yield Spread cannot be calculated
+	 */
+
+	public abstract double calcYieldSpreadFromOASToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblOAS)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Yield Spread from Price to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblPrice Price to Work-out
+	 * 
+	 * @return Yield Spread from Price to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if the Yield Spread cannot be calculated
+	 */
+
+	public abstract double calcYieldSpreadFromPrice (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblPrice)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Yield Spread from Price to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblPrice Price to Maturity
+	 * 
+	 * @return Yield Spread from Price to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if Yield Spread cannot be calculated
+	 */
+
+	public abstract double calcYieldSpreadFromPrice (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblPrice)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Yield Spread from Price to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblPrice Price to Optimal Exercise
+	 * 
+	 * @return Yield Spread from Price to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if Yield Spread cannot be calculated
+	 */
+
+	public abstract double calcYieldSpreadFromPriceToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblPrice)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Yield Spread from PECS to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblPECS PECS to Work-out
+	 * 
+	 * @return Yield Spread from PECS to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if the Yield Spread cannot be calculated
+	 */
+
+	public abstract double calcYieldSpreadFromPECS (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblPECS)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Yield Spread from PECS to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblPECS PECS to Maturity
+	 * 
+	 * @return Yield Spread from PECS to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if Yield Spread cannot be calculated
+	 */
+
+	public abstract double calcYieldSpreadFromPECS (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblPECS)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Yield Spread from PECS to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblPECS PECS to Optimal Exercise
+	 * 
+	 * @return Yield Spread from PECS to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if Yield Spread cannot be calculated
+	 */
+
+	public abstract double calcYieldSpreadFromPECSToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblPECS)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Yield Spread from TSY Spread to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblTSYSpread TSY Spread to Work-out
+	 * 
+	 * @return Yield Spread from TSY Spread to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if the Yield Spread cannot be calculated
+	 */
+
+	public abstract double calcYieldSpreadFromTSYSpread (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblTSYSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Yield Spread from TSY Spread to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblTSYSpread TSY Spread to Maturity
+	 * 
+	 * @return Yield Spread from TSY Spread to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if Yield Spread cannot be calculated
+	 */
+
+	public abstract double calcYieldSpreadFromTSYSpread (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblTSYSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Yield Spread from TSY Spread to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblTSYSpread TSY Spread to Optimal Exercise
+	 * 
+	 * @return Yield Spread from TSY Spread to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if Yield Spread cannot be calculated
+	 */
+
+	public abstract double calcYieldSpreadFromTSYSpreadToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblTSYSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Yield Spread from Yield to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblYield Yield to Work-out
+	 * 
+	 * @return Yield Spread from Yield to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if the Yield Spread cannot be calculated
+	 */
+
+	public abstract double calcYieldSpreadFromYield (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblYield)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Yield Spread from Yield to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblYield Yield to Maturity
+	 * 
+	 * @return Yield Spread from Yield to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if Yield Spread cannot be calculated
+	 */
+
+	public abstract double calcYieldSpreadFromYield (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblYield)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Yield Spread from Yield to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblYield Yield to Optimal Exercise
+	 * 
+	 * @return Yield Spread from Yield to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if Yield Spread cannot be calculated
+	 */
+
+	public abstract double calcYieldSpreadFromYieldToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblYieldSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Yield Spread from Z Spread to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblZSpread Z Spread to Work-out
+	 * 
+	 * @return Yield Spread from Z Spread to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if the Yield Spread cannot be calculated
+	 */
+
+	public abstract double calcYieldSpreadFromZSpread (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblZSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Yield Spread from Z Spread to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblZSpread Z Spread to Maturity
+	 * 
+	 * @return Yield Spread from Z Spread to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if Yield Spread cannot be calculated
+	 */
+
+	public abstract double calcYieldSpreadFromZSpread (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblZSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Yield Spread from Z Spread to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblZSpread Z Spread to Optimal Exercise
+	 * 
+	 * @return Yield Spread from Z Spread to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if Yield Spread cannot be calculated
+	 */
+
+	public abstract double calcYieldSpreadFromZSpreadToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblZSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Z Spread from ASW to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblASW ASW to Work-out
+	 * 
+	 * @return Z Spread from ASW to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if the Z Spread cannot be calculated
+	 */
+
+	public abstract double calcZSpreadFromASW (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblASW)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Z Spread from ASW to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblASW ASW to Maturity
+	 * 
+	 * @return Z Spread from ASW to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if Z Spread cannot be calculated
+	 */
+
+	public abstract double calcZSpreadFromASW (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblASW)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Z Spread from ASW to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblASW ASW to Optimal Exercise
+	 * 
+	 * @return Z Spread from ASW to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if Z Spread cannot be calculated
+	 */
+
+	public abstract double calcZSpreadFromASWToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblASW)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Z Spread from Bond Basis to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblBondBasis Bond Basis to Work-out
+	 * 
+	 * @return Z Spread from Bond Basis to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if the Z Spread cannot be calculated
+	 */
+
+	public abstract double calcZSpreadFromBondBasis (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblBondBasis)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Z Spread from Bond Basis to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblBondBasis Bond Basis to Maturity
+	 * 
+	 * @return Z Spread from Bond Basis to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if Z Spread cannot be calculated
+	 */
+
+	public abstract double calcZSpreadFromBondBasis (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblBondBasis)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Z Spread from Bond Basis to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblBondBasis Bond Basis to Optimal Exercise
+	 * 
+	 * @return Z Spread from Bond Basis to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if Z Spread cannot be calculated
+	 */
+
+	public abstract double calcZSpreadFromBondBasisToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblBondBasis)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Z Spread from Credit Basis to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblCreditBasis Credit Basis to Work-out
+	 * 
+	 * @return Z Spread from Credit Basis to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if the Z Spread cannot be calculated
+	 */
+
+	public abstract double calcZSpreadFromCreditBasis (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblCreditBasis)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Z Spread from Credit Basis to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblCreditBasis Credit Basis to Maturity
+	 * 
+	 * @return Z Spread from Credit Basis to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if Z Spread cannot be calculated
+	 */
+
+	public abstract double calcZSpreadFromCreditBasis (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblCreditBasis)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Z Spread from Credit Basis to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblCreditBasis Credit Basis to Optimal Exercise
+	 * 
+	 * @return Z Spread from Credit Basis to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if Z Spread cannot be calculated
+	 */
+
+	public abstract double calcZSpreadFromCreditBasisToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblCreditBasis)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Z Spread from Discount Margin to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblDiscountMargin Discount Margin to Work-out
+	 * 
+	 * @return Z Spread from Discount Margin to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if the Z Spread cannot be calculated
+	 */
+
+	public abstract double calcZSpreadFromDiscountMargin (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblDiscountMargin)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Z Spread from Discount Margin to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblDiscountMargin Discount Margin to Maturity
+	 * 
+	 * @return Z Spread from Discount Margin to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if Z Spread cannot be calculated
+	 */
+
+	public abstract double calcZSpreadFromDiscountMargin (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblDiscountMargin)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Z Spread from Discount Margin to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblDiscountMargin Discount Margin to Optimal Exercise
+	 * 
+	 * @return Z Spread from Discount Margin to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if Z Spread cannot be calculated
+	 */
+
+	public abstract double calcZSpreadFromDiscountMarginToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblDiscountMargin)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Z Spread from G Spread to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblGSpread G Spread to Work-out
+	 * 
+	 * @return Z Spread from G Spread to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if the Z Spread cannot be calculated
+	 */
+
+	public abstract double calcZSpreadFromGSpread (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblGSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Z Spread from G Spread to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblGSpread G Spread to Maturity
+	 * 
+	 * @return Z Spread from G Spread to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if Z Spread cannot be calculated
+	 */
+
+	public abstract double calcZSpreadFromGSpread (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblGSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Z Spread from G Spread to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblGSpread G Spread to Optimal Exercise
+	 * 
+	 * @return Z Spread from G Spread to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if Z Spread cannot be calculated
+	 */
+
+	public abstract double calcZSpreadFromGSpreadToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblGSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Z Spread from I Spread to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblISpread I Spread to Work-out
+	 * 
+	 * @return Z Spread from I Spread to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if the Z Spread cannot be calculated
+	 */
+
+	public abstract double calcZSpreadFromISpread (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblISpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Z Spread from I Spread to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblISpread I Spread to Maturity
+	 * 
+	 * @return Z Spread from I Spread to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if Z Spread cannot be calculated
+	 */
+
+	public abstract double calcZSpreadFromISpread (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblISpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Z Spread from I Spread to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblISpread ISpread to Optimal Exercise
+	 * 
+	 * @return Z Spread from I Spread to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if Z Spread cannot be calculated
+	 */
+
+	public abstract double calcZSpreadFromISpreadToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblISpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Z Spread from OAS to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblOAS OAS to Work-out
+	 * 
+	 * @return Z Spread from OAS to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if the Z Spread cannot be calculated
+	 */
+
+	public abstract double calcZSpreadFromOAS (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblOAS)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Z Spread from OAS to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblOAS OAS to Maturity
+	 * 
+	 * @return Z Spread from OAS to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if Z Spread cannot be calculated
+	 */
+
+	public abstract double calcZSpreadFromOAS (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblOAS)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Z Spread from OAS to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblOAS OAS to Optimal Exercise
+	 * 
+	 * @return Z Spread from OAS to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if Z Spread cannot be calculated
+	 */
+
+	public abstract double calcZSpreadFromOASToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblOAS)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Z Spread from Price to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblPrice Price to Work-out
+	 * 
+	 * @return Z Spread from Price to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if the Z Spread cannot be calculated
+	 */
+
+	public abstract double calcZSpreadFromPrice (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblPrice)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Z Spread from Price to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblPrice Price to Maturity
+	 * 
+	 * @return Z Spread from Price to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if Z Spread cannot be calculated
+	 */
+
+	public abstract double calcZSpreadFromPrice (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblPrice)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Z Spread from Price to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblPrice Price to Optimal Exercise
+	 * 
+	 * @return Z Spread from Price to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if Z Spread cannot be calculated
+	 */
+
+	public abstract double calcZSpreadFromPriceToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblPrice)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Z Spread from PECS to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblPECS PECS to Work-out
+	 * 
+	 * @return Z Spread from PECS to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if the Z Spread cannot be calculated
+	 */
+
+	public abstract double calcZSpreadFromPECS (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblPECS)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Z Spread from PECS to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblPECS PECS to Maturity
+	 * 
+	 * @return Z Spread from PECS to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if Z Spread cannot be calculated
+	 */
+
+	public abstract double calcZSpreadFromPECS (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblPECS)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Z Spread from PECS to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblPECS PECS to Optimal Exercise
+	 * 
+	 * @return Z Spread from PECS to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if Z Spread cannot be calculated
+	 */
+
+	public abstract double calcZSpreadFromPECSToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblPECS)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Z Spread from TSY Spread to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblTSYSpread TSY Spread to Work-out
+	 * 
+	 * @return Z Spread from TSY Spread to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if the Z Spread cannot be calculated
+	 */
+
+	public abstract double calcZSpreadFromTSYSpread (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblTSYSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Z Spread from TSY Spread to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblTSYSpread TSY Spread to Maturity
+	 * 
+	 * @return Z Spread from TSY Spread to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if Z Spread cannot be calculated
+	 */
+
+	public abstract double calcZSpreadFromTSYSpread (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblTSYSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Z Spread from TSY Spread to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblTSYSpread TSY Spread to Optimal Exercise
+	 * 
+	 * @return Z Spread from TSY Spread to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if Z Spread cannot be calculated
+	 */
+
+	public abstract double calcZSpreadFromTSYSpreadToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblTSYSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Z Spread from Yield to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblYield Yield to Work-out
+	 * 
+	 * @return Z Spread from Yield to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if the Z Spread cannot be calculated
+	 */
+
+	public abstract double calcZSpreadFromYield (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblYield)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Z Spread from Yield to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblYield Yield to Maturity
+	 * 
+	 * @return Z Spread from Yield to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if Z Spread cannot be calculated
+	 */
+
+	public abstract double calcZSpreadFromYield (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblYield)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Z Spread from Yield to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblYield Yield to Optimal Exercise
+	 * 
+	 * @return Z Spread from Yield to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if Z Spread cannot be calculated
+	 */
+
+	public abstract double calcZSpreadFromYieldToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblYield)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Z Spread from Yield Spread to Work-out
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblWorkoutDate Work-out Date
+	 * @param dblWorkoutFactor Work-out Factor
+	 * @param dblYieldSpread Yield Spread to Work-out
+	 * 
+	 * @return Z Spread from Yield Spread to Work-out
+	 * 
+	 * @throws java.lang.Exception Thrown if the Z Spread cannot be calculated
+	 */
+
+	public abstract double calcZSpreadFromYieldSpread (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblWorkoutDate,
+		final double dblWorkoutFactor,
+		final double dblYieldSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Z Spread from Yield Spread to Maturity
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblYieldSpread Yield Spread to Maturity
+	 * 
+	 * @return Z Spread from Yield Spread to Maturity
+	 * 
+	 * @throws java.lang.Exception Thrown if Z Spread cannot be calculated
+	 */
+
+	public abstract double calcZSpreadFromYieldSpread (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblYieldSpread)
+		throws java.lang.Exception;
+
+	/**
+	 * Calculate Z Spread from Yield Spread to Optimal Exercise
+	 * 
+	 * @param valParams Valuation Parameters
+	 * @param mktParams Market Parameters
+	 * @param quotingParams Quoting Parameters
+	 * @param dblYieldSpread Yield Spread to Optimal Exercise
+	 * 
+	 * @return Z Spread from Yield Spread to Optimal Exercise
+	 * 
+	 * @throws java.lang.Exception Thrown if Yield Spread cannot be calculated
+	 */
+
+	public abstract double calcZSpreadFromYieldSpreadToOptimalExercise (
+		final org.drip.param.valuation.ValuationParams valParams,
+		final org.drip.param.definition.ComponentMarketParams mktParams,
+		final org.drip.param.valuation.QuotingParams quotingParams,
+		final double dblYieldSpread)
 		throws java.lang.Exception;
 
 	/**

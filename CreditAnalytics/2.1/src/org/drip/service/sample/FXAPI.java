@@ -14,7 +14,6 @@ import java.util.Random;
 import org.drip.analytics.date.JulianDate;
 import org.drip.analytics.daycount.Convention;
 import org.drip.analytics.definition.*;
-import org.drip.analytics.support.GenericUtil;
 import org.drip.param.valuation.*;
 import org.drip.product.definition.*;
 import org.drip.product.params.*;
@@ -26,6 +25,12 @@ import org.drip.product.params.*;
 import org.drip.analytics.creator.*;
 import org.drip.product.creator.*;
 import org.drip.service.api.CreditAnalytics;
+
+/*
+ * DRIP Math Support
+ */
+
+import org.drip.math.common.FormatUtil;
 
 /*
  * -*- mode: java; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
@@ -96,10 +101,12 @@ public class FXAPI {
 
 			adblNodes[i] = JulianDate.Today().addYears (i + 1).getJulian();
 
-			System.out.println (cp.getCode() + "[" + (i + 1) + "]=" + GenericUtil.FormatDouble (adblFXFwd[i]));
+			System.out.println (cp.getCode() + "[" + (i + 1) + "]=" +
+				FormatUtil.FormatDouble (adblFXFwd[i], 1, 3, 100.));
 		}
 
-		ValuationParams valParams = ValuationParams.CreateValParams (JulianDate.Today(), 0, "USD", Convention.DR_ACTUAL);
+		ValuationParams valParams = ValuationParams.CreateValParams (JulianDate.Today(), 0, "USD",
+			Convention.DR_ACTUAL);
 
 		/*
 		 * Create the FX forward instrument
@@ -121,7 +128,8 @@ public class FXAPI {
 
 		double dblFXFwdPIP = fxfwd.implyFXForward (valParams, dcEUR, dcUSD, 1.4, true);
 
-		System.out.println (cp.getCode() + "[1Y](pip)= " + GenericUtil.FormatDouble (dblFXFwdPIP));
+		System.out.println (cp.getCode() + "[1Y](pip)= " + FormatUtil.FormatDouble
+			(dblFXFwdPIP, 1, 3, 100.));
 
 		/*
 		 * Calculate the DC Basis on the EUR curve
@@ -130,7 +138,7 @@ public class FXAPI {
 		double dblDCEURBasis = fxfwd.calcDCBasis (valParams, dcEUR, dcUSD, dblFXSpot, dblFXFwdMarket, false);
 
 		System.out.println ("EUR Basis bp for " + cp.getCode() + "[1Y] = " + dblFXFwdMarket + ": " +
-			GenericUtil.FormatDouble (dblDCEURBasis));
+			FormatUtil.FormatDouble (dblDCEURBasis, 1, 3, 100.));
 
 		/*
 		 * Calculate the DC Basis on the USD curve
@@ -139,13 +147,14 @@ public class FXAPI {
 		double dblDCUSDBasis = fxfwd.calcDCBasis (valParams, dcEUR, dcUSD, dblFXSpot, dblFXFwdMarket, true);
 
 		System.out.println ("USD Basis bp for " + cp.getCode() + "[1Y] = " + dblFXFwdMarket + ": " +
-			GenericUtil.FormatDouble (dblDCUSDBasis));
+			FormatUtil.FormatDouble (dblDCUSDBasis, 1, 3, 100.));
 
 		/*
 		 * Create an FX curve from the spot, and the array of nodes, FX forward, as well as the PIP indicator
 		 */
 
-		FXForwardCurve fxCurve = FXForwardCurveBuilder.CreateFXForwardCurve (cp, JulianDate.Today(), dblFXSpot, adblNodes, adblFXFwd, abIsPIP);
+		FXForwardCurve fxCurve = FXForwardCurveBuilder.CreateFXForwardCurve
+			(cp, JulianDate.Today(), dblFXSpot, adblNodes, adblFXFwd, abIsPIP);
 
 		/*
 		 * Calculate the array of the USD basis
@@ -154,7 +163,8 @@ public class FXAPI {
 		double[] adblFullUSDBasis = fxCurve.getFullBasis (valParams, dcEUR, dcUSD, true);
 
 		for (int i = 0; i < adblFullUSDBasis.length; ++i)
-			System.out.println ("FullUSDBasis[" + (i + 1) + "Y]=" + GenericUtil.FormatSpread (adblFullUSDBasis[i]));
+			System.out.println ("FullUSDBasis[" + (i + 1) + "Y]=" +
+				FormatUtil.FormatDouble (adblFullUSDBasis[i], 1, 3, 100.));
 
 		/*
 		 * Calculate the array of the EUR basis
@@ -163,7 +173,8 @@ public class FXAPI {
 		double[] adblFullEURBasis = fxCurve.getFullBasis (valParams, dcEUR, dcUSD, false);
 
 		for (int i = 0; i < adblFullEURBasis.length; ++i)
-			System.out.println ("FullEURBasis[" + (i + 1) + "Y]=" + GenericUtil.FormatSpread (adblFullEURBasis[i]));
+			System.out.println ("FullEURBasis[" + (i + 1) + "Y]=" +
+				FormatUtil.FormatDouble (adblFullEURBasis[i], 1, 3, 100.));
 
 		/*
 		 * Calculate the array of bootstrapped USD basis
@@ -173,7 +184,7 @@ public class FXAPI {
 
 		for (int i = 0; i < adblBootstrappedUSDBasis.length; ++i)
 			System.out.println ("Bootstrapped USDBasis from FX fwd for " + cp.getCode() + "[" + (i + 1) + "Y]=" +
-				GenericUtil.FormatSpread (adblBootstrappedUSDBasis[i]));
+				FormatUtil.FormatDouble (adblBootstrappedUSDBasis[i], 1, 3, 100.));
 
 		/*
 		 * Calculate the array of bootstrapped EUR basis
@@ -183,14 +194,14 @@ public class FXAPI {
 
 		for (int i = 0; i < adblBootstrappedEURBasis.length; ++i)
 			System.out.println ("Bootstrapped EURBasis from FX fwd for " + cp.getCode() + "[" + (i + 1) + "Y]=" +
-				GenericUtil.FormatSpread (adblBootstrappedEURBasis[i]));
+				FormatUtil.FormatDouble (adblBootstrappedEURBasis[i], 1, 3, 100.));
 
 		/*
 		 * Create an USD FX Basis Curve from the spot, and the array of nodes, FX Basis
 		 */
 
-		FXBasisCurve fxUSDBasisCurve = FXBasisCurveBuilder.CreateFXBasisCurve (cp, JulianDate.Today(), dblFXSpot,
-			adblNodes, adblFullUSDBasis, false);
+		FXBasisCurve fxUSDBasisCurve = FXBasisCurveBuilder.CreateFXBasisCurve
+			(cp, JulianDate.Today(), dblFXSpot, adblNodes, adblFullUSDBasis, false);
 
 		/*
 		 * Re-calculate the array of FX Forward from USD Basis Curve
@@ -200,14 +211,14 @@ public class FXAPI {
 
 		for (int i = 0; i < adblFXFwdFromUSDBasis.length; ++i)
 			System.out.println ("FX Fwd from Bootstrapped USD Basis: " + cp.getCode() + "[" + (i + 1) + "Y]=" +
-				GenericUtil.FormatDouble (adblFXFwdFromUSDBasis[i]));
+				FormatUtil.FormatDouble (adblFXFwdFromUSDBasis[i], 1, 3, 100.));
 
 		/*
 		 * Create an EUR FX Basis Curve from the spot, and the array of nodes, FX Basis
 		 */
 
-		FXBasisCurve fxEURBasisCurve = FXBasisCurveBuilder.CreateFXBasisCurve (cp, JulianDate.Today(), dblFXSpot,
-			adblNodes, adblFullEURBasis, false);
+		FXBasisCurve fxEURBasisCurve = FXBasisCurveBuilder.CreateFXBasisCurve
+			(cp, JulianDate.Today(), dblFXSpot, adblNodes, adblFullEURBasis, false);
 
 		/*
 		 * Re-calculate the array of FX Forward from EUR Basis Curve
@@ -217,7 +228,7 @@ public class FXAPI {
 
 		for (int i = 0; i < adblFXFwdFromEURBasis.length; ++i)
 			System.out.println ("FX Fwd from Bootstrapped EUR Basis: " + cp.getCode() + "[" + (i + 1) + "Y]=" +
-				GenericUtil.FormatDouble (adblFXFwdFromEURBasis[i]));
+				FormatUtil.FormatDouble (adblFXFwdFromEURBasis[i], 1, 3, 100.));
 	}
 
 	public static final void main (

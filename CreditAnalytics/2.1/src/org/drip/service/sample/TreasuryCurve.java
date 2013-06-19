@@ -20,6 +20,12 @@ import org.drip.product.creator.*;
 import org.drip.service.api.CreditAnalytics;
 
 /*
+ * DRIP Math Support
+ */
+
+import org.drip.math.common.FormatUtil;
+
+/*
  * -*- mode: java; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
  */
 
@@ -142,15 +148,24 @@ public class TreasuryCurve {
 		double adblYield[] = new double[aTSYBond.length];
 
 		for (int i = 0; i < aTSYBond.length; ++i) {
-			double dblPrice = aTSYBond[i].calcPriceFromBumpedDC (new ValuationParams (JulianDate.Today(), JulianDate.Today(), "USD"),
-				ComponentMarketParamsBuilder.MakeDiscountCMP (dcTSY), aTSYBond[i].getMaturityDate().getJulian(), 1., 0.);
+			double dblPrice = aTSYBond[i].calcPriceFromBumpedDC (
+				new ValuationParams (JulianDate.Today(), JulianDate.Today(), "USD"),
+				ComponentMarketParamsBuilder.MakeDiscountCMP (dcTSY),
+				aTSYBond[i].getMaturityDate().getJulian(),
+				1.,
+				0.);
 
-			System.out.println ("\tPrice[" + aTSYBond[i].getComponentName() + "]: " + org.drip.math.common.FormatUtil.FormatPrice (dblPrice));
+			System.out.println ("\tPrice[" + aTSYBond[i].getComponentName() + "]: " +
+				FormatUtil.FormatDouble (dblPrice, 2, 3, 100.));
 
-			double dblYield = aTSYBond[i].calcYieldFromPrice (new ValuationParams (JulianDate.Today(), JulianDate.Today(), "USD"),
-				ComponentMarketParamsBuilder.MakeDiscountCMP (dcTSY), null, dblPrice);
+			double dblYield = aTSYBond[i].calcYieldFromPrice (
+				new ValuationParams (JulianDate.Today(), JulianDate.Today(), "USD"),
+				ComponentMarketParamsBuilder.MakeDiscountCMP (dcTSY),
+				null,
+				dblPrice);
 
-			System.out.println ("\tYield[" + aTSYBond[i].getComponentName() + "]: " + org.drip.math.common.FormatUtil.FormatDouble (dblYield));
+			System.out.println ("\tYield[" + aTSYBond[i].getComponentName() + "]: " +
+				FormatUtil.FormatDouble (dblYield, 1, 3, 100.));
 		}
 
 		return adblYield;
@@ -201,7 +216,8 @@ public class TreasuryCurve {
 		for (int i = 0; i < astrTSYName.length; ++i) {
 			String strTenor = aiMaturityYear[i] + "Y";
 
-			System.out.println ("DF[" + strTenor + "]: " + dcTSY.calcImpliedRate (strTenor) + "; Yield[" + strTenor + "]: " + adblCalibYield[i]);
+			System.out.println ("DF[" + strTenor + "]: " + dcTSY.calcImpliedRate (strTenor) +
+				"; Yield[" + strTenor + "]: " + adblCalibYield[i]);
 		}
 
 		System.out.println ("\n----\n");
@@ -218,7 +234,8 @@ public class TreasuryCurve {
 		for (int i = 0; i < astrTSYName.length; ++i) {
 			String strTenor = aiMaturityYear[i] + "Y";
 
-			System.out.println ("CalcYield[" + strTenor + "]: " + adblYield[i] + "; Input[" + strTenor + "]: " + adblCalibYield[i]);
+			System.out.println ("CalcYield[" + strTenor + "]: " + adblYield[i] +
+				"; Input[" + strTenor + "]: " + adblCalibYield[i]);
 		}
 
 		/*
@@ -246,13 +263,20 @@ public class TreasuryCurve {
 		 * Calculate yield for off-the-run
 		 */
 
-		double dblPrice = bondOffTheRun.calcPriceFromBumpedDC (new ValuationParams (JulianDate.Today(), JulianDate.Today(), "USD"),
-			ComponentMarketParamsBuilder.MakeDiscountCMP (dcTSY), bondOffTheRun.getMaturityDate().getJulian(), 1., 0.);
+		double dblPrice = bondOffTheRun.calcPriceFromBumpedDC (
+			new ValuationParams (JulianDate.Today(), JulianDate.Today(), "USD"),
+			ComponentMarketParamsBuilder.MakeDiscountCMP (dcTSY),
+			bondOffTheRun.getMaturityDate().getJulian(),
+			1.,
+			0.);
 
 		System.out.println ("\nOff-The-Run Price[" + iOffTheRunMaturityYears + "Y]: " + dblPrice);
 
-		double dblYieldOffTheRun = bondOffTheRun.calcYieldFromPrice (new ValuationParams (JulianDate.Today(), JulianDate.Today(), "USD"),
-			ComponentMarketParamsBuilder.MakeDiscountCMP (dcTSY), null, dblPrice);
+		double dblYieldOffTheRun = bondOffTheRun.calcYieldFromPrice (
+			new ValuationParams (JulianDate.Today(), JulianDate.Today(), "USD"),
+			ComponentMarketParamsBuilder.MakeDiscountCMP (dcTSY),
+			null,
+			dblPrice);
 
 		System.out.println ("\nOff-The-Run Yield[" + iOffTheRunMaturityYears + "Y]: " + dblYieldOffTheRun);
 

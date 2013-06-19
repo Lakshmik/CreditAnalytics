@@ -26,6 +26,12 @@ import org.drip.product.creator.*;
 import org.drip.service.api.CreditAnalytics;
 
 /*
+ * DRIP Math Support
+ */
+
+import org.drip.math.common.FormatUtil;
+
+/*
  * -*- mode: java; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
  */
 
@@ -278,9 +284,9 @@ public class BondAnalyticsAPI {
 					JulianDate.fromJulian (p.getAccrualStartDate()) + FIELD_SEPARATOR +
 					JulianDate.fromJulian (p.getAccrualEndDate()) + FIELD_SEPARATOR +
 					JulianDate.fromJulian (p.getPayDate()) + FIELD_SEPARATOR +
-					GenericUtil.FormatDouble (p.getCouponDCF(), 1, 4, 1.) + FIELD_SEPARATOR +
-					GenericUtil.FormatDouble (dc.getDF (p.getPayDate()), 1, 4, 1.) + FIELD_SEPARATOR +
-					GenericUtil.FormatDouble (cc.getSurvival (p.getPayDate()), 1, 4, 1.)
+					FormatUtil.FormatDouble (p.getCouponDCF(), 1, 4, 1.) + FIELD_SEPARATOR +
+					FormatUtil.FormatDouble (dc.getDF (p.getPayDate()), 1, 4, 1.) + FIELD_SEPARATOR +
+					FormatUtil.FormatDouble (cc.getSurvival (p.getPayDate()), 1, 4, 1.)
 				);
 
 			/*
@@ -303,7 +309,8 @@ public class BondAnalyticsAPI {
 
 			ValuationParams valParams = ValuationParams.CreateValParams (JulianDate.Today(), 0, "", Convention.DR_ACTUAL);
 
-			System.out.println ("\nPrice From Yield: " + GenericUtil.FormatPrice (aBond[i].calcPriceFromYield (valParams, cmp, null, 0.)));
+			System.out.println ("\nPrice From Yield: " + FormatUtil.FormatDouble (aBond[i].calcPriceFromYield
+				(valParams, cmp, null, 0.), 2, 3, 100.));
 
 			WorkoutInfo wi = aBond[i].calcExerciseYieldFromPrice (valParams, cmp, null, 1.);
 
@@ -311,51 +318,49 @@ public class BondAnalyticsAPI {
 
 			System.out.println ("Workout Factor: " + wi._dblExerciseFactor);
 
-			System.out.println ("Workout Yield: " + GenericUtil.FormatPrice (wi._dblYield));
+			System.out.println ("Workout Yield: " + FormatUtil.FormatDouble (wi._dblYield, 2, 3, 100.));
 
-			System.out.println ("Workout Yield From Price: " + GenericUtil.FormatPrice
-				(aBond[i].calcYieldFromPrice (valParams, cmp, null, wi._dblDate, wi._dblExerciseFactor, 1.)));
+			System.out.println ("Workout Yield From Price: " + FormatUtil.FormatDouble
+				(aBond[i].calcYieldFromPrice (valParams, cmp, null, wi._dblDate, wi._dblExerciseFactor, 1.), 2, 3, 100.));
 
 			if (!aBond[i].isFloater()) {
-				System.out.println ("Z Spread From Price: " + GenericUtil.FormatSpread
-					(aBond[i].calcZSpreadFromPrice (valParams, cmp, null, wi._dblDate, wi._dblExerciseFactor, 1.)));
+				System.out.println ("Z Spread From Price: " + FormatUtil.FormatDouble
+					(aBond[i].calcZSpreadFromPrice (valParams, cmp, null, wi._dblDate, wi._dblExerciseFactor, 1.), 1, 3, 100.));
 
-				System.out.println ("OAS From Price: " + GenericUtil.FormatSpread
-					(aBond[i].calcOASFromPrice (valParams, cmp, null, wi._dblDate, wi._dblExerciseFactor, 1.)));
+				System.out.println ("OAS From Price: " + FormatUtil.FormatDouble
+					(aBond[i].calcOASFromPrice (valParams, cmp, null, wi._dblDate, wi._dblExerciseFactor, 1.), 1, 3, 100.));
 			}
 
-			System.out.println ("I Spread From Price: " + GenericUtil.FormatSpread (aBond[i].calcISpreadFromPrice
-				(valParams, cmp, null, wi._dblDate, wi._dblExerciseFactor, 1.)));
+			System.out.println ("I Spread From Price: " + FormatUtil.FormatDouble (aBond[i].calcISpreadFromPrice
+				(valParams, cmp, null, wi._dblDate, wi._dblExerciseFactor, 1.), 1, 3, 100.));
 
-			System.out.println ("Discount Margin From Price: " + GenericUtil.FormatSpread (aBond[i].calcDiscountMarginFromPrice
-				(valParams, cmp, null, wi._dblDate, wi._dblExerciseFactor, 1.)));
+			System.out.println ("Discount Margin From Price: " + FormatUtil.FormatDouble (aBond[i].calcDiscountMarginFromPrice
+				(valParams, cmp, null, wi._dblDate, wi._dblExerciseFactor, 1.), 1, 3, 100.));
 
-			System.out.println ("TSY Spread From Price: " + GenericUtil.FormatSpread
-				(aBond[i].calcTSYSpreadFromPrice (valParams, cmp, null, wi._dblDate, wi._dblExerciseFactor, 1.)));
+			System.out.println ("TSY Spread From Price: " + FormatUtil.FormatDouble
+				(aBond[i].calcTSYSpreadFromPrice (valParams, cmp, null, wi._dblDate, wi._dblExerciseFactor, 1.), 1, 3, 100.));
 
-			System.out.println ("ASW Spread From Price: " + (int)
-				aBond[i].calcParASWFromPrice (valParams, cmp, null, wi._dblDate, wi._dblExerciseFactor, 1.));
+			System.out.println ("ASW From Price: " + (int) aBond[i].calcASWFromPrice (valParams, cmp, null, wi._dblDate, wi._dblExerciseFactor, 1.));
 
-			System.out.println ("Credit Basis From Price: " + GenericUtil.FormatSpread
-				(aBond[i].calcCreditBasisFromPrice (valParams, cmp, null, wi._dblDate, wi._dblExerciseFactor, 1.)));
+			System.out.println ("Credit Basis From Price: " + FormatUtil.FormatDouble
+				(aBond[i].calcCreditBasisFromPrice (valParams, cmp, null, wi._dblDate, wi._dblExerciseFactor, 1.), 1, 3, 100.));
 
-			System.out.println ("Price From TSY Spread: " + GenericUtil.FormatPrice
-				(aBond[i].calcPriceFromTSYSpread (valParams, cmp, null, 0.0188)));
+			System.out.println ("Price From TSY Spread: " + FormatUtil.FormatDouble
+				(aBond[i].calcPriceFromTSYSpread (valParams, cmp, null, 0.0188), 1, 3, 100.));
 
-			System.out.println ("Yield From TSY Spread: " + GenericUtil.FormatPrice
-				(aBond[i].calcYieldFromTSYSpread (valParams, cmp, 0.0188)));
+			System.out.println ("Yield From TSY Spread: " + FormatUtil.FormatDouble
+				(aBond[i].calcYieldFromTSYSpread (valParams, cmp, null, 0.0188), 1, 3, 100.));
 
-			System.out.println ("Par ASW From TSY Spread: " + (int)
-				aBond[i].calcParASWFromTSYSpread (valParams, cmp, null, 0.0188));
+			System.out.println ("ASW From TSY Spread: " + (int) aBond[i].calcASWFromTSYSpread (valParams, cmp, null, 0.0188));
 
-			System.out.println ("Credit Basis From TSY Spread: " + GenericUtil.FormatSpread
-				(aBond[i].calcCreditBasisFromTSYSpread (valParams, cmp, null, 0.0188)));
+			System.out.println ("Credit Basis From TSY Spread: " + FormatUtil.FormatDouble
+				(aBond[i].calcCreditBasisFromTSYSpread (valParams, cmp, null, 0.0188), 1, 3, 100.));
 
 			/* System.out.println ("PECS From TSY Spread: " + FIGen.FormatSpread
 				(aBond[i].calcPECSFromTSYSpread (valParams, cmp, null, 0.0188))); */
 
-			System.out.println ("Theoretical Price: " + GenericUtil.FormatPrice
-				(aBond[i].calcPriceFromCreditBasis (valParams, cmp, null, wi._dblDate, wi._dblExerciseFactor, 0.)));
+			System.out.println ("Theoretical Price: " + FormatUtil.FormatDouble
+				(aBond[i].calcPriceFromCreditBasis (valParams, cmp, null, wi._dblDate, wi._dblExerciseFactor, 0.), 1, 3, 100.));
 		}
 	}
 

@@ -9,7 +9,6 @@ import org.drip.analytics.date.JulianDate;
 import org.drip.analytics.daycount.Convention;
 import org.drip.analytics.definition.*;
 import org.drip.analytics.period.*;
-import org.drip.analytics.support.GenericUtil;
 import org.drip.param.definition.*;
 import org.drip.param.pricer.PricerParams;
 import org.drip.param.valuation.*;
@@ -23,6 +22,12 @@ import org.drip.analytics.creator.*;
 import org.drip.param.creator.*;
 import org.drip.product.creator.*;
 import org.drip.service.api.CreditAnalytics;
+
+/*
+ * DRIP Math Support
+ */
+
+import org.drip.math.common.FormatUtil;
 
 /*
  * -*- mode: java; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
@@ -96,7 +101,8 @@ public class CreditAnalyticsAPI {
 		 * Create Credit Curve from an array of dates and their corresponding survival probabilities
 		 */
 
-		CreditCurve ccFromSurvival = CreditCurveBuilder.FromSurvival (dtStart.getJulian(), "CC", adblDate, adblSurvival, 0.4);
+		CreditCurve ccFromSurvival = CreditCurveBuilder.FromSurvival
+			(dtStart.getJulian(), "CC", adblDate, adblSurvival, 0.4);
 
 		System.out.println ("CCFromSurvival[" + dt10Y.toString() + "]; Survival=" +
 			ccFromSurvival.getSurvival ("10Y") + "; Hazard=" + ccFromSurvival.calcHazard ("10Y"));
@@ -151,7 +157,8 @@ public class CreditAnalyticsAPI {
 		 * Create the Credit Curve from the give CDS instruments
 		 */
 
-		CreditCurve cc = CreditScenarioCurveBuilder.CreateCreditCurve ("CORP", dtStart, aCDS, dc, adblQuotes, astrCalibMeasure, 0.4, false);
+		CreditCurve cc = CreditScenarioCurveBuilder.CreateCreditCurve
+			("CORP", dtStart, aCDS, dc, adblQuotes, astrCalibMeasure, 0.4, false);
 
 		/*
 		 * Valuation Parameters
@@ -170,8 +177,10 @@ public class CreditAnalyticsAPI {
 		 */
 
 		for (int i = 0; i < aCDS.length; ++i)
-			System.out.println ("\t" + astrCalibMeasure[i] + "[" + i + "] = " + aCDS[i].calcMeasureValue (valParams, pricerParams,
-				ComponentMarketParamsBuilder.CreateComponentMarketParams (dc, null, null, cc, null, null, null), null, astrCalibMeasure[i]));
+			System.out.println ("\t" + astrCalibMeasure[i] + "[" + i + "] = " +
+				aCDS[i].calcMeasureValue (valParams, pricerParams,
+				ComponentMarketParamsBuilder.CreateComponentMarketParams
+					(dc, null, null, cc, null, null, null), null, astrCalibMeasure[i]));
 	}
 
 	/**
@@ -234,11 +243,11 @@ public class CreditAnalyticsAPI {
 				JulianDate.fromJulian (p.getAccrualStartDate()) + FIELD_SEPARATOR +
 				JulianDate.fromJulian (p.getAccrualEndDate()) + FIELD_SEPARATOR +
 				JulianDate.fromJulian (p.getPayDate()) + FIELD_SEPARATOR +
-				GenericUtil.FormatDouble (p.getIndexRate(), 1, 4, 1.) +	FIELD_SEPARATOR +
-				GenericUtil.FormatDouble (p.getSpread(), 1, 4, 1.) + FIELD_SEPARATOR +
-				GenericUtil.FormatDouble (p.getCouponDCF(), 1, 4, 1.) + FIELD_SEPARATOR +
-				GenericUtil.FormatDouble (dc.getDF (p.getPayDate()), 1, 4, 1.) + FIELD_SEPARATOR +
-				GenericUtil.FormatDouble (cc.getSurvival (p.getPayDate()), 1, 4, 1.)
+				FormatUtil.FormatDouble (p.getIndexRate(), 1, 4, 1.) +	FIELD_SEPARATOR +
+				FormatUtil.FormatDouble (p.getSpread(), 1, 4, 1.) + FIELD_SEPARATOR +
+				FormatUtil.FormatDouble (p.getCouponDCF(), 1, 4, 1.) + FIELD_SEPARATOR +
+				FormatUtil.FormatDouble (dc.getDF (p.getPayDate()), 1, 4, 1.) + FIELD_SEPARATOR +
+				FormatUtil.FormatDouble (cc.getSurvival (p.getPayDate()), 1, 4, 1.)
 			);
 
 		System.out.println ("Loss Start     Loss End      Pay Date      Cpn    Notl     Rec    EffDF    StartSurv  EndSurv");
@@ -254,12 +263,12 @@ public class CreditAnalyticsAPI {
 				JulianDate.fromJulian (dp.getStartDate()) + FIELD_SEPARATOR +
 				JulianDate.fromJulian (dp.getEndDate()) + FIELD_SEPARATOR +
 				JulianDate.fromJulian (dp.getPayDate()) + FIELD_SEPARATOR +
-				GenericUtil.FormatDouble (dp.getCouponDCF(), 1, 4, 1.) + FIELD_SEPARATOR +
-				GenericUtil.FormatDouble (dp.getEffectiveNotional(), 1, 0, 1.) + FIELD_SEPARATOR +
-				GenericUtil.FormatDouble (dp.getEffectiveRecovery(), 1, 2, 1.) + FIELD_SEPARATOR +
-				GenericUtil.FormatDouble (dp.getEffectiveDF(), 1, 4, 1.)  + FIELD_SEPARATOR +
-				GenericUtil.FormatDouble (dp.getStartSurvival(), 1, 4, 1.) + FIELD_SEPARATOR +
-				GenericUtil.FormatDouble (dp.getEndSurvival(), 1, 4, 1.)
+				FormatUtil.FormatDouble (dp.getCouponDCF(), 1, 4, 1.) + FIELD_SEPARATOR +
+				FormatUtil.FormatDouble (dp.getEffectiveNotional(), 1, 0, 1.) + FIELD_SEPARATOR +
+				FormatUtil.FormatDouble (dp.getEffectiveRecovery(), 1, 2, 1.) + FIELD_SEPARATOR +
+				FormatUtil.FormatDouble (dp.getEffectiveDF(), 1, 4, 1.)  + FIELD_SEPARATOR +
+				FormatUtil.FormatDouble (dp.getStartSurvival(), 1, 4, 1.) + FIELD_SEPARATOR +
+				FormatUtil.FormatDouble (dp.getEndSurvival(), 1, 4, 1.)
 			);
 	}
 

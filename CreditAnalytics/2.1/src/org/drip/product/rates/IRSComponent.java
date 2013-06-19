@@ -116,8 +116,9 @@ public class IRSComponent extends org.drip.product.definition.RatesComponent {
 			_bApplyCpnEOMAdj,
 			strAccrualDC, // Accrual Day Count
 			_bApplyAccEOMAdj,
-			bFullStub,
-			strCalendar); // Full First Coupon Period?
+			bFullStub, // Full First Coupon Period?
+			false, // Merge the first 2 Periods - create a long stub?
+			strCalendar);
 	}
 
 	/**
@@ -433,7 +434,7 @@ public class IRSComponent extends org.drip.product.definition.RatesComponent {
 
 					dblResetDate = period.getResetDate();
 				} else
-					dblFloatingRate = mktParams.getDiscountCurve().calcImpliedRate (period.getStartDate(),
+					dblFloatingRate = mktParams.getDiscountCurve().calcLIBOR (period.getStartDate(),
 						period.getEndDate());
 
 				dblDirtyPeriodDV01 = 0.01 * period.getCouponDCF() * mktParams.getDiscountCurve().getDF
@@ -530,7 +531,7 @@ public class IRSComponent extends org.drip.product.definition.RatesComponent {
 		return mapResult;
 	}
 
-	@Override public org.drip.math.algodiff.WengertJacobian calcPVDFMicroJack (
+	@Override public org.drip.math.calculus.WengertJacobian calcPVDFMicroJack (
 		final org.drip.param.valuation.ValuationParams valParams,
 		final org.drip.param.pricer.PricerParams pricerParams,
 		final org.drip.param.definition.ComponentMarketParams mktParams,
@@ -550,7 +551,7 @@ public class IRSComponent extends org.drip.product.definition.RatesComponent {
 		double dblParSwapRate = mapMeasures.get ("SwapRate");
 
 		try {
-			org.drip.math.algodiff.WengertJacobian wjPVDFMicroJack = null;
+			org.drip.math.calculus.WengertJacobian wjPVDFMicroJack = null;
 
 			org.drip.analytics.definition.DiscountCurve dc = mktParams.getDiscountCurve();
 
@@ -559,19 +560,19 @@ public class IRSComponent extends org.drip.product.definition.RatesComponent {
 
 				if (dblPeriodPayDate < valParams._dblValue) continue;
 
-				org.drip.math.algodiff.WengertJacobian wjPeriodFwdRateDF = dc.getForwardRateJacobian
+				org.drip.math.calculus.WengertJacobian wjPeriodFwdRateDF = dc.getForwardRateJacobian
 					(p.getStartDate(), p.getEndDate());
 
-				org.drip.math.algodiff.WengertJacobian wjPeriodPayDFDF = dc.getDFJacobian (dblPeriodPayDate);
+				org.drip.math.calculus.WengertJacobian wjPeriodPayDFDF = dc.getDFJacobian (dblPeriodPayDate);
 
 				if (null == wjPeriodFwdRateDF || null == wjPeriodPayDFDF) continue;
 
-				double dblForwardRate = dc.calcImpliedRate (p.getStartDate(), p.getEndDate());
+				double dblForwardRate = dc.calcLIBOR (p.getStartDate(), p.getEndDate());
 
 				double dblPeriodPayDF = dc.getDF (dblPeriodPayDate);
 
 				if (null == wjPVDFMicroJack)
-					wjPVDFMicroJack = new org.drip.math.algodiff.WengertJacobian (1,
+					wjPVDFMicroJack = new org.drip.math.calculus.WengertJacobian (1,
 						wjPeriodFwdRateDF.numParameters());
 
 				double dblPeriodNotional = getNotional (p.getStartDate(), p.getEndDate());
@@ -598,7 +599,7 @@ public class IRSComponent extends org.drip.product.definition.RatesComponent {
 		return null;
 	}
 
-	@Override public org.drip.math.algodiff.WengertJacobian calcQuoteDFMicroJack (
+	@Override public org.drip.math.calculus.WengertJacobian calcQuoteDFMicroJack (
 		final java.lang.String strQuote,
 		final org.drip.param.valuation.ValuationParams valParams,
 		final org.drip.param.pricer.PricerParams pricerParams,
@@ -620,7 +621,7 @@ public class IRSComponent extends org.drip.product.definition.RatesComponent {
 			double dblParSwapRate = mapMeasures.get ("SwapRate");
 
 			try {
-				org.drip.math.algodiff.WengertJacobian wjSwapRateDFMicroJack = null;
+				org.drip.math.calculus.WengertJacobian wjSwapRateDFMicroJack = null;
 
 				org.drip.analytics.definition.DiscountCurve dc = mktParams.getDiscountCurve();
 
@@ -629,20 +630,20 @@ public class IRSComponent extends org.drip.product.definition.RatesComponent {
 
 					if (dblPeriodPayDate < valParams._dblValue) continue;
 
-					org.drip.math.algodiff.WengertJacobian wjPeriodFwdRateDF = dc.getForwardRateJacobian
+					org.drip.math.calculus.WengertJacobian wjPeriodFwdRateDF = dc.getForwardRateJacobian
 						(p.getStartDate(), p.getEndDate());
 
-					org.drip.math.algodiff.WengertJacobian wjPeriodPayDFDF = dc.getDFJacobian
+					org.drip.math.calculus.WengertJacobian wjPeriodPayDFDF = dc.getDFJacobian
 						(dblPeriodPayDate);
 
 					if (null == wjPeriodFwdRateDF || null == wjPeriodPayDFDF) continue;
 
-					double dblForwardRate = dc.calcImpliedRate (p.getStartDate(), p.getEndDate());
+					double dblForwardRate = dc.calcLIBOR (p.getStartDate(), p.getEndDate());
 
 					double dblPeriodPayDF = dc.getDF (dblPeriodPayDate);
 
 					if (null == wjSwapRateDFMicroJack)
-						wjSwapRateDFMicroJack = new org.drip.math.algodiff.WengertJacobian (1,
+						wjSwapRateDFMicroJack = new org.drip.math.calculus.WengertJacobian (1,
 							wjPeriodFwdRateDF.numParameters());
 
 					double dblPeriodNotional = getNotional (p.getStartDate(), p.getEndDate());

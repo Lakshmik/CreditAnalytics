@@ -50,7 +50,7 @@ public class FixedPointFinderNewton extends org.drip.math.solver1D.FixedPointFin
 		if (!org.drip.math.common.NumberUtil.IsValid (dblVariate))
 			throw new java.lang.Exception ("FixedPointFinderNewton::calcVariateOFSlope => Invalid input!");
 
-		org.drip.math.algodiff.Differential diff = _of.calcDerivative (dblVariate, 1);
+		org.drip.math.calculus.Differential diff = _of.calcDifferential (dblVariate, 1);
 
 		if (null == diff)
 			throw new java.lang.Exception
@@ -97,7 +97,7 @@ public class FixedPointFinderNewton extends org.drip.math.solver1D.FixedPointFin
 
 	public FixedPointFinderNewton (
 		final double dblOFGoal,
-		final org.drip.math.algodiff.ObjectiveFunction of)
+		final org.drip.math.function.AbstractUnivariate of)
 		throws java.lang.Exception
 	{
 		super (dblOFGoal, of, null);

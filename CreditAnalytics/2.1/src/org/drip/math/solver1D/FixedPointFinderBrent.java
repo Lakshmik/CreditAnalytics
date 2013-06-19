@@ -114,7 +114,7 @@ public class FixedPointFinderBrent extends org.drip.math.solver1D.FixedPointFind
 
 	public FixedPointFinderBrent (
 		final double dblOFGoal,
-		final org.drip.math.algodiff.ObjectiveFunction of)
+		final org.drip.math.function.AbstractUnivariate of)
 		throws java.lang.Exception
 	{
 		super (dblOFGoal, of, null, org.drip.math.solver1D.VariateIteratorPrimitive.BISECTION);

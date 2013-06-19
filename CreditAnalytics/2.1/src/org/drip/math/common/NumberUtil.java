@@ -118,4 +118,120 @@ public class NumberUtil {
 	{
 		return WithinTolerance (dbl1, dbl2, DEFAULT_ABSOLUTE_TOLERANCE, DEFAULT_RELATIVE_TOLERANCE);
 	}
+
+	/**
+	 * This function implements Factorial N.
+	 * 
+	 * @param n N
+	 * 
+	 * @return Factorial N
+	 */
+
+	public static final int Factorial (
+		final int n)
+	{
+		int iNFact = 1;
+
+		for (int i = 1; i <= n; ++i)
+			iNFact *= i;
+
+		return iNFact;
+	}
+
+	/**
+	 * This function implements N Permute K.
+	 * 
+	 * @param n N
+	 * @param k K
+	 * 
+	 * @return N Permute K
+	 */
+
+	public static final int NPK (
+		final int n,
+		final int k)
+	{
+		int iK = n < k ? n : k;
+		int iN = n > k ? n : k;
+
+		return Factorial (iN) / Factorial (iK);
+	}
+
+	/**
+	 * This function implements N choose K.
+	 * 
+	 * @param n N
+	 * @param k K
+	 * 
+	 * @return N choose K
+	 */
+
+	public static final int NCK (
+		final int n,
+		final int k)
+	{
+		int iK = n < k ? n : k;
+		int iN = n > k ? n : k;
+
+		return Factorial (iN) / Factorial (iK) / Factorial (iN - iK);
+	}
+
+	/**
+	 * Print the contents of the 1D array
+	 * 
+	 * @param strName Label Name
+	 * @param adblA The 1D array
+	 * @param bBailOnNaN Bail on encountering an NaN
+	 * 
+	 * @return TRUE => Print Successful
+	 */
+
+	public static final boolean Print1DArray (
+		final java.lang.String strName,
+		final double[] adblA,
+		final boolean bBailOnNaN)
+	{
+		if (null == adblA || 0 == adblA.length) return false;
+
+		int iSize = adblA.length;
+
+		for (int i = 0; i < iSize; ++i) {
+			if (!org.drip.math.common.NumberUtil.IsValid (adblA[i]) && bBailOnNaN) return false;
+
+			System.out.println (strName + "[" + i + "] = " + adblA[i]);
+		}
+
+		return true;
+	}
+
+	/**
+	 * Print the contents of the 2D array
+	 * 
+	 * @param strName Label Name
+	 * @param aadblA The 2D array
+	 * @param bBailOnNaN Bail on encountering an NaN
+	 * 
+	 * @return TRUE => Print Successful
+	 */
+
+	public static final boolean Print2DArray (
+		final java.lang.String strName,
+		final double[][] aadblA,
+		final boolean bBailOnNaN)
+	{
+		if (null == aadblA || 0 == aadblA.length) return false;
+
+		int iSize = aadblA.length;
+
+		for (int i = 0; i < iSize; ++i) {
+			for (int j = 0; j < iSize; ++j) {
+				if (!org.drip.math.common.NumberUtil.IsValid (aadblA[i][j]) && bBailOnNaN) return false;
+
+				System.out.println (strName + "[" + i + "][" + j + "] = " +
+					org.drip.math.common.FormatUtil.FormatDouble (aadblA[i][j], 0, 6, 1.));
+			}
+		}
+
+		return true;
+	}
 }

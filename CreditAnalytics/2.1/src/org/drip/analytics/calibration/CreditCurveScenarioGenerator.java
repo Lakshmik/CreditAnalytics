@@ -42,8 +42,6 @@ package org.drip.analytics.calibration;
  */
 
 public class CreditCurveScenarioGenerator {
-	private static final boolean s_bBlog = false;
-
 	private org.drip.product.definition.CalibratableComponent[] _aCalibInst = null;
 
 	private org.drip.analytics.calibration.CurveCalibrator _compCalib = new
@@ -62,8 +60,7 @@ public class CreditCurveScenarioGenerator {
 		throws java.lang.Exception
 	{
 		if (null == (_aCalibInst = aCalibInst) || 0 == _aCalibInst.length)
-			throw new java.lang.Exception
-				("CreditCurveScenarioGenerator ctr: Got invalid calib instrument set!");
+			throw new java.lang.Exception ("CreditCurveScenarioGenerator ctr: Invalid calib instr!");
 	}
 
 	/**
@@ -114,11 +111,15 @@ public class CreditCurveScenarioGenerator {
 				null == dc)
 			return null;
 
+		int iNumInstr = adblQuotes.length;
+		double adblDate[] = new double[iNumInstr];
+		double adblHazardRate[] = new double[iNumInstr];
 		org.drip.analytics.definition.CreditCurve cc = null;
-		double adblDate[] = new double[adblQuotes.length];
-		double adblHazardRate[] = new double[adblQuotes.length];
 
-		for (int i = 0; i < adblQuotes.length; ++i) {
+		if (0 == iNumInstr || iNumInstr != astrCalibMeasure.length || iNumInstr != astrCalibMeasure.length)
+			return null;
+
+		for (int i = 0; i < iNumInstr; ++i) {
 			adblHazardRate[i] = java.lang.Double.NaN;
 
 			adblDate[i] = _aCalibInst[i].getMaturityDate().getJulian();
@@ -137,14 +138,10 @@ public class CreditCurveScenarioGenerator {
 		org.drip.param.pricer.PricerParams pricerParams = new org.drip.param.pricer.PricerParams (7, null,
 			false, org.drip.param.pricer.PricerParams.PERIOD_DISCRETIZATION_DAY_STEP);
 
-		for (int i = 0; i < adblQuotes.length; ++i) {
+		for (int i = 0; i < iNumInstr; ++i) {
 			if (!_compCalib.bootstrapHazardRate (cc, _aCalibInst[i], i, valParams, dc, dcTSY, dcEDSF,
-				pricerParams, astrCalibMeasure[i], adblQuotes[i], mmFixings, quotingParams, false)) {
-				if (s_bBlog)
-					System.out.println ("Bootstrapping " + _aCalibInst[i].getComponentName() + " failed!");
-
+				pricerParams, astrCalibMeasure[i], adblQuotes[i], mmFixings, quotingParams, false))
 				return null;
-			}
 		}
 
 		cc.setInstrCalibInputs (valParams, bFlat, dc, dcTSY, dcEDSF, pricerParams, _aCalibInst, adblQuotes,
@@ -256,7 +253,7 @@ public class CreditCurveScenarioGenerator {
 
 		for (int i = 0; i < _aCalibInst.length; ++i) {
 			org.drip.analytics.definition.CreditCurve cc = null;
-			double[] adblTenorQuotes = new double [_aCalibInst.length];
+			double[] adblTenorQuotes = new double[_aCalibInst.length];
 
 			for (int j = 0; j < _aCalibInst.length; ++j) {
 				if (j == i)

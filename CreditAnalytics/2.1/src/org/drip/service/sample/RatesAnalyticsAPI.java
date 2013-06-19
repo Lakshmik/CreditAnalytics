@@ -13,7 +13,6 @@ import java.util.*;
 
 import org.drip.analytics.date.JulianDate;
 import org.drip.analytics.definition.*;
-import org.drip.analytics.support.*;
 import org.drip.param.valuation.*;
 import org.drip.product.definition.*;
 
@@ -25,6 +24,12 @@ import org.drip.analytics.creator.*;
 import org.drip.param.creator.*;
 import org.drip.product.creator.*;
 import org.drip.service.api.CreditAnalytics;
+
+/*
+ * DRIP Math Support
+ */
+
+import org.drip.math.common.FormatUtil;
 
 /*
  * -*- mode: java; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
@@ -263,7 +268,7 @@ public class RatesAnalyticsAPI {
 		 */
 
 		DiscountCurve dc = RatesScenarioCurveBuilder.CreateDiscountCurve (dtStart, "USD",
-			DiscountCurveBuilder.BOOTSTRAP_MODE_POLYNOMIAL_SPLINE_DF,
+			DiscountCurveBuilder.BOOTSTRAP_MODE_CONSTANT_FORWARD,
 			aCompCalib, adblCompCalibValue, astrCalibMeasure, mmFixings);
 
 		/*
@@ -272,9 +277,9 @@ public class RatesAnalyticsAPI {
 
 		for (int i = 0; i < aCompCalib.length; ++i)
 			System.out.println (astrCalibMeasure[i] + "[" + i + "] = " +
-				GenericUtil.FormatPrice (aCompCalib[i].calcMeasureValue (new ValuationParams (dtStart, dtStart, "USD"), null,
+				FormatUtil.FormatDouble (aCompCalib[i].calcMeasureValue (new ValuationParams (dtStart, dtStart, "USD"), null,
 					ComponentMarketParamsBuilder.CreateComponentMarketParams (dc, null, null, null, null, null, mmFixings),
-						null, astrCalibMeasure[i]), 1, 5, 1.) + " | " + GenericUtil.FormatPrice (adblCompCalibValue[i], 1, 5, 1.));
+						null, astrCalibMeasure[i]), 1, 5, 1.) + " | " + FormatUtil.FormatDouble (adblCompCalibValue[i], 1, 5, 1.));
 
 		/* for (int i = 0; i < 100; ++i) {
 			org.drip.analytics.date.JulianDate dt = dtStart.addDays (90 * i);
@@ -282,7 +287,7 @@ public class RatesAnalyticsAPI {
 			System.out.println ("DF[" + dt + "] = " + dc.getDF (dt));
 		} */
 
-		for (int i = 0; i < aCompCalib.length; ++i) {
+		/* for (int i = 0; i < aCompCalib.length; ++i) {
 			org.drip.math.algodiff.WengertJacobian wjComp = aCompCalib[i].calcPVDFMicroJack
 				(new ValuationParams (dtStart, dtStart, "USD"),
 				null,
@@ -291,7 +296,7 @@ public class RatesAnalyticsAPI {
 
 			System.out.println ("PV/DF Micro Jack[" + aCompCalib[i].getComponentName() + "]=" +
 				(null == wjComp ? null : wjComp.displayString()));
-		}
+		} */
 	}
 
 	public static void DiscountCurveFromCash()
@@ -355,11 +360,11 @@ public class RatesAnalyticsAPI {
 
 		for (int i = 0; i < aCompCalib.length; ++i)
 			System.out.println (astrCalibMeasure[i] + "[" + i + "] = " +
-				GenericUtil.FormatPrice (aCompCalib[i].calcMeasureValue (new ValuationParams (dtStart, dtStart, "USD"), null,
+				FormatUtil.FormatDouble (aCompCalib[i].calcMeasureValue (new ValuationParams (dtStart, dtStart, "USD"), null,
 					ComponentMarketParamsBuilder.CreateComponentMarketParams (dc, null, null, null, null, null, null),
-						null, astrCalibMeasure[i]), 1, 5, 1.) + " | " + GenericUtil.FormatPrice (adblCompCalibValue[i], 1, 5, 1.));
+						null, astrCalibMeasure[i]), 1, 5, 1.) + " | " + FormatUtil.FormatDouble (adblCompCalibValue[i], 1, 5, 1.));
 
-		org.drip.math.algodiff.WengertJacobian wjPVDF = dc.compPVDFJacobian (dtStart);
+		org.drip.math.calculus.WengertJacobian wjPVDF = dc.compPVDFJacobian (dtStart);
 
 		System.out.println ("PV/DF Micro Jack[04/06/11]=" + (null == wjPVDF ? null : wjPVDF.displayString()));
 	}
@@ -408,11 +413,11 @@ public class RatesAnalyticsAPI {
 
 		for (int i = 0; i < aCompCalib.length; ++i)
 			System.out.println (astrCalibMeasure[i] + "[" + i + "] = " +
-				GenericUtil.FormatPrice (aCompCalib[i].calcMeasureValue (new ValuationParams (dtStart, dtStart, "USD"), null,
+				FormatUtil.FormatDouble (aCompCalib[i].calcMeasureValue (new ValuationParams (dtStart, dtStart, "USD"), null,
 					ComponentMarketParamsBuilder.CreateComponentMarketParams (dc, null, null, null, null, null, null),
-						null, astrCalibMeasure[i]), 1, 5, 1.) + " | " + GenericUtil.FormatPrice (adblCompCalibValue[i], 1, 5, 1.));
+						null, astrCalibMeasure[i]), 1, 5, 1.) + " | " + FormatUtil.FormatDouble (adblCompCalibValue[i], 1, 5, 1.));
 
-		org.drip.math.algodiff.WengertJacobian wjPVDF = dc.compPVDFJacobian (dtStart);
+		org.drip.math.calculus.WengertJacobian wjPVDF = dc.compPVDFJacobian (dtStart);
 
 		System.out.println ("PV/DF Micro Jack[04/06/11]=" + (null == wjPVDF ? null : wjPVDF.displayString()));
 	}
@@ -502,7 +507,7 @@ public class RatesAnalyticsAPI {
 		 */
 
 		DiscountCurve dc = RatesScenarioCurveBuilder.CreateDiscountCurve (dtStart, "USD",
-			DiscountCurveBuilder.BOOTSTRAP_MODE_POLYNOMIAL_SPLINE_DF,
+			DiscountCurveBuilder.BOOTSTRAP_MODE_CONSTANT_FORWARD,
 			aCompCalib, adblCompCalibValue, astrCalibMeasure, mmFixings);
 
 		/*
@@ -511,16 +516,16 @@ public class RatesAnalyticsAPI {
 
 		for (int i = 0; i < aCompCalib.length; ++i)
 			System.out.println (astrCalibMeasure[i] + "[" + i + "] = " +
-				GenericUtil.FormatPrice (aCompCalib[i].calcMeasureValue (new ValuationParams (dtStart, dtStart, "USD"), null,
+				FormatUtil.FormatDouble (aCompCalib[i].calcMeasureValue (new ValuationParams (dtStart, dtStart, "USD"), null,
 					ComponentMarketParamsBuilder.CreateComponentMarketParams (dc, null, null, null, null, null, mmFixings),
-						null, astrCalibMeasure[i]), 1, 5, 1.) + " | " + GenericUtil.FormatPrice (adblCompCalibValue[i], 1, 5, 1.));
+						null, astrCalibMeasure[i]), 1, 5, 1.) + " | " + FormatUtil.FormatDouble (adblCompCalibValue[i], 1, 5, 1.));
 
-		org.drip.math.algodiff.WengertJacobian wjQuoteDF = dc.compQuoteDFJacobian (dtStart);
+		org.drip.math.calculus.WengertJacobian wjQuoteDF = dc.compQuoteDFJacobian (dtStart);
 
 		System.out.println ("Quote/DF Micro Jack[04/06/11]=" + (null == wjQuoteDF ? null :
 			wjQuoteDF.displayString()));
 
-		org.drip.math.algodiff.WengertJacobian wjPVDF = dc.compPVDFJacobian (dtStart);
+		org.drip.math.calculus.WengertJacobian wjPVDF = dc.compPVDFJacobian (dtStart);
 
 		System.out.println ("PV/Zero Micro Jack[04/06/11]=" + (null == wjPVDF ? null : wjPVDF.displayString()));
 	}

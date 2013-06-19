@@ -287,7 +287,7 @@ public abstract class Component extends org.drip.service.stream.Serializer imple
 
 				if (null != mpc.getScenCMP (this, "RRBumpDn")) {
 					java.util.Map<java.lang.String, java.lang.Double> mapRRBumpDn = value (valParams,
-						pricerParams, mpc.getScenCMP (this, "FlatCreditBumpDn"), quotingParams);
+						pricerParams, mpc.getScenCMP (this, "RRBumpDn"), quotingParams);
 
 					if (null != mapRRBumpDn && null != mapRRBumpDn.entrySet()) {
 						compOp._mRRGamma = new java.util.HashMap<java.lang.String, java.lang.Double>();
@@ -527,9 +527,9 @@ public abstract class Component extends org.drip.service.stream.Serializer imple
 		final double dblSettleDate,
 		final double dblPV,
 		final org.drip.analytics.definition.DiscountCurve dc,
-		final org.drip.math.algodiff.WengertJacobian wjPVDFMicroJack)
+		final org.drip.math.calculus.WengertJacobian wjPVDFMicroJack)
 	{
-		org.drip.math.algodiff.WengertJacobian wjCashSettleDFDF = dc.getDFJacobian (dblSettleDate);
+		org.drip.math.calculus.WengertJacobian wjCashSettleDFDF = dc.getDFJacobian (dblSettleDate);
 
 		if (null == wjCashSettleDFDF) return false;
 

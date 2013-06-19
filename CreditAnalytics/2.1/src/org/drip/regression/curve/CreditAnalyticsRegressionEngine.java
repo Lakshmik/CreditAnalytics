@@ -5,15 +5,6 @@ package org.drip.regression.curve;
  * Regression Suite imports 
  */
 
-import org.drip.regression.core.RegressionEngine;
-
-/*
- * Credit Analytics imports 
- */
-
-import org.drip.analytics.daycount.*;
-import org.drip.analytics.support.*;
-
 /*
  * -*- mode: java; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
  */
@@ -48,7 +39,7 @@ import org.drip.analytics.support.*;
  * @author Lakshmi Krishnamurthy
  */
 
-public class CreditAnalyticsRegressionEngine extends RegressionEngine {
+public class CreditAnalyticsRegressionEngine extends org.drip.regression.core.RegressionEngine {
 	/**
 	 * Initializes the Credit Analytics Regression Engine
 	 * 
@@ -58,7 +49,10 @@ public class CreditAnalyticsRegressionEngine extends RegressionEngine {
 	 * @throws Exception Thrown from the super
 	 */
 
-	public CreditAnalyticsRegressionEngine (final int iNumRuns, final int iRegressionDetail) throws Exception
+	public CreditAnalyticsRegressionEngine (
+		final int iNumRuns,
+		final int iRegressionDetail)
+		throws java.lang.Exception
 	{
 		super (iNumRuns, iRegressionDetail);
 	}
@@ -68,16 +62,14 @@ public class CreditAnalyticsRegressionEngine extends RegressionEngine {
 	 */
 
 	@Override public boolean initRegressionEnv() {
-		if (!super.initRegressionEnv()) return false;
-
-		Logger.Init ("c:\\Lakshmi\\BondAnal\\Config.xml");
-
-		Convention.Init ("c:\\Lakshmi\\BondAnal\\Config.xml");
-
-		return true;
+		return super.initRegressionEnv() && org.drip.analytics.support.Logger.Init
+			("c:\\Lakshmi\\BondAnal\\Config.xml") && org.drip.analytics.daycount.Convention.Init
+				("c:\\Lakshmi\\BondAnal\\Config.xml");
 	}
 
-	public static void main (final String[] astrArgs) throws Exception {
+	public static void main (
+		final java.lang.String[] astrArgs)
+		throws java.lang.Exception {
 		CreditAnalyticsRegressionEngine care = new CreditAnalyticsRegressionEngine (10,
 			org.drip.regression.core.RegressionEngine.REGRESSION_DETAIL_MODULE_UNIT_DECOMPOSED);
 

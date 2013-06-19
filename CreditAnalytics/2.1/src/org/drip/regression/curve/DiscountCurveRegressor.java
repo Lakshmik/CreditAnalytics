@@ -2,32 +2,6 @@
 package org.drip.regression.curve;
 
 /*
- * Other imports
- */
-
-import java.util.*;
-
-/*
- * Regression Suite imports 
- */
-
-import org.drip.regression.core.*;
-
-/*
- * Credit Analytics imports
- */
-
-import org.drip.analytics.creator.*;
-import org.drip.analytics.date.*;
-import org.drip.analytics.definition.*;
-import org.drip.analytics.support.*;
-import org.drip.param.creator.*;
-import org.drip.param.definition.*;
-import org.drip.product.creator.*;
-import org.drip.product.definition.*;
-import org.drip.math.common.NumberUtil;
-
-/*
  * -*- mode: java; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
  */
 
@@ -61,50 +35,58 @@ import org.drip.math.common.NumberUtil;
  * @author Lakshmi Krishnamurthy
  */
 
-public class DiscountCurveRegressor implements RegressorSet {
-	private String _strCurrency = "";
-	private DiscountCurve _dc = null;
-	private JulianDate _dtStart = null;
-	private DiscountCurve _dcFromFlatRate = null;
-	private String _strRegressionScenario = "org.drip.analytics.curve.DiscountCurve";
+public class DiscountCurveRegressor implements org.drip.regression.core.RegressorSet {
+	private java.lang.String _strCurrency = "";
+	private org.drip.analytics.date.JulianDate _dtStart = null;
+	private org.drip.analytics.definition.DiscountCurve _dc = null;
+	private org.drip.analytics.definition.DiscountCurve _dcFromFlatRate = null;
+	private java.lang.String _strRegressionScenario = "org.drip.analytics.curve.DiscountCurve";
 
-	private List<UnitRegressor> _setRegressors = new ArrayList<UnitRegressor>();
+	private java.util.List<org.drip.regression.core.UnitRegressor> _setRegressors = new
+		java.util.ArrayList<org.drip.regression.core.UnitRegressor>();
 
 	/**
 	 * Do Nothing DiscountCurveRegressor constructor
 	 */
 
-	public DiscountCurveRegressor() {
+	public DiscountCurveRegressor()
+	{
 	}
 
 	/*
 	 * Discount Curve Regressor set setup
 	 */
 
-	@Override public boolean setupRegressors() {
+	@Override public boolean setupRegressors()
+	{
 		/*
 		 * Testing creation of the Discount Curve from rates instruments - implements the pre-regression, the
 		 * 	post-regression, and the actual regression functionality of the UnitRegressorExecutor class.
 		 */
 
 		try {
-			_setRegressors.add (new UnitRegressionExecutor ("CreateFromRatesInstruments",
-				_strRegressionScenario) {
+			_setRegressors.add (new org.drip.regression.core.UnitRegressionExecutor
+				("CreateFromRatesInstruments", _strRegressionScenario)
+			{
 				private static final int NUM_DC_INSTR = 30;
 
-				private String _astrCalibMeasure[] = new String[NUM_DC_INSTR];
 				private double _adblCompCalibValue[] = new double[NUM_DC_INSTR];
-				private CalibratableComponent _aCompCalib[] = new CalibratableComponent[NUM_DC_INSTR];
+				private java.lang.String _astrCalibMeasure[] = new java.lang.String[NUM_DC_INSTR];
+				private org.drip.product.definition.CalibratableComponent _aCompCalib[] = new
+					org.drip.product.definition.CalibratableComponent[NUM_DC_INSTR];
 
-				Map<JulianDate, Map<String, Double>> _mmFixings = new HashMap<JulianDate, Map<String,
-					Double>>();
+				java.util.Map<org.drip.analytics.date.JulianDate, java.util.Map<java.lang.String,
+					java.lang.Double>> _mmFixings = new java.util.HashMap<org.drip.analytics.date.JulianDate,
+						java.util.Map<java.lang.String, java.lang.Double>>();
 
-				@Override public boolean preRegression() {
+				@Override public boolean preRegression()
+				{
 					_strCurrency = "CHF";
 					double adblDate[] = new double[NUM_DC_INSTR];
 					double adblRate[] = new double[NUM_DC_INSTR];
 
-					if (null == (_dtStart = JulianDate.CreateFromYMD (2010, JulianDate.MAY, 12)))
+					if (null == (_dtStart = org.drip.analytics.date.JulianDate.CreateFromYMD (2010,
+						org.drip.analytics.date.JulianDate.MAY, 12)))
 						return false;
 
 					adblDate[0] = _dtStart.addDays (3).getJulian(); // ON
@@ -130,13 +112,14 @@ public class DiscountCurveRegressor implements RegressorSet {
 					_adblCompCalibValue[6] = .0026;
 
 					for (int i = 0; i < 7; ++i) {
-						adblRate[i] = Double.NaN;
 						_astrCalibMeasure[i] = "Rate";
+						adblRate[i] = java.lang.Double.NaN;
 
 						try {
-							_aCompCalib[i] = CashBuilder.CreateCash (_dtStart.addDays (2), new JulianDate
-								(adblDate[i]), _strCurrency);
-						} catch (Exception e) {
+							_aCompCalib[i] = org.drip.product.creator.CashBuilder.CreateCash
+								(_dtStart.addDays (2), new org.drip.analytics.date.JulianDate (adblDate[i]),
+									_strCurrency);
+						} catch (java.lang.Exception e) {
 							e.printStackTrace();
 
 							return false;
@@ -151,14 +134,15 @@ public class DiscountCurveRegressor implements RegressorSet {
 					_adblCompCalibValue[12] = .0104;
 					_adblCompCalibValue[13] = .0134;
 					_adblCompCalibValue[14] = .0160;
-					JulianDate dtEDFStart = _dtStart;
+					org.drip.analytics.date.JulianDate dtEDFStart = _dtStart;
 
-					CalibratableComponent[] aEDF = EDFutureBuilder.GenerateEDPack (_dtStart, 8, _strCurrency);
+					org.drip.product.definition.CalibratableComponent[] aEDF =
+						org.drip.product.creator.EDFutureBuilder.GenerateEDPack (_dtStart, 8, _strCurrency);
 
 					for (int i = 0; i < 8; ++i) {
-						adblRate[i + 7] = Double.NaN;
 						_aCompCalib[i + 7] = aEDF[i];
 						_astrCalibMeasure[i + 7] = "Rate";
+						adblRate[i + 7] = java.lang.Double.NaN;
 
 						adblDate[i + 7] = dtEDFStart.addDays ((i + 1) * 91).getJulian();
 					}
@@ -210,21 +194,22 @@ public class DiscountCurveRegressor implements RegressorSet {
 					_adblCompCalibValue[29] = .0409;
 
 					for (int i = 0; i < 15; ++i) {
-						adblRate[i + 15] = Double.NaN;
 						_astrCalibMeasure[i + 15] = "Rate";
+						adblRate[i + 15] = java.lang.Double.NaN;
 
 						try {
-							_aCompCalib[i + 15] = IRSBuilder.CreateIRS (_dtStart.addDays (2), new
-								JulianDate (adblDate[i + 15]), 0., _strCurrency, _strCurrency + "-LIBOR-6M",
-									_strCurrency);
-						} catch (Exception e) {
+							_aCompCalib[i + 15] = org.drip.product.creator.IRSBuilder.CreateIRS
+								(_dtStart.addDays (2), new org.drip.analytics.date.JulianDate (adblDate[i +
+								    15]), 0., _strCurrency, _strCurrency + "-LIBOR-6M", _strCurrency);
+						} catch (java.lang.Exception e) {
 							e.printStackTrace();
 
 							return false;
 						}
 					}
 
-					Map<String, Double> mIndexFixings = new HashMap<String, Double>();
+					java.util.Map<java.lang.String, java.lang.Double> mIndexFixings = new
+						java.util.HashMap<java.lang.String, java.lang.Double>();
 
 					mIndexFixings.put (_strCurrency + "-LIBOR-6M", 0.0042);
 
@@ -233,13 +218,13 @@ public class DiscountCurveRegressor implements RegressorSet {
 					return true;
 				}
 
-				@Override public boolean execRegression() {
-					if (null == (_dc = RatesScenarioCurveBuilder.CreateDiscountCurve (_dtStart, _strCurrency,
-						org.drip.analytics.creator.DiscountCurveBuilder.BOOTSTRAP_MODE_POLYNOMIAL_SPLINE_DF,
-							_aCompCalib, _adblCompCalibValue, _astrCalibMeasure, _mmFixings)))
-						return false;
-
-					return true;
+				@Override public boolean execRegression()
+				{
+					return null != (_dc =
+						org.drip.param.creator.RatesScenarioCurveBuilder.CreateDiscountCurve (_dtStart,
+							_strCurrency,
+								org.drip.analytics.creator.DiscountCurveBuilder.BOOTSTRAP_MODE_POLYNOMIAL_SPLINE_DF,
+						_aCompCalib, _adblCompCalibValue, _astrCalibMeasure, _mmFixings));
 				}
 			});
 
@@ -248,29 +233,32 @@ public class DiscountCurveRegressor implements RegressorSet {
 			 * 	post-regression, and the actual regression functionality of the UnitRegressorExecutor class.
 			 */
 
-			_setRegressors.add (new UnitRegressionExecutor ("CreateFromFlatRate", _strRegressionScenario) {
-				@Override public boolean execRegression() {
-					if (null == (_dcFromFlatRate = DiscountCurveBuilder.CreateFromFlatRate (_dtStart, _strCurrency,
-						0.04)))
-						return false;
-
-					return true;
+			_setRegressors.add (new org.drip.regression.core.UnitRegressionExecutor ("CreateFromFlatRate",
+				_strRegressionScenario)
+			{
+				@Override public boolean execRegression()
+				{
+					return null != (_dcFromFlatRate =
+						org.drip.analytics.creator.DiscountCurveBuilder.CreateFromFlatRate (_dtStart,
+							_strCurrency, 0.04));
 				}
 
-				@Override public boolean postRegression (final RegressionRunDetail rnvd) {
+				@Override public boolean postRegression (
+					final org.drip.regression.core.RegressionRunDetail rnvd)
+				{
 					final int NUM_DC_INSTRUMENTS = 5;
 					double adblDate[] = new double[NUM_DC_INSTRUMENTS];
 					double adblDiscountFactorFlatRate[] = new double[NUM_DC_INSTRUMENTS];
 
 					for (int i = 0; i < NUM_DC_INSTRUMENTS; ++i) {
 						try {
-							if (!NumberUtil.IsValid (adblDiscountFactorFlatRate[i] = _dcFromFlatRate.getDF
-								(adblDate[i] = _dtStart.addYears (i + 1).getJulian())))
+							if (!org.drip.math.common.NumberUtil.IsValid (adblDiscountFactorFlatRate[i] =
+								_dcFromFlatRate.getDF (adblDate[i] = _dtStart.addYears (i + 1).getJulian())))
 								return false;
 
-							rnvd.set ("DiscountFactor[" + new JulianDate (adblDate[i]) + "]", "" +
-								adblDiscountFactorFlatRate[i]);
-						} catch (Exception e) {
+							rnvd.set ("DiscountFactor[" + new org.drip.analytics.date.JulianDate
+								(adblDate[i]) + "]", "" + adblDiscountFactorFlatRate[i]);
+						} catch (java.lang.Exception e) {
 							e.printStackTrace();
 
 							return false;
@@ -287,20 +275,23 @@ public class DiscountCurveRegressor implements RegressorSet {
 			 * 		class.
 			 */
 
-			_setRegressors.add (new UnitRegressionExecutor ("BuildFromDF", _strRegressionScenario) {
+			_setRegressors.add (new org.drip.regression.core.UnitRegressionExecutor ("BuildFromDF",
+				_strRegressionScenario)
+			{
 				private static final int NUM_DC_INSTRUMENTS = 5;
 
-				private DiscountCurve _dcFromDF = null;
 				private double _adblDate[] = new double[NUM_DC_INSTRUMENTS];
+				private org.drip.analytics.definition.DiscountCurve _dcFromDF = null;
 				private double _adblDiscountFactorFlatRate[] = new double[NUM_DC_INSTRUMENTS];
 
-				@Override public boolean preRegression() {
+				@Override public boolean preRegression()
+				{
 					for (int i = 0; i < NUM_DC_INSTRUMENTS; ++i) {
 						try {
-							if (!NumberUtil.IsValid (_adblDiscountFactorFlatRate[i] = _dc.getDF (_adblDate[i]
-								= _dtStart.addYears (i + 1).getJulian())))
+							if (!org.drip.math.common.NumberUtil.IsValid (_adblDiscountFactorFlatRate[i] =
+								_dc.getDF (_adblDate[i] = _dtStart.addYears (i + 1).getJulian())))
 								return false;
-						} catch (Exception e) {
+						} catch (java.lang.Exception e) {
 							e.printStackTrace();
 
 							return false;
@@ -310,30 +301,32 @@ public class DiscountCurveRegressor implements RegressorSet {
 					return true;
 				}
 
-				@Override public boolean execRegression() {
-					if (null == (_dcFromDF = DiscountCurveBuilder.BuildFromDF (_dtStart, _strCurrency, _adblDate,
-						_adblDiscountFactorFlatRate,
-							org.drip.analytics.creator.DiscountCurveBuilder.BOOTSTRAP_MODE_CONSTANT_FORWARD)))
-						return false;
-
-					return true;
+				@Override public boolean execRegression()
+				{
+					return null != (_dcFromDF = org.drip.analytics.creator.DiscountCurveBuilder.BuildFromDF
+						(_dtStart, _strCurrency, _adblDate, _adblDiscountFactorFlatRate,
+							org.drip.analytics.creator.DiscountCurveBuilder.BOOTSTRAP_MODE_CONSTANT_FORWARD));
 				}
 
-				@Override public boolean postRegression (final RegressionRunDetail rnvd) {
+				@Override public boolean postRegression (
+					final org.drip.regression.core.RegressionRunDetail rnvd)
+				{
 					for (int i = 0; i < NUM_DC_INSTRUMENTS; ++i) {
 						try {
 							double dblDiscountFactorDFCurve = _dcFromDF.getDF (_adblDate[i]);
 
-							rnvd.set ("DiscountFactorFlatRate[" + new JulianDate (_adblDate[i]) + "]",
-								GenericUtil.FormatDouble (_adblDiscountFactorFlatRate[i], 1, 3, 1));
+							rnvd.set ("DiscountFactorFlatRate[" + new org.drip.analytics.date.JulianDate
+								(_adblDate[i]) + "]", org.drip.math.common.FormatUtil.FormatDouble
+									(_adblDiscountFactorFlatRate[i], 1, 3, 1));
 
-							rnvd.set ("DiscountFactorDFCurve[" + new JulianDate (_adblDate[i]) + "]",
-								GenericUtil.FormatDouble (dblDiscountFactorDFCurve, 1, 3, 1));
+							rnvd.set ("DiscountFactorDFCurve[" + new org.drip.analytics.date.JulianDate
+								(_adblDate[i]) + "]", org.drip.math.common.FormatUtil.FormatDouble
+									(dblDiscountFactorDFCurve, 1, 3, 1));
 
-							if (!NumberUtil.WithinTolerance (dblDiscountFactorDFCurve,
+							if (!org.drip.math.common.NumberUtil.WithinTolerance (dblDiscountFactorDFCurve,
 								_adblDiscountFactorFlatRate[i]))
 								return false;
-						} catch (Exception e) {
+						} catch (java.lang.Exception e) {
 							e.printStackTrace();
 
 							return false;
@@ -349,20 +342,23 @@ public class DiscountCurveRegressor implements RegressorSet {
 			 * 	post-regression, and the actual regression functionality of the UnitRegressorExecutor class.
 			 */
 
-			_setRegressors.add (new UnitRegressionExecutor ("CreateDC", _strRegressionScenario) {
+			_setRegressors.add (new org.drip.regression.core.UnitRegressionExecutor ("CreateDC",
+				_strRegressionScenario)
+			{
 				private static final int NUM_DC_INSTRUMENTS = 5;
 
-				private DiscountCurve _dcFromRates = null;
 				private double _adblDate[] = new double[NUM_DC_INSTRUMENTS];
 				private double _adblRate[] = new double[NUM_DC_INSTRUMENTS];
+				private org.drip.analytics.definition.DiscountCurve _dcFromRates = null;
 
-				@Override public boolean preRegression() {
+				@Override public boolean preRegression()
+				{
 					for (int i = 0; i < NUM_DC_INSTRUMENTS; ++i) {
 						try {
-							if (!NumberUtil.IsValid (_adblRate[i] = _dc.calcImpliedRate (_adblDate[i] =
-								_dtStart.addYears (i + 1).getJulian())))
+							if (!org.drip.math.common.NumberUtil.IsValid (_adblRate[i] = _dc.calcImpliedRate
+								(_adblDate[i] = _dtStart.addYears (i + 1).getJulian())))
 								return false;
-						} catch (Exception e) {
+						} catch (java.lang.Exception e) {
 							e.printStackTrace();
 
 							return false;
@@ -372,16 +368,16 @@ public class DiscountCurveRegressor implements RegressorSet {
 					return true;
 				}
 
-				@Override public boolean execRegression() {
-					if (null == (_dcFromRates = DiscountCurveBuilder.CreateDC (_dtStart, _strCurrency,
-						_adblDate, _adblRate,
-							org.drip.analytics.creator.DiscountCurveBuilder.BOOTSTRAP_MODE_CONSTANT_FORWARD)))
-						return false;
-
-					return true;
+				@Override public boolean execRegression()
+				{
+					return null != (_dcFromRates = org.drip.analytics.creator.DiscountCurveBuilder.CreateDC
+						(_dtStart, _strCurrency, _adblDate, _adblRate,
+							org.drip.analytics.creator.DiscountCurveBuilder.BOOTSTRAP_MODE_CONSTANT_FORWARD));
 				}
 
-				@Override public boolean postRegression (final RegressionRunDetail rnvd) {
+				@Override public boolean postRegression (
+					final org.drip.regression.core.RegressionRunDetail rnvd)
+				{
 					for (int i = 0; i < NUM_DC_INSTRUMENTS; ++i) {
 						try {
 							double dblStartDate = _dtStart.getJulian();
@@ -390,14 +386,17 @@ public class DiscountCurveRegressor implements RegressorSet {
 
 							double dblRate = _dcFromRates.calcImpliedRate (dblStartDate, _adblDate[i]);
 
-							rnvd.set ("DiscountFactorOriginalDC[" + new JulianDate (_adblDate[i]) + "]",
-								GenericUtil.FormatDouble (_adblRate[i], 1, 3, 1));
+							rnvd.set ("DiscountFactorOriginalDC[" + new org.drip.analytics.date.JulianDate
+								(_adblDate[i]) + "]", org.drip.math.common.FormatUtil.FormatDouble
+									(_adblRate[i], 1, 3, 1));
 
-							rnvd.set ("DiscountFactoRateImplied[" + new JulianDate (_adblDate[i]) + "]",
-								GenericUtil.FormatDouble (dblRate, 1, 3, 1));
+							rnvd.set ("DiscountFactoRateImplied[" + new org.drip.analytics.date.JulianDate
+								(_adblDate[i]) + "]", org.drip.math.common.FormatUtil.FormatDouble (dblRate,
+									1, 3, 1));
 
-							if (!NumberUtil.WithinTolerance (dblRate, _adblRate[i])) return false;
-						} catch (Exception e) {
+							if (!org.drip.math.common.NumberUtil.WithinTolerance (dblRate, _adblRate[i]))
+								return false;
+						} catch (java.lang.Exception e) {
 							e.printStackTrace();
 
 							return false;
@@ -413,36 +412,36 @@ public class DiscountCurveRegressor implements RegressorSet {
 			 * 	post-regression, and the actual regression functionality of the UnitRegressorExecutor class.
 			 */
 
-			_setRegressors.add (new UnitRegressionExecutor ("CompAndQuotes", _strRegressionScenario) {
+			_setRegressors.add (new org.drip.regression.core.UnitRegressionExecutor ("CompAndQuotes",
+				_strRegressionScenario)
+			{
 				private double[] _adblQuote = null;
-				private CalibratableComponent[] _aCalibComp = null;
+				private org.drip.product.definition.CalibratableComponent[] _aCalibComp = null;
 
-				@Override public boolean execRegression() {
-					if (null == (_aCalibComp = _dc.getCalibComponents()) || 0 == _aCalibComp.length)
-						return false;
-
-					if (null == (_adblQuote = _dc.getCompQuotes()) || 0 == _adblQuote.length ||
-						_aCalibComp.length != _adblQuote.length)
-						return false;
-
-					return true;
+				@Override public boolean execRegression()
+				{
+					return null != (_aCalibComp = _dc.getCalibComponents()) && 0 == _aCalibComp.length &&
+						null == (_adblQuote = _dc.getCompQuotes()) && 0 == _adblQuote.length &&
+							_aCalibComp.length != _adblQuote.length;
 				}
 
-				@Override public boolean postRegression (final RegressionRunDetail rnvd) {
+				@Override public boolean postRegression (
+					final org.drip.regression.core.RegressionRunDetail rnvd)
+				{
 					for (int i = 0; i < _aCalibComp.length; ++i) {
-						String strCalibCompCode = _aCalibComp[i].getPrimaryCode();
+						java.lang.String strCalibCompCode = _aCalibComp[i].getPrimaryCode();
 
 						try {
 							double dblQuote = _dc.getQuote (strCalibCompCode);
 
-							JulianDate dt = _dc.getNodeDate (i);
+							org.drip.analytics.date.JulianDate dt = _dc.getNodeDate (i);
 
 							rnvd.set ("CompQuote" + "_" + strCalibCompCode + "{" + dt + "}",
-								GenericUtil.FormatDouble (dblQuote, 1, 4, 1));
+								org.drip.math.common.FormatUtil.FormatDouble (dblQuote, 1, 4, 1));
 
 							rnvd.set ("NodeQuote" + "_" + strCalibCompCode + "{" + dt + "}",
-								GenericUtil.FormatDouble (_adblQuote[i], 1, 4, 1));
-						} catch (Exception e) {
+								org.drip.math.common.FormatUtil.FormatDouble (_adblQuote[i], 1, 4, 1));
+						} catch (java.lang.Exception e) {
 							e.printStackTrace();
 
 							return false;
@@ -458,32 +457,37 @@ public class DiscountCurveRegressor implements RegressorSet {
 			 * 	post-regression, and the actual regression functionality of the UnitRegressorExecutor class.
 			 */
 
-			_setRegressors.add (new UnitRegressionExecutor ("ParallelShiftedCurve", _strRegressionScenario) {
-				private DiscountCurve _dcShifted = null;
+			_setRegressors.add (new org.drip.regression.core.UnitRegressionExecutor ("ParallelShiftedCurve",
+				_strRegressionScenario)
+			{
+				private org.drip.analytics.definition.DiscountCurve _dcShifted = null;
 
-				@Override public boolean execRegression() {
-					if (null == (_dcShifted = (DiscountCurve) _dc.createParallelShiftedCurve (0.0004))) return false;
-
-					return true;
+				@Override public boolean execRegression()
+				{
+					return null != (_dcShifted = (org.drip.analytics.definition.DiscountCurve)
+						_dc.createParallelShiftedCurve (0.0004));
 				}
 
-				@Override public boolean postRegression (final RegressionRunDetail rnvd) {
-					CalibratableComponent[] aCalibComp = _dc.getCalibComponents();
+				@Override public boolean postRegression (
+					final org.drip.regression.core.RegressionRunDetail rnvd)
+				{
+					org.drip.product.definition.CalibratableComponent[] aCalibComp =
+						_dc.getCalibComponents();
 
 					for (int i = 0; i < aCalibComp.length; ++i) {
-						String strCalibCompCode = aCalibComp[i].getPrimaryCode();
+						java.lang.String strCalibCompCode = aCalibComp[i].getPrimaryCode();
 
 						try {
 							double dblQuote = _dc.getQuote (strCalibCompCode);
 
 							double dblQuoteShifted = _dcShifted.getQuote (strCalibCompCode);
 
-							rnvd.set ("BaseCurve" + "_" + strCalibCompCode, GenericUtil.FormatDouble
-								(dblQuote, 1, 4, 1));
+							rnvd.set ("BaseCurve" + "_" + strCalibCompCode,
+								org.drip.math.common.FormatUtil.FormatDouble (dblQuote, 1, 4, 1));
 
 							rnvd.set ("ParallelShiftedCurve" + "_" + strCalibCompCode,
-								GenericUtil.FormatDouble (dblQuoteShifted, 1, 4, 1));
-						} catch (Exception e) {
+								org.drip.math.common.FormatUtil.FormatDouble (dblQuoteShifted, 1, 4, 1));
+						} catch (java.lang.Exception e) {
 							e.printStackTrace();
 
 							return false;
@@ -499,17 +503,20 @@ public class DiscountCurveRegressor implements RegressorSet {
 			 * 	post-regression, and the actual regression functionality of the UnitRegressorExecutor class.
 			 */
 
-			_setRegressors.add (new UnitRegressionExecutor ("RateShiftedCurve", _strRegressionScenario) {
-				private DiscountCurve _dcShifted = null;
+			_setRegressors.add (new org.drip.regression.core.UnitRegressionExecutor ("RateShiftedCurve",
+				_strRegressionScenario)
+			{
+				private org.drip.analytics.definition.DiscountCurve _dcShifted = null;
 
-				@Override public boolean execRegression() {
-					if (null == (_dcShifted = (DiscountCurve) _dcFromFlatRate.createParallelShiftedCurve (0.0004)))
-						return false;
-
-					return true;
+				@Override public boolean execRegression()
+				{
+					return null != (_dcShifted = (org.drip.analytics.definition.DiscountCurve)
+						_dcFromFlatRate.createParallelShiftedCurve (0.0004));
 				}
 
-				@Override public boolean postRegression (final RegressionRunDetail rnvd) {
+				@Override public boolean postRegression (
+					final org.drip.regression.core.RegressionRunDetail rnvd)
+				{
 					final int NUM_DC_INSTRUMENTS = 5;
 					double adblDate[] = new double[NUM_DC_INSTRUMENTS];
 					double adblRate[] = new double[NUM_DC_INSTRUMENTS];
@@ -517,25 +524,29 @@ public class DiscountCurveRegressor implements RegressorSet {
 
 					for (int i = 0; i < NUM_DC_INSTRUMENTS; ++i) {
 						try {
-							if (!NumberUtil.IsValid (adblRate[i] = _dcFromFlatRate.calcImpliedRate
-								(adblDate[i] = _dtStart.addYears (i + 1).getJulian())))
+							if (!org.drip.math.common.NumberUtil.IsValid (adblRate[i] =
+								_dcFromFlatRate.calcImpliedRate (adblDate[i] = _dtStart.addYears (i +
+									1).getJulian())))
 								return false;
 
-							if (!NumberUtil.IsValid (adblRateShifted[i] = _dcShifted.calcImpliedRate
-								(adblDate[i] = _dtStart.addYears (i + 1).getJulian())))
+							if (!org.drip.math.common.NumberUtil.IsValid (adblRateShifted[i] =
+								_dcShifted.calcImpliedRate (adblDate[i] = _dtStart.addYears (i +
+									1).getJulian())))
 								return false;
 
-							JulianDate dt = new JulianDate (adblDate[i]);
+							org.drip.analytics.date.JulianDate dt = new org.drip.analytics.date.JulianDate
+								(adblDate[i]);
 
-							rnvd.set ("RateBase[" + dt + "]", GenericUtil.FormatDouble (adblRate[i], 1, 4,
-								1));
+							rnvd.set ("RateBase[" + dt + "]", org.drip.math.common.FormatUtil.FormatDouble
+								(adblRate[i], 1, 4, 1));
 
-							rnvd.set ("RateShifted[" + dt + "]", GenericUtil.FormatDouble
+							rnvd.set ("RateShifted[" + dt + "]", org.drip.math.common.FormatUtil.FormatDouble
 								(adblRateShifted[i], 1, 4, 1));
 
-							if (!NumberUtil.WithinTolerance (adblRate[i] + 0.0004, adblRateShifted[i]))
+							if (!org.drip.math.common.NumberUtil.WithinTolerance (adblRate[i] + 0.0004,
+								adblRateShifted[i]))
 								return false;
-						} catch (Exception e) {
+						} catch (java.lang.Exception e) {
 							e.printStackTrace();
 
 							return false;
@@ -551,15 +562,17 @@ public class DiscountCurveRegressor implements RegressorSet {
 			 * 	post-regression, and the actual regression functionality of the UnitRegressorExecutor class.
 			 */
 
-			_setRegressors.add (new UnitRegressionExecutor ("BasisRateShiftedCurve", _strRegressionScenario)
+			_setRegressors.add (new org.drip.regression.core.UnitRegressionExecutor ("BasisRateShiftedCurve",
+				_strRegressionScenario)
 			{
 				private static final int NUM_DC_INSTRUMENTS = 5;
 
-				private DiscountCurve _dcBasisShifted = null;
+				private org.drip.analytics.definition.DiscountCurve _dcBasisShifted = null;
 				private double _adblDate[] = new double[NUM_DC_INSTRUMENTS];
 				private double _adblBasis[] = new double[NUM_DC_INSTRUMENTS];
 
-				@Override public boolean preRegression() {
+				@Override public boolean preRegression()
+				{
 					for (int i = 0; i < NUM_DC_INSTRUMENTS; ++i) {
 						_adblBasis[i] = (i + 1) * 0.0001;
 
@@ -569,36 +582,37 @@ public class DiscountCurveRegressor implements RegressorSet {
 					return true;
 				}
 
-				@Override public boolean execRegression() {
-					if (null == (_dcBasisShifted = _dcFromFlatRate.createBasisRateShiftedCurve (_adblDate,
-						_adblBasis)))
-						return false;
-
-					return true;
+				@Override public boolean execRegression()
+				{
+					return null != (_dcBasisShifted = _dcFromFlatRate.createBasisRateShiftedCurve (_adblDate,
+						_adblBasis));
 				}
 
-				@Override public boolean postRegression (final RegressionRunDetail rnvd) {
+				@Override public boolean postRegression (
+					final org.drip.regression.core.RegressionRunDetail rnvd)
+				{
 					double adblRate[] = new double[NUM_DC_INSTRUMENTS];
 					double adblRateShifted[] = new double[NUM_DC_INSTRUMENTS];
 
 					for (int i = 0; i < NUM_DC_INSTRUMENTS; ++i) {
 						try {
-							if (!NumberUtil.IsValid (adblRate[i] = _dcFromFlatRate.calcImpliedRate
-								(_adblDate[i])))
+							if (!org.drip.math.common.NumberUtil.IsValid (adblRate[i] =
+								_dcFromFlatRate.calcImpliedRate (_adblDate[i])))
 								return false;
 
-							if (!NumberUtil.IsValid (adblRateShifted[i] = _dcBasisShifted.calcImpliedRate
-								(_adblDate[i])))
+							if (!org.drip.math.common.NumberUtil.IsValid (adblRateShifted[i] =
+								_dcBasisShifted.calcImpliedRate (_adblDate[i])))
 								return false;
 
-							JulianDate dt = new JulianDate (_adblDate[i]);
+							org.drip.analytics.date.JulianDate dt = new org.drip.analytics.date.JulianDate
+								(_adblDate[i]);
 
-							rnvd.set ("RateBasisEmpty[" + dt + "]", GenericUtil.FormatDouble (adblRate[i], 1,
-								4, 1));
+							rnvd.set ("RateBasisEmpty[" + dt + "]",
+								org.drip.math.common.FormatUtil.FormatDouble (adblRate[i], 1, 4, 1));
 
-							rnvd.set ("RateBasisShifted[" + dt + "]", GenericUtil.FormatDouble
-								(adblRateShifted[i], 1, 4, 1));
-						} catch (Exception e) {
+							rnvd.set ("RateBasisShifted[" + dt + "]",
+								org.drip.math.common.FormatUtil.FormatDouble (adblRateShifted[i], 1, 4, 1));
+						} catch (java.lang.Exception e) {
 							e.printStackTrace();
 
 							return false;
@@ -614,20 +628,23 @@ public class DiscountCurveRegressor implements RegressorSet {
 			 * 	post-regression, and the actual regression functionality of the UnitRegressorExecutor class.
 			 */
 
-			_setRegressors.add (new UnitRegressionExecutor ("CreateTweakedCurve", _strRegressionScenario) {
+			_setRegressors.add (new org.drip.regression.core.UnitRegressionExecutor ("CreateTweakedCurve",
+				_strRegressionScenario)
+			{
 				private static final int NUM_DC_INSTRUMENTS = 5;
 
-				private DiscountCurve _dcNTP = null;
-				private NodeTweakParams _ntp = null;
 				private double _adblDate[] = new double[NUM_DC_INSTRUMENTS];
+				private org.drip.param.definition.NodeTweakParams _ntp = null;
+				private org.drip.analytics.definition.DiscountCurve _dcNTP = null;
 
-				@Override public boolean preRegression() {
+				@Override public boolean preRegression()
+				{
 					for (int i = 0; i < NUM_DC_INSTRUMENTS; ++i)
 						_adblDate[i] = _dtStart.addYears (i + 1).getJulian();
 
 					try {
-						_ntp = new NodeTweakParams (0, false, 0.0005);
-					} catch (Exception e) {
+						_ntp = new org.drip.param.definition.NodeTweakParams (0, false, 0.0005);
+					} catch (java.lang.Exception e) {
 						e.printStackTrace();
 
 						return false;
@@ -636,36 +653,41 @@ public class DiscountCurveRegressor implements RegressorSet {
 					return true;
 				}
 
-				@Override public boolean execRegression() {
-					if (null == (_dcNTP = (DiscountCurve) _dcFromFlatRate.createTweakedCurve (_ntp))) return false;
-
-					return true;
+				@Override public boolean execRegression()
+				{
+					return null != (_dcNTP = (org.drip.analytics.definition.DiscountCurve)
+						_dcFromFlatRate.createTweakedCurve (_ntp));
 				}
 
-				@Override public boolean postRegression (final RegressionRunDetail rnvd) {
+				@Override public boolean postRegression (
+					final org.drip.regression.core.RegressionRunDetail rnvd)
+				{
 					double adblRate[] = new double[NUM_DC_INSTRUMENTS];
 					double adblRateNTP[] = new double[NUM_DC_INSTRUMENTS];
 
 					for (int i = 0; i < NUM_DC_INSTRUMENTS; ++i) {
 						try {
-							if (!NumberUtil.IsValid (adblRate[i] = _dcFromFlatRate.calcImpliedRate
-								(_adblDate[i])))
+							if (!org.drip.math.common.NumberUtil.IsValid (adblRate[i] =
+								_dcFromFlatRate.calcImpliedRate (_adblDate[i])))
 								return false;
 
-							if (!NumberUtil.IsValid (adblRateNTP[i] = _dcNTP.calcImpliedRate (_adblDate[i])))
+							if (!org.drip.math.common.NumberUtil.IsValid (adblRateNTP[i] =
+								_dcNTP.calcImpliedRate (_adblDate[i])))
 								return false;
 
-							JulianDate dt = new JulianDate (_adblDate[i]);
+							org.drip.analytics.date.JulianDate dt = new org.drip.analytics.date.JulianDate
+								(_adblDate[i]);
 
-							rnvd.set ("RateUnTweaked[" + dt + "]", GenericUtil.FormatDouble (adblRate[i], 1,
-								4, 1));
+							rnvd.set ("RateUnTweaked[" + dt + "]",
+								org.drip.math.common.FormatUtil.FormatDouble (adblRate[i], 1, 4, 1));
 
-							rnvd.set ("RateTweaked[" + dt + "]", GenericUtil.FormatDouble (adblRateNTP[i], 1,
-								4, 1));
+							rnvd.set ("RateTweaked[" + dt + "]", org.drip.math.common.FormatUtil.FormatDouble
+								(adblRateNTP[i], 1, 4, 1));
 
-							if (!NumberUtil.WithinTolerance (adblRate[i] + 0.0005, adblRateNTP[i]))
+							if (!org.drip.math.common.NumberUtil.WithinTolerance (adblRate[i] + 0.0005,
+								adblRateNTP[i]))
 								return false;
-						} catch (Exception e) {
+						} catch (java.lang.Exception e) {
 							e.printStackTrace();
 
 							return false;
@@ -681,26 +703,30 @@ public class DiscountCurveRegressor implements RegressorSet {
 			 * 	post-regression, and the actual regression functionality of the UnitRegressorExecutor class.
 			 */
 
-			_setRegressors.add (new UnitRegressionExecutor ("EffectiveDF", _strRegressionScenario) {
+			_setRegressors.add (new org.drip.regression.core.UnitRegressionExecutor ("EffectiveDF",
+				_strRegressionScenario)
+			{
 				private static final int NUM_DC_INSTRUMENTS = 5;
 
 				private double _adblDate[] = new double[NUM_DC_INSTRUMENTS];
 				private double _adblDiscountFactor[] = new double[NUM_DC_INSTRUMENTS];
 
-				@Override public boolean preRegression() {
+				@Override public boolean preRegression()
+				{
 					for (int i = 0; i < NUM_DC_INSTRUMENTS; ++i)
 						_adblDate[i] = _dtStart.addYears (i + 1).getJulian();
 
 					return true;
 				}
 
-				@Override public boolean execRegression() {
+				@Override public boolean execRegression()
+				{
 					for (int i = 0; i < NUM_DC_INSTRUMENTS; ++i) {
 						try {
-							if (!NumberUtil.IsValid (_adblDiscountFactor[i] = _dc.getEffectiveDF ((i + 1) +
-								"Y", (i + 2) + "Y")))
+							if (!org.drip.math.common.NumberUtil.IsValid (_adblDiscountFactor[i] =
+								_dc.getEffectiveDF ((i + 1) + "Y", (i + 2) + "Y")))
 								return false;
-						} catch (Exception e) {
+						} catch (java.lang.Exception e) {
 							e.printStackTrace();
 
 							return false;
@@ -710,12 +736,15 @@ public class DiscountCurveRegressor implements RegressorSet {
 					return true;
 				}
 
-				@Override public boolean postRegression (final RegressionRunDetail rnvd) {
+				@Override public boolean postRegression (
+					final org.drip.regression.core.RegressionRunDetail rnvd)
+				{
 					for (int i = 0; i < NUM_DC_INSTRUMENTS; ++i) {
 						try {
-							rnvd.set ("Effective[" + new JulianDate (_adblDate[i]) + "]",
-								GenericUtil.FormatDouble (_adblDiscountFactor[i], 1, 4, 1));
-						} catch (Exception e) {
+							rnvd.set ("Effective[" + new org.drip.analytics.date.JulianDate (_adblDate[i]) +
+								"]", org.drip.math.common.FormatUtil.FormatDouble (_adblDiscountFactor[i], 1,
+									4, 1));
+						} catch (java.lang.Exception e) {
 							e.printStackTrace();
 
 							return false;
@@ -731,26 +760,30 @@ public class DiscountCurveRegressor implements RegressorSet {
 			 * 	post-regression, and the actual regression functionality of the UnitRegressorExecutor class.
 			 */
 
-			_setRegressors.add (new UnitRegressionExecutor ("CalcImpliedRate", _strRegressionScenario) {
+			_setRegressors.add (new org.drip.regression.core.UnitRegressionExecutor ("CalcImpliedRate",
+				_strRegressionScenario)
+			{
 				private static final int NUM_DC_INSTRUMENTS = 5;
 
 				private double _adblDate[] = new double[NUM_DC_INSTRUMENTS];
 				private double _adblImpliedRate[] = new double[NUM_DC_INSTRUMENTS];
 
-				@Override public boolean preRegression() {
+				@Override public boolean preRegression()
+				{
 					for (int i = 0; i < NUM_DC_INSTRUMENTS; ++i)
 						_adblDate[i] = _dtStart.addYears (i + 1).getJulian();
 
 					return true;
 				}
 
-				@Override public boolean execRegression() {
+				@Override public boolean execRegression()
+				{
 					for (int i = 0; i < NUM_DC_INSTRUMENTS; ++i) {
 						try {
-							if (!NumberUtil.IsValid (_adblImpliedRate[i] = _dc.calcImpliedRate ((i + 1) +
-								"Y", (i + 2) + "Y")))
+							if (!org.drip.math.common.NumberUtil.IsValid (_adblImpliedRate[i] =
+								_dc.calcImpliedRate ((i + 1) + "Y", (i + 2) + "Y")))
 								return false;
-						} catch (Exception e) {
+						} catch (java.lang.Exception e) {
 							e.printStackTrace();
 
 							return false;
@@ -760,12 +793,15 @@ public class DiscountCurveRegressor implements RegressorSet {
 					return true;
 				}
 
-				@Override public boolean postRegression (final RegressionRunDetail rnvd) {
+				@Override public boolean postRegression (
+					final org.drip.regression.core.RegressionRunDetail rnvd)
+				{
 					for (int i = 0; i < NUM_DC_INSTRUMENTS; ++i) {
 						try {
-							rnvd.set ("ImpliedRate[" + new JulianDate (_adblDate[i]) + "]",
-								GenericUtil.FormatDouble (_adblImpliedRate[i], 1, 4, 1));
-						} catch (Exception e) {
+							rnvd.set ("ImpliedRate[" + new org.drip.analytics.date.JulianDate (_adblDate[i])
+								+ "]", org.drip.math.common.FormatUtil.FormatDouble (_adblImpliedRate[i], 1,
+									4, 1));
+						} catch (java.lang.Exception e) {
 							e.printStackTrace();
 
 							return false;
@@ -775,7 +811,7 @@ public class DiscountCurveRegressor implements RegressorSet {
 					return true;
 				}
 			});
-		} catch (Exception e) {
+		} catch (java.lang.Exception e) {
 			e.printStackTrace();
 
 			return false;
@@ -784,11 +820,13 @@ public class DiscountCurveRegressor implements RegressorSet {
 		return true;
 	}
 
-	@Override public List<UnitRegressor> getRegressorSet() {
+	@Override public java.util.List<org.drip.regression.core.UnitRegressor> getRegressorSet()
+	{
 		return _setRegressors;
 	}
 
-	@Override public String getSetName() {
+	@Override public java.lang.String getSetName()
+	{
 		return _strRegressionScenario;
 	}
 }

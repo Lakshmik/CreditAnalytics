@@ -79,7 +79,7 @@ public class FixedPointFinderZheng extends org.drip.math.solver1D.FixedPointFind
 
 	public FixedPointFinderZheng (
 		final double dblOFGoal,
-		final org.drip.math.algodiff.ObjectiveFunction of)
+		final org.drip.math.function.AbstractUnivariate of)
 		throws java.lang.Exception
 	{
 		super (dblOFGoal, of, null, org.drip.math.solver1D.VariateIteratorPrimitive.BISECTION);

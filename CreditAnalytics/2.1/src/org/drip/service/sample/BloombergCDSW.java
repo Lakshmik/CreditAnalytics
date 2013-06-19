@@ -11,11 +11,12 @@ import java.util.*;
  * Credit Products imports
  */
 
+import org.drip.analytics.creator.DiscountCurveBuilder;
 import org.drip.analytics.date.JulianDate;
 import org.drip.analytics.definition.*;
 import org.drip.analytics.period.CouponPeriodCurveFactors;
-import org.drip.analytics.support.GenericUtil;
 import org.drip.param.definition.*;
+import org.drip.param.creator.ComponentMarketParamsBuilder;
 import org.drip.param.pricer.PricerParams;
 import org.drip.param.valuation.*;
 import org.drip.product.definition.*;
@@ -27,6 +28,12 @@ import org.drip.product.definition.*;
 import org.drip.param.creator.*;
 import org.drip.product.creator.*;
 import org.drip.service.api.CreditAnalytics;
+
+/*
+ * DRIP Math Support
+ */
+
+import org.drip.math.common.FormatUtil;
 
 /*
  * -*- mode: java; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
@@ -121,22 +128,23 @@ public class BloombergCDSW {
 		 * Build the IR curve from the components, their calibration measures, and their calibration quotes.
 		 */
 
-		DiscountCurve dc = RatesScenarioCurveBuilder.CreateDiscountCurve (dtStart, strCurrency, "ConstantFoward", aCompCalib,
-			adblCompCalibValue, astrCalibMeasure, mmFixings);
+		DiscountCurve dc = RatesScenarioCurveBuilder.CreateDiscountCurve (dtStart, strCurrency,
+			DiscountCurveBuilder.BOOTSTRAP_MODE_CONSTANT_FORWARD, aCompCalib, adblCompCalibValue, astrCalibMeasure, mmFixings);
 
 		/*
 		 * Check: Re-calculate the input rates
 		 */
 
-		/* ValuationParams valParams = ValuationParams.CreateStdValParams (dtStart, strCurrency);
+		ValuationParams valParams = ValuationParams.CreateStdValParams (dtStart, strCurrency);
 
-		ComponentMarketParams cmp = new ComponentMarketParams (dc, null, null, null, null, null, mmFixings);
+		ComponentMarketParams cmp = ComponentMarketParamsBuilder.CreateComponentMarketParams
+			(dc, null, null, null, null, null, mmFixings);
 
 		for (int i = 0; i < aCompCalib.length; ++i) {
 			double dblRate = aCompCalib[i].calcMeasureValue (valParams, null, cmp, null, "Rate");
 
-			System.out.println ("Rate[" + i + "] = " + FIGen.FormatDouble (dblRate, 1, 4, 100.));
-		} */
+			System.out.println ("Rate[" + i + "] = " + FormatUtil.FormatDouble (dblRate, 1, 4, 100.));
+		}
 
 		return dc;
 	}
@@ -179,7 +187,7 @@ public class BloombergCDSW {
 		for (int i = 0; i < aCDS.length; ++i) {
 			double dblFairPremium = aCDS[i].calcMeasureValue (valParams, pricerParams, cmp, null, "FairPremium");
 
-			System.out.println ("\tFairPremium[" + i + "] = " + GenericUtil.FormatDouble (dblFairPremium, 3, 3, 1.));
+			System.out.println ("\tFairPremium[" + i + "] = " + FormatUtil.FormatDouble (dblFairPremium, 3, 3, 1.));
 		}
 
 		return cc;
@@ -224,7 +232,7 @@ public class BloombergCDSW {
 
 		Map<String, Double> mapMeasures = cds.value (valParams, pricerParams, cmp, null);
 
-		System.out.println ("Default Probability at Maturity: " + GenericUtil.FormatDouble
+		System.out.println ("Default Probability at Maturity: " + FormatUtil.FormatDouble
 			(1. - cc.getSurvival (cds.getMaturityDate()), 1, 3, 1.));
 
 		System.out.println ("\nCDS Pricing");
@@ -252,11 +260,11 @@ public class BloombergCDSW {
 				JulianDate.fromJulian (p.getAccrualStartDate()) + FIELD_SEPARATOR +
 				JulianDate.fromJulian (p.getAccrualEndDate()) + FIELD_SEPARATOR +
 				JulianDate.fromJulian (p.getPayDate()) + FIELD_SEPARATOR +
-				GenericUtil.FormatDouble (p.getIndexRate(), 1, 4, 1.) +	FIELD_SEPARATOR +
-				GenericUtil.FormatDouble (p.getSpread(), 1, 4, 1.) + FIELD_SEPARATOR +
-				GenericUtil.FormatDouble (p.getCouponDCF(), 1, 4, 1.) + FIELD_SEPARATOR +
-				GenericUtil.FormatDouble (dc.getDF (p.getPayDate()), 1, 4, 1.) + FIELD_SEPARATOR +
-				GenericUtil.FormatDouble (cc.getSurvival (p.getPayDate()), 1, 4, 1.)
+				FormatUtil.FormatDouble (p.getIndexRate(), 1, 4, 1.) +	FIELD_SEPARATOR +
+				FormatUtil.FormatDouble (p.getSpread(), 1, 4, 1.) + FIELD_SEPARATOR +
+				FormatUtil.FormatDouble (p.getCouponDCF(), 1, 4, 1.) + FIELD_SEPARATOR +
+				FormatUtil.FormatDouble (dc.getDF (p.getPayDate()), 1, 4, 1.) + FIELD_SEPARATOR +
+				FormatUtil.FormatDouble (cc.getSurvival (p.getPayDate()), 1, 4, 1.)
 			);
 	}
 

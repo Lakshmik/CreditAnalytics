@@ -1168,7 +1168,7 @@ public class BondManager {
 			dblTSYSpread = bond.calcGSpreadFromPrice (valParams, mpc.getScenCMP (bond, "Base"), null,
 				wi._dblDate, wi._dblExerciseFactor, dblPrice);
 
-			dblASWSpread = bond.calcParASWFromPrice (valParams, mpc.getScenCMP (bond, "Base"), null,
+			dblASWSpread = bond.calcASWFromPrice (valParams, mpc.getScenCMP (bond, "Base"), null,
 				wi._dblDate, wi._dblExerciseFactor, dblPrice);
 
 			dblCreditBasis = bond.calcCreditBasisFromPrice (valParams, mpc.getScenCMP (bond, "Base"), null,

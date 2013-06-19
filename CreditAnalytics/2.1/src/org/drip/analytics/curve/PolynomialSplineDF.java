@@ -40,30 +40,17 @@ package org.drip.analytics.curve;
 public class PolynomialSplineDF extends org.drip.analytics.definition.DiscountCurve {
 	private static final int NUM_DF_QUADRATURES = 5;
 
-	/**
-	 * Log Relation between Discount Factor and Forward Rate
-	 */
-
-	public static final int DISC_FACTOR_FWD_RATE_RELATION_LOG = 0;
-
-	/**
-	 * Linear Relation between Discount Factor and Forward Rate
-	 */
-
-	public static final int DISC_FACTOR_FWD_RATE_RELATION_LINEAR = 1;
-
 	private double[] _adblDate = null;
 	private double[] _adblCalibQuote = null;
 	private java.lang.String _strCurrency = "";
+	private org.drip.math.grid.Span _csi = null;
 	private double _dblStartDate = java.lang.Double.NaN;
 	private java.lang.String[] _astrCalibMeasure = null;
 	private double _dblLeftNodeDF = java.lang.Double.NaN;
 	private double _dblLeftNodeDFSlope = java.lang.Double.NaN;
-	private org.drip.math.spline.SpanInterpolator _csi = null;
 	private double _dblLeftFlatForwardRate = java.lang.Double.NaN;
 	private double _dblRightFlatForwardRate = java.lang.Double.NaN;
 	private org.drip.param.valuation.ValuationParams _valParam = null;
-	private int _iDFFwdRateRelation = DISC_FACTOR_FWD_RATE_RELATION_LOG;
 	private org.drip.param.valuation.QuotingParams _quotingParams = null;
 	private java.util.Map<java.lang.String, java.lang.Double> _mapQuote = null;
 	private java.util.Map<java.lang.String, java.lang.String> _mapMeasure = null;
@@ -75,7 +62,7 @@ public class PolynomialSplineDF extends org.drip.analytics.definition.DiscountCu
 		final org.drip.analytics.date.JulianDate dtStart,
 		final java.lang.String strCurrency,
 		final double[] adblDate,
-		final org.drip.math.spline.SpanInterpolator csi)
+		final org.drip.math.grid.Span csi)
 		throws java.lang.Exception
 	{
 		_csi = csi;
@@ -118,13 +105,10 @@ public class PolynomialSplineDF extends org.drip.analytics.definition.DiscountCu
 			_adblDate[i] = adblDate[i];
 
 			if (0 == i)
-				adblDF[0] = DISC_FACTOR_FWD_RATE_RELATION_LOG == _iDFFwdRateRelation ? java.lang.Math.exp
-					(adblRate[0] * (_dblStartDate - _adblDate[0]) / 365.25) : 1. / (1. + (adblRate[0] *
-						(_dblStartDate - _adblDate[0]) / 365.25));
+				adblDF[0] = java.lang.Math.exp (adblRate[0] * (_dblStartDate - _adblDate[0]) / 365.25);
 			else
-				adblDF[i] = DISC_FACTOR_FWD_RATE_RELATION_LOG == _iDFFwdRateRelation ? java.lang.Math.exp
-					(adblRate[i] * (_adblDate[i - 1] - _adblDate[i]) / 365.25) * adblDF[i - 1] :
-						adblDF[i - 1] / (1. + (adblRate[0] * (_dblStartDate - _adblDate[0]) / 365.25));
+				adblDF[i] = java.lang.Math.exp (adblRate[i] * (_adblDate[i - 1] - _adblDate[i]) / 365.25) *
+					adblDF[i - 1];
 		}
 
 		_dblLeftFlatForwardRate = -365.25 * java.lang.Math.log (adblDF[0]) / (_adblDate[0] - _dblStartDate);
@@ -132,16 +116,14 @@ public class PolynomialSplineDF extends org.drip.analytics.definition.DiscountCu
 		_dblRightFlatForwardRate = -365.25 * java.lang.Math.log (adblDF[adblDF.length - 1]) /
 			(_adblDate[_adblDate.length - 1] - _dblStartDate);
 
-		org.drip.math.spline.BasisSplineElasticParams bfp = new
-			org.drip.math.spline.BasisSplineElasticParams();
+		org.drip.math.grid.ElasticParams ep = new org.drip.math.grid.ElasticParams();
 
-		bfp.addParam ("DenormalizedTension", 0.007);
+		ep.addParam ("DenormalizedTension", 0.007);
 
-		_csi = org.drip.math.spline.SpanInterpolator.CreateSpanInterpolator (adblDate, adblDF,
-			org.drip.math.spline.SpanInterpolator.BASIS_SPLINE_LINEAR_POLYNOMIAL, bfp,
-				org.drip.math.spline.SpanInterpolator.SPLINE_BOUNDARY_MODE_NATURAL,
-					org.drip.math.spline.SpanInterpolator.SET_ITEP |
-						org.drip.math.spline.SpanInterpolator.CALIBRATE_SPAN);
+		_csi = org.drip.math.grid.Span.CreateSpanInterpolator (adblDate, adblDF,
+			org.drip.math.grid.Span.BASIS_SPLINE_POLYNOMIAL,
+				org.drip.math.grid.Span.SPLINE_BOUNDARY_MODE_NATURAL, 1., 2, 0,
+					org.drip.math.grid.Span.SET_ITEP | org.drip.math.grid.Span.CALIBRATE_SPAN);
 	}
 
 	/**
@@ -451,15 +433,15 @@ public class PolynomialSplineDF extends org.drip.analytics.definition.DiscountCu
 			(-1. * _dblRightFlatForwardRate * (dblDate - _dblStartDate) / 365.25);
 	}
 
-	@Override public org.drip.math.algodiff.WengertJacobian getDFJacobian (
+	@Override public org.drip.math.calculus.WengertJacobian getDFJacobian (
 		final double dblDate)
 	{
 		if (!org.drip.math.common.NumberUtil.IsValid (dblDate)) return null;
 
-		org.drip.math.algodiff.WengertJacobian wj = null;
+		org.drip.math.calculus.WengertJacobian wj = null;
 
 		try {
-			wj = new org.drip.math.algodiff.WengertJacobian (1, _adblDate.length);
+			wj = new org.drip.math.calculus.WengertJacobian (1, _adblDate.length);
 		} catch (java.lang.Exception e) {
 			e.printStackTrace();
 
@@ -595,9 +577,7 @@ public class PolynomialSplineDF extends org.drip.analytics.definition.DiscountCu
 
 		if (dblDt1 < _dblStartDate || dblDt2 < _dblStartDate) return 0.;
 
-		return DISC_FACTOR_FWD_RATE_RELATION_LOG == _iDFFwdRateRelation ? 365.25 / (dblDt2 - dblDt1) *
-			java.lang.Math.log (getDF (dblDt1) / getDF (dblDt2)) : 365.25 / (dblDt2 - dblDt1) * ((getDF
-				(dblDt1) / getDF (dblDt2)) - 1.);
+		return 365.25 / (dblDt2 - dblDt1) * java.lang.Math.log (getDF (dblDt1) / getDF (dblDt2));
 	}
 
 	@Override public double calcImpliedRate (
@@ -720,7 +700,7 @@ public class PolynomialSplineDF extends org.drip.analytics.definition.DiscountCu
 				(dt).displayString());
 		}
 
-		org.drip.math.algodiff.WengertJacobian wjQuoteDF = dc.compQuoteDFJacobian
+		org.drip.math.calculus.WengertJacobian wjQuoteDF = dc.compQuoteDFJacobian
 			(org.drip.analytics.date.JulianDate.CreateFromDDMMMYYYY ("12-DEC-2020"));
 
 		System.out.println ("Quote/DF Micro Jack[12/12/20]=" + (null == wjQuoteDF ? null :

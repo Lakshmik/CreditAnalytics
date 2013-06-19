@@ -88,6 +88,10 @@ public class DerivedZeroRate extends org.drip.analytics.definition.ZeroCurve {
 	/**
 	 * ZeroCurve constructor from period, work-out, settle, and quoting parameters
 	 * 
+	 * @param iFreqZC Zero Curve Frequency
+	 * @param strDCZC Zero Curve Day Count
+	 * @param strCalendarZC Zero Curve Calendar
+	 * @param bApplyEOMAdjZC Zero Coupon EOM Adjustment Flag
 	 * @param lsPeriod List of bond coupon periods
 	 * @param dblWorkoutDate Work-out date
 	 * @param dblCashPayDate Cash-Pay Date
@@ -99,6 +103,10 @@ public class DerivedZeroRate extends org.drip.analytics.definition.ZeroCurve {
 	 */
 
 	public DerivedZeroRate (
+		final int iFreqZC,
+		final java.lang.String strDCZC,
+		final java.lang.String strCalendarZC,
+		final boolean bApplyEOMAdjZC,
 		final java.util.List<org.drip.analytics.period.Period> lsPeriod,
 		final double dblWorkoutDate,
 		final double dblCashPayDate,
@@ -113,10 +121,11 @@ public class DerivedZeroRate extends org.drip.analytics.definition.ZeroCurve {
 					!org.drip.math.common.NumberUtil.IsValid (dblZCBump))
 			throw new java.lang.Exception ("Invalid date parameters into ZeroCurve!");
 
-		int iFreq = 2;
-		boolean bApplyCpnEOMAdj = true;
-		java.lang.String strDC = "30/360";
-		java.lang.String strCalendar = "";
+		int iFreq = 0 == iFreqZC ? 2 : iFreqZC;
+		boolean bApplyCpnEOMAdj = bApplyEOMAdjZC;
+		java.lang.String strCalendar = strCalendarZC;
+
+		java.lang.String strDC = null == strDCZC || strDCZC.isEmpty() ? "30/360" : strDCZC;
 
 		if (null != quotingParams) {
 			strDC = quotingParams._strYieldDC;
@@ -181,7 +190,7 @@ public class DerivedZeroRate extends org.drip.analytics.definition.ZeroCurve {
 		return objDF;
 	}
 
-	@Override public org.drip.math.algodiff.WengertJacobian getDFJacobian (
+	@Override public org.drip.math.calculus.WengertJacobian getDFJacobian (
 		final double dblDate)
 	{
 		try {

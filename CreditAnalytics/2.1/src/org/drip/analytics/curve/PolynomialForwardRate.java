@@ -37,15 +37,15 @@ package org.drip.analytics.curve;
  * @author Lakshmi Krishnamurthy
  */
 
-public class CubicForwardRate extends org.drip.analytics.definition.DiscountCurve {
+public class PolynomialForwardRate extends org.drip.analytics.definition.DiscountCurve {
 	private static final int NUM_DF_QUADRATURES = 5;
 
 	private double[] _adblDate = null;
 	private double[] _adblCalibQuote = null;
 	private java.lang.String _strCurrency = "";
+	private org.drip.math.grid.Span _csi = null;
 	private double _dblStartDate = java.lang.Double.NaN;
 	private java.lang.String[] _astrCalibMeasure = null;
-	private org.drip.math.spline.SpanInterpolator _csi = null;
 	private org.drip.param.valuation.ValuationParams _valParam = null;
 	private org.drip.param.valuation.QuotingParams _quotingParams = null;
 	private java.util.Map<java.lang.String, java.lang.Double> _mapQuote = null;
@@ -78,17 +78,17 @@ public class CubicForwardRate extends org.drip.analytics.definition.DiscountCurv
 		return dblPeriodCumulativeRate / iNumSteps;
 	}
 
-	private org.drip.math.algodiff.WengertJacobian integratedPeriodAverageRateJacobian (
+	private org.drip.math.calculus.WengertJacobian integratedPeriodAverageRateJacobian (
 		final double dblStepWidth,
 		final double dblStartDate,
 		final double dblEndDate)
 	{
 		int iNumSteps = 0;
 		double dblPeriodCumulativeRate = 0.;
-		org.drip.math.algodiff.WengertJacobian wjPeriod = null;
+		org.drip.math.calculus.WengertJacobian wjPeriod = null;
 
 		try {
-			wjPeriod = new org.drip.math.algodiff.WengertJacobian (1, _adblDate.length);
+			wjPeriod = new org.drip.math.calculus.WengertJacobian (1, _adblDate.length);
 		} catch (java.lang.Exception e) {
 			e.printStackTrace();
 
@@ -130,11 +130,11 @@ public class CubicForwardRate extends org.drip.analytics.definition.DiscountCurv
 		return wjPeriod;
 	}
 
-	private CubicForwardRate (
+	private PolynomialForwardRate (
 		final org.drip.analytics.date.JulianDate dtStart,
 		final java.lang.String strCurrency,
 		final double[] adblDate,
-		final org.drip.math.spline.SpanInterpolator csi)
+		final org.drip.math.grid.Span csi)
 		throws java.lang.Exception
 	{
 		_csi = csi;
@@ -146,7 +146,7 @@ public class CubicForwardRate extends org.drip.analytics.definition.DiscountCurv
 	}
 
 	/**
-	 * Boot-straps a cubic forward discount curve from an array of dates and discount rates
+	 * Boot-straps a polynomial forward discount curve from an array of dates and discount rates
 	 * 
 	 * @param dtStart Epoch Date
 	 * @param strCurrency Currency
@@ -156,7 +156,7 @@ public class CubicForwardRate extends org.drip.analytics.definition.DiscountCurv
 	 * @throws java.lang.Exception Thrown if the curve cannot be created
 	 */
 
-	public CubicForwardRate (
+	public PolynomialForwardRate (
 		final org.drip.analytics.date.JulianDate dtStart,
 		final java.lang.String strCurrency,
 		final double[] adblDate,
@@ -166,7 +166,7 @@ public class CubicForwardRate extends org.drip.analytics.definition.DiscountCurv
 		if (null == adblDate || 0 == adblDate.length || null == adblEndRate || adblDate.length !=
 			adblEndRate.length || null == dtStart || null == (_strCurrency = strCurrency) ||
 				_strCurrency.isEmpty())
-			throw new java.lang.Exception ("CubicForwardRate ctr: Invalid inputs");
+			throw new java.lang.Exception ("PolynomialForwardRate ctr: Invalid inputs");
 
 		_strCurrency = strCurrency;
 		_adblDate = new double[adblDate.length];
@@ -176,61 +176,60 @@ public class CubicForwardRate extends org.drip.analytics.definition.DiscountCurv
 		for (int i = 0; i < _adblDate.length; ++i)
 			_adblDate[i] = adblDate[i];
 
-		org.drip.math.spline.BasisSplineElasticParams bfp = new
-			org.drip.math.spline.BasisSplineElasticParams();
+		org.drip.math.grid.ElasticParams ep = new org.drip.math.grid.ElasticParams();
 
-		bfp.addParam ("LocalTension", 0.0001);
+		ep.addParam ("LocalTension", 0.0001);
 
-		if (null == (_csi = org.drip.math.spline.SpanInterpolator.CreateSpanInterpolator (adblDate,
-			adblEndRate, org.drip.math.spline.SpanInterpolator.BASIS_SPLINE_CUBIC_POLYNOMIAL, bfp,
-				org.drip.math.spline.SpanInterpolator.SPLINE_BOUNDARY_MODE_NATURAL,
-					org.drip.math.spline.SpanInterpolator.SET_ITEP)))
-			throw new java.lang.Exception ("CubicForwardRate ctr: Cannot construct CSI!");
+		if (null == (_csi = org.drip.math.grid.Span.CreateSpanInterpolator (adblDate, adblEndRate,
+			org.drip.math.grid.Span.BASIS_SPLINE_POLYNOMIAL,
+				org.drip.math.grid.Span.SPLINE_BOUNDARY_MODE_NATURAL, 1., 4, 2,
+					org.drip.math.grid.Span.SET_ITEP)))
+			throw new java.lang.Exception ("PolynomialForwardRate ctr: Cannot construct CSI!");
 	}
 
 	/**
-	 * CubicForwardRate de-serialization from input byte array
+	 * PolynomialForwardRate de-serialization from input byte array
 	 * 
 	 * @param ab Byte Array
 	 * 
-	 * @throws java.lang.Exception Thrown if CubicForwardRate cannot be properly de-serialized
+	 * @throws java.lang.Exception Thrown if PolynomialForwardRate cannot be properly de-serialized
 	 */
 
-	public CubicForwardRate (
+	public PolynomialForwardRate (
 		final byte[] ab)
 		throws java.lang.Exception
 	{
 		if (null == ab || 0 == ab.length)
-			throw new java.lang.Exception ("CubicForwardRate de-serializer: Invalid input Byte array");
+			throw new java.lang.Exception ("PolynomialForwardRate de-serializer: Invalid input Byte array");
 
 		java.lang.String strRawString = new java.lang.String (ab);
 
 		if (null == strRawString || strRawString.isEmpty())
-			throw new java.lang.Exception ("CubicForwardRate de-serializer: Empty state");
+			throw new java.lang.Exception ("PolynomialForwardRate de-serializer: Empty state");
 
 		java.lang.String strSerializedCubicForwardRate = strRawString.substring (0, strRawString.indexOf
 			(getObjectTrailer()));
 
 		if (null == strSerializedCubicForwardRate || strSerializedCubicForwardRate.isEmpty())
-			throw new java.lang.Exception ("CubicForwardRate de-serializer: Cannot locate state");
+			throw new java.lang.Exception ("PolynomialForwardRate de-serializer: Cannot locate state");
 
 		java.lang.String[] astrField = org.drip.analytics.support.GenericUtil.Split
 			(strSerializedCubicForwardRate, getFieldDelimiter());
 
 		if (null == astrField || 4 > astrField.length)
-			throw new java.lang.Exception ("CubicForwardRate de-serializer: Invalid reqd field set");
+			throw new java.lang.Exception ("PolynomialForwardRate de-serializer: Invalid reqd field set");
 
 		// double dblVersion = new java.lang.Double (astrField[0]);
 
 		if (null == astrField[1] || astrField[1].isEmpty() ||
 			org.drip.service.stream.Serializer.NULL_SER_STRING.equals (astrField[1]))
-			throw new java.lang.Exception ("CubicForwardRate de-serializer: Cannot locate start state");
+			throw new java.lang.Exception ("PolynomialForwardRate de-serializer: Cannot locate start state");
 
 		_dblStartDate = new java.lang.Double (astrField[1]);
 
 		if (null == astrField[2] || astrField[2].isEmpty() ||
 			org.drip.service.stream.Serializer.NULL_SER_STRING.equals (astrField[2]))
-			throw new java.lang.Exception ("CubicForwardRate de-serializer: Cannot locate currency");
+			throw new java.lang.Exception ("PolynomialForwardRate de-serializer: Cannot locate currency");
 
 		_strCurrency = astrField[2];
 
@@ -240,14 +239,14 @@ public class CubicForwardRate extends org.drip.analytics.definition.DiscountCurv
 
 		if (null == astrField[3] || astrField[3].isEmpty() ||
 			org.drip.service.stream.Serializer.NULL_SER_STRING.equals (astrField[3]))
-			throw new java.lang.Exception ("CubicForwardRate de-serializer: Cannot decode state");
+			throw new java.lang.Exception ("PolynomialForwardRate de-serializer: Cannot decode state");
 
 		if (!org.drip.analytics.support.GenericUtil.KeyValueListFromStringArray (lsdblDate, lsdblRate,
 			astrField[3], getCollectionRecordDelimiter(), getCollectionKeyValueDelimiter()))
-			throw new java.lang.Exception ("CubicForwardRate de-serializer: Cannot decode state");
+			throw new java.lang.Exception ("PolynomialForwardRate de-serializer: Cannot decode state");
 
 		if (0 == lsdblDate.size() || 0 == lsdblRate.size() || lsdblDate.size() != lsdblRate.size())
-			throw new java.lang.Exception ("CubicForwardRate de-serializer: Cannot decode state");
+			throw new java.lang.Exception ("PolynomialForwardRate de-serializer: Cannot decode state");
 
 		_adblDate = new double[lsdblDate.size()];
 
@@ -365,7 +364,7 @@ public class CubicForwardRate extends org.drip.analytics.definition.DiscountCurv
 		return _mapQuote.get (strInstr);
 	}
 
-	@Override public CubicForwardRate createParallelShiftedCurve (
+	@Override public PolynomialForwardRate createParallelShiftedCurve (
 		final double dblShift)
 	{
 		if (!org.drip.math.common.NumberUtil.IsValid (dblShift)) return null;
@@ -376,10 +375,10 @@ public class CubicForwardRate extends org.drip.analytics.definition.DiscountCurv
 					_aCalibInst.length)
 			return createParallelRateShiftedCurve (dblShift);
 
-		CubicForwardRate dc = null;
+		PolynomialForwardRate dc = null;
 
 		try {
-			dc = new CubicForwardRate (new org.drip.analytics.date.JulianDate (_dblStartDate),
+			dc = new PolynomialForwardRate (new org.drip.analytics.date.JulianDate (_dblStartDate),
 				_strCurrency, _adblDate, _csi);
 		} catch (java.lang.Exception e) {
 			e.printStackTrace();
@@ -409,7 +408,7 @@ public class CubicForwardRate extends org.drip.analytics.definition.DiscountCurv
 		return dc;
 	}
 
-	@Override public CubicForwardRate createParallelRateShiftedCurve (
+	@Override public PolynomialForwardRate createParallelRateShiftedCurve (
 		final double dblShift)
 	{
 		if (!org.drip.math.common.NumberUtil.IsValid (dblShift)) return null;
@@ -420,7 +419,7 @@ public class CubicForwardRate extends org.drip.analytics.definition.DiscountCurv
 			for (int i = 0; i < _adblDate.length; ++i)
 				adblEndRate[i] = _csi.calcValue (_adblDate[i]) + dblShift;
 
-			return new CubicForwardRate (new org.drip.analytics.date.JulianDate (_dblStartDate),
+			return new PolynomialForwardRate (new org.drip.analytics.date.JulianDate (_dblStartDate),
 				_strCurrency, _adblDate, adblEndRate);
 		} catch (java.lang.Exception e) {
 			e.printStackTrace();
@@ -429,7 +428,7 @@ public class CubicForwardRate extends org.drip.analytics.definition.DiscountCurv
 		return null;
 	}
 
-	@Override public CubicForwardRate createBasisRateShiftedCurve (
+	@Override public PolynomialForwardRate createBasisRateShiftedCurve (
 		final double[] adblDate,
 		final double[] adblBasis)
 	{
@@ -443,7 +442,7 @@ public class CubicForwardRate extends org.drip.analytics.definition.DiscountCurv
 			for (int i = 0; i < adblDate.length; ++i)
 				adblCDFRate[i] = calcImpliedRate (adblDate[i]) + adblBasis[i];
 
-			return new CubicForwardRate (new org.drip.analytics.date.JulianDate (_dblStartDate),
+			return new PolynomialForwardRate (new org.drip.analytics.date.JulianDate (_dblStartDate),
 				_strCurrency, adblDate, adblCDFRate);
 		} catch (java.lang.Exception e) {
 			e.printStackTrace();
@@ -498,7 +497,7 @@ public class CubicForwardRate extends org.drip.analytics.definition.DiscountCurv
 		throws java.lang.Exception
 	{
 		if (!org.drip.math.common.NumberUtil.IsValid (dblDate))
-			throw new java.lang.Exception ("CubicForwardDiscountCurve.getDF got NaN for date");
+			throw new java.lang.Exception ("PolynomialForwardRate.getDF got NaN for date");
 
 		if (dblDate <= _dblStartDate) return 1.;
 
@@ -527,17 +526,17 @@ public class CubicForwardRate extends org.drip.analytics.definition.DiscountCurv
 		return java.lang.Math.exp (dblExpArg / 365.25);
 	}
 
-	@Override public org.drip.math.algodiff.WengertJacobian getDFJacobian (
+	@Override public org.drip.math.calculus.WengertJacobian getDFJacobian (
 		final double dblDate)
 	{
 		if (!org.drip.math.common.NumberUtil.IsValid (dblDate)) return null;
 
 		int i = 0;
 		double dblDF = java.lang.Double.NaN;
-		org.drip.math.algodiff.WengertJacobian wj = null;
+		org.drip.math.calculus.WengertJacobian wj = null;
 
 		try {
-			wj = new org.drip.math.algodiff.WengertJacobian (1, _adblDate.length);
+			wj = new org.drip.math.calculus.WengertJacobian (1, _adblDate.length);
 		} catch (java.lang.Exception e) {
 			e.printStackTrace();
 
@@ -560,13 +559,13 @@ public class CubicForwardRate extends org.drip.analytics.definition.DiscountCurv
 
 		while (i < _adblDate.length && (int) dblDate >= (int) _adblDate[i]) {
 			if (0 == i) {
-				org.drip.math.algodiff.WengertJacobian wjMicro = _csi.calcValueJacobian (_adblDate[0]);
+				org.drip.math.calculus.WengertJacobian wjMicro = _csi.calcValueJacobian (_adblDate[0]);
 
 				if (null == wjMicro || !wjMicro.scale (_adblDate[0] - _dblStartDate) || !wj.cumulativeMerge
 					(wjMicro))
 					return null;
 			} else {
-				org.drip.math.algodiff.WengertJacobian wjMicro = integratedPeriodAverageRateJacobian (1.,
+				org.drip.math.calculus.WengertJacobian wjMicro = integratedPeriodAverageRateJacobian (1.,
 					_adblDate[i - 1], _adblDate[i]);
 
 				if (null == wjMicro || !wjMicro.scale (_adblDate[i] - _adblDate[i - 1]) ||
@@ -578,19 +577,19 @@ public class CubicForwardRate extends org.drip.analytics.definition.DiscountCurv
 		}
 
 		if (0 == i) {
-			org.drip.math.algodiff.WengertJacobian wjMicro = _csi.calcValueJacobian (_adblDate[0]);
+			org.drip.math.calculus.WengertJacobian wjMicro = _csi.calcValueJacobian (_adblDate[0]);
 
 			if (null == wjMicro || !wjMicro.scale (dblDate - _dblStartDate) || !wj.cumulativeMerge (wjMicro))
 				return null;
 		} else if (_adblDate.length == i) {
-			org.drip.math.algodiff.WengertJacobian wjMicro = _csi.calcValueJacobian
+			org.drip.math.calculus.WengertJacobian wjMicro = _csi.calcValueJacobian
 				(_adblDate[_adblDate.length - 1]);
 
 			if (null == wjMicro || !wjMicro.scale (dblDate - _adblDate[_adblDate.length - 1]) ||
 				!wj.cumulativeMerge (wjMicro))
 				return null;
 		} else {
-			org.drip.math.algodiff.WengertJacobian wjMicro = integratedPeriodAverageRateJacobian (1.,
+			org.drip.math.calculus.WengertJacobian wjMicro = integratedPeriodAverageRateJacobian (1.,
 				_adblDate[i - 1], dblDate);
 
 			if (null == wjMicro || !wjMicro.scale (dblDate - _adblDate[i - 1]) || !wj.cumulativeMerge
@@ -627,7 +626,7 @@ public class CubicForwardRate extends org.drip.analytics.definition.DiscountCurv
 		throws java.lang.Exception
 	{
 		if (null == dt1 || null == dt2)
-			throw new java.lang.Exception ("CubicForwardDiscountCurve.getEffectiveDF got null for date");
+			throw new java.lang.Exception ("PolynomialForwardRate.getEffectiveDF got null for date");
 
 		return getEffectiveDF (dt1.getJulian(), dt2.getJulian());
 	}
@@ -638,7 +637,7 @@ public class CubicForwardRate extends org.drip.analytics.definition.DiscountCurv
 		throws java.lang.Exception
 	{
 		if (null == strTenor1 || strTenor1.isEmpty() || null == strTenor2 || strTenor2.isEmpty())
-			throw new java.lang.Exception ("CubicForwardDiscountCurve.getEffectiveDF got bad tenor");
+			throw new java.lang.Exception ("PolynomialForwardRate.getEffectiveDF got bad tenor");
 
 		return getEffectiveDF (new org.drip.analytics.date.JulianDate (_dblStartDate).addTenor (strTenor1),
 			new org.drip.analytics.date.JulianDate (_dblStartDate).addTenor (strTenor2));
@@ -671,15 +670,14 @@ public class CubicForwardRate extends org.drip.analytics.definition.DiscountCurv
 	{
 		if (!org.drip.math.common.NumberUtil.IsValid (dblValue)) return false;
 
-		org.drip.math.spline.BasisSplineElasticParams bfp = new
-			org.drip.math.spline.BasisSplineElasticParams();
+		org.drip.math.grid.ElasticParams ep = new org.drip.math.grid.ElasticParams();
 
-		bfp.addParam ("Tension", 0.1);
+		ep.addParam ("Tension", 0.1);
 
-		if (null == (_csi = org.drip.math.spline.SpanInterpolator.CreateSpanInterpolator (_adblDate,
-			dblValue, org.drip.math.spline.SpanInterpolator.BASIS_SPLINE_CUBIC_POLYNOMIAL, bfp,
-				org.drip.math.spline.SpanInterpolator.SPLINE_BOUNDARY_MODE_NATURAL,
-					org.drip.math.spline.SpanInterpolator.SET_ITEP)))
+		if (null == (_csi = org.drip.math.grid.Span.CreateSpanInterpolator (_adblDate, dblValue,
+			org.drip.math.grid.Span.BASIS_SPLINE_POLYNOMIAL,
+				org.drip.math.grid.Span.SPLINE_BOUNDARY_MODE_NATURAL, 1., 4, 2,
+					org.drip.math.grid.Span.SET_ITEP)))
 			return false;
 
 		return true;
@@ -703,7 +701,7 @@ public class CubicForwardRate extends org.drip.analytics.definition.DiscountCurv
 		throws java.lang.Exception
 	{
 		if (!org.drip.math.common.NumberUtil.IsValid (dblDate))
-			throw new java.lang.Exception ("CubicForwardDiscountCurve.calcImpliedRate got NaN for date");
+			throw new java.lang.Exception ("PolynomialForwardRate.calcImpliedRate got NaN for date");
 
 		return calcImpliedRate (_dblStartDate, dblDate);
 	}
@@ -713,7 +711,7 @@ public class CubicForwardRate extends org.drip.analytics.definition.DiscountCurv
 		throws java.lang.Exception
 	{
 		if (null == strTenor || strTenor.isEmpty())
-			throw new java.lang.Exception ("CubicForwardDiscountCurve.getDF got empty date");
+			throw new java.lang.Exception ("PolynomialForwardRate.getDF got empty date");
 
 		return calcImpliedRate (_dblStartDate, new org.drip.analytics.date.JulianDate
 			(_dblStartDate).addTenor (strTenor).getJulian());
@@ -725,7 +723,7 @@ public class CubicForwardRate extends org.drip.analytics.definition.DiscountCurv
 		throws java.lang.Exception
 	{
 		if (null == strTenor1 || strTenor1.isEmpty() || null == strTenor2 || strTenor2.isEmpty())
-			throw new java.lang.Exception ("DC.getDF got empty date");
+			throw new java.lang.Exception ("PolynomialForwardRate.getDF got empty date");
 
 		org.drip.analytics.date.JulianDate dtStart = new org.drip.analytics.date.JulianDate (_dblStartDate);
 
@@ -799,7 +797,7 @@ public class CubicForwardRate extends org.drip.analytics.definition.DiscountCurv
 			adblRate[i] = 0.01 * (i + 1);
 		}
 
-		CubicForwardRate dc = new CubicForwardRate
+		PolynomialForwardRate dc = new PolynomialForwardRate
 			(org.drip.analytics.date.JulianDate.Today(), "ABC", adblDate, adblRate);
 
 		byte[] abDC = dc.serialize();
@@ -809,7 +807,7 @@ public class CubicForwardRate extends org.drip.analytics.definition.DiscountCurv
 		System.out.println ("DF[12/12/20]=" + dc.getDF
 			(org.drip.analytics.date.JulianDate.CreateFromDDMMMYYYY ("12-DEC-2020")));
 
-		CubicForwardRate dcDeser = (CubicForwardRate) dc.deserialize (abDC);
+		PolynomialForwardRate dcDeser = (PolynomialForwardRate) dc.deserialize (abDC);
 
 		System.out.println ("Output: " + new java.lang.String (dcDeser.serialize()));
 

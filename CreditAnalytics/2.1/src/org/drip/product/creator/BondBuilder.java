@@ -161,8 +161,8 @@ public class BondBuilder {
 						java.lang.Double.NaN), new org.drip.product.params.CurrencySet (strCurrency +
 							"TSY", strCurrency + "TSY", strCurrency + "TSY"), null, new
 								org.drip.product.params.QuoteConvention (null, "",
-									dtEffective.getJulian(), 100., 3, strCurrency,
-										org.drip.analytics.daycount.Convention.DR_MOD_FOLL), new
+									dtEffective.getJulian(), 100., 0, strCurrency,
+										org.drip.analytics.daycount.Convention.DR_ACTUAL), new
 											org.drip.product.params.RatesSetting
 												(strCurrency, strCurrency, strCurrency, strCurrency), new
 													org.drip.product.params.CreditSetting
@@ -221,8 +221,8 @@ public class BondBuilder {
 							strCurrency + "TSY"), new org.drip.product.params.FloaterSetting (strRateIndex,
 								"", dblSpread, java.lang.Double.NaN), new
 									org.drip.product.params.QuoteConvention (null, "",
-										dtEffective.getJulian(), 100., 3, strCurrency,
-											org.drip.analytics.daycount.Convention.DR_MOD_FOLL), new
+										dtEffective.getJulian(), 100., 0, strCurrency,
+											org.drip.analytics.daycount.Convention.DR_ACTUAL), new
 												org.drip.product.params.RatesSetting (strCurrency,
 													strCurrency, strCurrency, strCurrency), new
 														org.drip.product.params.CreditSetting (30,
@@ -352,7 +352,7 @@ public class BondBuilder {
 					1., java.lang.Double.NaN, java.lang.Double.NaN), new org.drip.product.params.CurrencySet
 						(strCurrency + "TSY", strCurrency + "TSY", strCurrency + "TSY"), null, new
 							org.drip.product.params.QuoteConvention (null, "", dtEffective.getJulian(), 100.,
-								3, strCurrency, org.drip.analytics.daycount.Convention.DR_MOD_FOLL), new
+								0, strCurrency, org.drip.analytics.daycount.Convention.DR_ACTUAL), new
 									org.drip.product.params.RatesSetting (strCurrency, strCurrency,
 										strCurrency, strCurrency), new org.drip.product.params.CreditSetting
 											(30, java.lang.Double.NaN, true, "", true), new

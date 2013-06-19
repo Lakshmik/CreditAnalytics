@@ -43,7 +43,7 @@ package org.drip.analytics.calibration;
  */
 
 public class CurveCalibrator {
-	class CreditCurveCalibrator extends org.drip.math.algodiff.ObjectiveFunction {
+	class CreditCurveCalibrator extends org.drip.math.function.AbstractUnivariate {
 		private int _iInstr = -1;
 		private boolean _bFlat = false;
 		private java.lang.String _strMeasure = "";
@@ -169,7 +169,7 @@ public class CurveCalibrator {
 		final org.drip.param.valuation.QuotingParams quotingParams)
 		throws java.lang.Exception
 	{
-		org.drip.math.algodiff.ObjectiveFunction ofIROuter = new org.drip.math.algodiff.ObjectiveFunction
+		org.drip.math.function.AbstractUnivariate ofIROuter = new org.drip.math.function.AbstractUnivariate
 			(null) {
 			public double evaluate (
 				final double dblShiftedLeftSlope)
@@ -255,7 +255,7 @@ public class CurveCalibrator {
 			!org.drip.math.common.NumberUtil.IsValid (dblCalibValue))
 			throw new java.lang.Exception ("CurveCalibrator.calibrateIRNode => Invalid inputs!");
 
-		org.drip.math.algodiff.ObjectiveFunction ofIRNode = new org.drip.math.algodiff.ObjectiveFunction
+		org.drip.math.function.AbstractUnivariate ofIRNode = new org.drip.math.function.AbstractUnivariate
 			(null) {
 			public double evaluate (
 				final double dblValue)
@@ -270,8 +270,8 @@ public class CurveCalibrator {
 			}
 		};
 
-		org.drip.math.solver1D.FixedPointFinderOutput rfop = new
-			org.drip.math.solver1D.FixedPointFinderBrent (0., ofIRNode).findRoot();
+		org.drip.math.solver1D.FixedPointFinderOutput rfop = new org.drip.math.solver1D.FixedPointFinderBrent
+			(0., ofIRNode).findRoot();
 
 		if (null == rfop || !rfop.containsRoot())
 			throw new java.lang.Exception ("Cannot calibrate IR segment for node #" + iInstr);

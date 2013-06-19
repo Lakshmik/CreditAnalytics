@@ -57,11 +57,11 @@ package org.drip.math.solver1D;
 public abstract class FixedPointFinder {
 	protected double _dblOFGoal = java.lang.Double.NaN;
 	protected org.drip.math.solver1D.ExecutionControl _ec = null;
-	protected org.drip.math.algodiff.ObjectiveFunction _of = null;
+	protected org.drip.math.function.AbstractUnivariate _of = null;
 
 	protected FixedPointFinder (
 		final double dblOFGoal,
-		final org.drip.math.algodiff.ObjectiveFunction of,
+		final org.drip.math.function.AbstractUnivariate of,
 		final org.drip.math.solver1D.ExecutionControl ec)
 		throws java.lang.Exception
 	{

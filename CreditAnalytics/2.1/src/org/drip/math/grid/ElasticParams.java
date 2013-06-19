@@ -1,5 +1,5 @@
 
-package org.drip.math.spline;
+package org.drip.math.grid;
 
 /*
  * -*- mode: java; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
@@ -7,7 +7,6 @@ package org.drip.math.spline;
 
 /*!
  * Copyright (C) 2013 Lakshmi Krishnamurthy
- * Copyright (C) 2012 Lakshmi Krishnamurthy
  * 
  * This file is part of CreditAnalytics, a free-software/open-source library for fixed income analysts and
  * 		developers - http://www.credit-trader.org
@@ -30,21 +29,21 @@ package org.drip.math.spline;
  */
 
 /**
- * This class implements basis functional parameter set. It is typically set at per segment basis.
+ * This class implements basis elastics parameter set. It is set on a per segment basis.
  *
  * @author Lakshmi Krishnamurthy
  */
 
-public class BasisSplineElasticParams {
-	private java.util.Map<java.lang.String, java.lang.Double> _mapParams = new
-		java.util.HashMap<java.lang.String, java.lang.Double>();
+public class ElasticParams {
+	private java.util.Map<java.lang.String, java.lang.Double> _mapParams = null;
 
 	/**
-	 * Empty BasisFunctionalParams constructor
+	 * Empty ElasticParams constructor
 	 */
 
-	public BasisSplineElasticParams()
+	public ElasticParams()
 	{
+		_mapParams = new java.util.HashMap<java.lang.String, java.lang.Double>();
 	}
 
 	/**
@@ -84,8 +83,7 @@ public class BasisSplineElasticParams {
 		throws java.lang.Exception
 	{
 		if (null == strParamName || strParamName.isEmpty() || !_mapParams.containsKey (strParamName))
-			throw new java.lang.Exception
-				("BasisFunctionalParams::getParamValue => Invalid parameter name!");
+			throw new java.lang.Exception ("ElasticParams::getParamValue => Invalid parameter name!");
 
 		return _mapParams.get (strParamName);
 	}

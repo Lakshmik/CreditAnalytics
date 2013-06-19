@@ -1,5 +1,5 @@
 
-package org.drip.math.algodiff;
+package org.drip.math.function;
 
 /*
  * -*- mode: java; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
@@ -36,8 +36,8 @@ package org.drip.math.algodiff;
  * @author Lakshmi Krishnamurthy
  */
 
-public abstract class ObjectiveFunction {
-	protected org.drip.math.algodiff.DerivativeControl _dc = null;
+public abstract class AbstractUnivariate {
+	protected org.drip.math.calculus.DerivativeControl _dc = null;
 
 	/**
 	 * Objective Function constructor
@@ -45,10 +45,10 @@ public abstract class ObjectiveFunction {
 	 * @param dc Derivative Control
 	 */
 
-	public ObjectiveFunction (
-		final org.drip.math.algodiff.DerivativeControl dc)
+	public AbstractUnivariate (
+		final org.drip.math.calculus.DerivativeControl dc)
 	{
-		if (null == (_dc = dc)) _dc = new org.drip.math.algodiff.DerivativeControl();
+		if (null == (_dc = dc)) _dc = new org.drip.math.calculus.DerivativeControl();
 	}
 
 	/**
@@ -75,7 +75,7 @@ public abstract class ObjectiveFunction {
 	 * @return The Derivative
 	 */
 
-	public org.drip.math.algodiff.Differential calcDerivative (
+	public org.drip.math.calculus.Differential calcDifferential (
 		final double dblVariate,
 		final double dblOFBase,
 		final int iOrder)
@@ -94,17 +94,17 @@ public abstract class ObjectiveFunction {
 
 		if (1 != iOrder) {
 			try {
-				org.drip.math.algodiff.Differential diffLeft = calcDerivative (dblVariate - 0.5 *
+				org.drip.math.calculus.Differential diffLeft = calcDifferential (dblVariate - 0.5 *
 					dblVariateInfinitesimal, iOrder - 1);
 
 				if (null == diffLeft) return null;
 
-				org.drip.math.algodiff.Differential diffRight = calcDerivative (dblVariate + 0.5 *
+				org.drip.math.calculus.Differential diffRight = calcDifferential (dblVariate + 0.5 *
 					dblVariateInfinitesimal, iOrder - 1);
 
 				if (null == diffRight) return null;
 
-				return new org.drip.math.algodiff.Differential ((diffLeft.getDeltaOF() -
+				return new org.drip.math.calculus.Differential ((diffLeft.getDeltaOF() -
 					diffRight.getDeltaOF()) / dblVariateInfinitesimal, dblVariateInfinitesimal);
 			} catch (java.lang.Exception e) {
 				e.printStackTrace();
@@ -114,7 +114,7 @@ public abstract class ObjectiveFunction {
 		}
 
 		try {
-			return new org.drip.math.algodiff.Differential (dblVariateInfinitesimal, evaluate (dblVariate +
+			return new org.drip.math.calculus.Differential (dblVariateInfinitesimal, evaluate (dblVariate +
 				dblVariateInfinitesimal) - dblOFBase);
 		} catch (java.lang.Exception e) {
 			e.printStackTrace();
@@ -132,16 +132,33 @@ public abstract class ObjectiveFunction {
 	 * @return The Derivative
 	 */
 
-	public org.drip.math.algodiff.Differential calcDerivative (
+	public org.drip.math.calculus.Differential calcDifferential (
 		final double dblVariate,
 		final int iOrder)
 	{
 		try {
-			return calcDerivative (dblVariate, evaluate (dblVariate), iOrder);
+			return calcDifferential (dblVariate, evaluate (dblVariate), iOrder);
 		} catch (java.lang.Exception e) {
 			e.printStackTrace();
 		}
 
 		return null;
+	}
+
+	/**
+	 * Calculate the derivative as a double
+	 * 
+	 * @param dblVariate Variate at which the derivative is to be calculated
+	 * @param iOrder Order of the derivative to be computed
+	 * 
+	 * @return The Derivative
+	 */
+
+	public double calcDerivative (
+		final double dblVariate,
+		final int iOrder)
+		throws java.lang.Exception
+	{
+		return calcDifferential (dblVariate, evaluate (dblVariate), iOrder).calcSlope (false);
 	}
 }

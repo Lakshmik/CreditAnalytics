@@ -13,7 +13,6 @@ import java.util.Map;
 
 import org.drip.analytics.date.JulianDate;
 import org.drip.analytics.daycount.Convention;
-import org.drip.analytics.support.GenericUtil;
 import org.drip.param.definition.*;
 import org.drip.param.pricer.PricerParams;
 import org.drip.param.valuation.ValuationParams;
@@ -26,6 +25,12 @@ import org.drip.product.definition.*;
 import org.drip.analytics.creator.*;
 import org.drip.param.creator.*;
 import org.drip.service.api.CreditAnalytics;
+
+/*
+ * DRIP Math Support
+ */
+
+import org.drip.math.common.FormatUtil;
 
 /*
  * -*- mode: java; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
@@ -102,15 +107,15 @@ public class BondBasketAPI {
 
 		Map<String, Double> mapResult = bb.value (valParams, pricerParams, bmp, null);
 
-		System.out.println ("Fair Clean Price: " + GenericUtil.FormatPrice (mapResult.get ("FairCleanPV")));
+		System.out.println ("Fair Clean Price: " + FormatUtil.FormatDouble (mapResult.get ("FairCleanPV"), 2, 3, 100.));
 
-		System.out.println ("Fair Yield: " + GenericUtil.FormatPrice (mapResult.get ("Yield")));
+		System.out.println ("Fair Yield: " + FormatUtil.FormatDouble (mapResult.get ("Yield"), 2, 3, 100.));
 
-		System.out.println ("Fair GSpread: " + GenericUtil.FormatSpread (mapResult.get ("FairGSpread")));
+		System.out.println ("Fair GSpread: " + FormatUtil.FormatDouble (mapResult.get ("FairGSpread"), 1, 3, 100.));
 
-		System.out.println ("Fair ZSpread: " + GenericUtil.FormatSpread (mapResult.get ("FairZSpread")));
+		System.out.println ("Fair ZSpread: " + FormatUtil.FormatDouble (mapResult.get ("FairZSpread"), 1, 3, 100.));
 
-		System.out.println ("Fair ISpread: " + GenericUtil.FormatSpread (mapResult.get ("FairISpread")));
+		System.out.println ("Fair ISpread: " + FormatUtil.FormatDouble (mapResult.get ("FairISpread"), 1, 3, 100.));
 
 		System.out.println ("Fair DV01: " + mapResult.get ("FairDV01"));
 

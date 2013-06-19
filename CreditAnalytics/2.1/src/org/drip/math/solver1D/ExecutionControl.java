@@ -43,7 +43,7 @@ package org.drip.math.solver1D;
 public class ExecutionControl {
 	private org.drip.math.solver1D.ExecutionControlParams _ecp = null;
 
-	protected org.drip.math.algodiff.ObjectiveFunction _of = null;
+	protected org.drip.math.function.AbstractUnivariate _of = null;
 
 	/**
 	 * ExecutionControl constructor
@@ -55,7 +55,7 @@ public class ExecutionControl {
 	 */
 
 	public ExecutionControl (
-		final org.drip.math.algodiff.ObjectiveFunction of,
+		final org.drip.math.function.AbstractUnivariate of,
 		final org.drip.math.solver1D.ExecutionControlParams ecp)
 		throws java.lang.Exception
 	{

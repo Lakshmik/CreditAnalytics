@@ -1,5 +1,5 @@
 
-package org.drip.math.spline;
+package org.drip.math.grid;
 
 /*
  * -*- mode: java; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
@@ -7,7 +7,6 @@ package org.drip.math.spline;
 
 /*!
  * Copyright (C) 2013 Lakshmi Krishnamurthy
- * Copyright (C) 2012 Lakshmi Krishnamurthy
  * 
  * This file is part of CreditAnalytics, a free-software/open-source library for fixed income analysts and
  * 		developers - http://www.credit-trader.org
@@ -35,12 +34,12 @@ package org.drip.math.spline;
  * @author Lakshmi Krishnamurthy
  */
 
-public class InelasticOrdinates {
+public class Inelastics implements java.lang.Comparable<Inelastics> {
 	private double _dblLeft = java.lang.Double.NaN;
 	private double _dblRight = java.lang.Double.NaN;
 
 	/**
-	 * InelasticOrdinates constructor
+	 * Inelastics constructor
 	 * 
 	 * @param dblLeft Spline Left Ordinate
 	 * @param dblRight Spline Right Ordinate
@@ -48,13 +47,16 @@ public class InelasticOrdinates {
 	 * @throws java.lang.Exception Thrown if inputs are invalid
 	 */
 
-	public InelasticOrdinates (
+	public Inelastics (
 		final double dblLeft,
 		final double dblRight)
 		throws java.lang.Exception {
 		if (!org.drip.math.common.NumberUtil.IsValid (_dblLeft = dblLeft) ||
-			!org.drip.math.common.NumberUtil.IsValid (_dblRight = dblRight) || _dblLeft >= _dblRight)
-			throw new java.lang.Exception ("InelasticOrdinates ctr: Invalid inputs!");
+			!org.drip.math.common.NumberUtil.IsValid (_dblRight = dblRight) || _dblLeft >= _dblRight) {
+			System.out.println (_dblLeft + "=>" + _dblRight);
+
+			throw new java.lang.Exception ("Inelastics ctr: Invalid inputs!");
+		}
 	}
 
 	/**
@@ -88,11 +90,8 @@ public class InelasticOrdinates {
 	public boolean isInSegment (
 		final double dblPoint)
 	{
-		if (!org.drip.math.common.NumberUtil.IsValid (dblPoint) || _dblLeft > dblPoint || _dblRight <
-			dblPoint)
-			return false;
-
-		return true;
+		return org.drip.math.common.NumberUtil.IsValid (dblPoint) && _dblLeft <= dblPoint && _dblRight >=
+			dblPoint;
 	}
 
 	/**
@@ -121,8 +120,25 @@ public class InelasticOrdinates {
 		throws java.lang.Exception
 	{
 		if (!isInSegment (dblPoint))
-			throw new java.lang.Exception ("InelasticOrdinates.calcNormalizedOrdinate: Invalid inputs!");
+			throw new java.lang.Exception ("Inelastics.calcNormalizedOrdinate: Invalid inputs!");
 
 		return (dblPoint - _dblLeft) / (_dblRight - _dblLeft);
+	}
+
+	@Override public int hashCode()
+	{
+		long lBits = java.lang.Double.doubleToLongBits ((int) _dblLeft);
+
+		return (int) (lBits ^ (lBits >>> 32));
+	}
+
+	@Override public int compareTo (
+		final org.drip.math.grid.Inelastics ieOther)
+	{
+		if (_dblLeft > ieOther._dblLeft) return 1;
+
+		if (_dblLeft < ieOther._dblLeft) return -1;
+
+		return 0;
 	}
 }

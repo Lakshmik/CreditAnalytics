@@ -16,7 +16,6 @@ import org.drip.analytics.daycount.Convention;
 import org.drip.analytics.definition.*;
 import org.drip.analytics.output.ExerciseInfo;
 import org.drip.analytics.period.*;
-import org.drip.analytics.support.GenericUtil;
 import org.drip.param.definition.*;
 import org.drip.param.pricer.PricerParams;
 import org.drip.param.valuation.*;
@@ -29,6 +28,12 @@ import org.drip.product.definition.*;
 import org.drip.analytics.creator.*;
 import org.drip.param.creator.*;
 import org.drip.service.api.CreditAnalytics;
+
+/*
+ * DRIP Math Support
+ */
+
+import org.drip.math.common.FormatUtil;
 
 /*
  * -*- mode: java; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
@@ -100,8 +105,8 @@ public class BondLiveAndEODAPI {
 		 * Please see the FI javadoc for the API details.
 		 */
 
-		System.out.println ("EOD Yield From Price: " + GenericUtil.FormatPrice
-			(CreditAnalytics.BondEODYieldFromPrice (strISIN, JulianDate.CreateFromYMD (2011, 12, 16), 1.)));
+		System.out.println ("EOD Yield From Price: " + FormatUtil.FormatDouble
+			(CreditAnalytics.BondEODYieldFromPrice (strISIN, JulianDate.CreateFromYMD (2011, 12, 16), 1.), 2, 3, 100.));
 	}
 
 	/**
@@ -196,15 +201,15 @@ public class BondLiveAndEODAPI {
 
 				System.out.println (strISIN + FIELD_SEPARATOR +
 					(bond.isFloater() ? "FLOAT   " : "FIXED   ") + bond.getTicker() + FIELD_SEPARATOR +
-					GenericUtil.FormatPrice (bond.getCoupon (dtToday.getJulian(), cmp)) + FIELD_SEPARATOR +
+					FormatUtil.FormatDouble (bond.getCoupon (dtToday.getJulian(), cmp), 2, 3, 100.) + FIELD_SEPARATOR +
 					bond.getMaturityDate() + FIELD_SEPARATOR +
-					GenericUtil.FormatPrice (dblYieldFromPrice) + FIELD_SEPARATOR +
-					GenericUtil.FormatSpread (dblZSpreadFromPrice) + FIELD_SEPARATOR +
-					GenericUtil.FormatSpread (dblOASpreadFromPrice) + FIELD_SEPARATOR +
-					GenericUtil.FormatSpread (dblTSYSpreadFromPrice) + FIELD_SEPARATOR +
-					GenericUtil.FormatSpread (dblCreditBasisFromPrice) + FIELD_SEPARATOR +
-					GenericUtil.FormatSpread (dblPECSFromPrice) + FIELD_SEPARATOR +
-					GenericUtil.FormatPrice (dblBondCreditPrice)
+					FormatUtil.FormatDouble (dblYieldFromPrice, 2, 3, 100.) + FIELD_SEPARATOR +
+					FormatUtil.FormatDouble (dblZSpreadFromPrice, 1, 3, 100.) + FIELD_SEPARATOR +
+					FormatUtil.FormatDouble (dblOASpreadFromPrice, 1, 3, 100.) + FIELD_SEPARATOR +
+					FormatUtil.FormatDouble (dblTSYSpreadFromPrice, 1, 3, 100.) + FIELD_SEPARATOR +
+					FormatUtil.FormatDouble (dblCreditBasisFromPrice, 1, 3, 100.) + FIELD_SEPARATOR +
+					FormatUtil.FormatDouble (dblPECSFromPrice, 1, 3, 100.) + FIELD_SEPARATOR +
+					FormatUtil.FormatDouble (dblBondCreditPrice, 1, 3, 100.)
 				);
 			}
 		}
@@ -216,9 +221,9 @@ public class BondLiveAndEODAPI {
 
 			System.out.println (
 				strISIN + FIELD_SEPARATOR + bond.getTicker() + FIELD_SEPARATOR +
-				GenericUtil.FormatPrice (bond.getCoupon (JulianDate.Today().getJulian(), null)) + FIELD_SEPARATOR +
+				FormatUtil.FormatDouble (bond.getCoupon (JulianDate.Today().getJulian(), null), 2, 3, 100.) + FIELD_SEPARATOR +
 				bond.getMaturityDate() + FIELD_SEPARATOR +
-				GenericUtil.FormatPrice (CreditAnalytics.GetBondDoubleField (strISIN, "OutstandingAmount"), 10, 0, 1.)
+				FormatUtil.FormatDouble (CreditAnalytics.GetBondDoubleField (strISIN, "OutstandingAmount"), 10, 0, 1.)
 			);
 		}
 
@@ -323,10 +328,6 @@ public class BondLiveAndEODAPI {
 
 		double dblGTMFromPrice = CreditAnalytics.BondGTMFromPrice (strISIN, valParams, dc, dcTSY, 1., quotingParams);
 
-		double dblParASWFromPrice = CreditAnalytics.BondParASWFromPrice (strISIN, dtToday, dc, 1.);
-
-		double dblParASWTMFromPrice = CreditAnalytics.BondParASWTMFromPrice (strISIN, valParams, dc, 1., null);
-
 		double dblCreditBasisFromPrice = CreditAnalytics.BondCreditBasisFromPrice (strISIN, dtToday, dc, cc, 1.);
 
 		double dblCreditBasisTMFromPrice = CreditAnalytics.BondCreditBasisTMFromPrice (strISIN, valParams, dc, cc, 1., quotingParams);
@@ -351,8 +352,6 @@ public class BondLiveAndEODAPI {
 
 		double dblGSpreadFromTSYSpread = CreditAnalytics.BondGSpreadFromTSYSpread (strISIN, dtToday, dc, dcTSY, 0.0271);
 
-		double dblParASWFromTSYSpread = CreditAnalytics.BondParASWFromTSYSpread (strISIN, dtToday, dc, dcTSY, 0.0271);
-
 		double dblCreditBasisFromTSYSpread = CreditAnalytics.BondCreditBasisFromTSYSpread (strISIN, dtToday, dc, dcTSY, cc, 0.0271);
 
 		double dblPECSFromTSYSpread = CreditAnalytics.BondCreditBasisFromTSYSpread (strISIN, dtToday, dc, dcTSY, cc, 0.0971);
@@ -375,18 +374,18 @@ public class BondLiveAndEODAPI {
 
 		ExerciseInfo nei = CreditAnalytics.NextExerciseInfo (strISIN, dtToday);
 
-		System.out.println (strISIN + "    " + bond.getTicker() + " " + GenericUtil.FormatPrice (bond.getCoupon
-			(valParams._dblValue, cmp)) + " " + bond.getMaturityDate());
+		System.out.println (strISIN + "    " + bond.getTicker() + " " + FormatUtil.FormatDouble (bond.getCoupon
+			(valParams._dblValue, cmp), 2, 3, 100.) + " " + bond.getMaturityDate());
 
 		System.out.println ("Work-out date From Price: " + new JulianDate (wi._dblDate));
 
 		System.out.println ("Work-out factor From Price: " + wi._dblExerciseFactor);
 
-		System.out.println ("Work-out Yield From Price: " + GenericUtil.FormatPrice (wi._dblYield));
+		System.out.println ("Work-out Yield From Price: " + FormatUtil.FormatDouble (wi._dblYield, 2, 3, 100.));
 
 		System.out.println ("Work-out Type for Price: " + org.drip.analytics.support.AnalyticsHelper.WorkoutTypeToString (wi._iWOType));
 
-		System.out.println ("Yield From Price: " + GenericUtil.FormatPrice (dblYieldFromPrice) + " / " + GenericUtil.FormatPrice (dblYTMFromPrice));
+		System.out.println ("Yield From Price: " + FormatUtil.FormatDouble (dblYieldFromPrice, 2, 3, 100.) + " / " + FormatUtil.FormatDouble (dblYTMFromPrice, 2, 3, 100.));
 
 		System.out.println ("Z Spread From Price: " + (int) (10000. * dblZSpreadFromPrice) + " / " + (int) (10000. * dblZTMFromPrice));
 
@@ -400,15 +399,13 @@ public class BondLiveAndEODAPI {
 
 		System.out.println ("G Spread From Price: " + (int) (10000. * dblGSpreadFromPrice) + " / " + (int) (10000. * dblGTMFromPrice));
 
-		System.out.println ("Par ASW From Price: " + (int) dblParASWFromPrice + " / " + (int) dblParASWTMFromPrice);
-
 		System.out.println ("Credit Basis From Price: " + (int) (10000. * dblCreditBasisFromPrice) + " / " + (int) (10000. * dblCreditBasisTMFromPrice));
 
 		System.out.println ("PECS From Price: " + (int) (10000. * dblPECSFromPrice) + " / " + (int) (10000. * dblPECSTMFromPrice));
 
-		System.out.println ("Price From TSY Spread: " + GenericUtil.FormatPrice (dblPriceFromTSYSpread));
+		System.out.println ("Price From TSY Spread: " + FormatUtil.FormatDouble (dblPriceFromTSYSpread, 2, 3, 100.));
 
-		System.out.println ("Yield From TSY Spread: " + GenericUtil.FormatPrice (dblYieldFromTSYSpread));
+		System.out.println ("Yield From TSY Spread: " + FormatUtil.FormatDouble (dblYieldFromTSYSpread, 2, 3, 100.));
 
 		System.out.println ("Z Spread From TSY Spread: " + (int) (10000. * dblZSpreadFromTSYSpread));
 
@@ -420,13 +417,11 @@ public class BondLiveAndEODAPI {
 
 		System.out.println ("G Spread From TSY Spread: " + (int) (10000. * dblGSpreadFromTSYSpread));
 
-		System.out.println ("Par ASW From TSY Spread: " + (int) dblParASWFromTSYSpread);
-
 		System.out.println ("Credit Basis From TSY Spread: " + (int) (10000. * dblCreditBasisFromTSYSpread));
 
 		System.out.println ("PECS From TSY Spread: " + (int) (10000. * dblPECSFromTSYSpread));
 
-		System.out.println ("Credit Risky Price: " + GenericUtil.FormatPrice (dblBondCreditPrice));
+		System.out.println ("Credit Risky Price: " + FormatUtil.FormatDouble (dblBondCreditPrice, 2, 3, 100.));
 
 		System.out.println ("Valuation Date: " + JulianDate.Today());
 
@@ -460,11 +455,11 @@ public class BondLiveAndEODAPI {
 					JulianDate.fromJulian (p.getAccrualStartDate()) + FIELD_SEPARATOR +
 					JulianDate.fromJulian (p.getAccrualEndDate()) + FIELD_SEPARATOR +
 					JulianDate.fromJulian (p.getPayDate()) + FIELD_SEPARATOR +
-					GenericUtil.FormatDouble (p.getIndexRate(), 1, 4, 1.) + FIELD_SEPARATOR +
-					GenericUtil.FormatDouble (p.getSpread(), 1, 4, 1.) + FIELD_SEPARATOR +
-					GenericUtil.FormatDouble (p.getCouponDCF(), 1, 4, 1.) + FIELD_SEPARATOR +
-					GenericUtil.FormatDouble (dc.getDF (p.getPayDate()), 1, 4, 1.) + FIELD_SEPARATOR +
-					GenericUtil.FormatDouble (cc.getSurvival (p.getPayDate()), 1, 4, 1.)
+					FormatUtil.FormatDouble (p.getIndexRate(), 1, 4, 1.) + FIELD_SEPARATOR +
+					FormatUtil.FormatDouble (p.getSpread(), 1, 4, 1.) + FIELD_SEPARATOR +
+					FormatUtil.FormatDouble (p.getCouponDCF(), 1, 4, 1.) + FIELD_SEPARATOR +
+					FormatUtil.FormatDouble (dc.getDF (p.getPayDate()), 1, 4, 1.) + FIELD_SEPARATOR +
+					FormatUtil.FormatDouble (cc.getSurvival (p.getPayDate()), 1, 4, 1.)
 				);
 		} else {
 			System.out.println ("Acc Start       Acc End     Pay Date   Cpn DCF    Pay01    Surv01");
@@ -476,9 +471,9 @@ public class BondLiveAndEODAPI {
 					JulianDate.fromJulian (p.getAccrualStartDate()) + FIELD_SEPARATOR +
 					JulianDate.fromJulian (p.getAccrualEndDate()) + FIELD_SEPARATOR +
 					JulianDate.fromJulian (p.getPayDate()) + FIELD_SEPARATOR +
-					GenericUtil.FormatDouble (p.getCouponDCF(), 1, 4, 1.) + FIELD_SEPARATOR +
-					GenericUtil.FormatDouble (dc.getDF (p.getPayDate()), 1, 4, 1.) + FIELD_SEPARATOR +
-					GenericUtil.FormatDouble (cc.getSurvival (p.getPayDate()), 1, 4, 1.)
+					FormatUtil.FormatDouble (p.getCouponDCF(), 1, 4, 1.) + FIELD_SEPARATOR +
+					FormatUtil.FormatDouble (dc.getDF (p.getPayDate()), 1, 4, 1.) + FIELD_SEPARATOR +
+					FormatUtil.FormatDouble (cc.getSurvival (p.getPayDate()), 1, 4, 1.)
 				);
 		}
 
@@ -491,12 +486,12 @@ public class BondLiveAndEODAPI {
 				JulianDate.fromJulian (dp.getStartDate()) + FIELD_SEPARATOR +
 				JulianDate.fromJulian (dp.getEndDate()) + FIELD_SEPARATOR +
 				JulianDate.fromJulian (dp.getPayDate()) + FIELD_SEPARATOR +
-				GenericUtil.FormatDouble (dp.getCouponDCF(), 1, 4, 1.) + FIELD_SEPARATOR +
-				GenericUtil.FormatDouble (dp.getEffectiveNotional(), 1, 0, 1.) + FIELD_SEPARATOR +
-				GenericUtil.FormatDouble (dp.getEffectiveRecovery(), 1, 2, 1.) + FIELD_SEPARATOR +
-				GenericUtil.FormatDouble (dp.getEffectiveDF(), 1, 4, 1.)  + FIELD_SEPARATOR +
-				GenericUtil.FormatDouble (dp.getStartSurvival(), 1, 4, 1.) + FIELD_SEPARATOR +
-				GenericUtil.FormatDouble (dp.getEndSurvival(), 1, 4, 1.)
+				FormatUtil.FormatDouble (dp.getCouponDCF(), 1, 4, 1.) + FIELD_SEPARATOR +
+				FormatUtil.FormatDouble (dp.getEffectiveNotional(), 1, 0, 1.) + FIELD_SEPARATOR +
+				FormatUtil.FormatDouble (dp.getEffectiveRecovery(), 1, 2, 1.) + FIELD_SEPARATOR +
+				FormatUtil.FormatDouble (dp.getEffectiveDF(), 1, 4, 1.)  + FIELD_SEPARATOR +
+				FormatUtil.FormatDouble (dp.getStartSurvival(), 1, 4, 1.) + FIELD_SEPARATOR +
+				FormatUtil.FormatDouble (dp.getEndSurvival(), 1, 4, 1.)
 			);
 	}
 

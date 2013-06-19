@@ -1358,7 +1358,7 @@ public class BondProductBuilder extends org.drip.service.stream.Serializer {
 		try {
 			if (0. != _dblCurrentCoupon)
 				_dblFloatSpread = _dblCurrentCoupon - 100. * mpc.getIRSG().get
-					(_strCouponCurrency).getDCBase().calcImpliedRate
+					(_strCouponCurrency).getDCBase().calcLIBOR
 						(org.drip.analytics.support.AnalyticsHelper.GetTenorFromFreq (_iCouponFreq));
 			else
 				_dblFloatSpread = 0.;

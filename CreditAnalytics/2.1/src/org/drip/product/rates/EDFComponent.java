@@ -80,46 +80,42 @@ public class EDFComponent extends org.drip.product.definition.RatesComponent {
 	{
 		if (null == dt) throw new java.lang.Exception ("Bad EDF base date!");
 
-		java.lang.String strEDCode = null;
+		java.lang.String strEDCode = strFullEDCode;
 
-		java.lang.String[] astrEDCode = strFullEDCode.split (".");
-
-		if (4 != (strEDCode = astrEDCode[0]).length() || !astrEDCode[0].toUpperCase().startsWith ("ED"))
-			throw new java.lang.Exception ("Unknown EDF Code: " + strFullEDCode);
+		if (4 != strEDCode.length() || !strEDCode.toUpperCase().startsWith ("ED"))
+			 throw new java.lang.Exception ("Unknown EDF Code: " + strEDCode);
 
 		_strIR = strIR;
-		int iMonth = -1;
+		int iEffectiveMonth = -1;
 
 		int iYearDigit = new java.lang.Integer ("" + strEDCode.charAt (3)).intValue();
 
-		if (10 <= iYearDigit) throw new java.lang.Exception ("Invalid ED year in " + strFullEDCode);
+		if (10 <= iYearDigit) throw new java.lang.Exception ("Invalid ED year in " + strEDCode);
 
 		char chMonth = strEDCode.charAt (2);
 
 		if ('H' == chMonth)
-			iMonth = org.drip.analytics.date.JulianDate.MARCH;
+			 iEffectiveMonth = org.drip.analytics.date.JulianDate.MARCH;
 		else if ('M' == chMonth)
-			iMonth = org.drip.analytics.date.JulianDate.JUNE;
+			 iEffectiveMonth = org.drip.analytics.date.JulianDate.JUNE;
 		else if ('U' == chMonth)
-			iMonth = org.drip.analytics.date.JulianDate.SEPTEMBER;
+			iEffectiveMonth = org.drip.analytics.date.JulianDate.SEPTEMBER;
 		else if ('Z' == chMonth)
-			iMonth = org.drip.analytics.date.JulianDate.DECEMBER;
+			 iEffectiveMonth = org.drip.analytics.date.JulianDate.DECEMBER;
 		else
-			throw new java.lang.Exception ("Unknown Month in " + strFullEDCode);
+			 throw new java.lang.Exception ("Unknown Month in " + strEDCode);
 
-		org.drip.analytics.date.JulianDate dtEDFStart = dt.getFirstEDFStartDate (3);
+		org.drip.analytics.date.JulianDate dtEDEffective = dt.getFirstEDFStartDate (3);
 
-		org.drip.analytics.date.JulianDate dtEDFEnd = dtEDFStart.addMonths (3);
+		while (iYearDigit != (org.drip.analytics.date.JulianDate.Year (dtEDEffective.getJulian()) % 10))
+			 dtEDEffective = dtEDEffective.addYears (1);
 
-		while (iYearDigit != (org.drip.analytics.date.JulianDate.Year (dtEDFEnd.getJulian()) % 10))
-			dtEDFEnd = dtEDFEnd.addYears (1);
+		org.drip.analytics.date.JulianDate dtEffective = org.drip.analytics.date.JulianDate.CreateFromYMD
+			 (org.drip.analytics.date.JulianDate.Year (dtEDEffective.getJulian()), iEffectiveMonth, 15);
 
-		org.drip.analytics.date.JulianDate dtMaturity = org.drip.analytics.date.JulianDate.CreateFromYMD
-			(org.drip.analytics.date.JulianDate.Year (dtEDFEnd.getJulian()), iMonth, 20);
+		_dblEffective = dtEffective.getJulian();
 
-		_dblEffective = dtMaturity.addMonths (-3).getJulian();
-
-		_dblMaturity = dtMaturity.getJulian();
+		_dblMaturity = dtEffective.addMonths (3).getJulian();
 
 		_notlSchedule = org.drip.product.params.FactorSchedule.CreateBulletSchedule();
 	}
@@ -380,7 +376,7 @@ public class EDFComponent extends org.drip.product.definition.RatesComponent {
 		return mapResult;
 	}
 
-	@Override public org.drip.math.algodiff.WengertJacobian calcPVDFMicroJack (
+	@Override public org.drip.math.calculus.WengertJacobian calcPVDFMicroJack (
 		final org.drip.param.valuation.ValuationParams valParams,
 		final org.drip.param.pricer.PricerParams pricerParams,
 		final org.drip.param.definition.ComponentMarketParams mktParams,
@@ -404,15 +400,15 @@ public class EDFComponent extends org.drip.product.definition.RatesComponent {
 
 			double dblDFMaturity = dc.getDF (getMaturityDate().getJulian());
 
-			org.drip.math.algodiff.WengertJacobian wjDFEffective = dc.getDFJacobian (_dblEffective);
+			org.drip.math.calculus.WengertJacobian wjDFEffective = dc.getDFJacobian (_dblEffective);
 
-			org.drip.math.algodiff.WengertJacobian wjDFMaturity = dc.getDFJacobian
+			org.drip.math.calculus.WengertJacobian wjDFMaturity = dc.getDFJacobian
 				(getMaturityDate().getJulian());
 
 			if (null == wjDFEffective || null == wjDFMaturity) return null;
 
-			org.drip.math.algodiff.WengertJacobian wjPVDFMicroJack = new
-				org.drip.math.algodiff.WengertJacobian (1, wjDFMaturity.numParameters());
+			org.drip.math.calculus.WengertJacobian wjPVDFMicroJack = new
+				org.drip.math.calculus.WengertJacobian (1, wjDFMaturity.numParameters());
 
 			for (int i = 0; i < wjDFMaturity.numParameters(); ++i) {
 				if (!wjPVDFMicroJack.accumulatePartialFirstDerivative (0, i, wjDFMaturity.getFirstDerivative
@@ -434,7 +430,7 @@ public class EDFComponent extends org.drip.product.definition.RatesComponent {
 		return null;
 	}
 
-	@Override public org.drip.math.algodiff.WengertJacobian calcQuoteDFMicroJack (
+	@Override public org.drip.math.calculus.WengertJacobian calcQuoteDFMicroJack (
 		final java.lang.String strQuote,
 		final org.drip.param.valuation.ValuationParams valParams,
 		final org.drip.param.pricer.PricerParams pricerParams,
@@ -453,15 +449,15 @@ public class EDFComponent extends org.drip.product.definition.RatesComponent {
 
 				double dblDFMaturity = dc.getDF (getMaturityDate().getJulian());
 
-				org.drip.math.algodiff.WengertJacobian wjDFEffective = dc.getDFJacobian (_dblEffective);
+				org.drip.math.calculus.WengertJacobian wjDFEffective = dc.getDFJacobian (_dblEffective);
 
-				org.drip.math.algodiff.WengertJacobian wjDFMaturity = dc.getDFJacobian
+				org.drip.math.calculus.WengertJacobian wjDFMaturity = dc.getDFJacobian
 					(getMaturityDate().getJulian());
 
 				if (null == wjDFEffective || null == wjDFMaturity) return null;
 
-				org.drip.math.algodiff.WengertJacobian wjDFMicroJack = new
-					org.drip.math.algodiff.WengertJacobian (1, wjDFMaturity.numParameters());
+				org.drip.math.calculus.WengertJacobian wjDFMicroJack = new
+					org.drip.math.calculus.WengertJacobian (1, wjDFMaturity.numParameters());
 
 				for (int i = 0; i < wjDFMaturity.numParameters(); ++i) {
 					if (!wjDFMicroJack.accumulatePartialFirstDerivative (0, i,

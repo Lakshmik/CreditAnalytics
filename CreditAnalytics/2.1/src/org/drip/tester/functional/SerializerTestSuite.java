@@ -143,9 +143,9 @@ public class SerializerTestSuite {
 		final java.lang.String[] astrArgs)
 		throws java.lang.Exception
 	{
-		org.drip.analytics.support.Logger.Init ("c:\\Lakshmi\\BondAnal\\Config.xml");
+		org.drip.analytics.support.Logger.Init ("c:\\DRIP\\CreditAnalytics\\Config.xml");
 
-		org.drip.analytics.daycount.Convention.Init ("c:\\Lakshmi\\BondAnal\\Config.xml");
+		org.drip.analytics.daycount.Convention.Init ("c:\\DRIP\\CreditAnalytics\\Config.xml");
 
 		org.drip.analytics.date.JulianDate dtToday = org.drip.analytics.date.JulianDate.Today();
 
@@ -250,7 +250,7 @@ public class SerializerTestSuite {
 		Verify (abPeriod, new org.drip.analytics.period.Period (abPeriod), "Period");
 
 		byte[] abCouponPeriod = new org.drip.analytics.period.CouponPeriod (dblStart, dblStart + 180,
-			dblStart, dblStart + 180, dblStart + 180, dblStart + 180, 2, "30/360", true, "30/360", true,
+			dblStart, dblStart + 180, dblStart + 180, dblStart + 180, 2, 0.5, "30/360", true, "30/360", true,
 				dblStart + 1825, "GBP").serialize();
 
 		Verify (abCouponPeriod, new org.drip.analytics.period.CouponPeriod (abCouponPeriod), "CouponPeriod");

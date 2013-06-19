@@ -598,6 +598,37 @@ public class AnalyticsHelper {
 	}
 
 	/**
+	 * Create a JulianDate from the YYYY MM DD
+	 * 
+	 * @param strYYYYMMDD Java Date input as delimited YYYY MM DD
+	 * @param strDelim Delimiter
+	 * 
+	 * @return JulianDate output
+	 */
+
+	public static final org.drip.analytics.date.JulianDate MakeJulianFromYYYYMMDD (
+		final java.lang.String strYYYYMMDD,
+		final java.lang.String strDelim)
+	{
+		if (null == strYYYYMMDD || strYYYYMMDD.isEmpty() || null == strDelim || strDelim.isEmpty())
+			return null;
+
+		java.lang.String[] astrYYYYMMDD = strYYYYMMDD.split (strDelim);
+
+		if (null == astrYYYYMMDD || 3 != astrYYYYMMDD.length) return null;
+
+		try {
+			return org.drip.analytics.date.JulianDate.CreateFromYMD (new java.lang.Integer
+				(astrYYYYMMDD[0].trim()), new java.lang.Integer (astrYYYYMMDD[1].trim()), new
+					java.lang.Integer (astrYYYYMMDD[2].trim()));
+		} catch (java.lang.Exception e) {
+			e.printStackTrace();
+		}
+
+		return null;
+	}
+
+	/**
 	 * Gets the DRIP day count from the Bloomberg code
 	 * 
 	 * @param strBBGDC String representing the Bloomberg day count convention

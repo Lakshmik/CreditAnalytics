@@ -424,7 +424,7 @@ public class ConstantForwardRate extends org.drip.analytics.definition.DiscountC
 		return java.lang.Math.exp (dblExpArg / 365.25);
 	}
 
-	@Override public org.drip.math.algodiff.WengertJacobian getDFJacobian (
+	@Override public org.drip.math.calculus.WengertJacobian getDFJacobian (
 		final double dblDate)
 	{
 		if (!org.drip.math.common.NumberUtil.IsValid (dblDate)) return null;
@@ -432,10 +432,10 @@ public class ConstantForwardRate extends org.drip.analytics.definition.DiscountC
 		int i = 0;
 		double dblDF = java.lang.Double.NaN;
 		double dblStartDate = _dblStartDate;
-		org.drip.math.algodiff.WengertJacobian wj = null;
+		org.drip.math.calculus.WengertJacobian wj = null;
 
 		try {
-			wj = new org.drip.math.algodiff.WengertJacobian (1, _adblRate.length);
+			wj = new org.drip.math.calculus.WengertJacobian (1, _adblRate.length);
 		} catch (java.lang.Exception e) {
 			e.printStackTrace();
 

@@ -242,8 +242,8 @@ public class JulianDate implements java.lang.Comparable<JulianDate> {
 
 		if (iYear <= 0) --iYear;
 
-		return org.drip.analytics.support.GenericUtil.PrePad (iMonth) + "/" +
-			org.drip.analytics.support.GenericUtil.PrePad (iDay) + "/" + iYear;
+		return org.drip.math.common.FormatUtil.PrePad (iMonth) + "/" +
+			org.drip.math.common.FormatUtil.PrePad (iDay) + "/" + iYear;
 	}
 
 	/**
@@ -1054,7 +1054,7 @@ public class JulianDate implements java.lang.Comparable<JulianDate> {
 
 		if (iYear <= 0) --iYear;
 
-		if (20 <= iDay) {
+		if (15 <= iDay) {
 			if (12 < ++iMonth) {
 				++iYear;
 				iMonth -= 12;
@@ -1064,7 +1064,7 @@ public class JulianDate implements java.lang.Comparable<JulianDate> {
 		while (0 != iMonth % iNumRollMonths) ++iMonth;
 
 		try {
-			return CreateFromYMD (iYear, iMonth, 20);
+			return CreateFromYMD (iYear, iMonth, 15);
 		} catch (java.lang.Exception e) {
 			e.printStackTrace();
 		}

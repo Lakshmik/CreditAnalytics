@@ -40,6 +40,7 @@ public class CashComponent extends org.drip.product.definition.RatesComponent {
 	private double _dblNotional = 100.;
 	private java.lang.String _strIR = "";
 	private java.lang.String _strCode = "";
+	// private java.lang.String _strDC = "Act/360";
 	private double _dblMaturity = java.lang.Double.NaN;
 	private double _dblEffective = java.lang.Double.NaN;
 	private org.drip.product.params.FactorSchedule _notlSchedule = null;
@@ -296,7 +297,7 @@ public class CashComponent extends org.drip.product.definition.RatesComponent {
 				mktParams.getDiscountCurve().getDF (_dblEffective) / mktParams.getDiscountCurve().getDF
 					(dblCashSettle) * _dblNotional * 0.01 * getNotional (_dblEffective, _dblMaturity));
 
-			mapResult.put ("Price", 100. * (1 - mktParams.getDiscountCurve().calcImpliedRate (_dblEffective,
+			mapResult.put ("Price", 100. * (1 - mktParams.getDiscountCurve().calcLIBOR (_dblEffective,
 				_dblMaturity)));
 
 			mapResult.put ("Rate", mktParams.getDiscountCurve().calcImpliedRate (_dblEffective,
@@ -310,7 +311,7 @@ public class CashComponent extends org.drip.product.definition.RatesComponent {
 		return mapResult;
 	}
 
-	@Override public org.drip.math.algodiff.WengertJacobian calcPVDFMicroJack (
+	@Override public org.drip.math.calculus.WengertJacobian calcPVDFMicroJack (
 		final org.drip.param.valuation.ValuationParams valParams,
 		final org.drip.param.pricer.PricerParams pricerParams,
 		final org.drip.param.definition.ComponentMarketParams mktParams,
@@ -330,12 +331,12 @@ public class CashComponent extends org.drip.product.definition.RatesComponent {
 
 			org.drip.analytics.definition.DiscountCurve dc = mktParams.getDiscountCurve();
 
-			org.drip.math.algodiff.WengertJacobian wjDFDF = dc.getDFJacobian (_dblMaturity);
+			org.drip.math.calculus.WengertJacobian wjDFDF = dc.getDFJacobian (_dblMaturity);
 
 			if (null == wjDFDF) return null;
 
-			org.drip.math.algodiff.WengertJacobian wjPVDFMicroJack = new
-				org.drip.math.algodiff.WengertJacobian (1, wjDFDF.numParameters());
+			org.drip.math.calculus.WengertJacobian wjPVDFMicroJack = new
+				org.drip.math.calculus.WengertJacobian (1, wjDFDF.numParameters());
 
 			for (int k = 0; k < wjDFDF.numParameters(); ++k) {
 				if (!wjPVDFMicroJack.accumulatePartialFirstDerivative (0, k, wjDFDF.getFirstDerivative (0,
@@ -352,7 +353,7 @@ public class CashComponent extends org.drip.product.definition.RatesComponent {
 		return null;
 	}
 
-	@Override public org.drip.math.algodiff.WengertJacobian calcQuoteDFMicroJack (
+	@Override public org.drip.math.calculus.WengertJacobian calcQuoteDFMicroJack (
 		final java.lang.String strQuote,
 		final org.drip.param.valuation.ValuationParams valParams,
 		final org.drip.param.pricer.PricerParams pricerParams,
@@ -367,12 +368,12 @@ public class CashComponent extends org.drip.product.definition.RatesComponent {
 			try {
 				org.drip.analytics.definition.DiscountCurve dc = mktParams.getDiscountCurve();
 
-				org.drip.math.algodiff.WengertJacobian wjDF = dc.getDFJacobian (_dblMaturity);
+				org.drip.math.calculus.WengertJacobian wjDF = dc.getDFJacobian (_dblMaturity);
 
 				if (null == wjDF) return null;
 
-				org.drip.math.algodiff.WengertJacobian wjDFMicroJack = new
-					org.drip.math.algodiff.WengertJacobian (1, wjDF.numParameters());
+				org.drip.math.calculus.WengertJacobian wjDFMicroJack = new
+					org.drip.math.calculus.WengertJacobian (1, wjDF.numParameters());
 
 				for (int k = 0; k < wjDF.numParameters(); ++k) {
 					if (!wjDFMicroJack.accumulatePartialFirstDerivative (0, k, -365.25 / (_dblMaturity -
