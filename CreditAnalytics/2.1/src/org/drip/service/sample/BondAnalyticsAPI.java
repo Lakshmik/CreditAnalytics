@@ -5,6 +5,9 @@ package org.drip.service.sample;
  * Credit Product imports
  */
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.drip.analytics.date.JulianDate;
 import org.drip.analytics.daycount.Convention;
 import org.drip.analytics.definition.*;
@@ -67,6 +70,87 @@ import org.drip.math.common.FormatUtil;
 
 public class BondAnalyticsAPI {
 	private static final String FIELD_SEPARATOR = "    ";
+
+	private static DiscountCurve BuildRatesCurveFromInstruments (
+		final JulianDate dtStart,
+		final String[] astrCashTenor,
+		final double[] adblCashRate,
+		final String[] astrIRSTenor,
+		final double[] adblIRSRate,
+		final String strCurrency)
+		throws Exception
+	{
+		int iNumDCInstruments = astrCashTenor.length + adblIRSRate.length;
+		double adblDate[] = new double[iNumDCInstruments];
+		double adblRate[] = new double[iNumDCInstruments];
+		String astrCalibMeasure[] = new String[iNumDCInstruments];
+		double adblCompCalibValue[] = new double[iNumDCInstruments];
+		CalibratableComponent aCompCalib[] = new CalibratableComponent[iNumDCInstruments];
+		String strIndex = strCurrency + "-LIBOR-6M";
+
+		// Cash Calibration
+
+		for (int i = 0; i < astrCashTenor.length; ++i) {
+			astrCalibMeasure[i] = "Rate";
+			adblRate[i] = java.lang.Double.NaN;
+			adblCompCalibValue[i] = adblCashRate[i];
+
+			aCompCalib[i] = CashBuilder.CreateCash (dtStart.addDays (2), new JulianDate (adblDate[i] =
+				dtStart.addTenor (astrCashTenor[i]).getJulian()), strCurrency);
+		}
+
+		// IRS Calibration
+
+		for (int i = 0; i < astrIRSTenor.length; ++i) {
+			astrCalibMeasure[i + astrCashTenor.length] = "Rate";
+			adblRate[i + astrCashTenor.length] = java.lang.Double.NaN;
+			adblCompCalibValue[i + astrCashTenor.length] = adblIRSRate[i];
+
+			aCompCalib[i + astrCashTenor.length] = IRSBuilder.CreateIRS (dtStart.addDays (2), new
+				JulianDate (adblDate[i + astrCashTenor.length] = dtStart.addTenor
+					(astrIRSTenor[i]).getJulian()), 0., strCurrency, strIndex, strCurrency);
+		}
+
+		/*
+		 * Create the sample (in this case dummy) IRS index rate fixings object
+		 */
+
+		Map<String, Double> mIndexFixings = new HashMap<String, Double>();
+
+		mIndexFixings.put (strIndex, 0.0042);
+
+		Map<JulianDate, Map<String, Double>> mmFixings = new HashMap<JulianDate, Map<String, Double>>();
+
+		mmFixings.put (dtStart.addDays (2), mIndexFixings);
+
+		/*
+		 * Build the IR curve from the components, their calibration measures, and their calibration quotes.
+		 */
+
+		return RatesScenarioCurveBuilder.CreateDiscountCurve (dtStart, strCurrency,
+			DiscountCurveBuilder.BOOTSTRAP_MODE_CONSTANT_FORWARD, aCompCalib, adblCompCalibValue, astrCalibMeasure, mmFixings);
+	}
+
+	/*
+	 * Sample demonstrating creation of discount curve
+	 * 
+	 *  	USE WITH CARE: This sample ignores errors and does not handle exceptions.
+	 */
+
+	private static final DiscountCurve MakeDiscountCurve (
+		final JulianDate dtCurve)
+		throws Exception
+	{
+		String[] astrCashTenor = new String[] {};
+		double[] adblCashRate = new double[] {};
+		String[] astrIRSTenor = new String[] {   "1Y",    "2Y",    "3Y",    "4Y",    "5Y",    "6Y",    "7Y",
+			   "8Y",    "9Y",   "10Y",   "11Y",   "12Y",   "15Y",   "20Y",   "25Y",   "30Y",   "40Y",   "50Y"};
+		double[] adblIRSRate = new double[]  {0.04000, 0.04000, 0.04000, 0.04000, 0.04000, 0.04000, 0.04000,
+			0.04000, 0.04000, 0.04000, 0.04000, 0.04000, 0.04000, 0.04000, 0.04000, 0.04000, 0.04000, 0.04000};
+
+		return BuildRatesCurveFromInstruments (dtCurve, astrCashTenor, adblCashRate, astrIRSTenor,
+			adblIRSRate, "USD");
+	}
 
 	/*
 	 * Sample demonstrating creation of the principal factor schedule from date and factor array
@@ -256,7 +340,7 @@ public class BondAnalyticsAPI {
 		 * Base Discount Curve
 		 */
 
-		DiscountCurve dc = DiscountCurveBuilder.CreateFromFlatRate (JulianDate.Today(), "USD", 0.04);
+		DiscountCurve dc = MakeDiscountCurve (JulianDate.Today());
 
 		/*
 		 * Treasury Discount Curve
@@ -310,51 +394,56 @@ public class BondAnalyticsAPI {
 			ValuationParams valParams = ValuationParams.CreateValParams (JulianDate.Today(), 0, "", Convention.DR_ACTUAL);
 
 			System.out.println ("\nPrice From Yield: " + FormatUtil.FormatDouble (aBond[i].calcPriceFromYield
-				(valParams, cmp, null, 0.), 2, 3, 100.));
+				(valParams, cmp, null, 0.03), 1, 3, 100.));
 
-			WorkoutInfo wi = aBond[i].calcExerciseYieldFromPrice (valParams, cmp, null, 1.);
+			double dblPrice = aBond[i].calcPriceFromYield
+					(valParams, cmp, null, 0.03);
+
+			WorkoutInfo wi = aBond[i].calcExerciseYieldFromPrice (valParams, cmp, null, dblPrice);
 
 			System.out.println ("Workout Date: " + JulianDate.fromJulian (wi._dblDate));
 
 			System.out.println ("Workout Factor: " + wi._dblExerciseFactor);
 
-			System.out.println ("Workout Yield: " + FormatUtil.FormatDouble (wi._dblYield, 2, 3, 100.));
+			System.out.println ("Workout Yield: " + FormatUtil.FormatDouble (wi._dblYield, 1, 2, 100.));
 
 			System.out.println ("Workout Yield From Price: " + FormatUtil.FormatDouble
-				(aBond[i].calcYieldFromPrice (valParams, cmp, null, wi._dblDate, wi._dblExerciseFactor, 1.), 2, 3, 100.));
+				(aBond[i].calcYieldFromPrice (valParams, cmp, null, wi._dblDate, wi._dblExerciseFactor, 1.), 1, 2, 100.));
 
 			if (!aBond[i].isFloater()) {
 				System.out.println ("Z Spread From Price: " + FormatUtil.FormatDouble
-					(aBond[i].calcZSpreadFromPrice (valParams, cmp, null, wi._dblDate, wi._dblExerciseFactor, 1.), 1, 3, 100.));
+					(aBond[i].calcZSpreadFromPrice (valParams, cmp, null, wi._dblDate, wi._dblExerciseFactor, 1.), 1, 0, 10000.));
 
-				System.out.println ("OAS From Price: " + FormatUtil.FormatDouble
-					(aBond[i].calcOASFromPrice (valParams, cmp, null, wi._dblDate, wi._dblExerciseFactor, 1.), 1, 3, 100.));
+				/* System.out.println ("OAS From Price: " + FormatUtil.FormatDouble
+					(aBond[i].calcOASFromPrice (valParams, cmp, null, wi._dblDate, wi._dblExerciseFactor, 1.), 1, 0, 10000.)); */
 			}
 
 			System.out.println ("I Spread From Price: " + FormatUtil.FormatDouble (aBond[i].calcISpreadFromPrice
-				(valParams, cmp, null, wi._dblDate, wi._dblExerciseFactor, 1.), 1, 3, 100.));
+				(valParams, cmp, null, wi._dblDate, wi._dblExerciseFactor, 1.), 1, 0, 10000.));
 
 			System.out.println ("Discount Margin From Price: " + FormatUtil.FormatDouble (aBond[i].calcDiscountMarginFromPrice
-				(valParams, cmp, null, wi._dblDate, wi._dblExerciseFactor, 1.), 1, 3, 100.));
+				(valParams, cmp, null, wi._dblDate, wi._dblExerciseFactor, 1.), 1, 0, 10000.));
 
 			System.out.println ("TSY Spread From Price: " + FormatUtil.FormatDouble
-				(aBond[i].calcTSYSpreadFromPrice (valParams, cmp, null, wi._dblDate, wi._dblExerciseFactor, 1.), 1, 3, 100.));
+				(aBond[i].calcTSYSpreadFromPrice (valParams, cmp, null, wi._dblDate, wi._dblExerciseFactor, 1.), 1, 0, 10000.));
 
-			System.out.println ("ASW From Price: " + (int) aBond[i].calcASWFromPrice (valParams, cmp, null, wi._dblDate, wi._dblExerciseFactor, 1.));
+			System.out.println ("ASW From Price: " + FormatUtil.FormatDouble
+				(aBond[i].calcASWFromPrice (valParams, cmp, null, wi._dblDate, wi._dblExerciseFactor, 1.), 1, 0, 10000.));
 
 			System.out.println ("Credit Basis From Price: " + FormatUtil.FormatDouble
-				(aBond[i].calcCreditBasisFromPrice (valParams, cmp, null, wi._dblDate, wi._dblExerciseFactor, 1.), 1, 3, 100.));
+				(aBond[i].calcCreditBasisFromPrice (valParams, cmp, null, wi._dblDate, wi._dblExerciseFactor, 1.), 1, 0, 10000.));
 
 			System.out.println ("Price From TSY Spread: " + FormatUtil.FormatDouble
 				(aBond[i].calcPriceFromTSYSpread (valParams, cmp, null, 0.0188), 1, 3, 100.));
 
 			System.out.println ("Yield From TSY Spread: " + FormatUtil.FormatDouble
-				(aBond[i].calcYieldFromTSYSpread (valParams, cmp, null, 0.0188), 1, 3, 100.));
+				(aBond[i].calcYieldFromTSYSpread (valParams, cmp, null, 0.0188), 1, 2, 100.));
 
-			System.out.println ("ASW From TSY Spread: " + (int) aBond[i].calcASWFromTSYSpread (valParams, cmp, null, 0.0188));
+			System.out.println ("ASW From TSY Spread: " + FormatUtil.FormatDouble
+				(aBond[i].calcASWFromTSYSpread (valParams, cmp, null, 0.0188), 1, 0, 10000.));
 
 			System.out.println ("Credit Basis From TSY Spread: " + FormatUtil.FormatDouble
-				(aBond[i].calcCreditBasisFromTSYSpread (valParams, cmp, null, 0.0188), 1, 3, 100.));
+				(aBond[i].calcCreditBasisFromTSYSpread (valParams, cmp, null, 0.0188), 1, 0, 10000.));
 
 			/* System.out.println ("PECS From TSY Spread: " + FIGen.FormatSpread
 				(aBond[i].calcPECSFromTSYSpread (valParams, cmp, null, 0.0188))); */
@@ -500,6 +589,6 @@ public class BondAnalyticsAPI {
 
 		CustomBondAPISample();
 
-		BondCDSCurveCalibration();
+		// BondCDSCurveCalibration();
 	}
 }

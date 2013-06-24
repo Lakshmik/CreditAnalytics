@@ -898,4 +898,69 @@ public class AnalyticsHelper {
 
 		return adblQuotesOut;
 	}
+
+	/**
+	 * Merge two lists of periods
+	 * 
+	 * @param lsPeriod1 Period 1
+	 * @param lsPeriod2 Period 2
+	 * 
+	 * @return The Merged Period List
+	 */
+
+	public static final java.util.List<org.drip.analytics.period.Period> MergePeriodLists (
+		final java.util.List<org.drip.analytics.period.Period> lsPeriod1,
+		final java.util.List<org.drip.analytics.period.Period> lsPeriod2)
+	{
+		if ((null == lsPeriod1 || 0 == lsPeriod1.size()) && (null == lsPeriod2 || 0 == lsPeriod2.size()))
+			return null;
+
+		java.util.List<org.drip.analytics.period.Period> lsPeriodMerged = new
+			java.util.ArrayList<org.drip.analytics.period.Period>();
+
+		if (null == lsPeriod1 || 0 == lsPeriod1.size()) {
+			for (org.drip.analytics.period.Period p : lsPeriod2) {
+				if (null != p) lsPeriodMerged.add (p);
+			}
+
+			return lsPeriodMerged;
+		}
+
+		if (null == lsPeriod2 || 0 == lsPeriod2.size()) {
+			for (org.drip.analytics.period.Period p : lsPeriod1) {
+				if (null != p) lsPeriodMerged.add (p);
+			}
+
+			return lsPeriodMerged;
+		}
+
+		int iPeriod1Index = 0;
+		int iPeriod2Index = 0;
+
+		while (iPeriod1Index < lsPeriod1.size() && iPeriod2Index < lsPeriod2.size()) {
+			org.drip.analytics.period.Period p1 = lsPeriod1.get (iPeriod1Index);
+
+			org.drip.analytics.period.Period p2 = lsPeriod2.get (iPeriod2Index);
+
+			if (p1.getPayDate() < p2.getPayDate()) {
+				lsPeriodMerged.add (p1);
+
+				++iPeriod1Index;
+			} else {
+				lsPeriodMerged.add (p2);
+
+				++iPeriod2Index;
+			}
+		}
+
+		if (iPeriod1Index < lsPeriod1.size() - 1) {
+			for (int i = iPeriod1Index; i < lsPeriod1.size(); ++i)
+				lsPeriodMerged.add (lsPeriod1.get (i));
+		} else if (iPeriod2Index < lsPeriod2.size() - 1) {
+			for (int i = iPeriod2Index; i < lsPeriod2.size(); ++i)
+				lsPeriodMerged.add (lsPeriod2.get (i));
+		}
+
+		return lsPeriodMerged;
+	}
 }

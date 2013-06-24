@@ -3615,8 +3615,7 @@ public class BondComponent extends org.drip.product.definition.Bond implements
 
 		double dblDirtyPrice = dblPrice + calcAccrued (valParams._dblValue, mktParams);
 
-		return (dblPriceForYieldMinus1bp + dblPriceForYieldPlus1bp - 2. * dblPrice) / (dblDirtyPrice *
-			dblDirtyPrice);
+		return (dblPriceForYieldMinus1bp + dblPriceForYieldPlus1bp - 2. * dblPrice) / dblDirtyPrice;
 	}
 
 	@Override public double calcConvexityFromPrice (

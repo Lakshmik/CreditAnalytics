@@ -6,13 +6,19 @@ import java.util.Map;
 
 import org.drip.analytics.creator.DiscountCurveBuilder;
 import org.drip.analytics.date.JulianDate;
+import org.drip.analytics.daycount.Convention;
 import org.drip.analytics.definition.DiscountCurve;
+import org.drip.analytics.period.Period;
 import org.drip.math.common.FormatUtil;
+import org.drip.param.creator.ComponentMarketParamsBuilder;
 import org.drip.param.creator.RatesScenarioCurveBuilder;
+import org.drip.param.definition.ComponentMarketParams;
+import org.drip.param.valuation.ValuationParams;
 import org.drip.product.creator.CashBuilder;
 import org.drip.product.creator.EDFutureBuilder;
 import org.drip.product.creator.IRSBuilder;
 import org.drip.product.definition.CalibratableComponent;
+import org.drip.product.definition.RatesComponent;
 import org.drip.service.api.CreditAnalytics;
 
 /*
@@ -49,6 +55,8 @@ import org.drip.service.api.CreditAnalytics;
  */
 
 public class BloombergSWPM {
+	private static final String FIELD_SEPARATOR = "    ";
+
 	private static DiscountCurve BuildBBGRatesCurve (
 		final JulianDate dtStart,
 		final String[] astrCashTenor,
@@ -101,7 +109,7 @@ public class BloombergSWPM {
 			adblCompCalibValue[i + adblEDFRate.length + astrCashTenor.length] = adblIRSRate[i];
 
 			aCompCalib[i + adblEDFRate.length + astrCashTenor.length] = IRSBuilder.CreateIRS (dtStart.addDays (2), new
-				JulianDate (adblDate[i + astrCashTenor.length] = dtStart.addTenor
+				JulianDate (adblDate[i + astrCashTenor.length] = dtStart.addDays (2).addTenor
 					(astrIRSTenor[i]).getJulian()), 0., strCurrency, strIndex, strCurrency);
 
 			// System.out.println ("IRS = " + aCompCalib[i + adblEDFRate.length + astrCashTenor.length].getMaturityDate());
@@ -137,8 +145,8 @@ public class BloombergSWPM {
 
 			double dblZeroDF = java.lang.Math.exp (-1. * dblZero * dblYearFract);
 
-			System.out.println (aCompCalib[i].getPrimaryCode() + " | " + aCompCalib[i].getMaturityDate() + " | " +
-				FormatUtil.FormatDouble (dblZero, 1, 6, 100.) + " | " + FormatUtil.FormatDouble (dblZeroDF, 1, 6, 1.));
+			System.out.println (aCompCalib[i].getPrimaryCode() + " | " + FormatUtil.FormatDouble (dblZero, 1, 6, 100.)
+				+ " | " + FormatUtil.FormatDouble (dblZeroDF, 1, 6, 1.));
 		}
 
 		return dc;
@@ -150,20 +158,59 @@ public class BloombergSWPM {
 	{
 		CreditAnalytics.Init ("");
 
-		JulianDate dtStart = JulianDate.CreateFromYMD (2013, JulianDate.JUNE, 13);
+		JulianDate dtStart = JulianDate.CreateFromYMD (2013, JulianDate.JUNE, 19);
+
+		/*
+		 * This part is best modeled by Curve #47 in the SWPM "Curves" tab
+		 */
 
 		String[] astrCashTenor = new String[] {"3M"};
-		double[] adblCashRate = new double[] {0.0027325};
-		/* double[] adblEDFRate = new double[] {0.00275, 0.00280, 0.00290, 0.00305, 0.00324, 0.00339, 0.00353, 0.00411, 0.00484,
-			0.00571, 0.00678, 0.00805, 0.00951, 0.01112, 0.01292, 0.01477}; */
-		double[] adblEDFRate = new double[] {0.00275, 0.00280};
-		/* String[] astrIRSTenor = new String[] {    "4Y",      "5Y",      "6Y",      "7Y",      "8Y",      "9Y",     "10Y",
-			    "11Y",     "12Y",     "15Y",     "20Y",     "25Y",     "30Y",     "40Y",     "50Y"};
-		double[] adblIRSRate = new double[] {0.0102874, 0.0133407, 0.0161406, 0.0186062, 0.0207300, 0.0225449, 0.0241363,
-			0.0255210, 0.0267012, 0.0292385, 0.0313285, 0.0323277, 0.0328821, 0.0330859, 0.0328771}; */
-		String[] astrIRSTenor = new String[] {};
-		double[] adblIRSRate = new double[] {};
+		double[] adblCashRate = new double[] {0.0027175};
+		double[] adblEDFRate = new double[] {0.00277, 0.00309};
+		String[] astrIRSTenor = new String[] {   "1Y",      "2Y",      "3Y",      "4Y",      "5Y",      "6Y",      "7Y",
+				 "8Y",      "9Y",     "10Y",     "12Y",     "15Y",     "20Y",     "30Y"};
+		double[] adblIRSRate = new double[] {0.003177, 0.0045574, 0.0073411, 0.0109921, 0.0145993, 0.0175048, 0.0198985,
+			0.0219095, 0.0236188, 0.0250914, 0.0274766, 0.0297526, 0.0315100, 0.0327862};
 
-		BuildBBGRatesCurve (dtStart, astrCashTenor, adblCashRate, adblEDFRate, astrIRSTenor, adblIRSRate, "USD");
+		DiscountCurve dc = BuildBBGRatesCurve (dtStart, astrCashTenor, adblCashRate, adblEDFRate, astrIRSTenor, adblIRSRate, "USD");
+
+		ComponentMarketParams cmp = ComponentMarketParamsBuilder.MakeDiscountCMP (dc);
+
+		ValuationParams valParams = ValuationParams.CreateValParams (dtStart.addDays (2), 0, "", Convention.DR_ACTUAL);
+
+		RatesComponent swap = IRSBuilder.CreateIRS (
+			dtStart.addDays (2),
+			dtStart.addDays (2).addTenor ("5Y"),
+			0.01478734,
+			"USD",
+			"USD-LIBOR-6M",
+			"USD");
+
+		Map<String, Double> mIndexFixings = new HashMap<String, Double>();
+
+		mIndexFixings.put ("USD-LIBOR-6M", 0.0042);
+
+		Map<JulianDate, Map<String, Double>> mmFixings = new HashMap<JulianDate, Map<String, Double>>();
+
+		mmFixings.put (dtStart.addDays (2), mIndexFixings);
+
+		cmp.setFixings (mmFixings);
+
+		Map<String, Double> mapSwapCalc = swap.value (valParams, null, cmp, null);
+
+		System.out.println ("PV: " + mapSwapCalc.get ("CleanPV"));
+
+		System.out.println ("DV01: " + mapSwapCalc.get ("DirtyDV01"));
+
+		System.out.println ("\nCashflow\n--------");
+
+		for (Period p : swap.getCouponPeriod())
+			System.out.println (
+				JulianDate.fromJulian (p.getAccrualStartDate()) + FIELD_SEPARATOR +
+				JulianDate.fromJulian (p.getAccrualEndDate()) + FIELD_SEPARATOR +
+				JulianDate.fromJulian (p.getPayDate()) + FIELD_SEPARATOR +
+				FormatUtil.FormatDouble (p.getCouponDCF(), 1, 4, 1.) + FIELD_SEPARATOR +
+				FormatUtil.FormatDouble (dc.getDF (p.getPayDate()), 1, 4, 1.) + FIELD_SEPARATOR
+			);
 	}
 }

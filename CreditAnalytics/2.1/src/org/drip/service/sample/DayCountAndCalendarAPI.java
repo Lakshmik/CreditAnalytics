@@ -153,33 +153,35 @@ public class DayCountAndCalendarAPI {
 		 * List available day count
 		 */
 
-		/* String strDCList = CreditAnalytics.GetAvailableDC();
+		String strDCList = CreditAnalytics.GetAvailableDC();
 
-		System.out.println (strDCList); */
+		System.out.println (strDCList);
 
 		/*
 		 * Calculate year fraction between 2 dates according to semi-annual, Act/360, and USD calendar
 		 */
 
-		double dblYF = CreditAnalytics.YearFraction (JulianDate.CreateFromYMD (2013, 5, 31),
-			JulianDate.CreateFromYMD (2013, 6, 13), "30/360", false, "USD");
+		double dblYF = CreditAnalytics.YearFraction (JulianDate.CreateFromYMD (2013, 5, 30),
+			JulianDate.CreateFromYMD (2013, 6, 24), "30/360", false, "USD");
 
 		/*
 		 * Adjust the date FORWARD according to the USD calendar
 		 */
 
-		// JulianDate dtAdjusted = CreditAnalytics.Adjust (JulianDate.CreateFromYMD (2011, 1, 16), "USD", 0);
+		JulianDate dtAdjusted = CreditAnalytics.Adjust (JulianDate.CreateFromYMD (2011, 1, 16), "USD", 0);
 
 		/*
 		 * Roll to the PREVIOUS date according to the USD calendar
 		 */
 
-		/* JulianDate dtRoll = CreditAnalytics.RollDate
+		JulianDate dtRoll = CreditAnalytics.RollDate
 			(JulianDate.CreateFromYMD (2011, 1, 16), "USD", Convention.DR_PREV);
 
-		System.out.println ("YearFract: " + dblYF + "; Adjusted: " + dtAdjusted + "; Rolled: " + dtRoll); */
+		System.out.println ("YearFract: " + dblYF + "; Adjusted: " + dtAdjusted + "; Rolled: " + dtRoll);
 
-		System.out.println ("YearFract: " + dblYF);
+		System.out.println ("Accrual Days: " + dblYF * 360);
+
+		System.out.println ("YearFract: " + dblYF * 0.0675 * 1000000);
 	}
 
 	public static final void main (

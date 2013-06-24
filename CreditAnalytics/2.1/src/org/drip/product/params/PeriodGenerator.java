@@ -39,7 +39,7 @@ package org.drip.product.params;
 public class PeriodGenerator extends PeriodSet {
 	private static final boolean m_bBlog = false;
 
-	private boolean _bApplyAccEOMAdj = true;
+	private boolean _bApplyAccEOMAdj = false;
 	private java.lang.String _strCalendar = "";
 	private boolean _bPeriodsFromForward = false;
 	private double _dblFirstCouponDate = java.lang.Double.NaN;
@@ -118,7 +118,7 @@ public class PeriodGenerator extends PeriodSet {
 		_bPeriodsFromForward = bPeriodsFromForward;
 		_dblInterestAccrualStart = dblInterestAccrualStart;
 
-		if (strCouponDC.toUpperCase().contains ("EOM")) _bApplyCpnEOMAdj = false;
+		if (strCouponDC.toUpperCase().contains ("EOM")) _bApplyCpnEOMAdj = true;
 
 		int iCouponDCIndex = strCouponDC.indexOf (" NON");
 
@@ -127,7 +127,7 @@ public class PeriodGenerator extends PeriodSet {
 		else
 			_strCouponDC = strCouponDC;
 
-		if (strAccrualDC.toUpperCase().contains ("EOM")) _bApplyAccEOMAdj = false;
+		if (strAccrualDC.toUpperCase().contains ("EOM")) _bApplyAccEOMAdj = true;
 
 		int iAccrualDCIndex = strAccrualDC.indexOf (" NON");
 

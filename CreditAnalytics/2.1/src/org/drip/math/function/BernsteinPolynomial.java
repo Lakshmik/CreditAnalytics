@@ -144,12 +144,16 @@ public class BernsteinPolynomial extends org.drip.math.function.AbstractUnivaria
 		final java.lang.String[] astrArgs)
 		throws java.lang.Exception
 	{
-		BernsteinPolynomial bp = new BernsteinPolynomial (1, 1);
+		BernsteinPolynomial bp = new BernsteinPolynomial (3, 3);
 
-		System.out.println ("BP[0.0] = " + bp.calcDerivative (0.0, 1));
+		System.out.println ("BPDeriv[0.00] = " + bp.calcDerivative (0.00, 1));
 
-		System.out.println ("BP[0.5] = " + bp.calcDerivative (0.5, 1));
+		System.out.println ("BPDeriv[0.25] = " + bp.calcDerivative (0.25, 1));
 
-		System.out.println ("BP[1.0] = " + bp.calcDerivative (1.0, 1));
+		System.out.println ("BPDeriv[0.50] = " + bp.calcDerivative (0.50, 1));
+
+		System.out.println ("BPDeriv[0.75] = " + bp.calcDerivative (0.75, 1));
+
+		System.out.println ("BPDeriv[1.00] = " + bp.calcDerivative (1.00, 1));
 	}
 }

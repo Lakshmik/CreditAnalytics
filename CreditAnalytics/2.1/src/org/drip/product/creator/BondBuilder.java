@@ -266,14 +266,15 @@ public class BondBuilder {
 	{
 		if (null == adt || 0 == adt.length || null == adblCouponAmount || 0 == adblCouponAmount.length ||
 			null == adblPrincipal || 0 == adblPrincipal.length || adt.length != adblCouponAmount.length ||
-				adt.length != adblPrincipal.length || null == dtEffective)
+				adt.length != adblPrincipal.length || null == dtEffective || 0 == iFreq)
 			return null;
 
 		java.util.List<org.drip.analytics.period.Period> lPeriods = new
 			java.util.ArrayList<org.drip.analytics.period.Period>();
 
 		double dblTotalPrincipal = 0.;
-		double[] adblDates = new double[adt.length];
+		double[] adblDate = new double[adt.length];
+		double[] adblCouponFactor = new double[adt.length];
 		double[] adblNormalizedPrincipal = new double[adt.length];
 		double[] adblCurrentCumulativePayDown = new double[adt.length];
 
@@ -297,7 +298,9 @@ public class BondBuilder {
 				return null;
 			}
 
-			adblDates[i] = adt[i].getJulian();
+			adblDate[i] = adt[i].getJulian();
+
+			adblCouponFactor[i] = adblCouponAmount[i] * iFreq;
 
 			if (bIsPrincipalPayDown) {
 				if (0. == dblTotalPrincipal)
@@ -315,30 +318,23 @@ public class BondBuilder {
 			}
 
 			try {
-				if (bIsPrincipalPayDown) {
-					double dblOutstandingPrincipal = 1.;
-
-					if (0. != dblTotalPrincipal)
-						dblOutstandingPrincipal = dblTotalPrincipal - adblCurrentCumulativePayDown[i];
-
-					lPeriods.add (new org.drip.analytics.period.Period (dblPeriodStart, adblDates[i],
-						dblPeriodStart, adblDates[i], adblDates[i], adblCouponAmount[i] /
-							dblOutstandingPrincipal));
-				} else
-					lPeriods.add (new org.drip.analytics.period.Period (dblPeriodStart, adblDates[i],
-						dblPeriodStart, adblDates[i], adblDates[i], adblCouponAmount[i] / adblPrincipal[i]));
+				if (bIsPrincipalPayDown)
+					lPeriods.add (new org.drip.analytics.period.Period (dblPeriodStart, adblDate[i],
+						dblPeriodStart, adblDate[i], adblDate[i], 1. / iFreq));
+				else
+					lPeriods.add (new org.drip.analytics.period.Period (dblPeriodStart, adblDate[i],
+						dblPeriodStart, adblDate[i], adblDate[i], 1. / iFreq));
 			} catch (java.lang.Exception e) {
 				e.printStackTrace();
 
 				return null;
 			}
 
-			dblPeriodStart = adblDates[i];
+			dblPeriodStart = adblDate[i];
 		}
 
-		org.drip.product.params.PeriodSet bfpgp = new
-			org.drip.product.params.PeriodSet (dtEffective.getJulian(), strDC, iFreq,
-				lPeriods);
+		org.drip.product.params.PeriodSet bfpgp = new org.drip.product.params.PeriodSet
+			(dtEffective.getJulian(), strDC, iFreq, lPeriods);
 
 		if (!bfpgp.validate()) {
 			System.out.println ("Could not validate bfpgp!");
@@ -348,19 +344,22 @@ public class BondBuilder {
 
 		return BondBuilder.CreateBondFromParams (new org.drip.product.params.TreasuryBenchmark (null,
 			strCurrency + "TSY", strCurrency + "EDSF"), new org.drip.product.params.IdentifierSet (strName,
-				strName, strName, strCurrency + "TSY"), new org.drip.product.params.CouponSetting (null, "",
-					1., java.lang.Double.NaN, java.lang.Double.NaN), new org.drip.product.params.CurrencySet
-						(strCurrency + "TSY", strCurrency + "TSY", strCurrency + "TSY"), null, new
-							org.drip.product.params.QuoteConvention (null, "", dtEffective.getJulian(), 100.,
-								0, strCurrency, org.drip.analytics.daycount.Convention.DR_ACTUAL), new
-									org.drip.product.params.RatesSetting (strCurrency, strCurrency,
-										strCurrency, strCurrency), new org.drip.product.params.CreditSetting
-											(30, java.lang.Double.NaN, true, "", true), new
-												org.drip.product.params.TerminationSetting (false, false,
-													false), bfpgp, new
-														org.drip.product.params.NotionalSetting
-															(org.drip.product.params.FactorSchedule.CreateFromDateFactorArray
-			(adblDates, adblNormalizedPrincipal), 100.,
+				strName, strName, strCurrency + "TSY"), new org.drip.product.params.CouponSetting
+					(org.drip.product.params.FactorSchedule.CreateFromDateFactorArray (adblDate,
+						adblCouponFactor), "", 1., java.lang.Double.NaN, java.lang.Double.NaN), new
+							org.drip.product.params.CurrencySet (strCurrency + "TSY", strCurrency + "TSY",
+								strCurrency + "TSY"), null, new org.drip.product.params.QuoteConvention
+									(null, "", dtEffective.getJulian(), 100., 0, strCurrency,
+										org.drip.analytics.daycount.Convention.DR_ACTUAL), new
+											org.drip.product.params.RatesSetting (strCurrency, strCurrency,
+												strCurrency, strCurrency), new
+													org.drip.product.params.CreditSetting (30,
+														java.lang.Double.NaN, true, "", true), new
+															org.drip.product.params.TerminationSetting
+																(false, false, false), bfpgp, new
+																	org.drip.product.params.NotionalSetting
+																		(org.drip.product.params.FactorSchedule.CreateFromDateFactorArray
+			(adblDate, adblNormalizedPrincipal), 100.,
 				org.drip.product.params.NotionalSetting.PERIOD_AMORT_AT_START, false));
 	}
 

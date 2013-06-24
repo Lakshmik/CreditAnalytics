@@ -215,8 +215,8 @@ public class BasisBuilder {
 		final java.lang.String[] astrArgs)
 		throws java.lang.Exception
 	{
-		int iK = 1;
-		int iNumBasis = 3;
+		int iK = 2;
+		int iNumBasis = 4;
 		org.drip.math.grid.Segment seg1 = null;
 		org.drip.math.grid.Segment seg2 = null;
 

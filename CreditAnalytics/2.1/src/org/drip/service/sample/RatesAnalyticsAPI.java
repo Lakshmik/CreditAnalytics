@@ -29,6 +29,7 @@ import org.drip.service.api.CreditAnalytics;
  * DRIP Math Support
  */
 
+import org.drip.math.calculus.WengertJacobian;
 import org.drip.math.common.FormatUtil;
 
 /*
@@ -287,8 +288,8 @@ public class RatesAnalyticsAPI {
 			System.out.println ("DF[" + dt + "] = " + dc.getDF (dt));
 		} */
 
-		/* for (int i = 0; i < aCompCalib.length; ++i) {
-			org.drip.math.algodiff.WengertJacobian wjComp = aCompCalib[i].calcPVDFMicroJack
+		for (int i = 0; i < aCompCalib.length; ++i) {
+			WengertJacobian wjComp = aCompCalib[i].calcPVDFMicroJack
 				(new ValuationParams (dtStart, dtStart, "USD"),
 				null,
 				ComponentMarketParamsBuilder.CreateComponentMarketParams (dc, null, null, null, null, null, mmFixings),
@@ -296,7 +297,7 @@ public class RatesAnalyticsAPI {
 
 			System.out.println ("PV/DF Micro Jack[" + aCompCalib[i].getComponentName() + "]=" +
 				(null == wjComp ? null : wjComp.displayString()));
-		} */
+		}
 	}
 
 	public static void DiscountCurveFromCash()

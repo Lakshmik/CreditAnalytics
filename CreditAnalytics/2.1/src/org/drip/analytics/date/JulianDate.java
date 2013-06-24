@@ -1073,6 +1073,56 @@ public class JulianDate implements java.lang.Comparable<JulianDate> {
 	}
 
 	/**
+	 * Generates the First Credit IMM roll date from this JulianDate
+	 * 
+	 * @param iNumRollMonths Integer representing number of months to roll
+	 * 
+	 * @return The new JulianDate
+	 */
+
+	public JulianDate getFirstCreditIMMStartDate (
+		final int iNumRollMonths)
+	{
+		int iJA = (int) (_dblJulian + HALFSECOND / 86400.);
+
+		if (iJA >= JGREG) {
+			int iJAlpha = (int) (((iJA - 1867216) - 0.25) / 36524.25);
+			iJA = iJA + 1 + iJAlpha - iJAlpha / 4;
+		}
+
+		int iJB = iJA + 1524;
+		int iJC = (int) (6680. + ((iJB - 2439870) - 122.1) / 365.25);
+		int iJD = 365 * iJC + iJC / 4;
+		int iJE = (int) ((iJB - iJD) / 30.6001);
+   		int iDay = iJB - iJD - (int) (30.6001 * iJE);
+   		int iMonth = iJE - 1;
+		int iYear = iJC - 4715;
+
+		if (iMonth > 12) iMonth -= 12;
+
+		if (iMonth > 2) --iYear;
+
+		if (iYear <= 0) --iYear;
+
+		if (15 <= iDay) {
+			if (12 < ++iMonth) {
+				++iYear;
+				iMonth -= 12;
+			}
+		}
+
+		while (0 != iMonth % iNumRollMonths) ++iMonth;
+
+		try {
+			return CreateFromYMD (iYear, iMonth, 20);
+		} catch (java.lang.Exception e) {
+			e.printStackTrace();
+		}
+
+		return null;
+	}
+
+	/**
 	 * Adds the tenor to the JulianDate to create a new date
 	 * 
 	 * @param strTenor String representing the tenor to add

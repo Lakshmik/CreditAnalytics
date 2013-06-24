@@ -50,7 +50,7 @@ public class PeriodSet extends org.drip.service.stream.Serializer implements
 	 * Apply Coupon end-of-month adjustment
 	 */
 
-	public boolean _bApplyCpnEOMAdj = true;
+	public boolean _bApplyCpnEOMAdj = false;
 
 	/**
 	 * Coupon day count

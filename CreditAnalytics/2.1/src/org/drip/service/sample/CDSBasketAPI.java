@@ -65,7 +65,7 @@ public class CDSBasketAPI {
 
 	public static final void BasketCDSAPISample()
 	{
-		JulianDate dtToday = JulianDate.Today();
+		JulianDate dtToday = JulianDate.CreateFromYMD (2013, JulianDate.MAY, 10);
 
 		/*
 		 * Construct the CDX.NA.IG 5Y Series 17 index by name and series
@@ -74,7 +74,7 @@ public class CDSBasketAPI {
 		BasketProduct bpCDX = CreditAnalytics.MakeCDX ("CDX.NA.IG", 17, "5Y");
 
 		/*
-		 * Construct the on-the-run CDX.NA.IG 5Y Series 17 index
+		 * Construct the on-the-run CDX.NA.IG 5Y Series index
 		 */
 
 		BasketProduct bpCDXOTR = CreditAnalytics.MakeCDX ("CDX.NA.IG", dtToday, "5Y");

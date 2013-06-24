@@ -637,12 +637,12 @@ public class StandardCDXManager {
 		java.util.Map<org.drip.analytics.date.JulianDate, java.lang.Integer> mapFirstCouponSeries =
 			_mmIndexFirstCouponSeries.get (strIndex);
 
-		org.drip.analytics.date.JulianDate dtFirstCoupon = dt.getFirstEDFStartDate (3);
+		org.drip.analytics.date.JulianDate dtFirstCoupon = dt.getFirstCreditIMMStartDate (3);
 
 		if (null == dtFirstCoupon || null == mapFirstCouponSeries) return null;
 
 		if (null == mapFirstCouponSeries.get (dtFirstCoupon))
-			dtFirstCoupon = dtFirstCoupon.getFirstEDFStartDate (3);
+			dtFirstCoupon = dtFirstCoupon.getFirstCreditIMMStartDate (3);
 
 		if (null == dtFirstCoupon || null == mapFirstCouponSeries.get (dtFirstCoupon)) return null;
 
@@ -660,12 +660,12 @@ public class StandardCDXManager {
 		java.util.Map<org.drip.analytics.date.JulianDate, java.lang.Integer> mapFirstCouponSeries =
 			org.drip.product.creator.CDXRefDataHolder._mmCDXRDBFirstCouponSeries.get (strIndex);
 
-		org.drip.analytics.date.JulianDate dtFirstCoupon = dt.getFirstEDFStartDate (3);
+		org.drip.analytics.date.JulianDate dtFirstCoupon = dt.getFirstCreditIMMStartDate (3);
 
 		if (null == dtFirstCoupon || null == mapFirstCouponSeries) return null;
 
 		if (null == mapFirstCouponSeries.get (dtFirstCoupon))
-			dtFirstCoupon = dtFirstCoupon.getFirstEDFStartDate (3);
+			dtFirstCoupon = dtFirstCoupon.getFirstCreditIMMStartDate (3);
 
 		if (null == dtFirstCoupon || null == mapFirstCouponSeries.get (dtFirstCoupon)) return null;
 

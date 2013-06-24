@@ -127,17 +127,17 @@ public class BloombergYAS {
 	public static final void BondPricerSample()
 		throws Exception
 	{
-		JulianDate dtCurve = JulianDate.CreateFromYMD (2013, 6, 19);
+		JulianDate dtCurve = JulianDate.CreateFromYMD (2013, 6, 20);
 
-		JulianDate dtSettle = JulianDate.CreateFromYMD (2013, 6, 21);
+		JulianDate dtSettle = JulianDate.CreateFromYMD (2013, 6, 24);
 
 		double dblNotional = 1000000.;
 		String[] astrCashTenor = new String[] {};
 		double[] adblCashRate = new double[] {};
 		String[] astrIRSTenor = new String[] {   "1Y",    "2Y",    "3Y",    "4Y",    "5Y",    "6Y",    "7Y",
 			   "8Y",    "9Y",   "10Y",   "11Y",   "12Y",   "15Y",   "20Y",   "25Y",   "30Y",   "40Y",   "50Y"};
-		double[] adblIRSRate = new double[]  {0.00311, 0.00417, 0.00634, 0.00937, 0.01250, 0.01539, 0.01795,
-			0.02014, 0.02203, 0.02368, 0.02509, 0.02626, 0.02880, 0.03089, 0.03188, 0.03244, 0.03267, 0.03246};
+		double[] adblIRSRate = new double[]  {0.00317, 0.00422, 0.00645, 0.00953, 0.01274, 0.01563, 0.01819,
+			0.02037, 0.02223, 0.02386, 0.02526, 0.02643, 0.02890, 0.03091, 0.03184, 0.03236, 0.03259, 0.03238};
 
 		DiscountCurve dc = BuildRatesCurveFromInstruments (dtCurve, astrCashTenor, adblCashRate, astrIRSTenor,
 			adblIRSRate, "USD");
@@ -145,11 +145,11 @@ public class BloombergYAS {
 		BondComponent bond = BondBuilder.CreateSimpleFixed (	// Simple Fixed Rate Bond
 				"TEST",		// Name
 				"USD",			// Currency
-				0.0665,			// Bond Coupon
+				0.06125,			// Bond Coupon
 				2, 				// Frequency
 				"30/360",		// Day Count
-				JulianDate.CreateFromYMD (2007, 5, 21), // Effective
-				JulianDate.CreateFromYMD (2037, 6, 1),	// Maturity
+				JulianDate.CreateFromYMD (2013, 5, 24), // Effective
+				JulianDate.CreateFromYMD (2018, 6, 1),	// Maturity
 				null,		// Principal Schedule
 				null);
 
@@ -171,7 +171,7 @@ public class BloombergYAS {
 
 		ValuationParams valParams = ValuationParams.CreateValParams (dtSettle, 0, "", Convention.DR_ACTUAL);
 
-		double dblPrice = 0.9;
+		double dblPrice = 0.988;
 
 		double dblAccrued = bond.calcAccrued (valParams._dblValue, cmp);
 

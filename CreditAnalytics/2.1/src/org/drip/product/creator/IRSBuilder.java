@@ -68,10 +68,17 @@ public class IRSBuilder {
 		}
 
 		try {
-			org.drip.product.definition.RatesComponent irs = new org.drip.product.rates.IRSComponent
-				(dtEffective.getJulian(), dtMaturity.getJulian(), dblCoupon, 2, "30/360", "30/360",
-					strFloatingRateIndex, false, null, null, null, null, null, null, null, null, null, 100.,
+			org.drip.product.rates.FixedStream fixStream = new org.drip.product.rates.FixedStream
+				(dtEffective.getJulian(), dtMaturity.getJulian(), dblCoupon, 2, "30/360", "30/360", false,
+					null, null, null, null, null, null, null, null, 100., strIR, strCalendar);
+
+			org.drip.product.rates.FloatingStream floatStream = new org.drip.product.rates.FloatingStream
+				(dtEffective.getJulian(), dtMaturity.getJulian(), 0., 4, "Act/360", "Act/360",
+					strFloatingRateIndex, false, null, null, null, null, null, null, null, null, null, -100.,
 						strIR, strCalendar);
+
+			org.drip.product.rates.IRSComponent irs = new org.drip.product.rates.IRSComponent (fixStream,
+				floatStream);
 
 			irs.setPrimaryCode ("IRS." + dtMaturity.toString() + "." + strIR);
 
@@ -112,10 +119,18 @@ public class IRSBuilder {
 		}
 
 		try {
-			org.drip.product.definition.RatesComponent irs = new org.drip.product.rates.IRSComponent
+			org.drip.product.rates.FixedStream fixStream = new org.drip.product.rates.FixedStream
 				(dtEffective.getJulian(), dtEffective.addTenor (strTenor).getJulian(), dblCoupon, 2,
-					"30/360", "30/360", strFloatingRateIndex, false, null, null, null, null, null, null,
-						null, null, null, 100., strIR, strCalendar);
+					"30/360", "30/360", false, null, null, null, null, null, null, null, null, 100., strIR,
+						strCalendar);
+
+			org.drip.product.rates.FloatingStream floatStream = new org.drip.product.rates.FloatingStream
+				(dtEffective.getJulian(), dtEffective.addTenor (strTenor).getJulian(), 0., 4, "Act/360",
+					"Act/360", strFloatingRateIndex, false, null, null, null, null, null, null, null, null,
+						null, -100., strIR, strCalendar);
+
+			org.drip.product.rates.IRSComponent irs = new org.drip.product.rates.IRSComponent (fixStream,
+				floatStream);
 
 			irs.setPrimaryCode ("IRS." + strTenor + "." + strIR);
 
